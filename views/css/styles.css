@@ -1,0 +1,23 @@
+object {
+    pointer-events: none;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.login-form {
+    width: 400px;
+    max-width: 80%;
+    padding: 50px;
+    border: 1px solid #DDD;
+    border-radius: 10px;
+}
+
+.login-form .actions {
+    display: flex;
+    justify-content: space-between;
+}
