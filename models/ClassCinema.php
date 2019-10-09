@@ -1,6 +1,6 @@
 <?php
     namespace models;
-    class Cinema {
+    class ClassCinema {
         //ATRIBUTES
         private $name;
         private $country;

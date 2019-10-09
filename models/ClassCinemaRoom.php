@@ -1,7 +1,7 @@
 <?php
     namespace models;
     //ATRIBUTES
-    class CinemaRoom {
+    class ClassCinemaRoom {
         private $name;
         private $type; 
         private $capacity;
@@ -13,7 +13,6 @@
         $this->capacity=$capacity;
         $this->seats=array();
         $this->createSeats($capacity);
-        
     }
     //EXTRAS
     private function createSeats($capacity){
