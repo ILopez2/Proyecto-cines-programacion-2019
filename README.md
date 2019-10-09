@@ -1,3 +1,9 @@
 # Proyecto-cines-programacion-2019
 
- Cuando se realice un commit ponganlo de la siguiente manera: Nombre del archivo modificado + fecha y hora de modificacion
+ -Cuando se realice un commit pongan que fue lo que hicieron en el titulo y los detalles ponganlos en la descripcion del commit.
+ 
+ -Los archivos deben comenzar siempre en minuscula.
+ 
+ -Las clases se tienen que llamar IGUALES a los archivos en los que estan.
+ 
+ -No usar "_" usen Camel Case.
