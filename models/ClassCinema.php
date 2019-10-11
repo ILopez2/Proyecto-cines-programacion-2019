@@ -1,6 +1,7 @@
 <?php
     namespace models;
     class ClassCinema {
+        
         //ATRIBUTES
         private $name;
         private $country;
@@ -40,7 +41,6 @@
         }
 
         //SETTERS
-
         public function setTicketCost($ticketCost){
             $this->ticketCost=$ticketCost;
         }

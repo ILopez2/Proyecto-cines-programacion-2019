@@ -1,8 +1,10 @@
 <?php namespace config;
 class Request {
+     
      private $controller;
      private $method;
      private $parameters;
+     
      public function __construct() {
           /**
           * Obtengo url en formato de string
@@ -19,11 +21,11 @@ class Request {
            /**
             * Si el array tiene elementos, el primero lo guardamos en controller, si no, guardamos Home como controller por defecto
             */
-           if(empty($ArregloUrl)) {
+          if(empty($ArregloUrl)) {
                 $this->controller = 'Home';
-           } else {
+          } else {
                 $this->controller = ucwords(array_shift($ArregloUrl));
-           }
+          }
           /**
           * Si el array tiene elementos, el primero lo guardamos en method, si no, guardamos index como method por defecto
           */
@@ -40,7 +42,7 @@ class Request {
                if(!empty($ArregloUrl)) {
                     $this->parameters = $ArregloUrl;
                }
-          } else {
+          }else{
                $this->parameters = $_POST;
           }
           /**

@@ -11,9 +11,12 @@
 	use config\Request 	as Request;
 		
     Autoload::start();
-    session_start();
-    
-	require_once(VIEWS."header.php");
+	session_start();
+	
+	
+	include(VIEWS."header.php");
+	include(VIEWS."home.php");
+	
 	Router::Route(new Request());
-	require_once(VIEWS."footer.php");
+
 ?>
