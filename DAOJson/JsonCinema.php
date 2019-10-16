@@ -1,6 +1,8 @@
 <?php 
     namespace DAOJson; 
-    use models/ClassCinema as CC;
+
+    use models\ClassCinema as CC;
+
     class JsonCinema implements IJson {
 
         //ATRIBUTES
@@ -34,7 +36,7 @@
                 $values["city"]=$cinema->getCity();
                 $values["address"]=$cinema->getAddress();
                 $values["ticketCost"]=$cinema->getTicketCost();
-                $values["cinemaRooms"]=$cinemaRooms->getCinemaRooms();
+                $values["cinemaRooms"]=$cinema->getCinemaRooms();
                 array_push($array,$values);
             }
             $jsonContent= json_encode($array, JSON_PRETTY_PRINT);
@@ -49,7 +51,7 @@
                 $array= ($jsonContent) ? json_decode($jsonContent, true ) : array();
 
                 foreach($array as $values){
-                    $cinema=new CC($values["name"],$values["country"],$values["province"],$values["city"],$values["address"],$values["ticketCost"],$values["cinemaRooms"]);
+                    $cinema = new CC($values["name"],$values["country"],$values["province"],$values["city"],$values["address"],$values["ticketCost"],$values["cinemaRooms"]);
                     array_push($this->cinemas, $cinema);
                 }
             }

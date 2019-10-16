@@ -41,7 +41,9 @@
         }
         
         //SETTERS
+        
         public function setRoleLevel($roleLevel){
             $this->roleLevel=$roleLevel;
         }
+
     }

@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link href="css/style.css" rel="stylesheet" type="text/css" />
-        <script src="/js/jquery-1.4.2.min.js" type="text/javascript"></script>
+        <script src="js/jquery-1.4.2.min.js" type="text/javascript"></script>
         <script src="js/cufon-yui.js" type="text/javascript"></script>
         <script src="js/cufon-replace.js" type="text/javascript"></script>
         <script src="js/Gill_Sans_400.font.js" type="text/javascript"></script>

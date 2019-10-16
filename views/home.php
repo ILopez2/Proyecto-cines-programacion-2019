@@ -1,5 +1,5 @@
 <?php
-    include_once("views/header.php");
+    include_once(VIEWS."header.php");
 ?>
     
       <div class="tail-top">
@@ -7,7 +7,7 @@
           <main id="main">
             <!------------------------- header start here  -->
             <header id="header">
-            <?php include_once("views/nav.php");?>
+            <?php include_once(VIEWS."nav.php");?>
             </header>
 <!------------------------ header finish here  -->
             <div class="box">
@@ -28,19 +28,19 @@
                             <ul class="movies">
                               <li>
                                 <h4>Toy Story 3</h4>
-                                <img src="/images/1page-img2.jpg" alt="" />
+                                <img src="images/1page-img2.jpg" alt="" />
                                 <p>Egetnunc nunc mattitor curabiturpiscipis nec ac hac pellus sem intesque sociis. Metusmetuer hendimentesque diam at orbi sempor.</p>
                                 <div class="wrapper"><a href="#" class="link2"><span><span>Read More</span></span></a></div>
                               </li>
                               <li>
                                 <h4>Prince of Percia: Sands of Time</h4>
-                                <img src="/images/1page-img3.jpg" alt="" />
+                                <img src="images/1page-img3.jpg" alt="" />
                                 <p>Dolorem malesuada anterdum quis vitae. Cursustellentesque enim justo vestasse vitae trices phasellus leo sociis leo magnisl. Malestibulusnatis. </p>
                                 <div class="wrapper"><a href="#" class="link2"><span><span>Read More</span></span></a></div>
                               </li>
                               <li class="last">
                                 <h4>The Twilight Saga: Eclipse</h4>
-                                <img src="/images/1page-img4.jpg" alt="" />
+                                <img src="images/1page-img4.jpg" alt="" />
                                 <p>Quisque felit odio ut nunc convallis semper sente ris feugiat. Odionam leo phasellentum id vitantesque nunc tor quisque a maecenatibus pellus.</p>
                                 <div class="wrapper"><a href="#" class="link2"><span><span>Read More</span></span></a></div>
                               </li>
