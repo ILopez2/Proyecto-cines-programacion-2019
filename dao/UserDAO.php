@@ -1,1 +1,8 @@
-//Tengo que realizar read, readAll 
+<?php 
+
+    class UserDAO{
+        
+
+    }
+
+    ?>

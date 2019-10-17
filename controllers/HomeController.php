@@ -1,5 +1,8 @@
-<?php namespace controllers;
-    use controllers\userController as userController;
+<?php 
+    namespace controllers;
+    
+    use controllers\UserController as UserController;
+    
     class HomeController
     {
         private $userController;
@@ -24,12 +27,12 @@
                     }
                 }
             }
-            include_once(VIEWS.'header.php');
+            include_once(VIEWS.'/header.php');
             if($showView){
-                include_once(VIEWS.'home.php');
+                include_once(VIEWS.'/home.php');
             }
             else{
-                include_once(VIEWS.'login.php');
+                include_once(VIEWS.'/login.php');
             }
         }        
     }

@@ -1,5 +1,6 @@
 <?php
-//  phpinfo();
+	
+	//  phpinfo();
  	// echo "934e435260635d2b56c3426a0d54dac4";
 	 
 	ini_set('display_errors', 1);

@@ -1,4 +1,4 @@
-<?php namespace DAOJson;
+<?php namespace daojson;
 
     use models\ClassUser as CU;
 
@@ -9,7 +9,7 @@
 
         public function __construct()
         {
-            $this->fileName = dirname(__DIR__)."data/Users.json";
+            $this->fileName = dirname(__DIR__)."/data/Users.json";
         }
 
         public function add($user){
@@ -23,7 +23,7 @@
             return $this->usersList;
         }
 
-        private function saveData(){
+        public function saveData(){
             $arrayToEncode = array();
             foreach($this->usersList as $user){
                 $arrayValues["name"]=$user->getName();
@@ -40,7 +40,7 @@
             file_put_contents($this->fileName, $jsonContent);
         }
 
-        private function retriveData(){
+        public function retriveData(){
             $this->usersList= array();
 
             if(!file_exists($this->fileName)){
