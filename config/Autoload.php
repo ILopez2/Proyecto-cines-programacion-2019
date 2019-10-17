@@ -9,6 +9,7 @@ class Autoload {
                // Convierto la url a minúsculas ya que mi estructura de directorios y ficheros esta toda en minúsculas
                // echo $url = strtolower($url);
                // Incluyo la url que, si todo esta bien, debería contener la clase que intento instanciar.
+               $url = ROOT . '/' . str_replace("\\", "/", $class)  . ".php";
                include_once($url);
 
           });
