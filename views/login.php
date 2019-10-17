@@ -18,7 +18,7 @@
         <div class="actions">
 
             <button type="button" class="btn btn-link" data-toggle="modal" data-target="#sign-up">
-                Registrar usuario
+                Sign up
             </button>
             
             <button type="submit" class="btn btn-dark">
@@ -51,7 +51,7 @@
             <form class="modal-content" action="sign-up.php" method="POST">
 
                 <div class="modal-header">
-                    <h5 class="modal-title">Registrar usuario</h5>
+                    <h5 class="modal-title">Sing up</h5>
                     <button type="button" class="close" data-dismiss="modal">
                         <span>&times;</span>
                     </button>
@@ -60,17 +60,17 @@
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label>Nombre</label>
+                        <label>Name</label>
                         <input type="text" class="form-control" name="name" />
                     </div>
 
                     <div class="form-group">
-                        <label>DNI</label>
-                        <input type="text" class="form-control" name="dni" />
+                        <label>Nationality</label>
+                        <input type="text" class="form-control" name="nationality" />
                     </div>
 
                     <div class="form-group">
-                        <label>Fecha de nacimiento</label>
+                        <label>Birthdate</label>
                         <input type="date" class="form-control" name="birthdate" />
                     </div>
                     
@@ -81,14 +81,14 @@
 
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" name="pass" />
+                        <input type="password" class="form-control" name="password" />
                     </div>
 
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-dark">Registrar</button>
+                    <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-dark">Registry</button>
                 </div>
             </form>
 

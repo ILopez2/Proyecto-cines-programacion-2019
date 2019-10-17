@@ -1,5 +1,4 @@
-<?php 
-    namespace DAOJson; 
+<?php namespace daojson; 
 
     use models\ClassCinema as CC;
 

@@ -1,5 +1,4 @@
-<?php 
-    namespace controllers;
+<?php namespace controllers;
     
     use controllers\UserController as UserController;
     
@@ -28,6 +27,7 @@
                 }
             }
             include_once(VIEWS.'/header.php');
+            
             if($showView){
                 include_once(VIEWS.'/home.php');
             }

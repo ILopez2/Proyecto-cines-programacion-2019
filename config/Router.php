@@ -1,4 +1,5 @@
 <?php namespace config;
+
     class Router {
         
         public function __construct()

@@ -1,13 +1,16 @@
-<?php
-    namespace DAO;
+<?php namespace dao;
+    
     use \PDO as PDO;
     use \Exception as Exception;
-    use DAO\QueryType as QueryType;
+    use dao\QueryType as QueryType;
+    
     class Connection
     {
+    
         private $pdo = null;
         private $pdoStatement = null;
         private static $instance = null;
+    
         private function __construct()
         {
             try
@@ -20,12 +23,14 @@
                 throw $ex;
             }
         }
+    
         public static function GetInstance()
         {
             if(self::$instance == null)
                 self::$instance = new Connection();
             return self::$instance;
         }
+    
         public function Execute($query, $parameters = array(), $queryType = QueryType::Query)
 	    {
             try

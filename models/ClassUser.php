@@ -1,5 +1,4 @@
-<?php
-    namespace models;
+<?php namespace models;
 
     class ClassUser {
         

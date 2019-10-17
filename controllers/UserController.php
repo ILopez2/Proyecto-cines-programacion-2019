@@ -1,5 +1,4 @@
-<?php 
-    namespace controllers;
+<?php namespace controllers;
     
     //use DAO\UserDAO as UserDAO;
     use daojson\JsonUser as JsonUser;
@@ -27,8 +26,8 @@
             $users=$this->userDAO->getAll();
             foreach($users as $user){
                 if(($user->getEmail() == $email) && ($user->getPass() == $pass)){
-                    $_SESSION['loggedEmail']= $user->getEmail();
-                    $_SESSION['loggedPass']=$user->getPass();
+                    $_SESSION['loggedEmail'] = $user->getEmail();
+                    $_SESSION['loggedPass'] = $user->getPass();
                 }
             }
         }

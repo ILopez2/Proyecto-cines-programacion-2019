@@ -1,5 +1,5 @@
-<?php
-    namespace models;
+<?php namespace models;
+    
     class ClassCinema {
         
         //ATRIBUTES
