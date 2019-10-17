@@ -1,6 +1,6 @@
 <?php
- 
- 	echo "934e435260635d2b56c3426a0d54dac4";
+//  phpinfo();
+ 	// echo "934e435260635d2b56c3426a0d54dac4";
 	 
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
@@ -15,11 +15,6 @@
 		
     Autoload::start();
 	session_start();
-	
-	
-	include(VIEWS."header.php");
-	include(VIEWS."home.php");
-	
 	Router::Route(new Request());
 
 	
