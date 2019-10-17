@@ -4,8 +4,6 @@
     use DAO\Connection as Connection;
     interface InterfaceDAO
     {
-        function Add(Student $student);
-        function GetAll();
         //readforID
         
     }
