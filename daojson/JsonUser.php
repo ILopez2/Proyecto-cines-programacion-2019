@@ -27,7 +27,7 @@
             $arrayToEncode = array();
             foreach($this->usersList as $user){
                 $arrayValues["name"]=$user->getName();
-                $arrayValues["birthday"]=$user->getBirthday();
+                $arrayValues["birthdate"]=$user->getBirthdate();
                 $arrayValues["nationality"]=$user->getNationality();
                 $arrayValues["email"]=$user->getEmail();
                 $arrayValues["password"]=$user->getPassword();
