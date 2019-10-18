@@ -4,16 +4,17 @@
         
         //ATRIBUTES
         private $name;
-        private $birthDate;
+        private $birthdate;
         private $nationality;
         private $email;
         private $password;
         private $roleLevel;
         
         //CONSTRUCTOR
-        public function __construct($name,$birthDate,$nationality,$email,$password){
+        public function __construct($name,$birthdate,$nationality,$email,$password){
             $this->name=$name;
             $this->nationality=$nationality;
+            $this->birthdate=$birthdate;
             $this->email=$email;
             $this->password=$password;
             $this->roleLevel= "Common";
@@ -23,8 +24,8 @@
         public function getName(){
             return $this->name;
         }
-        public function getBirthDate(){
-            return $this->birthDate;
+        public function getBirthdate(){
+            return $this->birthdate;
         }
         public function getNationality(){
             return $this->name;

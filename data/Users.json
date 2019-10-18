@@ -1,24 +1,24 @@
 [
     {
         "name": "Ivan",
-        "birthday": "1984-04-10",
-        "nacionality": "Argentina",
+        "birthdate": "1984-04-10",
+        "nationality": "Argentina",
         "email": "ivan@utn.com",
         "password": "asd123",
         "role": "admin"
     },
     {
         "name": "Jorge",
-        "birthday": "1984-04-10",
-        "nacionality": "Arg",
+        "birthdate": "1984-04-10",
+        "nationality": "Arg",
         "email": "jorge@utn.com",
         "password": "asd123",
         "role": "admin"
     },
     {
         "name": "Lopez",
-        "birthday": "1984-04-10",
-        "nacionality": "Uruguayo",
+        "birthdate": "1984-04-10",
+        "nationality": "Uruguayo",
         "email": "ivanl@utn.com",
         "password": "asd123",
         "role": "common"

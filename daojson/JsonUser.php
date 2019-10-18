@@ -9,7 +9,7 @@
 
         public function __construct()
         {
-            $this->fileName = dirname(__DIR__)."/data/Users.json";
+            $this->fileName =ROOT."data/Users.json";
         }
 
         public function add($user){
@@ -19,7 +19,7 @@
         }
 
         public function getAll(){
-            $this->retriveData();            
+            $this->retriveData();    
             return $this->usersList;
         }
 
@@ -43,14 +43,14 @@
         public function retriveData(){
             $this->usersList= array();
 
-            if(!file_exists($this->fileName)){
+            if(file_exists($this->fileName)){
                 
                 $jsonContent = file_get_contents($this->fileName);
+
                 $arrayToDecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
-                
                 foreach($arrayToDecode as $valuesArray){
                     
-                    $user = new CU($valuesArray["name"],$valuesArray["birthday"],$valuesArray["nationality"],$valuesArray["email"],$valuesArray["password"],$valuesArray["role"]);
+                    $user = new CU($valuesArray["name"],$valuesArray["birthdate"],$valuesArray["nationality"],$valuesArray["email"],$valuesArray["password"],$valuesArray["role"]);
                     array_push($this->usersList,$user);
                 }
 

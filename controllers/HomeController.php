@@ -5,7 +5,7 @@
     class HomeController
     {
         private $userController;
-
+        
         public function __construct(){
             $this->userController= new UserController();
         }

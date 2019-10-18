@@ -26,9 +26,9 @@
             $rta=false;
             $users=$this->userDAO->getAll();
             foreach($users as $user){
-                if(($user->getEmail() == $email) && ($user->getPass() == $pass)){
+                if(($user->getEmail() == $email) && ($user->getPassword() == $pass)){
                     $_SESSION['loggedEmail'] = $user->getEmail();
-                    $_SESSION['loggedPass'] = $user->getPass();
+                    $_SESSION['loggedPass'] = $user->getPassword();
                     $rta=true;
                 }
             }
