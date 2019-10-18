@@ -15,7 +15,7 @@
         //Chekea que exista un usuario logeado
         public function checkSession(){
             $rta=false;
-            if(isset($_SESSION['loggedUser'])){
+            if(isset($_SESSION['loggedEmail'])){
                 $rta=true;
             }
             return $rta;

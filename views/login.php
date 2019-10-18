@@ -1,16 +1,16 @@
 <main class="login">
 
     <!-- LOGIN -->
-    <form class="login-form" action="login.php" method="POST">
+    <form class="login-form" action="<?php echo FRONT_ROOT?>/Home/Index" method="POST">
  
         <div class="form-group">
             <label>Email</label>
-            <input type="email" class="form-control" name="usr" />
+            <input type="email" class="form-control" name="email" />
         </div>
         
         <div class="form-group">
             <label>Password</label>
-            <input type="password" class="form-control" name="pass">
+            <input type="password" class="form-control" name="password">
         </div>
 
         <div class="actions">

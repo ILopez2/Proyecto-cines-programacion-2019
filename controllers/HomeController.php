@@ -10,7 +10,7 @@
             $this->userController= new UserController();
         }
 
-        public function Index($_user=null,$_pass=null)
+        public function Index($email=null,$password=null)
         {
             //checksession y login
             $showView=false; //se vuelve verdadero solo si hay un user en session
@@ -18,8 +18,8 @@
                 $showView=true;
             }
             else{
-                if(isset($_user)){
-                    if($user=$this->userController->login($_user,$_pass)){
+                if(isset($email)){
+                    if($user=$this->userController->login($email,$password)){
                         $showView=true;
                     }
                     else{

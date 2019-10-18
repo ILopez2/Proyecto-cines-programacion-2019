@@ -8,6 +8,9 @@
 
     /* BACK */
     define('ROOT', dirname(__DIR__));
+    
+    //define('ROOT', str_replace('\\','/',dirname(__DIR__) . "/"));
+
     define('VIEWS', ROOT . '/views');
     define('ADMIN_VIEWS', ROOT . '/views/admin');
 
@@ -18,6 +21,8 @@
     define('JS_PATH', FRONT_ROOT . '/assets/js');
     define('IMG_PATH',FRONT_ROOT . '/assets/img');
 
+    $base=explode($_SERVER['DOCUMENT_ROOT'],ROOT);
+    define("BASE",$base[1]);
 
     /*
     define('IMG_PATH', FRONT_ROOT . '/asset/img');
