@@ -9,7 +9,8 @@
         public function __construct(){
             $this->userController= new UserController();
         }
-        public function Index($user=null,$pass=null)
+
+        public function Index($_user=null,$_pass=null)
         {
             //checksession y login
             $showView=false; //se vuelve verdadero solo si hay un user en session
@@ -17,8 +18,8 @@
                 $showView=true;
             }
             else{
-                if(isset($user)){
-                    if($user=$this->userController->login($user,$pass)){
+                if(isset($_user)){
+                    if($user=$this->userController->login($_user,$_pass)){
                         $showView=true;
                     }
                     else{
@@ -27,13 +28,15 @@
                 }
             }
             include_once(VIEWS.'/header.php');
-            
+            include_once(VIEWS.'/nav.php');
             if($showView){
                 include_once(VIEWS.'/home.php');
             }
             else{
                 include_once(VIEWS.'/login.php');
             }
+            
+            include_once(VIEWS.'/footer.php');
         }        
     }
 ?>

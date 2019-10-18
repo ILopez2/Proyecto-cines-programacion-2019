@@ -7,7 +7,7 @@
         
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="">Hola <?php echo $_SESSION['loggedUser']->getName(); ?></a>
+                <a class="nav-link" href=""></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="">Logout</a>

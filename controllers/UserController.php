@@ -23,12 +23,15 @@
 
         public function login($email,$pass){
             //tengo que comparar el usuario que viene por parametro(POST) con el que me tengo que traer con get de USERDAO
+            $rta=false;
             $users=$this->userDAO->getAll();
             foreach($users as $user){
                 if(($user->getEmail() == $email) && ($user->getPass() == $pass)){
                     $_SESSION['loggedEmail'] = $user->getEmail();
                     $_SESSION['loggedPass'] = $user->getPass();
+                    $rta=true;
                 }
             }
+            return $rta;
         }
 }

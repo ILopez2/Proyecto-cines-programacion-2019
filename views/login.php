@@ -1,8 +1,6 @@
 <main class="login">
 
-    <!--
-        LOGIN
-    -->
+    <!-- LOGIN -->
     <form class="login-form" action="login.php" method="POST">
  
         <div class="form-group">
@@ -42,9 +40,7 @@
     </form>
 
 
-    <!--
-        SIGN UP
-    -->
+    <!-- SIGN UP -->
     <div class="modal fade" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">
         <div class="modal-dialog" role="document">
 
