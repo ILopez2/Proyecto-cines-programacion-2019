@@ -11,13 +11,13 @@
         private $roleLevel;
         
         //CONSTRUCTOR
-        public function __construct($name,$birthdate,$nationality,$email,$password){
+        public function __construct($name,$birthdate,$nationality,$email,$password,$role){
             $this->name=$name;
             $this->nationality=$nationality;
             $this->birthdate=$birthdate;
             $this->email=$email;
             $this->password=$password;
-            $this->roleLevel= "Common";
+            $this->roleLevel= $role;
         }
         
         //GETTERS

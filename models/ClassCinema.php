@@ -5,38 +5,38 @@
         //ATRIBUTES
         private $name;
         private $country;
-        private $province;
-        private $city;
+        //private $province;
+        //private $city;
         private $address;
         private $ticketCost;
-        private $cinemaRooms=array();
+        private $cinemaRooms;
 
         //CONSTRUCTOR
-        public function __construct($name,$country,$province,$city,$address,$ticketCost,$cinemaRooms){
+        public function __construct($name,$city,$address,$ticketCost){
             $this->name=$name;
-            $this->country=$country;
-            $this->province=$province;
+            //$this->country=$country;
+            //$this->province=$province;
             $this->city=$city;
             $this->address=$address;
             $this->ticketCost=$ticketCost;
-            $this->cinemaRooms=$cinemaRooms;
+            $this->cinemaRooms=array();
         }
 
         //GETTERS
         public function getName(){
             return $this->name;
         }
-        public function getCountry(){
+       /* public function getCountry(){
             return $this->country;
         }
         public function getProvince(){
             return $this->province;
-        }
+        }*/
         public function getCity(){
             return $this->city;
         }
         public function getAddress(){
-            return $this->Address;
+            return $this->address;
         }
         public function getTicketCost(){
             return $this->ticketCost;
@@ -49,12 +49,12 @@
         public function setName($name){
             $this->name=$name;
         }
-        public function setCountry($country){
+        /*public function setCountry($country){
             $this->country=$country;
         }
         public function setProvince($province){
             $this->province=$province;
-        }
+        }*/
         public function setCity($city){
             $this->city=$city;
         }

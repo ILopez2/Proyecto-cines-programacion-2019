@@ -17,7 +17,17 @@
             array_push($this->usersList,$user);
             $this->saveData();
         }
-
+        public function getForID($name){
+            //retornar el cine correspondiente con el id que viene por parametro
+           /* $rta=null;
+            $this->retriveData();
+            foreach($cinema as $cine){
+                if($cine->getName() == $name){
+                    $rta=$name
+                }
+            }
+            return $name;*/
+        }
         public function getAll(){
             $this->retriveData();    
             return $this->usersList;
@@ -49,8 +59,8 @@
 
                 $arrayToDecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
                 foreach($arrayToDecode as $valuesArray){
-                    
-                    $user = new CU($valuesArray["name"],$valuesArray["birthdate"],$valuesArray["nationality"],$valuesArray["email"],$valuesArray["password"],$valuesArray["role"]);
+                    echo $valuesArray["role"];
+                $user = new CU($valuesArray["name"],$valuesArray["birthdate"],$valuesArray["nationality"],$valuesArray["email"],$valuesArray["password"],$valuesArray["role"]);
                     array_push($this->usersList,$user);
                 }
 

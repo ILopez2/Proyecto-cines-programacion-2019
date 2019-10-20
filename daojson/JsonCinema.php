@@ -16,8 +16,50 @@
         //JSON FUNCTIONS
         public function add($cinema){
             $this->retriveData();
-            array_push($this->cinemas,$cinema);
+            $exist=false;
+            foreach($this->cinemas as $cine){
+                if($cine->getName() == $cinema->getName()){
+                    $exist=true;
+                }
+            }
+            if($exist){
+                $_SESSION['errorMje']='El nombre ingresado ya existe.';
+            }else{
+                array_push($this->cinemas,$cinema);
+                $_SESSION['successMje'] = 'Cine agregado con éxito';
+            }
             $this->saveData();
+        }
+        public function delete($name){
+            $this->retriveData();
+            $newList = array();
+            $mje=false;
+            
+            foreach ($this->cinemas as $cine) {
+                if($cine->getName() == $name){
+                    $mje=true;
+                }
+                if($cine->getName() != $name){ 
+                    array_push($newList, $cine);
+                    
+                }
+            }
+            if($mje){
+                $_SESSION['successMje'] = 'Cine borrado con éxito';
+            }
+            $this->cinemas = $newList;
+            $this->saveData();
+        }
+        public function getForID($name){
+            //retornar el cine correspondiente con el id que viene por parametro
+            $rta=null;
+            $this->retriveData();
+            foreach($this->cinemas as $cine){
+                if($cine->getName() == $name){
+                    $rta=$name;
+                }
+            }
+            return $rta;
         }
 
         public function getAll(){
@@ -25,13 +67,13 @@
             return $this->cinemas;
         }
 
-        private function saveData(){
+        public function saveData(){
             $array=array();
 
             foreach($this->cinemas as $cinema){
                 $values["name"]=$cinema->getName();
-                $values["country"]=$cinema->getCountry();
-                $values["province"]=$cinema->getProvince();
+                //$values["country"]=$cinema->getCountry();
+                //$values["province"]=$cinema->getProvince();
                 $values["city"]=$cinema->getCity();
                 $values["address"]=$cinema->getAddress();
                 $values["ticketCost"]=$cinema->getTicketCost();
@@ -42,7 +84,7 @@
             file_put_contents($this->fileName, $jsonContent);
         }
 
-        private function retriveData(){
+        public function retriveData(){
             $this->cinemas= array();
 
             if(file_exists($this->fileName)){
@@ -50,7 +92,7 @@
                 $array= ($jsonContent) ? json_decode($jsonContent, true ) : array();
 
                 foreach($array as $values){
-                    $cinema = new CC($values["name"],$values["country"],$values["province"],$values["city"],$values["address"],$values["ticketCost"],$values["cinemaRooms"]);
+                    $cinema = new CC($values["name"]/*,$values["country"],$values["province"]*/,$values["city"],$values["address"],$values["ticketCost"]);
                     array_push($this->cinemas, $cinema);
                 }
             }

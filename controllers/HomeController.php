@@ -44,5 +44,17 @@
             $this->userController->logout();
             $this->Index();
         }
+
+        public function admCinema(){
+            include_once(VIEWS.'/header.php');
+            include_once(VIEWS.'/nav.php');
+            include_once(VIEWS.'/CrudCinema.php');
+            include_once(VIEWS.'/footer.php');
+        }
+
+
+
     }
+
+    
 ?>

@@ -31,6 +31,7 @@
                 if(($user->getEmail() == $email) && ($user->getPassword() == $pass)){
                     $_SESSION['loggedEmail'] = $user->getEmail();
                     $_SESSION['loggedPass'] = $user->getPassword();
+                    $_SESSION['loggedRole'] = $user->getRoleLevel();
                     $rta=true;
                 }
             }
