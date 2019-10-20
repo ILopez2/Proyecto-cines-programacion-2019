@@ -37,6 +37,12 @@
             }
             
             include_once(VIEWS.'/footer.php');
-        }        
+        }
+        
+        
+        public function logout(){
+            $this->userController->logout();
+            $this->Index();
+        }
     }
 ?>

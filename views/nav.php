@@ -10,7 +10,7 @@
                 <a class="nav-link" href=""></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">Logout</a>
+                <a class="nav-link" href="<?php echo FRONT_ROOT?>Home/logout">Logout</a>
             </li>
         </ul>
         <span class="navbar-text text-white">

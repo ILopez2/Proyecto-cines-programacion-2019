@@ -1,1 +1,3 @@
-<?php echo "hola";
+<?php
+
+session_destroy();

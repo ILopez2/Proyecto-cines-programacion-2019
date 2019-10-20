@@ -1,7 +1,7 @@
 <main class="login">
 
     <!-- LOGIN -->
-    <form class="login-form" action="<?php echo FRONT_ROOT?>/Home/Index" method="POST">
+    <form class="login-form" action="<?php FRONT_ROOT?>Home/Index" method="POST">
  
         <div class="form-group">
             <label>Email</label>

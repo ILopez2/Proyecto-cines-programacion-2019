@@ -2,15 +2,17 @@
     
     //use DAO\UserDAO as UserDAO;
     use daojson\JsonUser as JsonUser;
-
+    //use controllers\HomeController as Home;
     class UserController{
     
         private $userDAO;
+        //private $home;
 
         public function __construct(){
             //$this->userDAO= new UserDAO();
             // JSON 
             $this->userDAO = new JsonUser();
+            //$this->home = new Home();
         }
         //Chekea que exista un usuario logeado
         public function checkSession(){
@@ -34,4 +36,10 @@
             }
             return $rta;
         }
+
+        public function logout(){
+            unset($_SESSION['loggedEmail']);
+            unset($_SESSION['loggedPass']);
+        }
+        
 }
