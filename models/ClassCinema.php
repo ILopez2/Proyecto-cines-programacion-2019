@@ -4,9 +4,9 @@
         
         //ATRIBUTES
         private $name;
-        private $country;
+        //private $country;
         //private $province;
-        //private $city;
+        private $city;
         private $address;
         private $ticketCost;
         private $cinemaRooms;

@@ -61,7 +61,29 @@
             }
             return $rta;
         }
-
+        public function modify($value,$option,$cinemaName){
+            $this->retriveData();
+            $arrayToSave= array();
+            foreach($this->cinemas as $cinema){
+                if($cinema->getName() == $cinemaName){
+                    if($option == "name"){
+                        $cinema->setName($value);
+                    }
+                    if($option == "city"){
+                        $cinema->setCity($value);
+                    }
+                    if($option == "address"){
+                        $cinema->setAddress($value);
+                    }
+                    if($option == "ticketCost"){
+                        $cinema->setTicketCost($value);
+                    }
+                }
+                array_push($arrayToSave,$cinema);
+            }
+            $cinemas=$arrayToSave;
+            $this->saveData();
+        }
         public function getAll(){
             $this->retriveData();
             return $this->cinemas;

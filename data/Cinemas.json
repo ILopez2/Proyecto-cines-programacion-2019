@@ -1,23 +1,23 @@
 [
     {
-        "name": "lkds\u00f1laskd",
-        "city": "1",
-        "address": "lsakdl\u00f1as",
-        "ticketCost": "222",
+        "name": "Aldrey",
+        "city": "Miramar",
+        "address": "Funes 214",
+        "ticketCost": "60 pesos",
         "cinemaRooms": []
     },
     {
-        "name": "lkjdsalk",
-        "city": "1",
-        "address": "ssssss",
-        "ticketCost": "2342",
+        "name": "Los gallegos",
+        "city": "Mar del Plata",
+        "address": "Garay 1234",
+        "ticketCost": "100 pesos",
         "cinemaRooms": []
     },
     {
-        "name": "SOY",
-        "city": "1",
-        "address": "UN",
-        "ticketCost": "CAPO",
+        "name": "Ambasador",
+        "city": "Mar del Plata",
+        "address": "Chacabuco 1123",
+        "ticketCost": "30 pesos",
         "cinemaRooms": []
     }
 ]

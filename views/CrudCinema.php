@@ -28,64 +28,62 @@ $cinemas=$dao->getAll();
                 <?php } ?>
 
                 <div class="card card-body">
-                    <form action="<?php echo FRONT_ROOT?>Cinema/add" method="POST">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="name" placeholder="Nombre">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="adress" placeholder= "Direccion">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="price" placeholder="Precio de entrada">
-                    </div>
-                    <div class="form-group">
-                        <!--<input type="text" class="form-control" name="precio" placeholder="Precio de entrada"> -->
-                        <select name="city" class="form-control">
-                        <option selected disabled>Seleccione una ciudad</option>
-                        <option value="1">Mar del Plata</option>
-                        <option value="2">Miramar</option>
-                        </select>
-                    </div>
+                    <form action="<?php echo FRONT_ROOT?>Cinema/add" method="POST" required>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="name" placeholder="Nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="adress" placeholder= "Direccion" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="price" placeholder="Precio de entrada" required>
+                        </div>
+                        <div class="form-group">
+                            <!--<input type="text" class="form-control" name="precio" placeholder="Precio de entrada"> -->
+                            <select name="city" class="form-control" required>
+                            <option selected disabled value="">Seleccione una ciudad</option>
+                            <option value="Mar del Plata">Mar del Plata</option>
+                            <option value="Miramar">Miramar</option>
+                            </select>
+                        </div>
                    
                         
-                     <input type="submit" class="btn btn-success btn-block" name="save" value="Save">   
+                        <input type="submit" class="btn btn-success btn-block" name="save" value="Save">   
                         
 
                     </form>
                 </div>       
         </div>
-
-        <table border=1 class="table">
-    <thead class="thead-dark">
-        <tr>
-            
-            <th>Nombre</th>
-            <th>Direccion</th>
-            <th>Ciudad</th>
-            <th>Precio ticket</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-            <?php foreach($cinemas as $cine){  ?>
+    <table border=1 class="table">
+        <thead class="thead-dark">
             <tr>
-                <td><?php echo $cine->getName(); ?></td>
-                <td><?php echo $cine->getAddress(); ?></td>
-                <td><?php echo $cine->getCity(); ?></td>
-                <td><?php echo $cine->getTicketCost(); ?></td>
-                 
-                <td>
-                     <a href="<?php echo FRONT_ROOT?>Cinema/edit?id=<?php echo $cine->getName()?>" class="btn btn-secondary">
-                     <i class="fas fa-marker"></i>
-                    </a>
-                     <a href="<?php echo FRONT_ROOT?>Cinema/delete?id=<?php echo $cine->getName()?>" class="btn btn-danger">
-                    <i class="far fa-trash-alt"></i>
-                    </a>
-                </td>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Ciudad</th>
+                <th>Precio ticket</th>
+                <th>Actions</th>
             </tr>
-            <?php } ?>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+                <?php foreach($cinemas as $cine){  ?>
+                <tr>
+                    <td><?php echo $cine->getName(); ?></td>
+                    <td><?php echo $cine->getAddress(); ?></td>
+                    <td><?php echo $cine->getCity(); ?></td>
+                    <td><?php echo $cine->getTicketCost(); ?></td>
+                    
+                    <td>
+                        <a href="<?php echo FRONT_ROOT?>Cinema/edit?id=<?php echo $cine->getName()?>" class="btn btn-secondary">
+                        <i class="fas fa-marker"></i>
+                        </a>
+                        <a href="<?php echo FRONT_ROOT?>Cinema/delete?id=<?php echo $cine->getName()?>" class="btn btn-danger">
+                        <i class="far fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                <?php } ?>
+        </tbody>
+    </table>
     </div>
 
 </div>

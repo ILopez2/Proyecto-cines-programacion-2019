@@ -32,6 +32,8 @@
 
         }
         public function edit(){
-
+            //editar el valor del atributo seleccionado por el usuario del cine seleccionado
+            $this->cinemaDao->modify($value,$option,$cinemaName);
+            $this->home->admCinema();
         }
     }
