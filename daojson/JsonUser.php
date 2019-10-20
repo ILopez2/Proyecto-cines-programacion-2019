@@ -59,7 +59,6 @@
 
                 $arrayToDecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
                 foreach($arrayToDecode as $valuesArray){
-                    echo $valuesArray["role"];
                 $user = new CU($valuesArray["name"],$valuesArray["birthdate"],$valuesArray["nationality"],$valuesArray["email"],$valuesArray["password"],$valuesArray["role"]);
                     array_push($this->usersList,$user);
                 }
