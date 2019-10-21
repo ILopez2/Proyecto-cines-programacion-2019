@@ -4,11 +4,11 @@
 
     class JsonMovieApi{
 
-        public __construct(){
+        public function __construct(){
             
         }
 
-        public getLastMovies($lang){
+        public function getLastMovies($lang){
             $movies=array();
             $jsonContent=file_get_contents(LASTMVS.$lang);
 
@@ -25,7 +25,7 @@
         }
 
         /**DEVUELVE UN ARREGLO CON PELICULAS RELACIONADAS AL NOMBRE QUE SE PASO POR PARAMETRO */
-        public getMovie($name,$lang){
+        public function getMovie($name,$lang){
             str_replace(" ","+",$name);
             $movies=array();
             $jsonContent=file_get_contents(SERCHM.$name.$lang);
@@ -43,19 +43,19 @@
 
         }
 
-        public getMovieXid($id,$lang){
+        public function getMovieXid($id,$lang){
             $jsonContent=file_get_contents(SERCHMID.$id.APIKEY.$lang);
             $values= ($jsonContent) ? json_decode($jsonContent, true ) : array();
             $movie=new CM($values["id"],$values["title"],$values["relase_date"],$values["adult"],$values["overview"],$values["poster_path"]);
             return $movie;
         }
 
-        public getMoviePoster($posterPath=null,$posterSize="500"){
+        public function getMoviePoster($posterPath=null,$posterSize="500"){
             
             if($posterPath!=null){
                 $imgm=IMGM.$posterSize.$posterPath;
             }
-            else $imgm=FRONT_ROOT."assets/images/noImage.png"
+            else $imgm=FRONT_ROOT."assets/images/noImage.png";
             return $imgm;
         }
 

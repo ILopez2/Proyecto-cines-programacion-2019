@@ -9,7 +9,7 @@
         private $overview; //SINOPSIS DE LA PELICULA
         private $posterPath; //RUTA DEL ARCHIVO 
 
-        public __construct($id,$title,$relaseDate,$adult,$overview,$imagePatposterPathh){
+        public function __construct($id,$title,$relaseDate,$adult,$overview,$imagePatposterPathh){
             $this->id=$id;
             $this->title=$title;
             $this->relaseDate=$relaseDate;
@@ -18,22 +18,22 @@
             $this->posterPath=$posterPath;
         }
 
-        public getId(){
+        public function getId(){
             return $this->id;
         }
-        public getTitle(){
+        public function getTitle(){
             return $this->title;
         }
-        public getRelaseDate(){
+        public function getRelaseDate(){
             return $this->relaseDate;
         }
-        public getAdult(){
+        public function getAdult(){
             return $this->adult;
         }
-        public getOverview(){
+        public function getOverview(){
             return $this->overview;
         }
-        public getPosterPath(){
+        public function getPosterPath(){
             return $this->posterPath;
         }
     }
