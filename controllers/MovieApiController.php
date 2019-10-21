@@ -1,8 +1,8 @@
 <?php
-    namespace daojson;
+    namespace controllers;
     use models\ClassMovie as CM;
 
-    class JsonMovieApi{
+    class MovieApiController{
 
         public function __construct(){
             
@@ -14,12 +14,9 @@
 
             $arrayJson= ($jsonContent) ? json_decode($jsonContent, true ) : array();
             $arrayMovies=$arrayJson["results"];
-
-            for($i=0;i<count($arrayMovies);$i++){
                 foreach($arrayMovies as $values){
-                    $movie=new CM($values["id"],$values["title"],$values["relase_date"],$values["adult"],$values["overview"],$values["poster_path"]);
+                    $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"]);
                     array_push($movies,$movie);
-                }
             }
             return $movies;
         }
@@ -32,13 +29,10 @@
 
             $arrayJson= ($jsonContent) ? json_decode($jsonContent, true ) : array();
             $arrayMovies=$arrayJson["results"];
-            
-            for($i=0;i<count($arrayMovies);$i++){
                 foreach($arrayMovies as $values){
                     $movie=new CM($values["id"],$values["title"],$values["relase_date"],$values["adult"],$values["overview"],$values["poster_path"]);
                     array_push($movies,$movie);
                 }
-            }
             return $movies;
 
         }
