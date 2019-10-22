@@ -1,21 +1,21 @@
 <?php namespace controllers;
     
-    //use DAO\UserDAO as UserDAO;
+    use models\ClassUser as User;
     use daojson\JsonUser as JsonUser;
-    //use controllers\HomeController as Home;
+    use controllers\ViewsController as ViewController;
     class UserController{
     
         private $userDAO;
-        //private $home;
+        private $view;
 
         public function __construct(){
             //$this->userDAO= new UserDAO();
             // JSON 
             $this->userDAO = new JsonUser();
-            //$this->home = new Home();
+            $this->view = new ViewController();
         }
-        //Chekea que exista un usuario logeado
         public function checkSession(){
+            //Chekea que exista un usuario logeado
             $rta=false;
             if(isset($_SESSION['loggedEmail'])){
                 $rta=true;
@@ -39,8 +39,38 @@
         }
 
         public function logout(){
+            //elimina el usuario de la session
             unset($_SESSION['loggedEmail']);
             unset($_SESSION['loggedPass']);
         }
+
+        public function singUp($name,$birthdate,$nationality,$email,$password,$role='Common'){
+            //registrar nuevo usario
+            $newUser = new User($name,$birthdate,$nationality,$email,$password,$role);
+            $this->userDAO->add($newUser);
+        }
         
+        public function add($name,$birthdate,$nationality,$email,$password){
+            //agrega un usuario al dao
+            $user = new User($name,$birthdate,$nationality,$email,$password);
+            $this->userDAO->add($user);
+            $this->view->admUsers();
+        }
+
+        public function delete($email){
+            //borra un user
+            $this->userDAO->delete($email);
+            $this->view->admUsers();
+        }
+
+        public function edit(){
+            //edita uno o varios campos
+        }
+
+        public function setAdmin($email){
+            //vuelve a un usuario admin
+            $user=$this->userDAO->getForID($email);
+            $user->setRoleLevel('Admin');
+            $this->view->admUsers();
+        }
 }

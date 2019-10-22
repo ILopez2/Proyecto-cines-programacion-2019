@@ -44,7 +44,7 @@
             return $movie;
         }
 
-        public function getMoviePoster($posterPath=null,$posterSize="500"){
+        public function getMoviePoster($posterPath=null,$posterSize="200"){
             
             if($posterPath!=null){
                 $imgm=IMGM.$posterSize.$posterPath;

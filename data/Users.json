@@ -1,26 +1,58 @@
 [
     {
-        "name": "Ivan",
+        "name": "Ivan Graciarena",
         "birthdate": "1984-04-10",
         "nationality": "Argentina",
         "email": "ivan@utn.com",
         "password": "asd123",
-        "role": "admin"
+        "role": "Admin"
     },
     {
-        "name": "Jorge",
+        "name": "Jorge Villordo",
         "birthdate": "1984-04-10",
-        "nationality": "Arg",
+        "nationality": "Argentina",
         "email": "jorge@utn.com",
         "password": "asd123",
-        "role": "admin"
+        "role": "Admin"
     },
     {
-        "name": "Lopez",
+        "name": "Ivan Lopez",
         "birthdate": "1984-04-10",
-        "nationality": "Uruguayo",
-        "email": "ivanl@utn.com",
+        "nationality": "Argentina",
+        "email": "lopez@utn.com",
         "password": "asd123",
-        "role": "common"
+        "role": "Admin"
+    },
+    {
+        "name": "Alfredo B. Suqueado",
+        "birthdate": "1984-04-10",
+        "nationality": "Argentina",
+        "email": "alfred@utn.com",
+        "password": "asdasd",
+        "role": "Common"
+    },
+    {
+        "name": "Cesar Noso",
+        "birthdate": "1984-04-10",
+        "nationality": "Argentina",
+        "email": "cesar@utn.com",
+        "password": "asdasd",
+        "role": "Common"
+    },
+    {
+        "name": "Gustavo Mito",
+        "birthdate": "1984-04-10",
+        "nationality": "Argentina",
+        "email": "gusti@utn.com",
+        "password": "asdasd",
+        "role": "Common"
+    },
+    {
+        "name": "Matias Queroso",
+        "birthdate": "1984-04-10",
+        "nationality": "Argentina",
+        "email": "mati@utn.com",
+        "password": "asdasd",
+        "role": "Common"
     }
 ]

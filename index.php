@@ -18,10 +18,10 @@
     Autoload::start();
 	session_start();
 	//include_once(VIEWS.'/header.php');
-	//include_once(VIEWS.'/login.php');
 	//include_once(VIEWS.'/nav.php');
+	//include_once(VIEWS.'/login.php');
 	//include_once(VIEWS.'/CrudCinema.php');
-	
+	//include_once(VIEWS.'/CrudUsers.php');
 	//include_once(VIEWS.'/footer.php');
 	//var_dump($_SESSION);
 	Router::Route(new Request());

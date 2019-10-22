@@ -56,7 +56,7 @@
             $this->retriveData();
             foreach($this->cinemas as $cine){
                 if($cine->getName() == $name){
-                    $rta=$name;
+                    $rta=$cine;
                 }
             }
             return $rta;

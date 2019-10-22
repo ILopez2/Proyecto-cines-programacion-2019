@@ -45,6 +45,10 @@
             $this->Index();
         }
 
+        public function singUp($name,$birthdate,$nationality,$email,$password,$role='Common'){
+            $this->userController->singUp($name,$birthdate,$nationality,$email,$password,$role);
+            $this->Index();
+        }
         public function admCinema(){
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');

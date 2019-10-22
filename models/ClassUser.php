@@ -28,7 +28,7 @@
             return $this->birthdate;
         }
         public function getNationality(){
-            return $this->name;
+            return $this->nationality;
         }
         public function getEmail(){
             return $this->email;

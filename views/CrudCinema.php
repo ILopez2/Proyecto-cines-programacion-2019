@@ -54,36 +54,39 @@ $cinemas=$dao->getAll();
                     </form>
                 </div>       
         </div>
-    <table border=1 class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>Nombre</th>
-                <th>Direccion</th>
-                <th>Ciudad</th>
-                <th>Precio ticket</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-                <?php foreach($cinemas as $cine){  ?>
+        <div class="col-m-8">
+            <table class="table table-bordered">
+            <thead class="thead-dark">
                 <tr>
-                    <td><?php echo $cine->getName(); ?></td>
-                    <td><?php echo $cine->getAddress(); ?></td>
-                    <td><?php echo $cine->getCity(); ?></td>
-                    <td><?php echo $cine->getTicketCost(); ?></td>
-                    
-                    <td>
-                        <a href="<?php echo FRONT_ROOT?>Cinema/edit?id=<?php echo $cine->getName()?>" class="btn btn-secondary">
-                        <i class="fas fa-marker"></i>
-                        </a>
-                        <a href="<?php echo FRONT_ROOT?>Cinema/delete?id=<?php echo $cine->getName()?>" class="btn btn-danger">
-                        <i class="far fa-trash-alt"></i>
-                        </a>
-                    </td>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Ciudad</th>
+                    <th>Precio ticket</th>
+                    <th>Actions</th>
                 </tr>
-                <?php } ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                    <?php foreach($cinemas as $cine){  ?>
+                    <tr>
+                        <td><?php echo $cine->getName(); ?></td>
+                        <td><?php echo $cine->getAddress(); ?></td>
+                        <td><?php echo $cine->getCity(); ?></td>
+                        <td><?php echo $cine->getTicketCost(); ?></td>
+                        
+                        <td>
+                            <a href="<?php echo FRONT_ROOT?>Cinema/edit?id=<?php echo $cine->getName()?>" class="btn btn-secondary">
+                            <i class="fas fa-marker"></i>
+                            </a>
+                            <a href="<?php echo FRONT_ROOT?>Cinema/delete?id=<?php echo $cine->getName()?>" class="btn btn-danger">
+                            <i class="far fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <?php } ?>
+            </tbody>
+            </table>        
+        </div>
+    
     </div>
 
 </div>

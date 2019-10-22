@@ -14,20 +14,78 @@
 
         public function add($user){
             $this->retriveData();
-            array_push($this->usersList,$user);
-            $this->saveData();
-        }
-        public function getForID($name){
-            //retornar el cine correspondiente con el id que viene por parametro
-           /* $rta=null;
-            $this->retriveData();
-            foreach($cinema as $cine){
-                if($cine->getName() == $name){
-                    $rta=$name
+            $exist=false;
+            foreach($this->usersList as $value){
+                if($user->getEmail() == $value->getEmail()){
+                    $exist=true;
                 }
             }
-            return $name;*/
+            if($exist){
+                $_SESSION['errorMje']='El <strong>email<strong> ingresado ya esta en uso.';
+            }else{
+                array_push($this->usersList,$user);
+                $_SESSION['successMje'] = 'Usuario agregado con éxito';
+            }
+            $this->saveData();
         }
+        public function getForID($email){
+            //retornar el cine correspondiente con el id que viene por parametro
+            $rta=null;
+            $this->retriveData();
+            foreach($usersList as $value){
+                if($value->getEmail() == $email){
+                    $rta=$value;
+                }
+            }
+            return $rta;
+        }
+
+        public function delete($email){
+            $this->retriveData();
+            $newList = array();
+            $mje=false;
+            
+            foreach ($this->userList as $user) {
+                if($user->getEmail() == $email){
+                    $mje=true;
+                }
+                if($user->getEmail() != $email){ 
+                    array_push($newList, $user);
+                    
+                }
+            }
+            if($mje){
+                $_SESSION['successMje'] = 'Cine borrado con éxito';
+            }
+            $this->userList = $newList;
+            $this->saveData();
+        }
+      
+        public function modify($value,$option,$email){
+            //hay que modificar esta funcion para que se puedan editar varios o todos los campos a la vez.
+            $this->retriveData();
+            $arrayToSave= array();
+            foreach($this->userList as $user){
+                if($user->getEmail() == $email){
+                    if($option == "name"){
+                        $user->setName($value);
+                    }
+                    if($option == "birthdate"){
+                        $user->setBirthdate($value);
+                    }
+                    if($option == "nationality"){
+                        $user->setNationality($value);
+                    }
+                    if($option == "email"){
+                        $user->setEmail($value);
+                    }
+                }
+                array_push($arrayToSave,$user);
+            }
+            $userList=$arrayToSave;
+            $this->saveData();
+        }
+
         public function getAll(){
             $this->retriveData();    
             return $this->usersList;
