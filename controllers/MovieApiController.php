@@ -1,11 +1,14 @@
-<?php
-    namespace controllers;
+<?php namespace controllers;
+    
     use models\ClassMovie as CM;
+    use controllers\ViewsController as VC;
 
     class MovieApiController{
 
+        private $view;
+
         public function __construct(){
-            
+            $view = new VC();
         }
 
         public function getLastMovies($lang){
@@ -23,24 +26,30 @@
 
         /**DEVUELVE UN ARREGLO CON PELICULAS RELACIONADAS AL NOMBRE QUE SE PASO POR PARAMETRO */
         public function getMovie($name,$lang){
-            str_replace(" ","+",$name);
+            $aux = str_replace(" ","+",$name);
             $movies=array();
-            $jsonContent=file_get_contents(SERCHM.$name.$lang);
 
+            $jsonContent=file_get_contents(SERCM.$aux.$lang);
             $arrayJson= ($jsonContent) ? json_decode($jsonContent, true ) : array();
             $arrayMovies=$arrayJson["results"];
-                foreach($arrayMovies as $values){
-                    $movie=new CM($values["id"],$values["title"],$values["relase_date"],$values["adult"],$values["overview"],$values["poster_path"]);
+                
+            foreach($arrayMovies as $values){
+                    $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"]);
+                    //var_dump($values["release_date"]);
                     array_push($movies,$movie);
-                }
+            }
             return $movies;
 
+        }
+
+        public function search($searchResult){
+            $this->view->search($searchResult);
         }
 
         public function getMovieXid($id,$lang){
             $jsonContent=file_get_contents(SERCHMID.$id.APIKEY.$lang);
             $values= ($jsonContent) ? json_decode($jsonContent, true ) : array();
-            $movie=new CM($values["id"],$values["title"],$values["relase_date"],$values["adult"],$values["overview"],$values["poster_path"]);
+            $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"]);
             return $movie;
         }
 

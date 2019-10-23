@@ -27,4 +27,10 @@
             include_once(VIEWS.'/footer.php');
         }
 
+        public function search($searchResult){
+            include_once(VIEWS.'/header.php');
+            include_once(VIEWS.'/nav.php');
+            include_once(VIEWS.'/SearchResult.php');
+            include_once(VIEWS.'/footer.php');
+        }
     }

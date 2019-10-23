@@ -12,9 +12,12 @@
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group mr-1" role="group" aria-label="First group">
                     <?php } ?>
-                    <form action="<?php echo FRONT_ROOT?>" method="POST" class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                    <form action="<?php echo FRONT_ROOT?>Views/search" method="POST" class="form-inline">
+                        
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" required>
+                        
                         <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fas fa-user-astronaut"></i> Search</button>
+                    
                     </form>
                     </div>
                     <div class="btn-group mr-2" role="group" aria-label="Second group">
