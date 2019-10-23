@@ -77,14 +77,14 @@ $users=$dao->getAll();
             <tbody>
                     <?php foreach($users as $value){  ?>
                     <tr>
-                        <td><?php echo $value->getName(); ?></td>
-                        <td><?php echo $value->getBirthdate(); ?></td>
-                        <td><?php echo $value->getNationality(); ?></td>
-                        <td><?php echo $value->getEmail(); ?></td>
-                        <td><?php echo $value->getPassword(); ?></td>
-                        <td><?php echo $value->getRoleLevel(); ?></td>
+                        <td class="table-light"><?php echo $value->getName(); ?></td>
+                        <td class="table-light"><?php echo $value->getBirthdate(); ?></td>
+                        <td class="table-light"><?php echo $value->getNationality(); ?></td>
+                        <td class="table-light"><?php echo $value->getEmail(); ?></td>
+                        <td class="table-light"><?php echo $value->getPassword(); ?></td>
+                        <td class="table-light"><?php echo $value->getRoleLevel(); ?></td>
                         
-                        <td>
+                        <td class="table-light">
                             <a href="<?php echo FRONT_ROOT?>User/edit?id=<?php echo $value->getEmail()?>" class="btn btn-secondary">
                             <i class="fas fa-marker"></i>
                             </a>

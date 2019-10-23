@@ -19,7 +19,7 @@
     define('VIEWS_PATH', FRONT_ROOT .'/views');
     define('CSS_PATH',FRONT_ROOT . '/assets/css');
     define('JS_PATH', FRONT_ROOT . '/assets/js/');
-    define('IMG_PATH',FRONT_ROOT . '/assets/img/');
+    define('IMG_PATH',FRONT_ROOT . 'assets/images/');
 
 
     /*

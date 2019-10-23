@@ -4,23 +4,23 @@
     <form class="login-form" action="<?php echo FRONT_ROOT?>Home/Index" method="POST">
  
         <div class="form-group">
-            <label>Email</label>
-            <input type="email" class="form-control" name="email" />
+            <label><strong>Email</strong></label>
+            <input type="email" class="form-control" name="email" placeholder="Ingrese su email" />
         </div>
         
         <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" name="password">
+            <label><strong>Password</strong></label>
+            <input type="password" class="form-control" name="password" placeholder="Ingrese su contraseña">
         </div>
 
         <div class="actions">
 
-            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#sign-up">
-                Sign up
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sign-up">
+            <i class="fas fa-user-plus"></i> Sign up
             </button>
             
             <button type="submit" class="btn btn-dark">
-                Login
+            <i class="fas fa-sign-in-alt"></i> Login
             </button>
         
         </div>

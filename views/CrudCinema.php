@@ -68,12 +68,12 @@ $cinemas=$dao->getAll();
             <tbody>
                     <?php foreach($cinemas as $cine){  ?>
                     <tr>
-                        <td><?php echo $cine->getName(); ?></td>
-                        <td><?php echo $cine->getAddress(); ?></td>
-                        <td><?php echo $cine->getCity(); ?></td>
-                        <td><?php echo $cine->getTicketCost(); ?></td>
+                        <td class="table-light"><?php echo $cine->getName(); ?></td>
+                        <td class="table-light"><?php echo $cine->getAddress(); ?></td>
+                        <td class="table-light"><?php echo $cine->getCity(); ?></td>
+                        <td class="table-light"><?php echo $cine->getTicketCost(); ?></td>
                         
-                        <td>
+                        <td class="table-light">
                             <a href="<?php echo FRONT_ROOT?>Cinema/edit?id=<?php echo $cine->getName()?>" class="btn btn-secondary">
                             <i class="fas fa-marker"></i>
                             </a>
