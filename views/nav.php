@@ -8,10 +8,10 @@
            ?>
         
             <ul class="navbar-nav ml-auto">
-            <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'admin') {?>
+            
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group mr-1" role="group" aria-label="First group">
-                    <?php } ?>
+                    
                     <form action="<?php echo FRONT_ROOT?>Views/search" method="POST" class="form-inline">
                         
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" required>
@@ -20,6 +20,7 @@
                     
                     </form>
                     </div>
+                    <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin') {?>
                     <div class="btn-group mr-2" role="group" aria-label="Second group">
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -30,6 +31,7 @@
                         <a class="dropdown-item" href="<?php echo FRONT_ROOT?>Views/admUsers"><i class="fas fa-user-cog"></i> Usuarios</a>
                         </div>
                     </div>
+                    <?php } ?>
                         
                     </div>
                     <div class="btn-group" role="group" aria-label="Third group">

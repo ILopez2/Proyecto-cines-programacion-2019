@@ -28,11 +28,13 @@
                 }
             }
             include_once(VIEWS.'/header.php');
-            include_once(VIEWS.'/nav.php');
+            
             if($showView){
+                include_once(VIEWS.'/nav.php');
                 include_once(VIEWS.'/home.php');
             }
             else{
+               
                 include_once(VIEWS.'/login.php');
             }
             

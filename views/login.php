@@ -5,12 +5,12 @@
  
         <div class="form-group">
             <label><strong>Email</strong></label>
-            <input type="email" class="form-control" name="email" placeholder="Ingrese su email" />
+            <input type="email" class="form-control" name="email" placeholder="Ingrese su email" required />
         </div>
         
         <div class="form-group">
             <label><strong>Password</strong></label>
-            <input type="password" class="form-control" name="password" placeholder="Ingrese su contraseña">
+            <input type="password" class="form-control" name="password" placeholder="Ingrese su contraseña"required>
         </div>
 
         <div class="actions">
@@ -64,25 +64,25 @@
 
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" name="name" />
+                        <input type="text" class="form-control" name="name" required/>
                     </div>
                     <div class="form-group">
                         <label>Birthdate</label>
-                        <input type="date" class="form-control" name="birthdate" />
+                        <input type="date" class="form-control" name="birthdate" required/>
                     </div>
                     <div class="form-group">
                         <label>Nationality</label>
-                        <input type="text" class="form-control" name="nationality" />
+                        <input type="text" class="form-control" name="nationality" required/>
                     </div>
                     
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" name="email" />
+                        <input type="email" class="form-control" name="email" required/>
                     </div>
 
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" name="password" />
+                        <input type="password" class="form-control" name="password" required/>
                     </div>
 
                 </div>

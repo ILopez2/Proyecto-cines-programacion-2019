@@ -32,7 +32,7 @@
             //retornar el cine correspondiente con el id que viene por parametro
             $rta=null;
             $this->retriveData();
-            foreach($usersList as $value){
+            foreach($this->usersList as $value){
                 if($value->getEmail() == $email){
                     $rta=$value;
                 }
@@ -45,7 +45,7 @@
             $newList = array();
             $mje=false;
             
-            foreach ($this->userList as $user) {
+            foreach ($this->usersList as $user) {
                 if($user->getEmail() == $email){
                     $mje=true;
                 }
@@ -55,34 +55,23 @@
                 }
             }
             if($mje){
-                $_SESSION['successMje'] = 'Cine borrado con éxito';
+                $_SESSION['successMje'] = 'Usuario borrado con éxito';
             }
-            $this->userList = $newList;
+            $this->usersList = $newList;
             $this->saveData();
         }
       
-        public function modify($value,$option,$email){
+        public function modify($newUser,$id){
             //hay que modificar esta funcion para que se puedan editar varios o todos los campos a la vez.
             $this->retriveData();
             $arrayToSave= array();
-            foreach($this->userList as $user){
-                if($user->getEmail() == $email){
-                    if($option == "name"){
-                        $user->setName($value);
-                    }
-                    if($option == "birthdate"){
-                        $user->setBirthdate($value);
-                    }
-                    if($option == "nationality"){
-                        $user->setNationality($value);
-                    }
-                    if($option == "email"){
-                        $user->setEmail($value);
-                    }
+            foreach($this->usersList as $user){
+                if($user->getEmail() == $id){
+                    $user=$newUser;
                 }
                 array_push($arrayToSave,$user);
             }
-            $userList=$arrayToSave;
+            $usersList=$arrayToSave;
             $this->saveData();
         }
 
@@ -125,6 +114,21 @@
         }
 
 
-
+        public function setRole($email,$role){
+            $this->retriveData();
+            $newList = array();
+            
+            foreach ($this->usersList as $user) {
+               
+                if($user->getEmail() == $email){ 
+                    $user->setRoleLevel($role);
+                    
+                }
+                array_push($newList, $user);
+            }
+            $this->usersList = $newList;
+            $this->saveData();
+        }
+        
         
     }

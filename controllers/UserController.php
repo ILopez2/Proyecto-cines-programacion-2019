@@ -63,14 +63,18 @@
             $this->view->admUsers();
         }
 
-        public function edit(){
+        public function edit($name,$birthdate,$nationality,$password,$id){
             //edita uno o varios campos
+            $auxUser = new User($name,$birthdate,$nationality,$id,$password);
+            $this->userDAO->modify($auxUser,$id);
+
         }
 
-        public function setAdmin($email){
+        public function setRole($email,$role){
             //vuelve a un usuario admin
-            $user=$this->userDAO->getForID($email);
-            $user->setRoleLevel('Admin');
+            
+            $this->userDAO->setRole($email,$role);
+            
             $this->view->admUsers();
         }
 }
