@@ -17,10 +17,8 @@
         public function add($cinema){
             $this->retriveData();
             $exist=false;
-            foreach($this->cinemas as $cine){
-                if($cine->getName() == $cinema->getName()){
-                    $exist=true;
-                }
+            if(($this->getForID($cinema->getName())!=null){
+                $exist=true;
             }
             if($exist){
                 $_SESSION['errorMje']='El nombre ingresado ya existe.';
@@ -88,14 +86,23 @@
             $this->retriveData();
             return $this->cinemas;
         }
-
+        public function updateCinema($cinemaToUpdate){
+            $this->retriveData();
+            $arrayToSave= array();
+            foreach($this->cinemas as $cinema){
+                if($cinema->getName() == $cinemaToUpdate->getName()){
+                    $cinema=$cinemaToUpdate;
+                }
+                array_push($arrayToSave,$cinema);
+            }
+            $this->cinemas=$arrayToSave;
+            $this->saveData();
+        }
         public function saveData(){
             $array=array();
 
             foreach($this->cinemas as $cinema){
                 $values["name"]=$cinema->getName();
-                //$values["country"]=$cinema->getCountry();
-                //$values["province"]=$cinema->getProvince();
                 $values["city"]=$cinema->getCity();
                 $values["address"]=$cinema->getAddress();
                 $values["ticketCost"]=$cinema->getTicketCost();
@@ -114,7 +121,7 @@
                 $array= ($jsonContent) ? json_decode($jsonContent, true ) : array();
 
                 foreach($array as $values){
-                    $cinema = new CC($values["name"]/*,$values["country"],$values["province"]*/,$values["city"],$values["address"],$values["ticketCost"]);
+                    $cinema = new CC($values["name"],$values["city"],$values["address"],$values["ticketCost"]);
                     array_push($this->cinemas, $cinema);
                 }
             }

@@ -4,8 +4,6 @@
         
         //ATRIBUTES
         private $name;
-        //private $country;
-        //private $province;
         private $city;
         private $address;
         private $ticketCost;
@@ -14,8 +12,6 @@
         //CONSTRUCTOR
         public function __construct($name,$city,$address,$ticketCost){
             $this->name=$name;
-            //$this->country=$country;
-            //$this->province=$province;
             $this->city=$city;
             $this->address=$address;
             $this->ticketCost=$ticketCost;
@@ -26,12 +22,6 @@
         public function getName(){
             return $this->name;
         }
-       /* public function getCountry(){
-            return $this->country;
-        }
-        public function getProvince(){
-            return $this->province;
-        }*/
         public function getCity(){
             return $this->city;
         }
@@ -49,12 +39,6 @@
         public function setName($name){
             $this->name=$name;
         }
-        /*public function setCountry($country){
-            $this->country=$country;
-        }
-        public function setProvince($province){
-            $this->province=$province;
-        }*/
         public function setCity($city){
             $this->city=$city;
         }
@@ -70,7 +54,29 @@
 
         //EXTRAS
         public function addCinemaRoom($cinemaRoom){
-           array_push($this->cinemaRooms,$cinemaRoom);
+            $rta=false;
+            $msj="Sala cargada con exito";
+            foreach($this->cinemaRooms as $room){
+                if($room->getName==$cinemaRoom->getName){
+                    $rta=true;
+                    $msj="Ya existe una sala con ese nombre";
+                }
+            }
+            if($rta==false){
+                array_push($this->cinemaRooms,$cinemaRoom);
+            }
+            return $msj;
+        }
+
+        public function deleteCinemaRoom($cinemaRoomName){
+            $arrayToSave=array();
+            $msj="Sala borrada con exito";
+            foreach($this->cinemaRooms as $room){
+                if($room->getName() != $cinemaRoomName){
+                }
+            }
+            $this->cinemaRooms=$arrayToSave;
+            return $msj;
         }
     }
 ?>

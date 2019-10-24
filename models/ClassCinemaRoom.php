@@ -4,14 +4,14 @@
         
     //ATRIBUTES
         private $name;
-        private $type; 
+        private $is3D; 
         private $capacity;
         private $seats=array();
     
     //CONSTRUCTOR
-    public function __construct($name,$type,$capacity){
+    public function __construct($name,$is3D,$capacity){
         $this->name=$name;
-        $this->type=$type;
+        $this->is3D=$is3D;
         $this->capacity=$capacity;
         $this->createSeats($capacity);
     }
@@ -20,8 +20,8 @@
     public function getName(){
         return $this->name;
     }
-    public function getType(){
-        return $this->type;
+    public function getIs3D(){
+        return $this->is3D;
     }
     public function getCapacity(){
         return $this->Capacity;
@@ -34,8 +34,8 @@
     public function setName($name){
         $this->name=$name;
     }
-    public function setType($type){
-        $this->type=$type;
+    public function setIs3D($is3D){
+        $this->is3D=$is3D;
     }
     public function setCapacity($capacity){
         $this->capacity=$capacity;
