@@ -13,6 +13,7 @@
         <div class="row">
             <div class="col-m-4">
                 <?php if(isset($_SESSION['successMje']) || isset($_SESSION['errorMje'])) { ?>
+                    
                     <div class="alert <?php if(isset($_SESSION['successMje'])) echo 'alert-success'; else echo 'alert-danger'; ?> alert-dismissible fade show mt-3" role="alert">
                         <strong><?php if(isset($_SESSION['successMje'])) echo $_SESSION['successMje']; else echo $_SESSION['errorMje']; ?></strong>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -27,11 +28,14 @@
                         
                         ?>
                     </div>
-                    <?php } ?>
+
+                 <?php } ?>
 
 
                     <!-- AddUser here ...  -->
                     <div class="card card-body">
+                    
+                    <?php if(isset($_SESSION['successMje']) || isset($_SESSION['errorMje'])) { ?>
                         <form action="<?php echo FRONT_ROOT?>User/add" method="POST" required>
                             
                             <div class="form-group">
@@ -62,8 +66,9 @@
                             <input type="submit" class="btn btn-success btn-block" name="save" value="Save">   
 
                         </form>
-                    </div>
+                    <?php } ?>    
 
+                    </div>
                     <!-- End AddUser here ...         -->
 
             </div>
@@ -82,51 +87,50 @@
                     </tr>
                 </thead>
                 <tbody>
-                        <?php foreach($users as $value){  ?>
-                    <tr>
-                            <td class="table-light"><?php echo $value->getName(); ?></td>
-                            <td class="table-light"><?php echo $value->getBirthdate(); ?></td>
-                            <td class="table-light"><?php echo $value->getNationality(); ?></td>
-                            <td class="table-light"><?php echo $value->getEmail(); ?></td>
-                            <td class="table-light"><?php echo $value->getPassword(); ?></td>
-                            <td class="table-light"><?php echo $value->getRoleLevel(); ?></td>
-                            
-                            <td class="table-light">
-                            
-                                <!-- EDIT HERE  -->
-                                <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
-                                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
-                                    <i class="fas fa-marker"></i>
-                                    </button>
-                                <?php } ?>
+                    <?php foreach($users as $value){ ?>
+                            <tr>
+                                <td class="table-light"><?php echo $value->getName(); ?></td>
+                                <td class="table-light"><?php echo $value->getBirthdate(); ?></td>
+                                <td class="table-light"><?php echo $value->getNationality(); ?></td>
+                                <td class="table-light"><?php echo $value->getEmail(); ?></td>
+                                <td class="table-light"><?php echo $value->getPassword(); ?></td>
+                                <td class="table-light"><?php echo $value->getRoleLevel(); ?></td>
                                 
-                                <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
-                                    <!-- DELETE HERE  -->
-                                    <a href="<?php echo FRONT_ROOT?>User/delete?id=<?php echo $value->getEmail()?>" class="btn btn-danger">
-                                    <i class="far fa-trash-alt"></i>
-                                    </a>
-                                <?php } ?>
-
-                                <!-- SET ADMIN -->
-                                <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
+                                <td class="table-light">
+                                
+                                    <!-- EDIT HERE  -->
+                                    <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
+                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
+                                        <i class="fas fa-marker"></i>
+                                        </button>
+                                    <?php } ?>
                                     
-                                    <?php if($value->getRoleLevel() != 'Admin'){ ?>
-                                    <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=Admin" class="btn btn-success">
-                                    <i class="fas fa-user-shield"></i>
-                                    </a>
-                                    
-                                    <?php }else{?>
-                                        <!-- SET COMMON -->
-                                        <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=Common" class="btn btn-danger">
-                                        <i class="fas fa-user-times"></i>
+                                    <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
+                                        <!-- DELETE HERE  -->
+                                        <a href="<?php echo FRONT_ROOT?>User/delete?id=<?php echo $value->getEmail()?>" class="btn btn-danger">
+                                        <i class="far fa-trash-alt"></i>
                                         </a>
                                     <?php } ?>
-                                
-                                <?php } ?>
 
-                            </td>
-                        </tr>
-                        <?php } ?>
+                                    <!-- SET ADMIN -->
+                                    <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
+                                        
+                                        <?php if($value->getRoleLevel() != 'Admin'){ ?>
+                                        <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=Admin" class="btn btn-success">
+                                        <i class="fas fa-user-shield"></i>
+                                        </a>
+                                        <?php }else{?>
+                                            <!-- SET COMMON -->
+                                            <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=Common" class="btn btn-danger">
+                                            <i class="fas fa-user-times"></i>
+                                            </a>
+                                        <?php } ?>
+                                    
+                                    <?php } ?>
+
+                                </td>
+                            </tr>
+                    <?php } ?>
                 </tbody>
                 </table>        
             </div>

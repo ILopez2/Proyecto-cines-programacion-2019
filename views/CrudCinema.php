@@ -11,21 +11,22 @@
         <div class="row">
             <div class="col-m-4">
                 <?php if(isset($_SESSION['successMje']) || isset($_SESSION['errorMje'])) { ?>
+                    
                     <div class="alert <?php if(isset($_SESSION['successMje'])) echo 'alert-success'; else echo 'alert-danger'; ?> alert-dismissible fade show mt-3" role="alert">
                         <strong><?php if(isset($_SESSION['successMje'])) echo $_SESSION['successMje']; else echo $_SESSION['errorMje']; ?></strong>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
+                        
                         <?php if(isset($_SESSION['successMje'])){
                             unset($_SESSION['successMje']);
                         }
                         if(isset($_SESSION['errorMje'])){
                             unset($_SESSION['errorMje']);
-                        }
-                        
-                        ?>
+                        }?>
                     </div>
-                    <?php } ?>
+
+                <?php } ?>
 
                     <div class="card card-body">
                     <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
@@ -51,10 +52,10 @@
                         
                                 
                                 <input type="submit" class="btn btn-success btn-block" name="save" value="Save">   
-                                
-
                             </form>
+
                     <?php } ?>
+                    
                     </div>       
             </div>
             <div class="col-m-8">
@@ -77,21 +78,24 @@
                             <td class="table-light"><?php echo $cine->getTicketCost(); ?></td>
                             
                             <td class="table-light">
+                            <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
                                 <a href="<?php echo FRONT_ROOT?>Cinema/edit?id=<?php echo $cine->getName()?>" class="btn btn-secondary">
                                 <i class="fas fa-marker"></i>
                                 </a>
+                            <?php } ?>
+                            <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>    
                                 <a href="<?php echo FRONT_ROOT?>Cinema/delete?id=<?php echo $cine->getName()?>" class="btn btn-danger">
                                 <i class="far fa-trash-alt"></i>
                                 </a>
+                            <?php } ?>
                             </td>
                         </tr>
+
                         <?php } ?>
                 </tbody>
                 </table>        
             </div>
-        
         </div>
-
     </div>
 
 <?php } ?>
