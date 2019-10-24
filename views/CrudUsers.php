@@ -26,34 +26,34 @@
                 <?php } ?>
 
                 <!-- AddUser here ...  -->
-                <div class="card card-body">
+                <div class="card card-body bg-secondary">
                 
                 <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin') { ?>
-                    <form action="<?php echo FRONT_ROOT?>User/add" method="POST" required>
+                    <form action="<?php echo FRONT_ROOT?>User/add" method="POST" >
                         
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" class="form-control" name="name" />
+                            <input type="text" class="form-control" name="name" required/>
                         </div>
 
                         <div class="form-group">
                             <label>Nationality</label>
-                            <input type="text" class="form-control" name="nationality" />
+                            <input type="text" class="form-control" name="nationality" required/>
                         </div>
 
                         <div class="form-group">
                             <label>Birthdate</label>
-                            <input type="date" class="form-control" name="birthdate" />
+                            <input type="date" class="form-control" name="birthdate" required/>
                         </div>
                         
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control" name="email" />
+                            <input type="email" class="form-control" name="email" required/>
                         </div>
 
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" class="form-control" name="password" />
+                            <input type="password" class="form-control" name="password" required/>
                         </div>
 
                         <input type="submit" class="btn btn-success btn-block" name="save" value="Save" >   
@@ -82,20 +82,14 @@
                     <tbody>
                         <?php foreach($users as $value){ ?>
                             <tr>
-                            <td class="table-light"><?php echo $value->getName(); ?></td>
-                            <td class="table-light"><?php echo $value->getBirthdate(); ?></td>
-                            <td class="table-light"><?php echo $value->getNationality(); ?></td>
-                            <td class="table-light"><?php echo $value->getEmail(); ?></td>
-                            <td class="table-light"><?php echo $value->getPassword(); ?></td>
-                            <td class="table-light"><?php echo $value->getRoleLevel(); ?></td>
-                            <td class="table-light">
-                            <!-- EDIT HERE  -->
-                            <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
-                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
-                                <i class="fas fa-marker">asd</i>
-                                </button>
-                                <?php } ?>
-                            <!-- END EDIT HERE  -->
+                            <td class="table-dark"><?php echo $value->getName(); ?></td>
+                            <td class="table-dark"><?php echo $value->getBirthdate(); ?></td>
+                            <td class="table-dark"><?php echo $value->getNationality(); ?></td>
+                            <td class="table-dark"><?php echo $value->getEmail(); ?></td>
+                            <td class="table-dark"><?php echo $value->getPassword(); ?></td>
+                            <td class="table-dark"><?php echo $value->getRoleLevel(); ?></td>
+                            <td class="table-dark">
+                            
 
                             <!-- DELETE HERE  -->
                             <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
@@ -107,12 +101,12 @@
                             <!-- SET ADMIN -->
                             <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
                                 <?php if($value->getRoleLevel() != 'Admin'){ ?>
-                                <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=Admin" class="btn btn-success">
+                                <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=Admin" class="btn btn-success" onclick="clicked(event)" >
                                 <i class="fas fa-user-shield"></i>
                                 </a>
                                 <?php }else{?>
                                     <!-- SET COMMON -->
-                                    <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=Common" class="btn btn-danger">
+                                    <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=Common" class="btn btn-danger" onclick="clicked(event)" >
                                     <i class="fas fa-user-times"></i>
                                     </a>
                             <?php } ?>    
@@ -120,11 +114,24 @@
                             </td>
                             </tr>
                             <?php } ?>
+
+                            <!-- EDIT START HERE  -->
+                        <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
+                            <td class="table-dark" colspan="7" style="text-align:center;">
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
+                                <i class="fas fa-marker">Modificar</i>
+                                </button>
+                            </td>
+                        <?php } ?>
+                        <!-- END EDIT HERE  -->
                     </tbody>
-                    </table>   
+                    </table> 
+                    <!-- END TABLE HERE  -->
+                    
+                      
 
                 </div>
-                <!-- END TABLE HERE  -->
+                
                 <!-- MODAL START HERE  -->
                 <div class="modal fade" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -143,30 +150,43 @@
                         </div>
 
                         <div class="modal-body">
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" class="form-control" name="name" />
-                            </div>
+                                <div class="form-group">
+                                <label>Seleccione un Usuario a editar:</label>
+                                    <select name="email" class="form-control" required>
+                                    <option selected disabled value="">Email del Usuario</option>
+                                    <?php foreach($users as $value){ ?>
+                                    <option value="<?php echo $value->getEmail();?>"> <?php echo $value->getEmail();?> </option>
+                                    
+                                    <?php }?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" name="name" placeholder="Nombre" required/>
+                                </div>    
                             <div class="form-group">
                                 <label>Birthdate</label>
-                                <input type="date" class="form-control" name="birthdate" />
+                                <input type="date" class="form-control" name="birthdate" placeholder="Fecha de nacimiento" required/>
                             </div>
                             <div class="form-group">
                                 <label>Nationality</label>
-                                <input type="text" class="form-control" name="nationality" />
+                                <input type="text" class="form-control" name="nationality" placeholder="Nacionalidad" required/>
                             </div>    
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="password" class="form-control" name="password" />
+                                <input type="password" class="form-control" name="password" placeholder="Contraseña" required/>
                             </div>
-                            <div>
-                                <input name="id" type="hidden" value="<?php echo $value->getEmail()?> ">
-                            </div>
+                            <label>Rol</label>
+                            <select name="role" class="form-control" required>
+                                    <option selected disabled value="">Rol de Usuario</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Common">Comun</option>
+                            </select>
                         </div>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-dark">Registry</button>
+                            <button type="submit" class="btn btn-dark" onclick="clicked(event)">Confirm</button>
                         </div>
                     </form>
                 </div>

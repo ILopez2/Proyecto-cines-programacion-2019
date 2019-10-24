@@ -10,8 +10,7 @@
         <h1 class="mb-5">Administracion de cines</h1>
         <div class="row">
             <div class="col-m-4">
-                <?php if(isset($_SESSION['successMje']) || isset($_SESSION['errorMje'])) { ?>
-                    
+                <?php if(isset($_SESSION['successMje']) || isset($_SESSION['errorMje'])){ ?>
                     <div class="alert <?php if(isset($_SESSION['successMje'])) echo 'alert-success'; else echo 'alert-danger'; ?> alert-dismissible fade show mt-3" role="alert">
                         <strong><?php if(isset($_SESSION['successMje'])) echo $_SESSION['successMje']; else echo $_SESSION['errorMje']; ?></strong>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -25,12 +24,9 @@
                             unset($_SESSION['errorMje']);
                         }?>
                     </div>
-
                 <?php } ?>
-
-                    <div class="card card-body">
-                    <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
-                            
+                    <div class="card card-body bg-secondary">
+                    <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>      
                             <form action="<?php echo FRONT_ROOT?>Cinema/add" method="POST" required>
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="name" placeholder="Nombre" required>
@@ -49,11 +45,8 @@
                                     <option value="Miramar">Miramar</option>
                                     </select>
                                 </div>
-                        
-                                
-                                <input type="submit" class="btn btn-success btn-block" name="save" value="Save">   
+                                <input type="submit" class="btn btn-success btn-block" name="save" value="Save" onclick="clicked(event)">   
                             </form>
-
                     <?php } ?>
                     
                     </div>       
@@ -72,30 +65,88 @@
                 <tbody>
                         <?php foreach($cinemas as $cine){  ?>
                         <tr>
-                            <td class="table-light"><?php echo $cine->getName(); ?></td>
-                            <td class="table-light"><?php echo $cine->getAddress(); ?></td>
-                            <td class="table-light"><?php echo $cine->getCity(); ?></td>
-                            <td class="table-light"><?php echo $cine->getTicketCost(); ?></td>
+                            <td class="table-dark"><?php echo $cine->getName(); ?></td>
+                            <td class="table-dark"><?php echo $cine->getAddress(); ?></td>
+                            <td class="table-dark"><?php echo $cine->getCity(); ?></td>
+                            <td class="table-dark"><?php echo $cine->getTicketCost(); ?></td>
                             
-                            <td class="table-light">
-                            <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
-                                <a href="<?php echo FRONT_ROOT?>Cinema/edit?id=<?php echo $cine->getName()?>" class="btn btn-secondary">
-                                <i class="fas fa-marker"></i>
-                                </a>
-                            <?php } ?>
+                            <td class="table-dark">
+                             <!-- DELETE START HERE  -->
                             <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>    
-                                <a href="<?php echo FRONT_ROOT?>Cinema/delete?id=<?php echo $cine->getName()?>" class="btn btn-danger">
+                                <a href="<?php echo FRONT_ROOT?>Cinema/delete?id=<?php echo $cine->getName()?>" class="btn btn-danger" onclick="clicked(event)">
                                 <i class="far fa-trash-alt"></i>
                                 </a>
+                             <!-- DELETE START HERE  -->
                             <?php } ?>
                             </td>
                         </tr>
-
                         <?php } ?>
+                        <!-- EDIT START HERE  -->
+                        <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
+                            <td class="table-dark" colspan="7" style="text-align:center;">
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
+                                <i class="fas fa-marker">Modificar</i>
+                                </button>
+                            </td>
+                        <?php } ?>
+                        <!-- END EDIT HERE  -->
                 </tbody>
                 </table>        
             </div>
+            
         </div>
+
+        <!-- MODAL START HERE  -->
+        <div class="modal fade" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+
+                    <form class="modal-content" action="<?php echo FRONT_ROOT?>User/edit" method="POST">
+
+                        <div class="modal-header">
+                            
+                            <h5 class="modal-title">Modify</h5>
+
+
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+
+                        </div>
+
+                        <div class="modal-body">
+                                <div class="form-group">
+                                <label>Seleccione un Cine para editar:</label>
+                                    <select name="email" class="form-control" required>
+                                    <option selected disabled value="">Nombre</option>
+                                    <?php foreach($cinemas as $value){ ?>
+                                    <option value="<?php echo $value->getName();?>"> <?php echo $value->getName();?> </option>
+                                    
+                                    <?php }?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="adress" placeholder= "Direccion" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="price" placeholder="Precio de entrada" required>
+                                </div>
+                                <div class="form-group">
+                                    <select name="city" class="form-control" required>
+                                    <option selected disabled value="">Seleccione una ciudad</option>
+                                    <option value="Mar del Plata">Mar del Plata</option>
+                                    <option value="Miramar">Miramar</option>
+                                    </select>
+                                </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-dark" onclick="clicked(event)">Confirm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- MODAL ENDS HERE  -->
     </div>
 
 <?php } ?>

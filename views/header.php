@@ -20,12 +20,12 @@
           height: 110vh;
           
       }
-      .logon {
+      .edit {
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: 100px;
-          padding: 10px;
+         
+          padding: 10px; 
           /*height: 100vh;*/
       }
       .login-form {
@@ -34,7 +34,7 @@
           padding: 50px;
           border: 1px solid #DDD;
           border-radius: 10px;
-          background-color: rgb(69, 102, 163);
+
           opacity: 0.95;
           
       }

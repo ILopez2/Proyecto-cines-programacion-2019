@@ -17,7 +17,7 @@
         public function add($cinema){
             $this->retriveData();
             $exist=false;
-            if(($this->getForID($cinema->getName())!=null){
+            if($this->getForID($cinema->getName())!=null){
                 $exist=true;
             }
             if($exist){

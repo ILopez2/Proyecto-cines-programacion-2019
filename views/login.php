@@ -1,7 +1,7 @@
 <main class="login">
 
     <!-- LOGIN -->
-    <form class="login-form" action="<?php echo FRONT_ROOT?>Home/Index" method="POST">
+    <form class="login-form bg-secondary" action="<?php echo FRONT_ROOT?>Home/Index" method="POST">
  
         <div class="form-group">
             <label><strong>Email</strong></label>
@@ -64,32 +64,32 @@
 
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" name="name" required/>
+                        <input type="text" class="form-control" name="name" placeholder="Nombre" required/>
                     </div>
                     <div class="form-group">
                         <label>Birthdate</label>
-                        <input type="date" class="form-control" name="birthdate" required/>
+                        <input type="date" class="form-control" name="birthdate" placeholder="Fecha de nacimiento" required/>
                     </div>
                     <div class="form-group">
                         <label>Nationality</label>
-                        <input type="text" class="form-control" name="nationality" required/>
+                        <input type="text" class="form-control" name="nationality" placeholder="Nacionalidad" required/>
                     </div>
                     
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" name="email" required/>
+                        <input type="email" class="form-control" name="email" placeholder="Email" required/>
                     </div>
 
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" name="password" required/>
+                        <input type="password" class="form-control" name="password" placeholder="******" required/>
                     </div>
 
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-dark">Registry</button>
+                    <button type="submit" class="btn btn-dark" onclick="clicked(event)">Registry</button>
                 </div>
             </form>
 
