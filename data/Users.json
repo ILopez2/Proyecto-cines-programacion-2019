@@ -38,21 +38,5 @@
         "email": "cesar@utn.com",
         "password": "asdasd",
         "role": "Common"
-    },
-    {
-        "name": "Gustavo Mito",
-        "birthdate": "1984-04-10",
-        "nationality": "Argentina",
-        "email": "gusti@utn.com",
-        "password": "asdasd",
-        "role": "Common"
-    },
-    {
-        "name": "Matias Queroso",
-        "birthdate": "1984-04-10",
-        "nationality": "Argentina",
-        "email": "mati@utn.com",
-        "password": "asdasd",
-        "role": "Common"
     }
 ]

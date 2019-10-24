@@ -68,6 +68,7 @@
             foreach($this->usersList as $user){
                 if($user->getEmail() == $id){
                     $user=$newUser;
+                    array_push($arrayToSave,$user);
                 }
                 array_push($arrayToSave,$user);
             }

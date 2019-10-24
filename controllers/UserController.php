@@ -63,10 +63,12 @@
             $this->view->admUsers();
         }
 
-        public function edit($name,$birthdate,$nationality,$password,$id){
+        public function edit($name,$birthdate,$nationality,$password,$id,$role){
             //edita uno o varios campos
-            $auxUser = new User($name,$birthdate,$nationality,$id,$password);
+            $auxUser = new User($name,$birthdate,$nationality,$id,$password,$role);
+            var_dump($auxUser);
             $this->userDAO->modify($auxUser,$id);
+            $this->view->admUsers();
 
         }
 
