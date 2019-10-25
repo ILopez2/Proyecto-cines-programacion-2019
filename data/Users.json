@@ -21,21 +21,13 @@
         "nationality": "Argentina",
         "email": "lopez@utn.com",
         "password": "asd123",
-        "role": "Admin"
+        "role": "Common"
     },
     {
         "name": "Alfredo B. Suqueado",
         "birthdate": "1984-04-10",
         "nationality": "Argentina",
         "email": "alfred@utn.com",
-        "password": "asdasd",
-        "role": "Common"
-    },
-    {
-        "name": "Cesar Noso",
-        "birthdate": "1984-04-10",
-        "nationality": "Argentina",
-        "email": "cesar@utn.com",
         "password": "asdasd",
         "role": "Common"
     }

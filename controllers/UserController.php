@@ -52,31 +52,36 @@
         
         public function add($name,$birthdate,$nationality,$email,$password){
             //agrega un usuario al dao
-            $user = new User($name,$birthdate,$nationality,$email,$password);
-            $this->userDAO->add($user);
-            $this->view->admUsers();
+            if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){
+                $user = new User($name,$birthdate,$nationality,$email,$password);
+                $this->userDAO->add($user);
+                $this->view->admUsers();
+            }
         }
 
         public function delete($email){
             //borra un user
-            $this->userDAO->delete($email);
-            $this->view->admUsers();
+            if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){
+                $this->userDAO->delete($email);
+                $this->view->admUsers();
+            }
         }
 
         public function edit($email,$name,$birthdate,$nationality,$password,$role){
             //edita uno o varios campos
-            $auxUser = new User($name,$birthdate,$nationality,$email,$password,$role);
-            var_dump($auxUser);
-            $this->userDAO->modify($auxUser,$id);
-            $this->view->admUsers();
-
+            if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){
+                $auxUser = new User($name,$birthdate,$nationality,$email,$password,$role);
+                var_dump($auxUser);
+                $this->userDAO->modify($auxUser,$id);
+                $this->view->admUsers();
+            }
         }
 
         public function setRole($email,$role){
             //vuelve a un usuario admin
-            
-            $this->userDAO->setRole($email,$role);
-            
-            $this->view->admUsers();
+            if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){
+                $this->userDAO->setRole($email,$role);
+                $this->view->admUsers();
+            }
         }
 }

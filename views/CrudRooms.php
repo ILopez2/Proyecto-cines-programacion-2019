@@ -26,9 +26,9 @@
                 <?php } ?>
 
                     <div class="card card-body">
-                    <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
+                    
                             
-                            <form action="<?php echo FRONT_ROOT?>Room/add" method="POST" required>
+                            <form action="<?php echo FRONT_ROOT?>CinemaRoom/add" method="POST" required>
                                 
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="name" placeholder="Nombre" required>
@@ -36,6 +36,10 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="type" placeholder= "Tipo" required>
                                 </div>
+                                <!-- <div>
+                                <input type=”radio” name=”affirmative” value=”yes” checked>Yes</input> 
+                                <input type=”radio” name=”negative” value=”no”>No</input>
+                                </div> -->
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="capacity" placeholder="Capacidad" required>
                                 </div>
@@ -43,7 +47,7 @@
                                 <input type="submit" class="btn btn-success btn-block" name="save" value="Save">   
                             </form>
 
-                    <?php } ?>
+                    
                     </div>       
             </div>
             <div class="col-m-8">
@@ -64,23 +68,23 @@
                             
                             <td class="table-light"> 
                             <!-- DELETE CINEMA HERE  -->
-                            <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>    
-                                <a href="<?php echo FRONT_ROOT?>Cinema/delete?id=<?php echo $rooms->getName()?>" class="btn btn-danger">
+                            
+                                <a href="<?php echo FRONT_ROOT?>CinemaRoom/delete?id=<?php echo $rooms->getName()?>" class="btn btn-danger">
                                 <i class="far fa-trash-alt"></i>
                                 </a>
-                            <?php } ?>
+                            
                             </td>
                             </tr>
                         <?php } ?>
-                        <!-- EDIT START HERE  -->
-                        <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
-                            <td colspan="7" style="text-align:center;">
-                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
-                                <i class="fas fa-marker">Modificar</i>
-                                </button>
-                            </td>
-                        <?php } ?>
-                        <!-- END EDIT HERE  -->
+                    <!-- EDIT START HERE  -->
+                    
+                        <td colspan="7" style="text-align:center;">
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
+                            <i class="fas fa-marker">Modificar</i>
+                            </button>
+                        </td>
+                    
+                    <!-- END EDIT HERE  -->
                 </tbody>
                 </table>        
             </div>
