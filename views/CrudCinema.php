@@ -26,7 +26,6 @@
                     </div>
                 <?php } ?>
                     <div class="card card-body bg-secondary">
-                    <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>      
                             <form action="<?php echo FRONT_ROOT?>Cinema/add" method="POST" required>
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="name" placeholder="Nombre" required>
@@ -47,8 +46,6 @@
                                 </div>
                                 <input type="submit" class="btn btn-success btn-block" name="save" value="Save" onclick="clicked(event)">   
                             </form>
-                    <?php } ?>
-                    
                     </div>       
             </div>
             <div class="col-m-8">
@@ -71,24 +68,29 @@
                             <td class="table-dark"><?php echo $cine->getTicketCost(); ?></td>
                             
                             <td class="table-dark">
+
                              <!-- DELETE START HERE  -->
-                            <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>    
                                 <a href="<?php echo FRONT_ROOT?>Cinema/delete?id=<?php echo $cine->getName()?>" class="btn btn-danger" onclick="clicked(event)">
                                 <i class="far fa-trash-alt"></i>
                                 </a>
                              <!-- DELETE START HERE  -->
-                            <?php } ?>
+
+                             <!-- CINEMA ROOMS VIEW START HERE -->
+                             <a href="<?php echo FRONT_ROOT?>Views/admRooms?id=<?php echo $cine->getName()?>" class="btn btn-primary" onclick="clicked(event)">
+                                <i class="fas fa-person-booth"></i>
+                                </a>
+                             <!-- CINEMA ROOMS VIEW ENDS HERE -->
+                            
                             </td>
                         </tr>
                         <?php } ?>
+
                         <!-- EDIT START HERE  -->
-                        <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
                             <td class="table-dark" colspan="7" style="text-align:center;">
                                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
                                 <i class="fas fa-marker">Modificar</i>
                                 </button>
                             </td>
-                        <?php } ?>
                         <!-- END EDIT HERE  -->
                 </tbody>
                 </table>        
@@ -99,14 +101,10 @@
         <!-- MODAL START HERE  -->
         <div class="modal fade" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-
                     <form class="modal-content" action="<?php echo FRONT_ROOT?>Cinema/edit" method="POST">
-
                         <div class="modal-header">
-                            
+        
                             <h5 class="modal-title">Modify</h5>
-
-
                             <button type="button" class="close" data-dismiss="modal">
                                 <span>&times;</span>
                             </button>
@@ -118,10 +116,11 @@
                                 <label>Seleccione un Cine para editar:</label>
                                     <select name="name" class="form-control" required>
                                     <option selected disabled value="">Nombre</option>
-                                    <?php foreach($cinemas as $value){ ?>
-                                    <option value="<?php echo $value->getName();?>"> <?php echo $value->getName();?> </option>
                                     
+                                    <?php foreach($cinemas as $value){ ?>
+                                        <option value="<?php echo $value->getName();?>"> <?php echo $value->getName();?> </option>                        
                                     <?php }?>
+
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -148,5 +147,4 @@
             </div>
             <!-- MODAL ENDS HERE  -->
     </div>
-
 <?php } ?>

@@ -3,7 +3,7 @@
     use models\ClassCinemaBillboard as Billboard;
     use models\ClassCinema as Cinema;
     use controllers\CinemaRoomController as View;
-    class CinemaRoomController
+    class CinemaBillboardController
     {
 
         public function add($movie,$cinemaName){

@@ -1,5 +1,6 @@
 <?php namespace models;
     use models\ClassCinemaBillboard as CinemaBillboard;
+    use models\ClassCinemaRoom as CinemaRoom;
     class ClassCinema {
         
         //ATRIBUTES
@@ -11,12 +12,12 @@
         private $billboard;
 
         //CONSTRUCTOR
-        public function __construct($name,$city,$address,$ticketCost,$cinemaRooms=array(),$billboard=new CinemaBillboard()){
+        public function __construct($name,$city,$address,$ticketCost,$cinemaRoom,$billboard){
             $this->name=$name;
             $this->city=$city;
             $this->address=$address;
             $this->ticketCost=$ticketCost;
-            $this->cinemaRooms=$cinemaRooms;
+            $this->cinemaRooms=$cinemaRoom;
             $this->billboard=$billboard;
         }
 
@@ -57,32 +58,6 @@
         }
         public function setBillboard($billboard){
             $this->billboard=$billboard;
-        }
-        //EXTRAS
-        public function addCinemaRoom($cinemaRoom){
-            $rta=false;
-            $msj="Sala cargada con exito";
-            foreach($this->cinemaRooms as $room){
-                if($room->getName==$cinemaRoom->getName){
-                    $rta=true;
-                    $msj="Ya existe una sala con ese nombre";
-                }
-            }
-            if($rta==false){
-                array_push($this->cinemaRooms,$cinemaRoom);
-            }
-            return $msj;
-        }
-
-        public function deleteCinemaRoom($cinemaRoomName){
-            $arrayToSave=array();
-            $msj="Sala borrada con exito";
-            foreach($this->cinemaRooms as $room){
-                if($room->getName() != $cinemaRoomName){
-                }
-            }
-            $this->cinemaRooms=$arrayToSave;
-            return $msj;
         }
     }
 ?>

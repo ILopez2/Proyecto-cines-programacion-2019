@@ -60,32 +60,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                        <?php foreach($cinemas as $rooms){  ?>
-                            <tr>
-                            
-                            <td class="table-light"><?php echo $rooms->getName(); ?></td>
-                            <td class="table-light"><?php echo $rooms->getType(); ?></td>
-                            <td class="table-light"><?php echo $rooms->getCapacity(); ?></td>
-                            
-                            <td class="table-light"> 
-                            <!-- DELETE CINEMA HERE  -->
-                            
-                                <a href="<?php echo FRONT_ROOT?>CinemaRoom/delete?id=<?php echo $rooms->getName()?>" class="btn btn-danger">
-                                <i class="far fa-trash-alt"></i>
-                                </a>
-                            
-                            </td>
-                            </tr>
+                        <?php foreach($cinemas as $values){
+                            if($values->getName() == $cinemaName){
+                                $rooms = $values->getCinemaRooms();?>
+                                <tr>
+                                <td class="table-light"><?php echo $rooms->getName(); ?></td>
+                                <td class="table-light"><?php echo $rooms->getType(); ?></td>
+                                <td class="table-light"><?php echo $rooms->getCapacity(); ?></td>
+                                <td class="table-light"> 
+                                <!-- DELETE CINEMA START HERE  -->
+                                    <a href="<?php echo FRONT_ROOT?>CinemaRoom/delete?id=<?php echo $rooms->getName()?>" class="btn btn-danger">
+                                    <i class="far fa-trash-alt"></i>
+                                    </a>
+                                <!-- DELETE CINEMA ENDS HERE  -->
+                                </td>
+                                </tr>
+                            <?php } ?>
                         <?php } ?>
                     <!-- EDIT START HERE  -->
-                    
                         <td colspan="7" style="text-align:center;">
                             <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
                             <i class="fas fa-marker">Modificar</i>
                             </button>
                         </td>
-                    
-                    <!-- END EDIT HERE  -->
+                    <!-- EDIT ENDS HERE  -->
                 </tbody>
                 </table>        
             </div>

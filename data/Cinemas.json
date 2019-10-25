@@ -4,20 +4,23 @@
         "city": "Miramar",
         "address": "Funes 214",
         "ticketCost": "60 pesos",
-        "cinemaRooms": []
+        "cinemaRooms": [],
+        "billboard":[]
     },
     {
         "name": "Los gallegos",
         "city": "Mar del Plata",
         "address": "Garay 1234",
         "ticketCost": "100 pesos",
-        "cinemaRooms": []
+        "cinemaRooms": [],
+        "billboard":[]
     },
     {
         "name": "Ambasador",
         "city": "Mar del Plata",
         "address": "Chacabuco 1123",
         "ticketCost": "30 pesos",
-        "cinemaRooms": []
+        "cinemaRooms": [],
+        "billboard":[]
     }
 ]

@@ -1,7 +1,7 @@
 <?php namespace daojson; 
 
     use models\ClassCinema as CC;
-
+    use models\ClassCinemaRoom as CR;
     class JsonCinema implements IJson {
 
         //ATRIBUTES
@@ -113,11 +113,53 @@
                 $array= ($jsonContent) ? json_decode($jsonContent, true ) : array();
 
                 foreach($array as $values){
-                    $cinema = new CC($values["name"],$values["city"],$values["address"],$values["ticketCost"],$values["cinemaRooms"],$values["billboard"]);
+                    $cinema = new CC($values["name"],$values["city"],$values["address"],$values["ticketCost"],$values["cinemaRooms"]),$values["billboard"];
                     array_push($this->cinemas, $cinema);
                 }
             }
         }
+
+        public function createRoom(){
+            $this->retriveData();
+            $arrayToSave= array();
+            foreach($this->cinemas as $cinema){
+                if($cinema->getName()=='Aldrey'){
+                    $room = new CR("sala 1",true,80);
+                    $cinema->setCinemaRoom($room);
+                }
+                array_push($arrayToSave,$cinema);
+            }
+            $this->cinemas=$arrayToSave;
+            $this->saveData();
+        }
+        
+        /*
+        public function addCinemaRoom($cinemaRoom){
+            $rta=false;
+            $msj="Sala cargada con exito";
+            foreach($this->cinemaRooms as $room){
+                if($room->getName==$cinemaRoom->getName){
+                    $rta=true;
+                    $msj="Ya existe una sala con ese nombre";
+                }
+            }
+            if($rta==false){
+                array_push($this->cinemaRooms,$cinemaRoom);
+            }
+            return $msj;
+        }
+
+        public function deleteCinemaRoom($cinemaRoomName){
+            $arrayToSave=array();
+            $msj="Sala borrada con exito";
+            foreach($this->cinemaRooms as $room){
+                if($room->getName() != $cinemaRoomName){
+                }
+            }
+            $this->cinemaRooms=$arrayToSave;
+            return $msj;
+        }
+        */
     }
 
 ?>

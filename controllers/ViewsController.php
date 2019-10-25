@@ -20,6 +20,13 @@
             include_once(VIEWS.'/footer.php');
         }
 
+        public function admRooms($cinemaName){
+            include_once(VIEWS.'/header.php');
+            include_once(VIEWS.'/nav.php');
+            include_once(VIEWS.'/CrudRooms.php');
+            include_once(VIEWS.'/footer.php');
+        }
+
         public function home(){
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');

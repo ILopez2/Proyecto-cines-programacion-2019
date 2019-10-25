@@ -1,12 +1,12 @@
 <?php namespace models;
-    class CinemaBillboard{
+    class ClassCinemaBillboard{
         
         // ATRIBUTES
         private $movies;
         
         // CONSTRUCTOR
         public function __construct(){
-            $this->movies=array()
+            $this->movies=array();
         }
         // GETTERS 
         
