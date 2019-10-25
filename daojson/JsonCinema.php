@@ -98,6 +98,7 @@
                 $values["address"]=$cinema->getAddress();
                 $values["ticketCost"]=$cinema->getTicketCost();
                 $values["cinemaRooms"]=$cinema->getCinemaRooms();
+                $values["billboard"]=$cinema->getBillboard();
                 array_push($array,$values);
             }
             $jsonContent= json_encode($array, JSON_PRETTY_PRINT);
@@ -112,7 +113,7 @@
                 $array= ($jsonContent) ? json_decode($jsonContent, true ) : array();
 
                 foreach($array as $values){
-                    $cinema = new CC($values["name"],$values["city"],$values["address"],$values["ticketCost"]);
+                    $cinema = new CC($values["name"],$values["city"],$values["address"],$values["ticketCost"],$values["cinemaRooms"],$values["billboard"]);
                     array_push($this->cinemas, $cinema);
                 }
             }

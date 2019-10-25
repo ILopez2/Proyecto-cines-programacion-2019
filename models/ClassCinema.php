@@ -1,5 +1,5 @@
 <?php namespace models;
-    
+    use models\ClassCinemaBillboard as CinemaBillboard;
     class ClassCinema {
         
         //ATRIBUTES
@@ -8,14 +8,16 @@
         private $address;
         private $ticketCost;
         private $cinemaRooms;
+        private $billboard;
 
         //CONSTRUCTOR
-        public function __construct($name,$city,$address,$ticketCost){
+        public function __construct($name,$city,$address,$ticketCost,$cinemaRooms=array(),$billboard=new CinemaBillboard()){
             $this->name=$name;
             $this->city=$city;
             $this->address=$address;
             $this->ticketCost=$ticketCost;
-            $this->cinemaRooms=array();
+            $this->cinemaRooms=$cinemaRooms;
+            $this->billboard=$billboard;
         }
 
         //GETTERS
@@ -34,7 +36,9 @@
         public function getCinemaRooms(){
             return $this->cinemaRooms;
         }
-        
+        public function getBillboard(){
+            return $this->billboard;
+        }
         //SETTERS
         public function setName($name){
             $this->name=$name;
@@ -51,7 +55,9 @@
         public function setCinemaRooms($cinemaRoom){
             $this->cinemaRooms=$cinemaRoom;
         }
-
+        public function setBillboard($billboard){
+            $this->billboard=$billboard;
+        }
         //EXTRAS
         public function addCinemaRoom($cinemaRoom){
             $rta=false;
