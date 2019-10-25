@@ -35,10 +35,11 @@
         public function read($name){
             //? no lo se rick
         }
-        public function edit(){
+        public function edit($name,$adress,$price,$city){
             //editar el valor del atributo seleccionado por el usuario del cine seleccionado
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){
-                $this->cinemaDao->modify($value,$option,$cinemaName);
+                $cinema = new Cinema($name,$city,$adress,$price);
+                $this->cinemaDao->modify($cinema);
                 $this->view->admCinema();
             }
         }

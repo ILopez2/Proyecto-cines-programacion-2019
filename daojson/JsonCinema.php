@@ -59,29 +59,20 @@
             }
             return $rta;
         }
-        public function modify($value,$option,$cinemaName){
+        public function modify($newCinema){
+            //hay que modificar esta funcion para que se puedan editar varios o todos los campos a la vez.
             $this->retriveData();
             $arrayToSave= array();
-            foreach($this->cinemas as $cinema){
-                if($cinema->getName() == $cinemaName){
-                    if($option == "name"){
-                        $cinema->setName($value);
-                    }
-                    if($option == "city"){
-                        $cinema->setCity($value);
-                    }
-                    if($option == "address"){
-                        $cinema->setAddress($value);
-                    }
-                    if($option == "ticketCost"){
-                        $cinema->setTicketCost($value);
-                    }
+            foreach($this->cinemas as $value){
+                if($value->getName() == $newCinema->getName()){
+                    $value=$newCinema;
                 }
-                array_push($arrayToSave,$cinema);
+                array_push($arrayToSave,$value);
             }
-            $cinemas=$arrayToSave;
+            $this->cinemas=$arrayToSave;
             $this->saveData();
         }
+
         public function getAll(){
             $this->retriveData();
             return $this->cinemas;

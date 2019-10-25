@@ -61,18 +61,17 @@
             $this->saveData();
         }
       
-        public function modify($newUser,$id){
+        public function modify($newUser){
             //hay que modificar esta funcion para que se puedan editar varios o todos los campos a la vez.
             $this->retriveData();
             $arrayToSave= array();
             foreach($this->usersList as $user){
-                if($user->getEmail() == $id){
+                if($user->getEmail() == $newUser->getEmail()){
                     $user=$newUser;
-                    array_push($arrayToSave,$user);
                 }
                 array_push($arrayToSave,$user);
             }
-            $usersList=$arrayToSave;
+            $this->usersList=$arrayToSave;
             $this->saveData();
         }
 

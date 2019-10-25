@@ -100,7 +100,7 @@
         <div class="modal fade" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">
                 <div class="modal-dialog" role="document">
 
-                    <form class="modal-content" action="<?php echo FRONT_ROOT?>User/edit" method="POST">
+                    <form class="modal-content" action="<?php echo FRONT_ROOT?>Cinema/edit" method="POST">
 
                         <div class="modal-header">
                             
@@ -116,7 +116,7 @@
                         <div class="modal-body">
                                 <div class="form-group">
                                 <label>Seleccione un Cine para editar:</label>
-                                    <select name="email" class="form-control" required>
+                                    <select name="name" class="form-control" required>
                                     <option selected disabled value="">Nombre</option>
                                     <?php foreach($cinemas as $value){ ?>
                                     <option value="<?php echo $value->getName();?>"> <?php echo $value->getName();?> </option>

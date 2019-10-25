@@ -71,8 +71,7 @@
             //edita uno o varios campos
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){
                 $auxUser = new User($name,$birthdate,$nationality,$email,$password,$role);
-                var_dump($auxUser);
-                $this->userDAO->modify($auxUser,$id);
+                $this->userDAO->modify($auxUser);
                 $this->view->admUsers();
             }
         }

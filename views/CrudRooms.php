@@ -62,6 +62,7 @@
                 <tbody>
                         <?php foreach($cinemas as $rooms){  ?>
                             <tr>
+                            
                             <td class="table-light"><?php echo $rooms->getName(); ?></td>
                             <td class="table-light"><?php echo $rooms->getType(); ?></td>
                             <td class="table-light"><?php echo $rooms->getCapacity(); ?></td>
