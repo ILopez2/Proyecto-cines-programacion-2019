@@ -2,14 +2,28 @@
     class CinemaBillboard{
         
         // ATRIBUTES
-        private $movie;
-
+        private $movies;
+        
         // CONSTRUCTOR
         public function __construct(){
-            
+            $this->movies=array()
         }
         // GETTERS 
-       
-
-        // SETTERS
+        
+        public function getMovies(){
+            return $this->movies;
+        }
+        // EXTRAS
+        public function deleteMovie($movieId){
+            $arrayToSave=array();
+            foreach($this->movies as $movie){
+                if($movie->getId != $movieId){
+                    array_push($arrayToSave,$movie);
+                }
+            }
+            $this->movies=$arrayToSave;
+        }
+        public function addMovie($movie){
+            array_push($this->movies, $movie);
+        }
     }
