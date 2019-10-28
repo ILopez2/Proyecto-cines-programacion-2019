@@ -1,5 +1,6 @@
 <?php namespace controllers;
     
+    use models\ClassMovieGenre as CMG;
     use models\ClassMovie as CM;
     use controllers\ViewsController as VC;
 
@@ -62,6 +63,16 @@
             return $imgm;
         }
 
+        public function getGenres($lang){
+            $jsonContent=file_get_contents(GEN.$lang);
+            $values= ($jsonContent) ? json_decode($jsonContent, true ) : array();
+            $genres=array();
+            for($i=0;$i<count($values);$i++){
+                $gen=new CGM($values[$i]["name"],$values[$i]["id"]);
+                array_push($genres,$gen);
+            }
+            return $genres;
+        }
     }
 
 ?>

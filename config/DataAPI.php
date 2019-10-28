@@ -30,4 +30,9 @@
     EN EL JSON DE CADA PELICULA
     EJEMPLO: IMGM."500"."/".kqjL17yufvn9OVLyXYpvtyrFfak.jpg */
     define("IMGM","https://image.tmdb.org/t/p/w");
+
+    /*ESTE LINK SIRVE PARA TRAER UN ARREGLO CON TODOS LOS GENEROS,TRAE EL ID Y EL NOMBRE DE CADA UNO
+    AL FINAL SE LE DEBE CONCATENAR LA CONSTANTE DEL LENGUAJE DESEADO
+    EJEMPLO: GEN.ENG */
+    define("GEN",PAGE."/3/genre/movie/list".APIKEY);
 ?>

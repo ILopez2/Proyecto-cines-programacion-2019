@@ -9,15 +9,17 @@ class ClassMovie{
     private $adult; //BOOLEANO QUE INDICA SI LA PELICULA ES PARA ADULTOS O NO
     private $overview; //SINOPSIS DE LA PELICULA
     private $posterPath; //RUTA DEL ARCHIVO 
+    private $genres;
 
      //CONSTRUCTOR
-    public function __construct($id,$title,$releaseDate,$adult,$overview,$posterPath){
+    public function __construct($id,$title,$releaseDate,$adult,$overview,$posterPath,$genres=array()){
         $this->id=$id;
         $this->title=$title;
         $this->releaseDate=$releaseDate;
         $this->adult=$adult;
         $this->overview=$overview;
         $this->posterPath=$posterPath;
+        $this->genres=$genres;
     }
 
      //GETTERS
@@ -38,6 +40,9 @@ class ClassMovie{
     }
     public function getPosterPath(){
         return $this->posterPath;
+    }
+    public function getGenres(){
+        return $this->genres;
     }
 }
 ?>
