@@ -25,6 +25,7 @@
         }
     
         public static function GetInstance()
+        //pregunta si existe una misma instancia de este mismo obj , si no existe crea la instancia y si eciste la retorna
         {
             if(self::$instance == null)
                 self::$instance = new Connection();
@@ -32,9 +33,11 @@
         }
     
         public function Execute($query, $parameters = array(), $queryType = QueryType::Query)
+        //para querys que devuelven datos
 	    {
             try
             {
+
                 $this->Prepare($query);
                 
                 $this->BindParameters($parameters, $queryType);
@@ -49,6 +52,7 @@
         }
         
         public function ExecuteNonQuery($query, $parameters = array(), $queryType = QueryType::Query)
+        //es una consulta que no reotorna datos, solo retorna columnass afectadas (insert)
 	    {            
             try
             {

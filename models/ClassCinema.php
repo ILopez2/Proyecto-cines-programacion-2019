@@ -12,7 +12,7 @@
         private $billboard;
 
         //CONSTRUCTOR
-        public function __construct($name,$city,$address,$ticketCost,$cinemaRoom,$billboard){
+        public function __construct($name,$city,$address,$ticketCost,$cinemaRoom=array(),$billboard){
             $this->name=$name;
             $this->city=$city;
             $this->address=$address;
@@ -53,8 +53,8 @@
         public function setTicketCost($ticketCost){
             $this->ticketCost=$ticketCost;
         }
-        public function setCinemaRooms($cinemaRoom){
-            $this->cinemaRooms=$cinemaRoom;
+        public function setCinemaRoom($cinemaRoom){
+            array_push($this->cinemaRooms,$cinemaRoom);
         }
         public function setBillboard($billboard){
             $this->billboard=$billboard;

@@ -1,7 +1,9 @@
 <?php
     use daojson\JsonCinema as JsonCinema;
     $dao = new JsonCinema();
+    $dao->createRoom();
     $cinemas=$dao->getAll();
+
 ?>
 
 <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
@@ -62,20 +64,22 @@
                 <tbody>
                         <?php foreach($cinemas as $values){
                             if($values->getName() == $cinemaName){
-                                $rooms = $values->getCinemaRooms();?>
+                                $rooms = $values->getCinemaRooms();
+                                foreach($rooms as $valueR){?>
                                 <tr>
-                                <td class="table-light"><?php echo $rooms->getName(); ?></td>
-                                <td class="table-light"><?php echo $rooms->getType(); ?></td>
-                                <td class="table-light"><?php echo $rooms->getCapacity(); ?></td>
-                                <td class="table-light"> 
+                                <td class="table-light"><?php echo $valueR->getName(); ?></td>
+                                <td class="table-light"><?php echo $valueR->getType(); ?></td>
+                                <td class="table-light"><?php echo $valueR->getCapacity(); ?></td>
+                                <td class="table-light">  
                                 <!-- DELETE CINEMA START HERE  -->
-                                    <a href="<?php echo FRONT_ROOT?>CinemaRoom/delete?id=<?php echo $rooms->getName()?>" class="btn btn-danger">
+                                    <a href="<?php echo FRONT_ROOT?>CinemaRoom/delete?id=<?php echo $valueR->getName()?>" class="btn btn-danger">
                                     <i class="far fa-trash-alt"></i>
                                     </a>
                                 <!-- DELETE CINEMA ENDS HERE  -->
                                 </td>
                                 </tr>
-                            <?php } ?>
+                            <?php}?>
+                                <?php } ?>
                         <?php } ?>
                     <!-- EDIT START HERE  -->
                         <td colspan="7" style="text-align:center;">

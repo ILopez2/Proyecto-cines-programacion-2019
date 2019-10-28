@@ -36,7 +36,7 @@
                     </div>
                     <div class="btn-group" role="group" aria-label="Third group">
                         
-                        <a class="btn btn-danger" href="<?php echo FRONT_ROOT?>Home/logout"  onclick="clicked(event)"> <i class="fas fa-sign-out-alt"></i>Logout </a>
+                        <a class="btn btn-danger" href="<?php echo FRONT_ROOT?>Home/logout"  onclick="clicked(event)"><i class="fas fa-door-open"></i> </i>Logout </a>
                        
                     </div>
                 </div>

@@ -24,7 +24,7 @@
         return $this->is3D;
     }
     public function getCapacity(){
-        return $this->Capacity;
+        return $this->capacity;
     }
     public function getSeats(){
         return $this->seats;
