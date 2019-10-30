@@ -3,8 +3,8 @@
     /* DB */ 
     define('DB_HOST', 'localhost');
     define('DB_NAME', 'cines');
-    define('DB_USER', 'admin');
-    define('DB_PASS', 'admin@');
+    define('DB_USER', 'root');
+    define('DB_PASS', '');
 
     /* BACK */
     define('ROOT', dirname(__DIR__)."/");

@@ -5,7 +5,10 @@
     
     interface InterfaceDao
     {
-        //readforID
-        
+        public function readforID($id);
+        public function readAll();
+        public function add($obj);
+        public function delete($id);
+        public function edit();
     }
 ?>

@@ -12,7 +12,7 @@
         private $billboard;
 
         //CONSTRUCTOR
-        public function __construct($name,$city,$address,$ticketCost,$cinemaRoom=array(),$billboard){
+        public function __construct($name,$city,$address,$ticketCost,$cinemaRoom=array(),$billboard=null){
             $this->name=$name;
             $this->city=$city;
             $this->address=$address;
