@@ -19,7 +19,8 @@
             $arrayJson= ($jsonContent) ? json_decode($jsonContent, true ) : array();
             $arrayMovies=$arrayJson["results"];
                 foreach($arrayMovies as $values){
-                    $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"]);
+                    $movieGenres=$this->genreIdToName($values["genre_ids"]);
+                    $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"],$movieGenres);
                     array_push($movies,$movie);
             }
             return $movies;
@@ -35,7 +36,8 @@
             $arrayMovies=$arrayJson["results"];
                 
             foreach($arrayMovies as $values){
-                    $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"]);
+                    $movieGenres=$this->genreIdToName($values["genre_ids"]);
+                    $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"],$movieGenres);
                     //var_dump($values["release_date"]);
                     array_push($movies,$movie);
             }
@@ -50,7 +52,8 @@
         public function getMovieXid($id,$lang){
             $jsonContent=file_get_contents(SERCHMID.$id.APIKEY.$lang);
             $values= ($jsonContent) ? json_decode($jsonContent, true ) : array();
-            $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"]);
+            $movieGenres=$this->genreIdToName($values["genre_ids"]);
+            $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"],$movieGenres);
             return $movie;
         }
 
@@ -63,7 +66,21 @@
             return $imgm;
         }
 
-        public function getGenres($lang){
+        //TRANSFORMA EL ARRAY DE IDS DE GENEROS EN UN ARRAY DE LOS NOMBRES DE LOS GENEROS
+        public function genreIdToName($genreIds){
+            $genreNames=array();
+            $allGenres=$this->getAllGenres($lang);
+            foreach($allGenres as $genre){
+                for($i=0;$i<count($genresId);$i++){
+                    if($genre->getId()==$genresId[$i]){
+                        array_push($genreNames,$genre->getName());
+                    }
+                }
+            }
+            return $genreNames;
+        }
+        //DEVUELVE UN ARRAY CON TODOS LOS GENEROS
+        public function getAllGenres($lang){
             $jsonContent=file_get_contents(GEN.$lang);
             $values= ($jsonContent) ? json_decode($jsonContent, true ) : array();
             $genres=array();

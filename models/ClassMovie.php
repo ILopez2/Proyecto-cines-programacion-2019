@@ -9,7 +9,7 @@ class ClassMovie{
     private $adult; //BOOLEANO QUE INDICA SI LA PELICULA ES PARA ADULTOS O NO
     private $overview; //SINOPSIS DE LA PELICULA
     private $posterPath; //RUTA DEL ARCHIVO 
-    private $genres;
+    private $genres; //ARRAY DE GENEROS
 
      //CONSTRUCTOR
     public function __construct($id,$title,$releaseDate,$adult,$overview,$posterPath,$genres=array()){
