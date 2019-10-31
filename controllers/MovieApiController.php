@@ -19,7 +19,7 @@
             $arrayJson= ($jsonContent) ? json_decode($jsonContent, true ) : array();
             $arrayMovies=$arrayJson["results"];
                 foreach($arrayMovies as $values){
-                    $movieGenres=$this->genreIdToName($values["genre_ids"]);
+                    $movieGenres=$this->genreIdToName($values["genre_ids"],$lang);
                     $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"],$movieGenres);
                     array_push($movies,$movie);
             }
@@ -36,9 +36,8 @@
             $arrayMovies=$arrayJson["results"];
                 
             foreach($arrayMovies as $values){
-                    $movieGenres=$this->genreIdToName($values["genre_ids"]);
+                    $movieGenres=$this->genreIdToName($values["genre_ids"],$lang);
                     $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"],$movieGenres);
-                    //var_dump($values["release_date"]);
                     array_push($movies,$movie);
             }
             return $movies;
@@ -52,7 +51,7 @@
         public function getMovieXid($id,$lang){
             $jsonContent=file_get_contents(SERCHMID.$id.APIKEY.$lang);
             $values= ($jsonContent) ? json_decode($jsonContent, true ) : array();
-            $movieGenres=$this->genreIdToName($values["genre_ids"]);
+            $movieGenres=$this->genreIdToName($values["genre_ids"],$lang);
             $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"],$movieGenres);
             return $movie;
         }
@@ -67,7 +66,7 @@
         }
 
         //TRANSFORMA EL ARRAY DE IDS DE GENEROS EN UN ARRAY DE LOS NOMBRES DE LOS GENEROS
-        public function genreIdToName($genreIds){
+        public function genreIdToName($genresId,$lang){
             $genreNames=array();
             $allGenres=$this->getAllGenres($lang);
             foreach($allGenres as $genre){
@@ -84,8 +83,8 @@
             $jsonContent=file_get_contents(GEN.$lang);
             $values= ($jsonContent) ? json_decode($jsonContent, true ) : array();
             $genres=array();
-            for($i=0;$i<count($values);$i++){
-                $gen=new CGM($values[$i]["name"],$values[$i]["id"]);
+            for($i=0;$i<count($values["genres"]);$i++){
+                $gen=new CMG($values["genres"][$i]["name"],$values["genres"][$i]["id"]);
                 array_push($genres,$gen);
             }
             return $genres;
