@@ -54,10 +54,40 @@
             $this->ticketCost=$ticketCost;
         }
         public function setCinemaRoom($cinemaRoom){
-            array_push($this->cinemaRooms,$cinemaRoom);
+            $this->cinemaRooms=$cinemaRoom;
         }
         public function setBillboard($billboard){
             $this->billboard=$billboard;
+        }
+
+        //EXTRAS 
+
+        public function addCinemaRoom($cinemaRoom){
+            $rta=false;
+            foreach($this->cinemaRooms as $room){
+                if($room->getName==$cinemaRoom->getName){
+                    $rta=true; 
+                }
+            }
+            if($rta==false){
+                array_push($this->cinemaRooms,$cinemaRoom);
+                $_SESSION["successMje"]="Sala cargada con exito";
+            }
+            else $_SESSION["errorMje"]="La sala ya existe";
+        }
+
+        public function deleteCinemaRoom($cinemaRoomName){
+            $arrayToSave=array();
+            $rta=false;
+            foreach($this->cinemaRooms as $room){
+                if($room->getName() != $cinemaRoomName){
+                    array_push($this->arrayToSave,$room);
+                }
+                else $rta=true;
+            }
+            if($rta=false) $_SESSION["errorMje"]="No existe una sala con ese nombre";
+            else $_SESSION["successMje"]="Sala borrada con exito";
+            $this->setCinemaRoom($arrayToSave);
         }
     }
 ?>

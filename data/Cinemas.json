@@ -1,26 +1,10 @@
 [
     {
-        "name": "Aldrey",
-        "city": "Miramar",
-        "address": "Funes 214",
-        "ticketCost": "60 pesos",
-        "cinemaRooms": [],
-        "billboard":[]
-    },
-    {
-        "name": "Los gallegos",
+        "name": "Del paseo",
         "city": "Mar del Plata",
-        "address": "Garay 1234",
-        "ticketCost": "100 pesos",
+        "address": "Ayacucho 12312",
+        "ticketCost": "20",
         "cinemaRooms": [],
-        "billboard":[]
-    },
-    {
-        "name": "Ambasador",
-        "city": "Mar del Plata",
-        "address": "Chacabuco 1123",
-        "ticketCost": "30 pesos",
-        "cinemaRooms": [],
-        "billboard":[]
+        "billboard": null
     }
 ]

@@ -9,11 +9,12 @@
         private $seats=array();
     
     //CONSTRUCTOR
-    public function __construct($name,$is3D,$capacity){
+    public function __construct($name=null,$is3D=null,$capacity=null){
         $this->name=$name;
         $this->is3D=$is3D;
         $this->capacity=$capacity;
-        $this->createSeats($capacity);
+        if($capacity!=null) $this->createSeats($capacity);
+        else $this->seats=array();
     }
 
     //GETTERS

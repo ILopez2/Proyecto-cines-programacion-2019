@@ -3,6 +3,7 @@
     use daojson\JsonCinema as JsonCinema;
     use models\ClassCinema as Cinema;
     use controllers\ViewsController as View;
+    use models\ClassCinemaRoom as CR;
     class CinemaController
     {
         private $cinemaDao;
@@ -14,9 +15,10 @@
         }
 
         public function add($name,$adress,$price,$city){
-            //tengo que agregar un cine.
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){
+                $room=new CR("sala 1",true,100);
                 $cinema = new Cinema($name,$city,$adress,$price);
+                $cinema->addCinemaRoom($room);
                 //falta resolver el tema de las salas, por el momento no trabajo con ellas solo se crea un array vacio.
                 $this->cinemaDao->add($cinema);
                 $this->view->admCinema();

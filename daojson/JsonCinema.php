@@ -14,6 +14,9 @@
         }
 
         //JSON FUNCTIONS
+
+
+        //AÑADE UN CINE AL JSON
         public function add($cinema){
             $this->retriveData();
             $exist=false;
@@ -28,6 +31,8 @@
             }
             $this->saveData();
         }
+
+        //ELIMINA EL CINE CON EL NOMBRE QUE SE ENVIA POR PARAMETRO
         public function delete($name){
             $this->retriveData();
             $newList = array();
@@ -48,8 +53,9 @@
             $this->cinemas = $newList;
             $this->saveData();
         }
+
+        //RETORNA EL CINE CON EL NOMBRE QUE SE ENVIA POR PARAMETRO
         public function getForID($name){
-            //retornar el cine correspondiente con el id que viene por parametro
             $rta=null;
             $this->retriveData();
             foreach($this->cinemas as $cine){
@@ -59,8 +65,9 @@
             }
             return $rta;
         }
+
+        //ENVIA UN CINE PARA MODIFICAR CON TODOS LOS DATOS NUEVOS 
         public function modify($newCinema){
-            //hay que modificar esta funcion para que se puedan editar varios o todos los campos a la vez.
             $this->retriveData();
             $arrayToSave= array();
             foreach($this->cinemas as $value){
@@ -73,31 +80,33 @@
             $this->saveData();
         }
 
+        //DEVUELVE UN ARREGLO CON TODOS LOS CINES
         public function getAll(){
             $this->retriveData();
             return $this->cinemas;
         }
-        public function updateCinema($cinemaToUpdate){
-            $this->retriveData();
-            $arrayToSave= array();
-            foreach($this->cinemas as $cinema){
-                if($cinema->getName() == $cinemaToUpdate->getName()){
-                    $cinema=$cinemaToUpdate;
-                }
-                array_push($arrayToSave,$cinema);
-            }
-            $this->cinemas=$arrayToSave;
-            $this->saveData();
-        }
-        public function saveData(){
-            $array=array();
 
+        //GUARDAR EL ARRAY EN EL JSON
+        public function saveData(){
+            $array=array();          
             foreach($this->cinemas as $cinema){
                 $values["name"]=$cinema->getName();
                 $values["city"]=$cinema->getCity();
                 $values["address"]=$cinema->getAddress();
                 $values["ticketCost"]=$cinema->getTicketCost();
-                $values["cinemaRooms"]=$cinema->getCinemaRooms();
+                $rooms=$cinema->getCinemaRooms();
+                if(!empty($rooms)){
+                    foreach($rooms as $room){
+                        for($i=0;$i<count($rooms);$i++){
+                            $values["cinemaRooms"][$i]["name"]=$room->getName();
+                            $values["cinemaRooms"][$i]["is3D"]=$room->getIs3D();
+                            $values["cinemaRooms"][$i]["capacity"]=$room->getCapacity();
+                            $values["cinemaRooms"][$i]["seats"]=$room->getSeats();
+                            $values["cinemaRooms"][$i]["prueba"]="jaja";
+                        }
+                    }
+                }
+                else $values["cinemaRooms"]=array();
                 $values["billboard"]=$cinema->getBillboard();
                 array_push($array,$values);
             }
@@ -105,61 +114,29 @@
             file_put_contents($this->fileName, $jsonContent);
         }
 
+        public function jsonToCinemaRoom($cinemaRooms){
+            $roomsArray=array();
+            if(!empty($cinemaRooms)){
+                for($i=0;$i<count($cinemaRooms);$i++){
+                    $room=new CR($cinemaRooms[$i]["name"],$cinemaRooms[$i]["is3D"],$cinemaRooms[$i]["capacity"]);
+                    array_push($roomsArray,$room);
+                }
+            }
+        }
+        //GUARDA EN EL ARREGLO TODOS LOS DATOS QUE ESTAN EN EL JSON
         public function retriveData(){
             $this->cinemas= array();
-
             if(file_exists($this->fileName)){
                 $jsonContent=file_get_contents($this->fileName);
                 $array= ($jsonContent) ? json_decode($jsonContent, true ) : array();
-
                 foreach($array as $values){
-                    $cinema = new CC($values["name"],$values["city"],$values["address"],$values["ticketCost"],$values["cinemaRooms"]),$values["billboard"];
+                    $cinemaRooms=$this->jsonToCinemaRoom($values["cinemaRooms"]);
+                    $cinema = new CC($values["name"],$values["city"],$values["address"],$values["ticketCost"],$cinemaRooms,$values["billboard"]);
                     array_push($this->cinemas, $cinema);
                 }
             }
         }
-
-        public function createRoom(){
-            $this->retriveData();
-            $arrayToSave= array();
-            foreach($this->cinemas as $cinema){
-                if($cinema->getName()=='Aldrey'){
-                    $room = new CR("sala 1",true,80);
-                    $cinema->setCinemaRoom($room);
-                }
-                array_push($arrayToSave,$cinema);
-            }
-            $this->cinemas=$arrayToSave;
-            $this->saveData();
-        }
-        
-        /*
-        public function addCinemaRoom($cinemaRoom){
-            $rta=false;
-            $msj="Sala cargada con exito";
-            foreach($this->cinemaRooms as $room){
-                if($room->getName==$cinemaRoom->getName){
-                    $rta=true;
-                    $msj="Ya existe una sala con ese nombre";
-                }
-            }
-            if($rta==false){
-                array_push($this->cinemaRooms,$cinemaRoom);
-            }
-            return $msj;
-        }
-
-        public function deleteCinemaRoom($cinemaRoomName){
-            $arrayToSave=array();
-            $msj="Sala borrada con exito";
-            foreach($this->cinemaRooms as $room){
-                if($room->getName() != $cinemaRoomName){
-                }
-            }
-            $this->cinemaRooms=$arrayToSave;
-            return $msj;
-        }
-        */
+       
     }
 
 ?>
