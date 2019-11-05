@@ -36,7 +36,7 @@
                                     <input type="text" class="form-control" name="adress" placeholder= "Direccion" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="price" placeholder="Precio de entrada" required>
+                                <input type="number" min="0" max="10000" step="1" name="price" placeholder="Precio de Entrada" required="required">
                                 </div>
                                 <div class="form-group">
                                     <!--<input type="text" class="form-control" name="precio" placeholder="Precio de entrada"> -->

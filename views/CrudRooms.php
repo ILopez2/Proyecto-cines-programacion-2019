@@ -1,6 +1,8 @@
 <?php
-    use daojson\JsonCinema as JsonCinema;
-    $dao = new JsonCinema();
+    //use daojson\JsonCinema as JsonCinema;
+    //$dao = new JsonCinema();
+    use dao\CinemaRoomDao as CinemaRoomDao;
+    $dao = new CinemaRoomDao();
     //$dao->createRoom();
     $cinemas=$dao->getAll();
 
@@ -77,7 +79,8 @@
                                                 echo    "<td class=table-light> <a href=".FRONT_ROOT."CinemaRoom/delete?id=".$valueR->getName()."class=btn btn-danger>";
                                                 echo    "<i class=far fa-trash-alt></i></a>";
                                                 //DELETE ENDS HERE
-                                                echo    "</td></tr>";
+                                                echo    "</td>
+                                                    </tr>";
                                             }              
                                         }
                                     }

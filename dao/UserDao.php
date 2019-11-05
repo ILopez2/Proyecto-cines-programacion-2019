@@ -2,7 +2,8 @@
 
     use dao\Connection as Connection;
     use models\ClassUser as User; 
-    class UserDao{
+    
+    class UserDao implements InterfaceDao{
         
         //ATRIBUTES
         private $connection;
@@ -88,7 +89,7 @@
         /*
         *Retorna todos los users de la BDD
         */
-        public function readAll(){
+        public function getAll(){
             $sql="SELECT * FROM usuarios";
             try{
                 //creo la instancia de coneccion
@@ -130,8 +131,6 @@
             },$value);
             return count($resp) > 1 ? $resp : $resp['0'];//hay que checkear del otro lado si esta devolviendo un obj o un array
         }
-    }
-
     }
 
 ?>

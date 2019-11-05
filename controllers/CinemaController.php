@@ -1,11 +1,11 @@
 <?php namespace controllers;
     //aca va a estar la funcionalidad del CRUD de los cines    
-    use daojson\JsonCinema as JsonCinema;
     use models\ClassCinema as Cinema;
+    use models\ClassCinemaRoom as ClassCinemaRoom;
+    use dao\CinemaDao as CinemaDao;
+    use daojson\JsonCinema as JsonCinema;
     use controllers\ViewsController as View;
-    use models\ClassCinemaRoom as CR;
-    use dao\CinemaDao as CD;
-    
+
     class CinemaController
     {
         private $cinemaDao;
@@ -13,7 +13,7 @@
         
         public function __construct(){
             //$this->cinemaDao = new JsonCinema();
-            $this->cinemaDao = new CD();
+            $this->cinemaDao = new CinemaDao();
             $this->view = new View();
         }
 

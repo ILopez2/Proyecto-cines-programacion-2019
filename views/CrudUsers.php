@@ -1,7 +1,11 @@
 <?php
 
-    use daojson\JsonUser as JsonUser;
-    $dao = new JsonUser();
+    //use daojson\JsonUser as JsonUser;
+    //$dao = new JsonUser();
+
+    use dao\UserDao as UserDao;
+    $dao = new UserDao();
+
     $users=$dao->getAll();
  
 ?>
