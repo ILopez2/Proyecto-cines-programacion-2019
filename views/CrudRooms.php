@@ -1,7 +1,7 @@
 <?php
     use daojson\JsonCinema as JsonCinema;
     $dao = new JsonCinema();
-    $dao->createRoom();
+    //$dao->createRoom();
     $cinemas=$dao->getAll();
 
 ?>
@@ -62,25 +62,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                        <?php foreach($cinemas as $values){
-                            if($values->getName() == $cinemaName){
-                                $rooms = $values->getCinemaRooms();
-                                foreach($rooms as $valueR){?>
-                                <tr>
-                                <td class="table-light"><?php echo $valueR->getName(); ?></td>
-                                <td class="table-light"><?php echo $valueR->getType(); ?></td>
-                                <td class="table-light"><?php echo $valueR->getCapacity(); ?></td>
-                                <td class="table-light">  
-                                <!-- DELETE CINEMA START HERE  -->
-                                    <a href="<?php echo FRONT_ROOT?>CinemaRoom/delete?id=<?php echo $valueR->getName()?>" class="btn btn-danger">
-                                    <i class="far fa-trash-alt"></i>
-                                    </a>
-                                <!-- DELETE CINEMA ENDS HERE  -->
-                                </td>
-                                </tr>
-                            <?php}?>
-                                <?php } ?>
-                        <?php } ?>
+                       <?php 
+                            foreach($cinemas as $values){
+                                if($values->getName() == $cinemaName){
+                                    $rooms = $values->getCinemaRooms();
+                                    if(is_array($rooms)){
+                                        if(!empty($rooms)){
+                                            foreach($rooms as $valueR){ 
+                                                echo "<tr>
+                                                        <td class=table-light>".$valueR->getName()."</td>";
+                                                echo    "<td class=table-light>".$valueR->getType()."</td>";
+                                                echo    "<td class=table-light>".$valueR->getCapacity()."</td>";
+                                                //DELETE STARTS HERE
+                                                echo    "<td class=table-light> <a href=".FRONT_ROOT."CinemaRoom/delete?id=".$valueR->getName()."class=btn btn-danger>";
+                                                echo    "<i class=far fa-trash-alt></i></a>";
+                                                //DELETE ENDS HERE
+                                                echo    "</td></tr>";
+                                            }              
+                                        }
+                                    }
+                                }
+                            } 
+                        ?>
                     <!-- EDIT START HERE  -->
                         <td colspan="7" style="text-align:center;">
                             <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
@@ -89,9 +92,8 @@
                         </td>
                     <!-- EDIT ENDS HERE  -->
                 </tbody>
-                </table>        
+                </table>       
             </div>
         </div>
     </div>
-
 <?php } ?>

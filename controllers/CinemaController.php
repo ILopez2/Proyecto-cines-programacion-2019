@@ -16,9 +16,7 @@
 
         public function add($name,$adress,$price,$city){
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){
-                $room=new CR("sala 1",true,100);
                 $cinema = new Cinema($name,$city,$adress,$price);
-                $cinema->addCinemaRoom($room);
                 //falta resolver el tema de las salas, por el momento no trabajo con ellas solo se crea un array vacio.
                 $this->cinemaDao->add($cinema);
                 $this->view->admCinema();
@@ -34,9 +32,7 @@
             }
         }
 
-        public function read($name){
-            //? no lo se rick
-        }
+
         public function edit($name,$adress,$price,$city){
             //editar el valor del atributo seleccionado por el usuario del cine seleccionado
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){
