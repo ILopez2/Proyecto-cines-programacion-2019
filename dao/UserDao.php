@@ -54,7 +54,7 @@
         *Borra un user de la BDD correspondiente al email del mismo pasado por parametro
         */
         public function delete($email){
-            $sql="DELETE FROM usuarios WHERE  email = :email"
+            $sql="DELETE FROM usuarios WHERE  email = :email";
             $parameters['email']=$email;
             try {
                 $this->connection = Connection::getInstance();
@@ -68,8 +68,8 @@
         /*
         *Retorna el user con el email pasado por parametro
         */
-        public function readforID($email){
-            $sql = "SELECT * FROM usuarios WHERE email = :email"
+        public function getForID($email){
+            $sql = "SELECT * FROM usuarios WHERE email = :email";
             $parameters['email']=$email;
             try{
                 //creo la instancia de coneccion
@@ -103,6 +103,20 @@
             }else{
                 return false
             }
+
+        }
+
+        public function setRole($email,$role){
+            $sql="UPDATE usuarios SET id_rol1 = 'admin' WHERE email = :email";
+            $parameters['email']=$email;
+            try{
+                //creo la instancia de coneccion
+                $this->connection= Connection::getInstance();
+                $result = $this->connection->execute($sql,$parameters);
+            }catch(\PDOException $ex){
+                throw $ex;
+            } 
+        } public function edit(){
 
         }
         /*

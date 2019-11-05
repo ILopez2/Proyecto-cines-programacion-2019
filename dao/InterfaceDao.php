@@ -5,8 +5,8 @@
     
     interface InterfaceDao
     {
-        public function readforID($id);
-        public function readAll();
+        public function getForID($id);
+        public function getAll();
         public function add($obj);
         public function delete($id);
         public function edit();

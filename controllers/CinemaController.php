@@ -4,13 +4,16 @@
     use models\ClassCinema as Cinema;
     use controllers\ViewsController as View;
     use models\ClassCinemaRoom as CR;
+    use dao\CinemaDao as CD;
+    
     class CinemaController
     {
         private $cinemaDao;
         private $view;
         
         public function __construct(){
-            $this->cinemaDao = new JsonCinema();
+            //$this->cinemaDao = new JsonCinema();
+            $this->cinemaDao = new CD();
             $this->view = new View();
         }
 

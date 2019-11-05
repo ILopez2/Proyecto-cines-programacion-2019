@@ -6,5 +6,21 @@
         "ticketCost": "20",
         "cinemaRooms": [],
         "billboard": null
+    },
+    {
+        "name": "das",
+        "city": "Mar del Plata",
+        "address": "DD",
+        "ticketCost": "12",
+        "cinemaRooms": [],
+        "billboard": null
+    },
+    {
+        "name": "sadasd",
+        "city": "Mar del Plata",
+        "address": "asdw",
+        "ticketCost": "sad",
+        "cinemaRooms": [],
+        "billboard": null
     }
 ]

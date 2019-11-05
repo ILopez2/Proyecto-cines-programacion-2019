@@ -1,6 +1,8 @@
 <?php
-    use daojson\JsonCinema as JsonCinema;
-    $dao = new JsonCinema();
+    //use daojson\JsonCinema as JsonCinema;
+    //$dao = new JsonCinema();
+    use dao\CinemaDao as CinemaDao;
+    $dao = new CinemaDao();
     $cinemas=$dao->getAll();
     //var_dump($_SESSION);
 ?>

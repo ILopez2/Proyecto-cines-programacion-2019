@@ -35,7 +35,7 @@
         *Borra un cine de la BDD correspondiente al nombre del mismo pasado por parametro
         */
         public function delete($cinemaName){
-            $sql="DELETE FROM cines WHERE nombre_cine = :cinemaName"
+            $sql="DELETE FROM cines WHERE nombre_cine = :cinemaName";
             $parameters['cinemaName']=$cinemaName;
             try {
                 $this->connection = Connection::getInstance();
@@ -49,8 +49,8 @@
         /*
         *Retorna el cine con el nombre pasado por parametro
         */
-        public function readforID($cinemaName){
-            $sql = "SELECT * FROM cines WHERE nombre_cine = :cinemaName"
+        public function getForID($cinemaName){
+            $sql = "SELECT * FROM cines WHERE nombre_cine = :cinemaName";
             $parameters['cinemaName']=$cinemaName;
             try{
                 //creo la instancia de coneccion
@@ -63,13 +63,13 @@
             if(!empty($result)){
                 return $this->mapeo($result);
             }else{
-                return false
+                return false;
             }
         }
         /*
         *Retorna todos los cines de la BDD
         */
-        public function readAll(){
+        public function getAll(){
             $sql="SELECT * FROM cines";
             try{
                 //creo la instancia de coneccion
@@ -82,8 +82,11 @@
             if(!empty($result)){
                 return $this->mapeo($result);
             }else{
-                return false
+                return false;
             }
+
+        }
+        public function edit(){
 
         }
         /*
@@ -92,8 +95,9 @@
         */
         protected function mapeo($value){
             $value=is_array($value) ? $value : [];
-            $value = array_map(function($p){
-                return new Cinema($p['name'],$p['city'],$p['address'],$p['price']);
+            $resp=array();
+            $resp = array_map(function($p){
+                return new Cinema($p['nombre_cine'],$p['id_ciudad1'],$p['direccion'],$p['valor_entrada']);
             },$value);
             return count($resp) > 1 ? $resp : $resp['0'];//hay que checkear del otro lado si esta devolviendo un obj o un array
         }
