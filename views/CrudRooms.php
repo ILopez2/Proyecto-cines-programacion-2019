@@ -1,8 +1,8 @@
 <?php
     //use daojson\JsonCinema as JsonCinema;
     //$dao = new JsonCinema();
-    use dao\CinemaRoomDao as CinemaRoomDao;
-    $dao = new CinemaRoomDao();
+    use dao\CinemaDao as CinemaDao;
+    $dao = new CinemaDao();
     //$dao->createRoom();
     $cinemas=$dao->getAll();
 
@@ -38,7 +38,11 @@
                                     <input type="text" class="form-control" name="name" placeholder="Nombre" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="type" placeholder= "Tipo" required>
+                                    <select class="form-control mr-sm-2" placeholder="Select" aria-label="Select" name="type" required> 
+                                    <option value="" disabled selected >Selecciones un tipo</option>
+                                    <option value="3d">3D</option>
+                                    <option value="3d">2D</option>
+                                    </select>
                                 </div>
                                 <!-- <div>
                                 <input type=”radio” name=”affirmative” value=”yes” checked>Yes</input> 
@@ -83,6 +87,19 @@
                                                     </tr>";
                                             }              
                                         }
+                                    }
+                                    else {
+
+                                        echo "<tr>
+                                                <td class=table-light>".$rooms->getName()."</td>";
+                                                echo    "<td class=table-light>".$rooms->getType()."</td>";
+                                                echo    "<td class=table-light>".$rooms->getCapacity()."</td>";
+                                                //DELETE STARTS HERE
+                                                echo    "<td class=table-light> <a href=".FRONT_ROOT."CinemaRoom/delete?id=".$rooms->getName()."class=btn btn-danger>";
+                                                echo    "<i class=far fa-trash-alt></i></a>";
+                                                //DELETE ENDS HERE
+                                                echo    "</td>
+                                                </tr>";
                                     }
                                 }
                             } 

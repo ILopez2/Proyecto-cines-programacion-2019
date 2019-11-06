@@ -34,7 +34,7 @@
             include_once(VIEWS.'/footer.php');
         }
 
-        public function search($searchResult){
+        public function searchGen($searchG){
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
             include_once(VIEWS.'/SearchResult.php');

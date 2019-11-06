@@ -4,7 +4,7 @@
 
     $search = new MovieApiController();
 
-    $result=$search->getMovie($searchResult,ESP);
+    $result=$search->getLastMovies(ESP);
     
 ?>
 <div class="container">
@@ -19,16 +19,21 @@
             <tbody>
                     <?php foreach($result as $value){ ?>
                     <tr>
-                        <td><?php echo $value->getTitle();?></td>
                         <td>
+                        <?php foreach($value->getGenres() as $gen){
+                                    if($gen==$searchG){
+                                        
+                                    $value->getTitle();?></td>
+                                    <td>
 
-                            <figure class="figure">
-                                <img class="figure-img img-fluid rounded" src="<?php echo $search->getMoviePoster($value->getPosterPath()); ?>" alt="">
-                                <figcaption class="figure-caption">A caption for the above image.</figcaption>
-                            </figure>
+                                        <figure class="figure">
+                                            <img class="figure-img img-fluid rounded" src="<?php echo $search->getMoviePoster($value->getPosterPath()); ?>" alt="">
+                                        </figure>
 
-                        </td>
-                    </tr>
+                                    </td>
+                                </tr>
+                            <?php } ?> 
+                        <?php } ?> 
                     <?php } ?>  
             </tbody>
             </table>        

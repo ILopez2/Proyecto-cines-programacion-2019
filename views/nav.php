@@ -1,3 +1,10 @@
+<?php 
+    use controllers\MovieApiController as MAC;
+
+    $apiM= new MAC();
+    $genres=$apiM->getAllGenres(ESP);
+?>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="<?php echo FRONT_ROOT?>Views/Mhome">MoviePass</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,9 +19,15 @@
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group mr-1" role="group" aria-label="First group">
                     
-                    <form action="<?php echo FRONT_ROOT?>Views/search" method="POST" class="form-inline">
+                    <form action="<?php echo FRONT_ROOT?>Views/searchGen" method="POST" class="form-inline">
                         
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" required>
+                        <select class="form-control mr-sm-2" placeholder="Select" aria-label="Select" name="searchG" required>
+                            <option value="" disabled selected >Selecciones un genero</option>
+                            <?php foreach($genres as $gen){
+                                echo "<option value=".$gen->getName().">".$gen->getName()."</option>";          
+                            }?>
+                        </select>
+
                         
                         <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fas fa-user-astronaut"></i> Search</button>
                     
