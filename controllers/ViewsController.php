@@ -27,7 +27,7 @@
             include_once(VIEWS.'/footer.php');
         }
 
-        public function home(){
+        public function Mhome(){
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
             include_once(VIEWS.'/home.php');

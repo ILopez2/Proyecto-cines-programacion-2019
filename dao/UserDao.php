@@ -83,7 +83,7 @@
             if(!empty($result)){
                 return $this->mapeo($result);
             }else{
-                return false
+                return false;
             }
         }
         /*
@@ -102,7 +102,7 @@
             if(!empty($result)){
                 return $this->mapeo($result);
             }else{
-                return false
+                return false;
             }
 
         }
