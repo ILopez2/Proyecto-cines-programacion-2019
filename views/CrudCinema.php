@@ -62,30 +62,56 @@
                     </tr>
                 </thead>
                 <tbody>
-                        <?php foreach($cinemas as $cine){  ?>
-                        <tr>
-                            <td class="table-dark"><?php echo $cine->getName(); ?></td>
-                            <td class="table-dark"><?php echo $cine->getAddress(); ?></td>
-                            <td class="table-dark"><?php echo $cine->getCity(); ?></td>
-                            <td class="table-dark"><?php echo $cine->getTicketCost(); ?></td>
-                            
-                            <td class="table-dark">
+                        <?php 
+                        if(!empty($cinemas)){
+                            if(is_array($cinemas)){
+                                foreach($cinemas as $cine){  ?>
+                                <tr>
+                                    <td class="table-dark"><?php echo $cine->getName(); ?></td>
+                                    <td class="table-dark"><?php echo $cine->getAddress(); ?></td>
+                                    <td class="table-dark"><?php echo $cine->getCity(); ?></td>
+                                    <td class="table-dark"><?php echo $cine->getTicketCost(); ?></td>
+                                    
+                                    <td class="table-dark">
 
-                             <!-- DELETE START HERE  -->
-                                <a href="<?php echo FRONT_ROOT?>Cinema/delete?id=<?php echo $cine->getName()?>" class="btn btn-danger" onclick="clicked(event)">
-                                <i class="far fa-trash-alt"></i>
-                                </a>
-                             <!-- DELETE START HERE  -->
+                                    <!-- DELETE START HERE  -->
+                                        <a href="<?php echo FRONT_ROOT?>Cinema/delete?id=<?php echo $cine->getName()?>" class="btn btn-danger" onclick="clicked(event)">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a>
+                                    <!-- DELETE START HERE  -->
 
-                             <!-- CINEMA ROOMS VIEW START HERE -->
-                             <a href="<?php echo FRONT_ROOT?>Views/admRooms?id=<?php echo $cine->getName()?>" class="btn btn-primary" onclick="clicked(event)">
-                                <i class="fas fa-person-booth"></i>
-                                </a>
-                             <!-- CINEMA ROOMS VIEW ENDS HERE -->
-                            
-                            </td>
-                        </tr>
-                        <?php } ?>
+                                    <!-- CINEMA ROOMS VIEW START HERE -->
+                                    <a href="<?php echo FRONT_ROOT?>Views/admRooms?id=<?php echo $cine->getName()?>" class="btn btn-primary" onclick="clicked(event)">
+                                        <i class="fas fa-person-booth"></i>
+                                    </a>
+                                    <!-- CINEMA ROOMS VIEW ENDS HERE -->
+                                    
+                                    </td>
+                                </tr>
+                            <?php }  
+                            }    
+                            else { ?>
+                                <tr>
+                                    <td class="table-dark"><?php echo $cinemas->getName(); ?></td>
+                                    <td class="table-dark"><?php echo $cinemas->getAddress(); ?></td>
+                                    <td class="table-dark"><?php echo $cinemas->getCity(); ?></td>
+                                    <td class="table-dark"><?php echo $cinemas->getTicketCost(); ?></td>
+                                    
+                                    <td class="table-dark">
+
+                                    <!-- DELETE START HERE  -->
+                                        <a href="<?php echo FRONT_ROOT?>Cinema/delete?id=<?php echo $cinemas->getName()?>" class="btn btn-danger" onclick="clicked(event)">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a>
+                                    <!-- DELETE START HERE  -->
+
+                                    <!-- CINEMA ROOMS VIEW START HERE -->
+                                    <a href="<?php echo FRONT_ROOT?>Views/admRooms?id=<?php echo $cinemas->getName()?>" class="btn btn-primary" onclick="clicked(event)">
+                                        <i class="fas fa-person-booth"></i>
+                                    </a>
+                                    </td>
+                                </tr>
+                            <?php } ?>
 
                         <!-- EDIT START HERE  -->
                             <td class="table-dark" colspan="7" style="text-align:center;">
@@ -94,6 +120,7 @@
                                 </button>
                             </td>
                         <!-- END EDIT HERE  -->
+                    <?php } ?>
                 </tbody>
                 </table>        
             </div>

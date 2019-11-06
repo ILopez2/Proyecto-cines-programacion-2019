@@ -23,10 +23,7 @@
             $parameters["city"]=$cinema->getCity();
             $parameters["address"]=$cinema->getAddress();
             $parameters["price"]=$cinema->getTicketCost();
-            echo $parameters["name"].'<br>';
-            echo $parameters["city"].'<br>';
-            echo $parameters["address"].'<br>';
-            echo $parameters["price"].'<br>';
+
             try{
                 //creo la instancia de coneccion
                 $this->connection = Connection::getInstance();
