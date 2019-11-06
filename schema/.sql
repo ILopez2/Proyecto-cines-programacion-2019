@@ -1,12 +1,12 @@
-create database cines;
-use cines;
+create database tpcines;
+use tpcines;
+#drop database cines;
 
 create table paises(
 id_pais int auto_increment not null,
 nombre_pais varchar(50),
 constraint pk_paises primary key (id_pais)
 );
-insert into paises(nombre_pais) values('argentina');
 
 create table provincias(
 id_provincia int auto_increment not null,
@@ -15,7 +15,7 @@ id_pais1 int not null,
 constraint fk_paises foreign key (id_pais1) references paises(id_pais),
 constraint pk_provincias primary key(id_provincia)
 );
-insert into provincias(nombre_provincia,id_pais1) values('Buenos aires',1);
+
 
 create table ciudades(
 id_ciudad int auto_increment not null,
@@ -24,12 +24,12 @@ id_provincia1 int not null,
 constraint fk_provincia foreign key(id_provincia1) references provincias(id_provincia),
 constraint pk_cuidades primary key(id_ciudad)
 );
-insert into ciudades(nombre_ciudad,id_provincia1) values('Mar del Plata',1);
+
 
 create table cines(
 id_cine int auto_increment not null,
-nombre_cine varchar(50),
-direccion varchar(80),
+nombre_cine varchar(50) not null,
+direccion varchar(80) not null,
 valor_entrada int not null,
 id_ciudad1 int not null,
 constraint fk_ciudad1 foreign key (id_ciudad1) references ciudades(id_ciudad),
@@ -39,14 +39,12 @@ constraint pk_cine primary key(id_cine)
 create table salas(
 id_sala int auto_increment not null,
 id_cine1 int not null,
-nombre_sala varchar(30),
+nombre_sala varchar(30) not null,
+capacidad int not null,
+is3d boolean not null,
 constraint fk_cine foreign key(id_cine1)references cines(id_cine),
 constraint pk_salas primary key(id_sala)
 );
-
-#agrego capacidad y is3D ya que no lo contemplamos
-alter table salas add (capacidad int not null,is3D boolean);
-describe salas;
 
 create table asientos(
 nro_asiento int unique not null,
@@ -76,18 +74,13 @@ create table funciones(
 id_funcion int auto_increment not null,
 id_sala2 int not null,
 id_pelicula1 int not null,
+lenguaje varchar(20) not null,
 fecha_y_horario date,
 constraint fk_salas1 foreign key(id_sala2) references salas(id_sala),
 constraint fk_peliculas foreign key(id_pelicula1) references peliculas(id_pelicula),
 constraint pk_funciones primary key(id_funcion)
 );
 
-create table clientes(
-dni int unique not null,
-nombre_cliente varchar(60),
-fecha_nac date,
-constraint pk_clientes primary key (dni)
-);
 
 create table roles(
 id_rol int auto_increment not null,
@@ -97,11 +90,11 @@ constraint pk_rol primary key(id_rol)
 
 create table usuarios(
 id_usuario int auto_increment not null,
-email varchar(50),
-pass varchar(50),
-dni1 int not null,
+nombre_user varchar(20) not null,
+fecha_nac date not null,
+email varchar(50) not null,
+pass varchar(50) not null,
 id_rol1 int not null,
-constraint fk_cliente foreign key(dni1) references clientes(dni),
 constraint fk_roles foreign key(id_rol1) references roles(id_rol),
 constraint pk_users primary key(id_usuario)
 );
@@ -133,11 +126,26 @@ constraint fk_usuario_ foreign key (id_usuario1) references usuarios(id_usuario)
 constraint fk_factura_ foreign key (id_factura1) references facturas(id_factura),
 constraint pk_entrada_ primary key (id_entrada)
 );
-
-# agrego 1 cine para mostrar
+#################INSERTAMOS DATOS#####################
+#PAISES
+insert into paises(nombre_pais) values('Argentina');
+#PRIVINCIAS
+insert into provincias(nombre_provincia,id_pais1) values('Buenos aires',1);
+#CIUDADES
+insert into ciudades(nombre_ciudad,id_provincia1) values('Mar del Plata',1);
+insert into ciudades(nombre_ciudad,id_provincia1) values('Miramar',1);
+# CINES
 insert into cines(nombre_cine,direccion,valor_entrada,id_ciudad1)values("Del paseo","Ayacucho 12312",200,1);
 insert into cines(nombre_cine,direccion,valor_entrada,id_ciudad1)values("Ambassador","Cordoba",300,1);
 insert into cines(nombre_cine,direccion,valor_entrada,id_ciudad1)values("Aldrey","not cordoba",300,1);
 insert into cines(nombre_cine,direccion,valor_entrada,id_ciudad1)values("Ambasarasa","Cba",300,1);
-
+#ROLES
+insert into roles(nombre_rol)values("Admin");
+insert into roles(nombre_rol)values("Comun");
+#USUARIOS
+insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Jorge",'1995-01-29','jorge@utn','asd123','1');
+insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivan",'1995-01-29','ivan@utn','asd123','1');
+insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivaasdn",'1995-01-29','ivsdasan@utn','asd123','1');
+select * from roles;
 select * from cines;
+select * from usuarios;

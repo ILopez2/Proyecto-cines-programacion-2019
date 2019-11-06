@@ -37,12 +37,13 @@
         *Agrega un nuevo user a la BDD
         */
         public function add($user){
-            $sql = "INSERT INTO usuarios(email,pass,dni1,id_rol1) VALUES (':email',':pass',':dni',':id_rol')";
-            $parameters["name"]=$user->getName();
-            $parameters["birthdate"]=$user->getBirthdate();  //TENGO QUE ARREGLAR LA BASE DE DATOS,MAÑANA CONSULTO CON VERO
-            $parameters["nationality"]=$user->getNationality();
+            $sql = "INSERT INTO usuarios(nombre_user,fecha_nac,email,pass,id_rol1) VALUES (':nombre_user',':fecha_nac',':email',':pass',':id_rol1')";
+            print_r($user);
+            $parameters["nombre_user"]=$user->getName();
+            $parameters["fecha_nac"]=$user->getBirthdate(); 
             $parameters["email"]=$user->getEmail();
             $parameters["pass"]=$user->getPassword();
+            $parameters["id_rol1"]=$user->getRoleLevel();
             try{
                 //creo la instancia de coneccion
                 $this->connection = Connection::getInstance();
@@ -81,7 +82,7 @@
             } 
             //hay que mapear de un arreglo asociativo a objetos
             if(!empty($result)){
-                return $this->mapeo($result);
+                return $this->mapear($result);
             }else{
                 return false;
             }
@@ -100,7 +101,7 @@
             } 
             //hay que mapear de un arreglo asociativo a objetos
             if(!empty($result)){
-                return $this->mapeo($result);
+                return $this->mapear($result);
             }else{
                 return false;
             }
@@ -124,13 +125,15 @@
         *Convierte un array asociativo a un array de objetos para facilitar su manejo
         *si la cantidad de elementos es mayor a 1 retorna el array entero, sino retorna la posicion 0.
         */
-        protected function mapeo($value){
-            $value=is_array($value) ? $value : [];
-            $value = array_map(function($p){
-                return new User($p['name'],$p['birthdate'],$p['nationality'],$p['email'],$p['pass']);
-            },$value);
-            return count($resp) > 1 ? $resp : $resp['0'];//hay que checkear del otro lado si esta devolviendo un obj o un array
-        }
+        protected function mapear($value) {
+            $value = is_array($value) ? $value : [];
+            $resp = array_map(function($p){
+                return new User($p['nombre_user'],$p['fecha_nac'],$p['email'],$p['pass'],$p['id_rol1']);
+            }, $value);
+                /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
+                return count($resp) > 1 ? $resp : $resp['0'];
+         }
+    
     }
 
 ?>

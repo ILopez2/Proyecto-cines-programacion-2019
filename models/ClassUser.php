@@ -5,15 +5,15 @@
         //ATRIBUTES
         private $name;
         private $birthdate;
-        private $nationality;
+        //private $nationality;
         private $email;
         private $password;
         private $roleLevel;
         
         //CONSTRUCTOR
-        public function __construct($name,$birthdate,$nationality,$email,$password,$role='Common'){
+        public function __construct($name,$birthdate/*,$nationality*/,$email,$password,$role='Common'){
             $this->name=$name;
-            $this->nationality=$nationality;
+           // $this->nationality=$nationality;
             $this->birthdate=$birthdate;
             $this->email=$email;
             $this->password=$password;
@@ -27,9 +27,9 @@
         public function getBirthdate(){
             return $this->birthdate;
         }
-        public function getNationality(){
+       /* public function getNationality(){
             return $this->nationality;
-        }
+        }*/
         public function getEmail(){
             return $this->email;
         }

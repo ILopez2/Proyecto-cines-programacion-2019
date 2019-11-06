@@ -2,6 +2,7 @@
     
     use models\ClassUser as User;
     use daojson\JsonUser as JsonUser;
+    use dao\UserDao as UserDao;
     use controllers\ViewsController as ViewController;
     class UserController{
     
@@ -11,7 +12,7 @@
         public function __construct(){
             //$this->userDAO= new UserDAO();
             // JSON 
-            $this->userDAO = new JsonUser();
+            $this->userDAO = new UserDao();
             $this->view = new ViewController();
         }
         public function checkSession(){
@@ -50,10 +51,10 @@
             $this->userDAO->add($newUser);
         }
         
-        public function add($name,$birthdate,$nationality,$email,$password){
+        public function add($name,$birthdate,$email,$password,$role){
             //agrega un usuario al dao
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){
-                $user = new User($name,$birthdate,$nationality,$email,$password);
+                $user = new User($name,$birthdate,$email,$password,$role);
                 $this->userDAO->add($user);
                 $this->view->admUsers();
             }

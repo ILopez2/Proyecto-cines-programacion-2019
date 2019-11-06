@@ -9,7 +9,7 @@
         private $dateTime;
         private $language;
         private $cinemaRoom;
-        private $id;
+        //private $id;
 
         //CONSTRUCTOR
 
@@ -19,7 +19,7 @@
             $this->dateTime=$dateTime;
             $this->cinemaRoom=$cinemaRoom;
             $this->language=$language;
-            $this->generateId($cinema->getName(),$movie->getId(),$dateTime,$cinemaRoom->getName());
+            //$this->generateId($cinema->getName(),$movie->getId(),$dateTime,$cinemaRoom->getName());
         }
 
 
@@ -34,9 +34,9 @@
         public function getDateTime(){
             return $this->dateTime;
         }
-        public function getId(){
+        /*public function getId(){
             return $this->id;
-        }
+        }*/
         public function getCinemaRoom(){
             return $this->cinemaRoom;
         }
@@ -64,7 +64,7 @@
 
         //EXTRAS
 
-        public function generateId($cinemaName,$movieId,$dateTime,$cinemaRoomName){
+        /*public function generateId($cinemaName,$movieId,$dateTime,$cinemaRoomName){
             $this->id=$cinemaName.$movieId.$dateTime.$cinemaRoomName;
-        }
+        }*/
     }

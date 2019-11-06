@@ -2,7 +2,7 @@
 
     /* DB */ 
     define('DB_HOST', 'localhost');
-    define('DB_NAME', 'cines');
+    define('DB_NAME', 'tpcines');
     define('DB_USER', 'root');
     define('DB_PASS', '');
 

@@ -41,11 +41,6 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Nationality</label>
-                            <input type="text" class="form-control" name="nationality" required/>
-                        </div>
-
-                        <div class="form-group">
                             <label>Birthdate</label>
                             <input type="date" class="form-control" name="birthdate" required/>
                         </div>
@@ -58,9 +53,18 @@
                         <div class="form-group">
                             <label>Password</label>
                             <input type="password" class="form-control" name="password" required/>
+
+                        </div>
+                        <div class="form-group">
+                            <label>Rol</label>
+                            <select name="role" class="form-control" required>
+                                    <option selected disabled value="">Rol de Usuario</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Comun</option>
+                            </select>
                         </div>
 
-                        <input type="submit" class="btn btn-success btn-block" name="save" value="Save" >   
+                        <input type="submit" class="btn btn-success btn-block">   
 
                     </form>
                 <?php } ?>    
@@ -76,7 +80,6 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Fecha nac</th>
-                            <th>Nacionalidad</th>
                             <th>Email</th>
                             <th>Password</th>
                             <th>Role</th>
@@ -88,7 +91,6 @@
                             <tr>
                             <td class="table-dark"><?php echo $value->getName(); ?></td>
                             <td class="table-dark"><?php echo $value->getBirthdate(); ?></td>
-                            <td class="table-dark"><?php echo $value->getNationality(); ?></td>
                             <td class="table-dark"><?php echo $value->getEmail(); ?></td>
                             <td class="table-dark"><?php echo $value->getPassword(); ?></td>
                             <td class="table-dark"><?php echo $value->getRoleLevel(); ?></td>
@@ -180,12 +182,14 @@
                                 <label>Password</label>
                                 <input type="password" class="form-control" name="password" placeholder="Contraseña" required/>
                             </div>
+                            <div class="form-group">
                             <label>Rol</label>
                             <select name="role" class="form-control" required>
                                     <option selected disabled value="">Rol de Usuario</option>
                                     <option value="Admin">Admin</option>
                                     <option value="Common">Comun</option>
                             </select>
+                            </div>
                         </div>
 
                         <div class="modal-footer">
