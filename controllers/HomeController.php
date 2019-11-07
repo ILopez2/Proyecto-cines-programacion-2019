@@ -47,7 +47,7 @@
             $this->Index();
         }
 
-        public function singUp($name,$birthdate,$nationality,$email,$password,$role='Common'){
+        public function singUp($name,$birthdate,$nationality,$email,$password,$role='2'){
             $this->userController->singUp($name,$birthdate,$nationality,$email,$password,$role);
             $this->Index();
         }

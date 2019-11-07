@@ -53,7 +53,7 @@
         
         public function add($name,$birthdate,$email,$password,$role){
             //agrega un usuario al dao
-            if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){
+            if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
                 $user = new User($name,$birthdate,$email,$password,$role);
                 $this->userDAO->add($user);
                 $this->view->admUsers();
@@ -62,7 +62,7 @@
 
         public function delete($email){
             //borra un user
-            if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){
+            if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
                 $this->userDAO->delete($email);
                 $this->view->admUsers();
             }
@@ -70,7 +70,7 @@
 
         public function edit($email,$name,$birthdate,$nationality,$password,$role){
             //edita uno o varios campos
-            if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){
+            if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
                 $auxUser = new User($name,$birthdate,$nationality,$email,$password,$role);
                 $this->userDAO->modify($auxUser);
                 $this->view->admUsers();
@@ -79,7 +79,7 @@
 
         public function setRole($email,$role){
             //vuelve a un usuario admin
-            if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){
+            if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
                 $this->userDAO->setRole($email,$role);
                 $this->view->admUsers();
             }

@@ -10,7 +10,7 @@
  
 ?>
 
-<?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
+<?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
     <div class="container p=4">
     <h1 class="mb-5">Administracion de usuarios</h1>
     <div class="row">
@@ -32,7 +32,7 @@
                 <!-- AddUser here ...  -->
                 <div class="card card-body bg-secondary">
                 
-                <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin') { ?>
+                <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1') { ?>
                     <form action="<?php echo FRONT_ROOT?>User/add" method="POST" >
                         
                         <div class="form-group">
@@ -93,26 +93,27 @@
                             <td class="table-dark"><?php echo $value->getBirthdate(); ?></td>
                             <td class="table-dark"><?php echo $value->getEmail(); ?></td>
                             <td class="table-dark"><?php echo $value->getPassword(); ?></td>
-                            <td class="table-dark"><?php echo $value->getRoleLevel(); ?></td>
+                            <td class="table-dark"><?php if($value->getRoleLevel()=="1") echo "Admin";
+                                                        else "Comun"; ?></td>
                             <td class="table-dark">
                             
 
                             <!-- DELETE HERE  -->
-                            <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
+                            <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
                                 <a href="<?php echo FRONT_ROOT?>User/delete?id=<?php echo $value->getEmail()?>" class="btn btn-danger" onclick="clicked(event)">
                                 <i class="far fa-trash-alt"></i>
                                 </a><?php } ?>
                             <!-- END DELETE HERE -->
                     
                             <!-- SET ADMIN -->
-                            <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
-                                <?php if($value->getRoleLevel() != 'Admin'){ ?>
-                                <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=Admin" class="btn btn-success" onclick="clicked(event)" >
+                            <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
+                                <?php if($value->getRoleLevel() != '1'){ ?>
+                                <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=1" class="btn btn-success" onclick="clicked(event)" >
                                 <i class="fas fa-user-shield"></i>
                                 </a>
                                 <?php }else{?>
                                     <!-- SET COMMON -->
-                                    <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=Common" class="btn btn-danger" onclick="clicked(event)" >
+                                    <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=2" class="btn btn-danger" onclick="clicked(event)" >
                                     <i class="fas fa-user-times"></i>
                                     </a>
                             <?php } ?>    
@@ -122,7 +123,7 @@
                             <?php } ?>
 
                             <!-- EDIT START HERE  -->
-                        <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
+                        <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
                             <td class="table-dark" colspan="7" style="text-align:center;">
                                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
                                 <i class="fas fa-marker">Modificar</i>
@@ -186,8 +187,8 @@
                             <label>Rol</label>
                             <select name="role" class="form-control" required>
                                     <option selected disabled value="">Rol de Usuario</option>
-                                    <option value="Admin">Admin</option>
-                                    <option value="Common">Comun</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Comun</option>
                             </select>
                             </div>
                         </div>

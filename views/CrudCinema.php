@@ -7,7 +7,7 @@
     //var_dump($_SESSION);
 ?>
 
-<?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
+<?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
     <div class="container p=4">
         <h1 class="mb-5">Administracion de cines</h1>
         <div class="row">
