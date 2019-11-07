@@ -9,7 +9,7 @@
     class MovieFunctionController{
         
         private $dao;
-        private $view
+        private $view;
 
         public function __construct(){
             //$this->cinemaDao = new JsonCinema();
@@ -18,9 +18,9 @@
         }
 
 
-        public function add($movie,$cinema,$dateTime,$language,$cinemaRoom,$id){
+        public function add($movie,$cinema,$dateTime,$language,$cinemaRoom){
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
-                $function = new ClassMovieFunction($movie,$cinema,$dateTime,$language,$cinemaRoom,$id);
+                $function = new ClassMovieFunction($movie,$cinema,$dateTime,$language,$cinemaRoom);
                 $this->dao->add($function);
                 $this->view->admFunctions();
             }

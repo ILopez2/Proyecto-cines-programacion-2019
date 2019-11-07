@@ -3,8 +3,7 @@
     use dao\Connection as Connection;
     use dao\CinemaRoomDao as CRD;
     use models\ClassCinema as Cinema;
-    $roomDao=new CRD();
-    $rooms=$roomDao->getAll();  
+    
 
     class CinemaDao implements InterfaceDao{
 
@@ -55,7 +54,7 @@
         */
         public function getForID($cinemaName){
             $sql = "SELECT * FROM cines WHERE nombre_cine = :cinemaName";
-            $parameters['nombre_cine']=$cinemaName;
+            $parameters['cinemaName']=$cinemaName;
             try{
                 //creo la instancia de coneccion
                 $this->connection= Connection::getInstance();
@@ -72,7 +71,7 @@
         }
         public function getForID2($cinemaName){
             $sql = "SELECT * FROM cines WHERE id_cine = :id";
-            $parameters['id_cine']=$cinemaName;
+            $parameters['id']=$cinemaName;
             try{
                 //creo la instancia de coneccion
                 $this->connection= Connection::getInstance();
@@ -119,6 +118,8 @@
             $resp=array();
             $resp = array_map(function($p){
             $cinemaRooms=null;
+            $roomDao=new CRD();
+            $rooms=$roomDao->getAll();  
             if(!empty($rooms)){
                 if(is_array($rooms)){
                     $cinemaRooms=array();

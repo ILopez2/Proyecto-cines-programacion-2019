@@ -46,7 +46,7 @@
         <tbody>
                 <?php foreach($array as $movie){  ?>
                 <tr>
-                    <td><?php echo $movie->getTitle(); ?></td>
+                    <td><?php var_dump($movie); echo $movie->getTitle(); ?></td>
                     <td>
                     <a href="<?php echo FRONT_ROOT?>Views/viewFunctions?id=<?php echo $movie->getId()?>"><img class="figure-img img-fluid rounded" src="<?php echo $dao->getMoviePoster($movie->getPosterPath()); ?>" alt=""></a> 
                     </td>

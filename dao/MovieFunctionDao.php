@@ -2,9 +2,8 @@
 namespace dao;
 
 use dao\Connection as Connection;
-use dao\CinemaDao as CDAO;
 use models\ClassMovieFunction as CMF;  
-$cinemaDao=new CDAO();
+
 class MovieFunctionDao implements InterfaceDao{
 
     //ATRIBUTES
@@ -21,9 +20,9 @@ class MovieFunctionDao implements InterfaceDao{
     */
     public function add($function){
         $sql = "INSERT INTO funciones(id_cine2,id_sala2,id_pelicula1,lenguaje,fecha_y_horario) VALUES (':cine',':sala',':pelicula',':lenguaje',':fechaHora')";
-        $parameters["cine"]=$function->getCinema()->getId();
+        $parameters["cine"]=$function->getCinema();
         $parameters["sala"]=$function->getCinemaRoom();
-        $parameters["pelicula"]=$function->getMovie()->getId();
+        $parameters["pelicula"]=$function->getMovie();
         $parameters["lenguaje"]=$function->getLanguage();
         $parameters["fechaHora"]=$function->getDateTime();
 
@@ -102,8 +101,7 @@ class MovieFunctionDao implements InterfaceDao{
         $value=is_array($value) ? $value : [];
         $resp=array();
         $resp = array_map(function($p){
-            $cinema=$cinemaDao->getForID2($p['id_cine2']);
-            return new CMF($p['id_pelicula'],$cinema,$p['fecha_y_horario'],$p['id_sala2'],$p['lenguaje'],$p['id_funcion']);
+            return new CMF($p['id_pelicula1'],$p['id_cine2'],$p['fecha_y_horario'],$p['id_sala2'],$p['lenguaje'],$p['id_funcion']);
         },$value);
         return count($resp) > 1 ? $resp : $resp['0'];//hay que checkear del otro lado si esta devolviendo un obj o un array
     }

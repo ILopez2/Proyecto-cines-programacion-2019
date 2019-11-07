@@ -49,7 +49,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                       <?php foreach($cinemasFunction as $function){
+                       <?php var_dump($cinemasFunction); foreach($cinemasFunction as $function){
                                 if($movie->getId() == $function->getMovie()->getId()){?>
                                     <tr>
                                         <td><figure class="figure">

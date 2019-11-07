@@ -1,5 +1,6 @@
 <?php 
-    use models/ClassMovie as Movie;
+    namespace models;
+    use models\ClassMovie as Movie;
     class ClassMovieFunction {
 
         //ATRIBUTES
