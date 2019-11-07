@@ -48,11 +48,7 @@
                 <tr>
                     <td><?php echo $movie->getTitle(); ?></td>
                     <td>
-                    <figure class="figure">
-                        <img class="figure-img img-fluid rounded" src="<?php echo $dao->getMoviePoster($movie->getPosterPath()); ?>" alt="">
-                        <figcaption class="figure-caption">A caption for the above image.</figcaption>
-                    </figure>
-                    
+                    <a href="<?php echo FRONT_ROOT?>Views/viewFunctions?id=<?php echo $movie->getId()?>"><img class="figure-img img-fluid rounded" src="<?php echo $dao->getMoviePoster($movie->getPosterPath()); ?>" alt=""></a> 
                     </td>
                 </tr>
                 <?php } ?>

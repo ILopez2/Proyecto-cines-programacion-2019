@@ -103,7 +103,7 @@ class MovieFunctionDao implements InterfaceDao{
         $resp=array();
         $resp = array_map(function($p){
             $cinema=$cinemaDao->getForID2($p['id_cine2']);
-            return new CMF($p['id_pelicula'],$p['fecha_y_horario'],$p['id_sala2'],$p['lenguaje'],$p['id_funcion']);
+            return new CMF($p['id_pelicula'],$cinema,$p['fecha_y_horario'],$p['id_sala2'],$p['lenguaje'],$p['id_funcion']);
         },$value);
         return count($resp) > 1 ? $resp : $resp['0'];//hay que checkear del otro lado si esta devolviendo un obj o un array
     }

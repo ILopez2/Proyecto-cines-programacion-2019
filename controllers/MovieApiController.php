@@ -1,5 +1,5 @@
 <?php namespace controllers;
-    
+    //https://developers.themoviedb.org/3
     use models\ClassMovieGenre as CMG;
     use models\ClassMovie as CM;
     use controllers\ViewsController as VC;
@@ -51,7 +51,8 @@
         public function getMovieXid($id,$lang){
             $jsonContent=file_get_contents(SERCHMID.$id.APIKEY.$lang);
             $values= ($jsonContent) ? json_decode($jsonContent, true ) : array();
-            $movieGenres=$this->genreIdToName($values["genre_ids"],$lang);
+            var_dump($values["genre_ids"]);
+            $movieGenres=$this->genreIdToName($values["genres"],$lang);
             $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"],$movieGenres);
             return $movie;
         }

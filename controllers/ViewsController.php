@@ -40,10 +40,16 @@
             include_once(VIEWS.'/SearchResult.php');
             include_once(VIEWS.'/footer.php');
         }
-        public function admFunctions(){
+        public function admFunctions($cinemaName){
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
             include_once(VIEWS.'/CrudMovieFunction.php');
+            include_once(VIEWS.'/footer.php');
+        }
+        public function viewFunctions($id){
+            include_once(VIEWS.'/header.php');
+            include_once(VIEWS.'/nav.php');
+            include_once(VIEWS.'/MovieFunction.php');
             include_once(VIEWS.'/footer.php');
         }
     }

@@ -1,9 +1,9 @@
 <?php 
     //use daojson\JsonCinemaMovieFunction as JsonCinemaMovieFunction;
     //$dao = new JsonCinemaMovieFunction();
-    use dao\CinemaMovieFunction as CinemaMovieFunction;
-    $dao = new CinemaMovieFunction();
-    $cinemaFunction=$dao->getAll();
+    use dao\MovieFunctionDao as MovieFunctionDao;
+    $dao = new MovieFunctionDao();
+    $cinemasFunction=$dao->getAll();
 
     use controllers\MovieApiController as MovieApiController;
     $dao = new MovieApiController();
@@ -11,7 +11,8 @@
 
     // ha yque cambiar esto por lo que se pase en el click..
     // hay que ver la forma de traer mediante el click la peli para esta pantalla..
-    $movie = $dao->getMovie($name,$lang);
+    $movie = $dao->getMovieXid($id,ESP);
+
 
 ?>
 
@@ -49,7 +50,7 @@
                 </thead>
                 <tbody>
                        <?php foreach($cinemasFunction as $function){
-                                if($movie->getTitle() == $function->getMovie()->getTitle()){?>
+                                if($movie->getId() == $function->getMovie()->getId()){?>
                                     <tr>
                                         <td><figure class="figure">
                                                 <img class="figure-img img-fluid rounded" src="<?php  echo $dao->getMoviePoster($function->getMovie()->getPosterPath());;?>" alt="">
