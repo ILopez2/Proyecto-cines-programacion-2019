@@ -42,6 +42,7 @@
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                         <a class="dropdown-item" href="<?php echo FRONT_ROOT?>Views/admCinema"><i class="fas fa-film"></i> Cines</a>
                         <a class="dropdown-item" href="<?php echo FRONT_ROOT?>Views/admUsers"><i class="fas fa-user-cog"></i> Usuarios</a>
+                        <a class="dropdown-item" href="<?php echo FRONT_ROOT?>Views/admFunctions"><i class="fa fa-ticket"></i> Funciones</a>
                         </div>
                     </div>
                     <?php } ?>

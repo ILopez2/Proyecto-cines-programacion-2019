@@ -67,6 +67,23 @@
                 return false;
             }
         }
+        public function getForID2($cinemaName){
+            $sql = "SELECT * FROM cines WHERE id_cine = :id";
+            $parameters['id_cine']=$cinemaName;
+            try{
+                //creo la instancia de coneccion
+                $this->connection= Connection::getInstance();
+                $result = $this->connection->execute($sql,$parameters);
+            }catch(\PDOException $ex){
+                throw $ex;
+            } 
+            //hay que mapear de un arreglo asociativo a objetos
+            if(!empty($result)){
+                return $this->mapeo($result);
+            }else{
+                return false;
+            }
+        }
         /*
         *Retorna todos los cines de la BDD
         */

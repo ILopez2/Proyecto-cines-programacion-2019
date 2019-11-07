@@ -40,4 +40,10 @@
             include_once(VIEWS.'/SearchResult.php');
             include_once(VIEWS.'/footer.php');
         }
+        public function admFunctions(){
+            include_once(VIEWS.'/header.php');
+            include_once(VIEWS.'/nav.php');
+            include_once(VIEWS.'/CrudMovieFunction.php');
+            include_once(VIEWS.'/footer.php');
+        }
     }

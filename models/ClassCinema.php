@@ -10,15 +10,17 @@
         private $ticketCost;
         private $cinemaRooms;
         private $billboard;
+        private $id;
 
         //CONSTRUCTOR
-        public function __construct($name,$city,$address,$ticketCost,$cinemaRoom=array(),$billboard=null){
+        public function __construct($name,$city,$address,$ticketCost,$cinemaRoom=array(),$billboard=null,$id=null){
             $this->name=$name;
             $this->city=$city;
             $this->address=$address;
             $this->ticketCost=$ticketCost;
             $this->cinemaRooms=$cinemaRoom;
             $this->billboard=$billboard;
+            $this->id=$id;
         }
 
         //GETTERS
@@ -39,6 +41,9 @@
         }
         public function getBillboard(){
             return $this->billboard;
+        }
+        public function getId(){
+            return $this->id;
         }
         //SETTERS
         public function setName($name){

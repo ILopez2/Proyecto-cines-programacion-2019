@@ -18,7 +18,7 @@
  
 ?>
 
-<?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
+<?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
     <div class="container p=4">
     <h1 class="mb-5">Administracion de Funciones</h1>
     <div class="row">
@@ -40,7 +40,7 @@
                 <!-- start AddFunction here ...  -->
                 <div class="card card-body bg-secondary">
                 
-                <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin') { ?>
+                <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1') { ?>
                     <form action="<?php echo FRONT_ROOT?>MovieFunction/add" method="POST" >
                         
                         <div class="form-group">
@@ -51,29 +51,18 @@
                             <?php foreach($array as $movie){?>
                             <option value="<?php echo $movie->getTitle(); ?>"><?php echo $movie->getTitle();?></option>
                             <?php }?>
+                            </select>
                             <!-- MOVIE OPTION ENDS HERE -->
                         </div>
 
                         <div class="form-group">
                         <!-- CINEMA OPTION START HERE -->
-                            <label>cinema</label>
+                        <label>cinema</label>
                             <select name="cinema" class="form-control" required>
-                                    <option selected disabled value="">Cine Disponible</option>
-                                    <?php foreach($cines as $cine){?>
-                                        <option value="<?php echo $cine->getName();?>"><?php echo $cine->getName();?></option>
-                                        
-                                        <div class="form-group">
-                                        <!-- CINEMA ROOM OPTION START HERE -->
-                                        <label>cinemaRoom</label>
-                                        <select name="room" class="form-control" required>
-                                                <option selected disabled value="">Elija Sala</option>
-                                                <?php foreach($cine as $room){?>
-                                                <option value="<?php echo $room->getName();?>"><?php echo $room->getName(); ?></option>
-                                                <?php }?>
-                                        </select>
-                                        <!-- CINEMA ROOM OPTION ENDS HERE -->
-                                        </div>    
-                                    <?php }?>
+                            <option selected disabled value="">Seleccione un cine</option>
+                            <?php foreach($cines as $cine){?>
+                            <option value="<?php echo $cine->getId(); ?>"><?php echo $cine->getName();?></option>
+                            <?php }?>
                             </select>
                         <!-- CINEMA OPTION ENDS HERE -->
                         </div>
@@ -97,9 +86,8 @@
                         <input type="submit" class="btn btn-success btn-block">   
 
                     </form>
+                    </div>
                 <?php } ?>    
-
-                </div>
                 <!-- End AddFunction here ...         -->
 
                 </div>
@@ -116,38 +104,80 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($functions as $function){ ?>
-                            <tr>
-                            <td class="table-dark"><?php echo $function->getMovie()->getTitle(); ?></td>
-                            <td class="table-dark"><?php echo $function->getCinema()->getName(); ?></td>
-                            <td class="table-dark"><?php echo $function->getCinemaRoom()->getName(); ?></td>
-                            <td class="table-dark"><?php echo $function->getDateTime(); ?></td>
-                            <td class="table-dark"><?php echo $function->getLanguage(); ?></td>
+
+                        <?php 
+                        if(is_array($functions)){
+                            if(!empty($functions)){ 
+                                foreach($functions as $function){ ?>
+                                <tr>
+                                <td class="table-dark"><?php echo $function->getMovie()->getTitle(); ?></td>
+                                <td class="table-dark"><?php echo $function->getCinema()->getName(); ?></td>
+                                <?php
+                                    $cinema=$function->getCinema();
+                                    $rooms=$cinema->getCinemaRooms();
+                                    foreach($rooms as $room){
+                                        echo "<td class=table-light>".$room->getName()."</td>";                           
+                                    }?>
+                                <td class="table-dark"><?php echo $function->getDateTime(); ?></td>
+                                <td class="table-dark"><?php echo $function->getLanguage(); ?></td>
+                                    
+
+                                <!-- DELETE HERE  -->
+                                <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
+                                    <a href="<?php echo FRONT_ROOT?>MovieFunction/delete?id=<?php echo $value->getId()?>" class="btn btn-danger" onclick="clicked(event)">
+                                    <i class="far fa-trash-alt"></i>
+                                    </a><?php } ?>
+                                <!-- END DELETE HERE -->
+
+                                <!-- EDIT START HERE  -->
+                                <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
+                                    <td class="table-dark" colspan="7" style="text-align:center;">
+                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
+                                        <i class="fas fa-marker">Modificar</i>
+                                        </button>
+                                    </td>
+                                <?php } ?>
+                                <!-- END EDIT HERE  -->
                             
+                        </div>
+                        <?php } } 
+                        else{ ?>
+                                    <tr>
+                                    <td class="table-dark"><?php echo $functions->getMovie()->getTitle(); ?></td>
+                                    <td class="table-dark"><?php echo $functions->getCinema()->getName(); ?></td>
+                                    <?php
+                                        $cinema=$functions->getCinema();
+                                        $rooms=$cinema->getCinemaRooms();
+                                        foreach($rooms as $room){
+                                            echo "<td class=table-light>".$room->getName()."</td>";                           
+                                        }?>
+                                    <td class="table-dark"><?php echo $functions->getDateTime(); ?></td>
+                                    <td class="table-dark"><?php echo $functions->getLanguage(); ?></td>
+                                    
 
-                            <!-- DELETE HERE  -->
-                            <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
-                                <a href="<?php echo FRONT_ROOT?>MovieFunction/delete?id=<?php echo $value->get()?>" class="btn btn-danger" onclick="clicked(event)">
-                                <i class="far fa-trash-alt"></i>
-                                </a><?php } ?>
-                            <!-- END DELETE HERE -->
+                                    <!-- DELETE HERE  -->
+                                    <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
+                                        <a href="<?php echo FRONT_ROOT?>MovieFunction/delete?id=<?php echo $value->getId()?>" class="btn btn-danger" onclick="clicked(event)">
+                                        <i class="far fa-trash-alt"></i>
+                                        </a><?php } ?>
+                                    <!-- END DELETE HERE -->
 
-                            <!-- EDIT START HERE  -->
-                        <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
-                            <td class="table-dark" colspan="7" style="text-align:center;">
-                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
-                                <i class="fas fa-marker">Modificar</i>
-                                </button>
-                            </td>
-                        <?php } ?>
-                        <!-- END EDIT HERE  -->
-                    </tbody>
-                    </table> 
-                    <!-- END TABLE HERE  -->
+                                    <!-- EDIT START HERE  -->
+                                <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
+                                    <td class="table-dark" colspan="7" style="text-align:center;">
+                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
+                                        <i class="fas fa-marker">Modificar</i>
+                                        </button>
+                                    </td>
+                                <?php } ?>
+                                <!-- END EDIT HERE  -->
+                            </tbody>
+                            </table> 
+                            <!-- END TABLE HERE  -->  
+                        <?php }
                     
-                      
-
-                </div>
+                    
+                    } ?>
                 
                 <!-- MODAL START HERE no terminado todavia -->
                 <div class="modal fade" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">
@@ -231,5 +261,5 @@
             <!-- MODAL ENDS HERE  -->
             </div>
     </div>
-<?php } ?>
+    <?php } ?>
 

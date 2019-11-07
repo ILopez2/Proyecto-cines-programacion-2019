@@ -60,7 +60,12 @@
                                         <td class=table-light><?php echo $function->getCinema()->getName();?></td>
                                         <td class=table-light><?php echo $function->getDateTime();?></td>
                                         <td class=table-light><?php echo $function->getLanguage();?></td>
-                                        <td class=table-light><?php echo $function->getCinema()->getCinemaRoom()->getName();?></td>
+                                        <?php 
+                                            $cinema=$function->getCinema();
+                                            $rooms=$cinema->getCinemaRooms();
+                                            foreach($rooms as $room){
+                                                echo "<td class=table-light>".$room->getName()."</td>";                           
+                                            }?>
                                     </tr>
                                 <?php } ?>
                         <?php } ?>
