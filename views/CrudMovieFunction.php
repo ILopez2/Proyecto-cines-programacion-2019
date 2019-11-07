@@ -1,5 +1,4 @@
 <?php
-
     //use daojson\JsonMovieFunction as JsonMovieFunction;
     //$dao = new JsonMovieFunction();
 
@@ -9,7 +8,6 @@
     $cinemaDao=new CMD;
     $cine=$cinemaDao->getForID($cinemaName);
     $functions=$dao->getAll();
-
     use dao\CinemaDao as CinemaDao;
     $daoCD= new CinemaDao;
     $cines=$daoCD->getAll();
@@ -44,7 +42,10 @@
                 
                 <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1') { ?>
                     <form action="<?php echo FRONT_ROOT?>MovieFunction/add" method="POST" >
-                        
+                        <div class="form-group">
+                        <label><strong>Cine:</strong></label>
+                            <input type="hidden" name="cinema" value="<?php echo $cine->getId(); ?>"><strong><?php echo $cine->getName();?></strong>
+                        </div>
                         <div class="form-group">
                         <!-- MOVIE OPTION START HERE -->
                             <label>Pelicula</label>
@@ -63,9 +64,14 @@
                             <option selected disabled value="">Seleccione una sala</option>
                             <?php 
                             $rooms=$cine->getCinemaRooms();
-                            foreach($rooms as $room){?>
-                            <option value="<?php echo $room->getId(); ?>"><?php echo $room->getName();?></option>
-                            <?php }?>
+                            if(!empty($rooms)){
+                               if(is_array($rooms)){
+                                foreach($rooms as $room){?>
+                                    <option value="<?php echo $room->getId(); ?>"><?php echo $room->getName();?></option>
+                                    <?php }
+                               } 
+                               else { ?> <option value="<?php echo $rooms->getId(); ?>"><?php echo $rooms->getName();?></option>                          
+                            <?php } }?>
                             </select>
                         </div>
                         <!-- CINEMAROOM OPTION ENDS HERE -->
@@ -73,16 +79,15 @@
 
                         <div class="form-group">
                             <label>Fecha y hora</label>
-                            <input type="date" class="form-control" name="date" required/>
+                            <input type="date" class="form-control" name="dateTime" required/>
                         </div>
 
                         <div class="form-group">
                             <label>Lenguaje</label>
                             <select name="language" class="form-control" required>
-                                    <option selected disabled value="">Audio de la pelicula</option>
-                                    <option value="1">Subtitulada</option>
-                                    <option value="2">Doblada</option>
-                                    <option value="3">Latino</option>
+                                    <option selected disabled value="">Lenguaje de la pelicula</option>
+                                    <option value="Subtitulada">Subtitulada</option>
+                                    <option value="Doblada">Doblada</option>
                             </select>
                         </div>
 

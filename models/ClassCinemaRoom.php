@@ -18,6 +18,7 @@
         //if($capacity!=null) $this->createSeats($capacity);
         //else $this->seats=array();
         $this->cinemaId=$cinemaId;
+        $this->roomId=$roomId;
     }
 
     //GETTERS
@@ -32,6 +33,9 @@
     }
     public function getCinemaId(){
         return $this->cinemaId;
+    }
+    public function getId(){
+        return $this->roomId;
     }
     /*public function getSeats(){
         return $this->seats;
