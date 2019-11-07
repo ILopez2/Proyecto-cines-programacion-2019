@@ -82,6 +82,7 @@ class MovieFunctionDao implements InterfaceDao{
         }catch(\PDOException $ex){
             throw $ex;
         } 
+
         //hay que mapear de un arreglo asociativo a objetos
         if(!empty($result)){
             return $this->mapeo($result);
@@ -97,16 +98,16 @@ class MovieFunctionDao implements InterfaceDao{
     *Convierte un array asociativo a un array de objetos para facilitar su manejo
     *si la cantidad de elementos es mayor a 1 retorna el array entero, sino retorna la posicion 0.
     */
-    protected function mapeo($value){
-        $value=is_array($value) ? $value : [];
-        $resp=array();
+    protected function mapeo($value) {
+        $value = is_array($value) ? $value : [];   
+        $resp=array();  
         $resp = array_map(function($p){
             return new CMF($p['id_pelicula1'],$p['id_cine2'],$p['fecha_y_horario'],$p['id_sala2'],$p['lenguaje'],$p['id_funcion']);
-        },$value);
-        return count($resp) > 1 ? $resp : $resp['0'];//hay que checkear del otro lado si esta devolviendo un obj o un array
-    }
+        }, $value);
+            /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
+            return count($resp) > 1 ? $resp : $resp['0'];
+     }
 }
-
 
 
 ?>

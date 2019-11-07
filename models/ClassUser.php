@@ -11,7 +11,7 @@
         private $roleLevel;
         
         //CONSTRUCTOR
-        public function __construct($name,$birthdate/*,$nationality*/,$email,$password,$role='Common'){
+        public function __construct($name,$birthdate/*,$nationality*/,$email,$password,$role='2'){
             $this->name=$name;
            // $this->nationality=$nationality;
             $this->birthdate=$birthdate;

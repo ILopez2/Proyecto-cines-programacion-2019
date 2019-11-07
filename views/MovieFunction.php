@@ -1,17 +1,19 @@
 <?php 
     //use daojson\JsonCinemaMovieFunction as JsonCinemaMovieFunction;
     //$dao = new JsonCinemaMovieFunction();
-    use dao\MovieFunctionDao as MovieFunctionDao;
-    $dao = new MovieFunctionDao();
+    use dao\MovieFunctionDao as MFD;
+    use dao\CinemaDao as CMD;
+    $dao = new MFD();
+    $daoC=new CMD();
     $cinemasFunction=$dao->getAll();
 
     use controllers\MovieApiController as MovieApiController;
-    $dao = new MovieApiController();
+    $daoM = new MovieApiController();
     
 
     // ha yque cambiar esto por lo que se pase en el click..
     // hay que ver la forma de traer mediante el click la peli para esta pantalla..
-    $movie = $dao->getMovieXid($id,ESP);
+    $movie = $daoM->getMovieXid($id,ESP);
 
 
 ?>
@@ -49,21 +51,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                       <?php var_dump($cinemasFunction); foreach($cinemasFunction as $function){
-                                if($movie->getId() == $function->getMovie()->getId()){?>
+                       <?php  foreach($cinemasFunction as $function){
+                           
+                                if($movie->getId() == $function->getMovie()){
+                                    $fMovie=$daoM->getMovieXid($function->getMovie(),ESP);
+                                    $fCinema=$daoC->getForID2($function->getCinema());
+                                    ?>
                                     <tr>
                                         <td><figure class="figure">
-                                                <img class="figure-img img-fluid rounded" src="<?php  echo $dao->getMoviePoster($function->getMovie()->getPosterPath());;?>" alt="">
+                                                <img class="figure-img img-fluid rounded" src="<?php  echo $daoM->getMoviePoster($fMovie->getPosterPath());?>" alt="">
                                             </figure>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class=table-light><?php echo $function->getCinema()->getName();?></td>
+                                        <td class=table-light><?php echo $fCinema->getName();?></td>
                                         <td class=table-light><?php echo $function->getDateTime();?></td>
                                         <td class=table-light><?php echo $function->getLanguage();?></td>
                                         <?php 
-                                            $cinema=$function->getCinema();
-                                            $rooms=$cinema->getCinemaRooms();
+                                            $rooms=$fCinema->getCinemaRooms();
                                             foreach($rooms as $room){
                                                 echo "<td class=table-light>".$room->getName()."</td>";                           
                                             }?>

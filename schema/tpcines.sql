@@ -1,6 +1,6 @@
 create database tpcines;
 use tpcines;
-drop database tpcines;
+#drop database tpcines;
 
 create table paises(
 id_pais int auto_increment not null,
@@ -156,3 +156,4 @@ insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha_y_horario)va
 select * from roles;
 select * from cines;
 select * from usuarios;
+select * from funciones;

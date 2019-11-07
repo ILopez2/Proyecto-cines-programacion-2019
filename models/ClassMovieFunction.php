@@ -14,13 +14,13 @@
 
         //CONSTRUCTOR
 
-        public function __constructor($movie,$cinema,$dateTime,$cinemaRoom,$language,$id=null){
+        public function __construct($movie,$cinema,$dateTime,$cinemaRoom,$language,$id=null){
             $this->movie=$movie;
             $this->cinema=$cinema;
             $this->dateTime=$dateTime;
             $this->cinemaRoom=$cinemaRoom;
             $this->language=$language;
-            $this->$id;
+            $this->$id=$id;
         }
 
 

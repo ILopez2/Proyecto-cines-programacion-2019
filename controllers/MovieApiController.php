@@ -51,7 +51,6 @@
         public function getMovieXid($id,$lang){
             $jsonContent=file_get_contents(SERCHMID.$id.APIKEY.$lang);
             $values= ($jsonContent) ? json_decode($jsonContent, true ) : array();
-            var_dump($values["genres"]);
             $movieGenres=$this->genreIdToName($values["genres"],$lang);
             $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"],$movieGenres);
             return $movie;
