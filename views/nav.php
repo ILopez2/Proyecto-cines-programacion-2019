@@ -33,7 +33,7 @@
                     
                     </form>
                     </div>
-                    <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin') {?>
+                    <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1') {?>
                     <div class="btn-group mr-2" role="group" aria-label="Second group">
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
