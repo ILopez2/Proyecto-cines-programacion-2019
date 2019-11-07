@@ -74,10 +74,12 @@ create table funciones(
 id_funcion int auto_increment not null,
 id_sala2 int not null,
 id_pelicula1 int not null,
+id_cine2 int not null,
 lenguaje varchar(20) not null,
 fecha_y_horario date,
 constraint fk_salas1 foreign key(id_sala2) references salas(id_sala),
 constraint fk_peliculas foreign key(id_pelicula1) references peliculas(id_pelicula),
+constraint fk_cines2 foreign key(id_cine2) references cines(id_cine),
 constraint pk_funciones primary key(id_funcion)
 );
 

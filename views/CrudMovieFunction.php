@@ -45,36 +45,46 @@
                         
                         <div class="form-group">
                         <!-- MOVIE OPTION START HERE -->
-                            <label>movie</label>
+                            <label>Pelicula</label>
                             <select name="movie" class="form-control" required>
                             <option selected disabled value="">Elija pelicula</option>
                             <?php foreach($array as $movie){?>
                             <option value="<?php echo $movie->getTitle(); ?>"><?php echo $movie->getTitle();?></option>
                             <?php }?>
-                            </select>
-                            <!-- MOVIE OPTION ENDS HERE -->
+                            </select>                           
                         </div>
-
-                        <div class="form-group">
+                        <!-- MOVIE OPTION ENDS HERE -->
                         <!-- CINEMA OPTION START HERE -->
-                        <label>cinema</label>
+                        <div class="form-group">
+                            <label>Cine</label>
                             <select name="cinema" class="form-control" required>
                             <option selected disabled value="">Seleccione un cine</option>
                             <?php foreach($cines as $cine){?>
                             <option value="<?php echo $cine->getId(); ?>"><?php echo $cine->getName();?></option>
                             <?php }?>
                             </select>
-                        <!-- CINEMA OPTION ENDS HERE -->
                         </div>
+                        <!-- CINEMA OPTION ENDS HERE -->
+                        <!-- CINEMAROOM OPTION START HERE -->
+                        <div class="form-group">
+                            <label>Sala</label>
+                            <select name="cinema" class="form-control" required>
+                            <option selected disabled value="">Seleccione un cine</option>
+                            <?php foreach($cines as $cine){?>
+                            <option value="<?php echo $cine->getId(); ?>"><?php echo $cine->getName();?></option>
+                            <?php }?>
+                            </select>
+                        </div>
+                        <!-- CINEMAROOM OPTION ENDS HERE -->
                         
 
                         <div class="form-group">
-                            <label>dateTime</label>
+                            <label>Fecha y hora</label>
                             <input type="date" class="form-control" name="date" required/>
                         </div>
 
                         <div class="form-group">
-                            <label>language</label>
+                            <label>Lenguaje</label>
                             <select name="language" class="form-control" required>
                                     <option selected disabled value="">Audio de la pelicula</option>
                                     <option value="1">Subtitulada</option>
@@ -96,11 +106,11 @@
                     <table class="table table-bordered table-striped">
                     <thead class="thead-dark">
                         <tr>
-                            <th>movie</th>
-                            <th>cinema</th>
-                            <th>cinemaRoom</th>
-                            <th>dateTime</th>
-                            <th>language</th>
+                            <th>Pelicula</th>
+                            <th>Cine</th>
+                            <th>Sala</th>
+                            <th>Fecha y hora</th>
+                            <th>Lenguaje</th>
                         </tr>
                     </thead>
                     <tbody>
