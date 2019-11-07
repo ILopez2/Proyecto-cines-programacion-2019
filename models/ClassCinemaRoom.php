@@ -6,15 +6,18 @@
         private $name;
         private $is3D; 
         private $capacity;
-        private $seats=array();
+        //private $seats=array();
+        private $cinemaId;
+        private $roomId;
     
     //CONSTRUCTOR
-    public function __construct($name=null,$is3D=null,$capacity=null){
+    public function __construct($name=null,$is3D=null,$capacity=null,$cinemaId=null,$roomId){
         $this->name=$name;
         $this->is3D=$is3D;
         $this->capacity=$capacity;
-        if($capacity!=null) $this->createSeats($capacity);
-        else $this->seats=array();
+        //if($capacity!=null) $this->createSeats($capacity);
+        //else $this->seats=array();
+        $this->cinemaId=$cinemaId;
     }
 
     //GETTERS
@@ -27,9 +30,12 @@
     public function getCapacity(){
         return $this->capacity;
     }
-    public function getSeats(){
-        return $this->seats;
+    public function getCinemaId(){
+        return $this->cinemaId;
     }
+    /*public function getSeats(){
+        return $this->seats;
+    }*/
 
     //SETTERS
     public function setName($name){
@@ -40,17 +46,17 @@
     }
     public function setCapacity($capacity){
         $this->capacity=$capacity;
-        $this->createSeats($capacity);
+        //$this->createSeats($capacity);
     }
 
-    //EXTRAS
+   /* //EXTRAS
     private function createSeats($capacity){
         $number=1;
         for($i=0;$i<$capacity;$i++){
             $this->seats[$i]=$number;
             $number++;
         }
-    }
+    }*/
 
     }
 ?>

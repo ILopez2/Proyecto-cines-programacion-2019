@@ -1,7 +1,10 @@
 <?php namespace dao;
 
     use dao\Connection as Connection;
-    use models\ClassCinema as Cinema;  
+    use dao\CinemaRoomDao as CRD;
+    use models\ClassCinema as Cinema;
+    $roomDao=new CRD();
+    $rooms=$roomDao->getAll();  
 
     class CinemaDao implements InterfaceDao{
 
@@ -115,7 +118,18 @@
             $value=is_array($value) ? $value : [];
             $resp=array();
             $resp = array_map(function($p){
-                return new Cinema($p['nombre_cine'],$p['id_ciudad1'],$p['direccion'],$p['valor_entrada']);
+            $cinemaRooms=null;
+            if(!empty($rooms)){
+                if(is_array($rooms)){
+                    $cinemaRooms=array();
+                    foreach($rooms as $room){
+                        if($room->getCinemaId()==$p["id_cine"])
+                        array_push($cinemaRooms,$room);
+                    }
+                }
+                else $cinemaRooms=$rooms;
+            }
+                return new Cinema($p['nombre_cine'],$p['id_ciudad1'],$p['direccion'],$p['valor_entrada'],$cinemaRooms,$p["id_cine"]);
             },$value);
             return count($resp) > 1 ? $resp : $resp['0'];//hay que checkear del otro lado si esta devolviendo un obj o un array
         }

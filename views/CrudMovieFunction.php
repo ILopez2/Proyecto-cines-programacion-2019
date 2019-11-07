@@ -4,8 +4,10 @@
     //$dao = new JsonMovieFunction();
 
     use dao\MovieFunctionDao as MovieFunctionDao;
+    use dao\CinemaDao as CMD;
     $dao = new MovieFunctionDao();
-
+    $cinemaDao=new CMD;
+    $cine=$cinemaDao->getForID($cinemaName);
     $functions=$dao->getAll();
 
     use dao\CinemaDao as CinemaDao;
@@ -54,24 +56,15 @@
                             </select>                           
                         </div>
                         <!-- MOVIE OPTION ENDS HERE -->
-                        <!-- CINEMA OPTION START HERE -->
-                        <div class="form-group">
-                            <label>Cine</label>
-                            <select name="cinema" class="form-control" required>
-                            <option selected disabled value="">Seleccione un cine</option>
-                            <?php foreach($cines as $cine){?>
-                            <option value="<?php echo $cine->getId(); ?>"><?php echo $cine->getName();?></option>
-                            <?php }?>
-                            </select>
-                        </div>
-                        <!-- CINEMA OPTION ENDS HERE -->
                         <!-- CINEMAROOM OPTION START HERE -->
                         <div class="form-group">
                             <label>Sala</label>
-                            <select name="cinema" class="form-control" required>
-                            <option selected disabled value="">Seleccione un cine</option>
-                            <?php foreach($cines as $cine){?>
-                            <option value="<?php echo $cine->getId(); ?>"><?php echo $cine->getName();?></option>
+                            <select name="cinemaRoom" class="form-control" required>
+                            <option selected disabled value="">Seleccione una sala</option>
+                            <?php 
+                            $rooms=$cine->getCinemaRooms();
+                            foreach($rooms as $room){?>
+                            <option value="<?php echo $room->getId(); ?>"><?php echo $room->getName();?></option>
                             <?php }?>
                             </select>
                         </div>
