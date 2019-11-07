@@ -11,7 +11,7 @@
         private $roomId;
     
     //CONSTRUCTOR
-    public function __construct($name=null,$is3D=null,$capacity=null,$cinemaId=null,$roomId){
+    public function __construct($name=null,$is3D=null,$capacity=null,$cinemaId=null,$roomId=null){
         $this->name=$name;
         $this->is3D=$is3D;
         $this->capacity=$capacity;

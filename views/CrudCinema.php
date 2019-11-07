@@ -42,8 +42,8 @@
                                     <!--<input type="text" class="form-control" name="precio" placeholder="Precio de entrada"> -->
                                     <select name="city" class="form-control" required>
                                     <option selected disabled value="">Seleccione una ciudad</option>
-                                    <option value="Mar del Plata">Mar del Plata</option>
-                                    <option value="Miramar">Miramar</option>
+                                    <option value="2">Mar del Plata</option>
+                                    <option value="1">Miramar</option>
                                     </select>
                                 </div>
                                 <input type="submit" class="btn btn-success btn-block" name="save" value="Save" onclick="clicked(event)">   

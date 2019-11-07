@@ -20,11 +20,13 @@
         *Agrega un nuevo cine a la BDD
         */
         public function add($cinema){
-            $sql = "INSERT INTO cines(nombre_cine,direccion,valor_entrada,id_ciudad1) VALUES (':name',':address',':price',':city')";
+            $sql = "INSERT INTO cines(nombre_cine,direccion,valor_entrada,id_ciudad1) VALUES (:name, :address, :price, :city)";
             $parameters["name"]=$cinema->getName();
             $parameters["city"]=$cinema->getCity();
             $parameters["address"]=$cinema->getAddress();
             $parameters["price"]=$cinema->getTicketCost();
+
+            var_dump($parameters);
 
             try{
                 //creo la instancia de coneccion

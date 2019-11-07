@@ -4,17 +4,19 @@
 
     use dao\MovieFunctionDao as MovieFunctionDao;
     use dao\CinemaDao as CMD;
+    use dao\CinemaRoomDao as CMRD;
     $dao = new MovieFunctionDao();
-    $cinemaDao=new CMD;
+    $cinemaDao=new CMD();
     $cine=$cinemaDao->getForID($cinemaName);
     $functions=$dao->getAll();
-    use dao\CinemaDao as CinemaDao;
-    $daoCD= new CinemaDao;
-    $cines=$daoCD->getAll();
+    $roomDao=new CMRD();
+
+    $cines=$cinemaDao->getAll();
 
     use controllers\MovieApiController as MovieApiController;
     $daoMAC = new MovieApiController();
     $array = $daoMAC->getLastMovies(ESP);
+
  
 ?>
 
@@ -116,16 +118,17 @@
                         <?php 
                         if(is_array($functions)){
                             if(!empty($functions)){ 
-                                foreach($functions as $function){ ?>
+                                foreach($functions as $function){ 
+                                    $movieF=$daoMAC->getMovieXid($function->getMovie(),ESP);
+                                    $cinemaF=$cinemaDao->getForID2($function->getCinema());?>
                                 <tr>
-                                <td class="table-dark"><?php echo $function->getMovie()->getTitle(); ?></td>
-                                <td class="table-dark"><?php echo $function->getCinema()->getName(); ?></td>
+                                <td class="table-dark"><?php echo $movieF->getTitle(); ?></td>
+                                <td class="table-dark"><?php echo $cinemaF->getName(); ?></td>
                                 <?php
-                                    $cinema=$function->getCinema();
-                                    $rooms=$cinema->getCinemaRooms();
-                                    foreach($rooms as $room){
-                                        echo "<td class=table-light>".$room->getName()."</td>";                           
-                                    }?>
+                                    
+                                    $rooms=$roomDao->getForID($function->getCinemaRoom());
+                                    ?>
+                                <td class="table-dark"><?php echo $rooms->getName(); ?></td>
                                 <td class="table-dark"><?php echo $function->getDateTime(); ?></td>
                                 <td class="table-dark"><?php echo $function->getLanguage(); ?></td>
                                     

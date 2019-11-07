@@ -37,13 +37,14 @@
         *Agrega un nuevo user a la BDD
         */
         public function add($user){
-            $sql = "INSERT INTO usuarios(nombre_user,fecha_nac,email,pass,id_rol1) VALUES (':nombre_user',':fecha_nac',':email',':pass',':id_rol1')";
-            print_r($user);
+
+            $sql = "INSERT INTO usuarios(nombre_user,fecha_nac,email,pass,id_rol1) VALUES (:nombre_user,:fecha_nac,:email,:pass,:id_rol1)";
             $parameters["nombre_user"]=$user->getName();
             $parameters["fecha_nac"]=$user->getBirthdate(); 
             $parameters["email"]=$user->getEmail();
             $parameters["pass"]=$user->getPassword();
-            $parameters["id_rol1"]=$user->getRoleLevel();
+            $parameters["id_rol1"]= intval($user->getRoleLevel());
+            var_dump($parameters);
             try{
                 //creo la instancia de coneccion
                 $this->connection = Connection::getInstance();

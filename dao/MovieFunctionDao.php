@@ -19,7 +19,7 @@ class MovieFunctionDao implements InterfaceDao{
     *Agrega un nuevo cine a la BDD
     */
     public function add($function){
-        $sql = "INSERT INTO funciones(id_cine2,id_sala2,id_pelicula1,lenguaje,fecha_y_horario) VALUES (':cine',':sala',':pelicula',':lenguaje',':fechaHora')";
+        $sql = "INSERT INTO funciones(id_cine2,id_sala2,id_pelicula1,lenguaje,fecha_y_horario) VALUES (:cine,:sala,:pelicula,:lenguaje,:fechaHora)";
         $parameters["cine"]=$function->getCinema();
         $parameters["sala"]=$function->getCinemaRoom();
         $parameters["pelicula"]=$function->getMovie();

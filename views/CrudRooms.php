@@ -5,12 +5,15 @@
     $dao = new CinemaDao();
     //$dao->createRoom();
     $cinemas=$dao->getAll();
+    $cinetoid=$dao->getForId($cinemaName);
+    $cinemaId=$cinetoid->getId();
+
 
 ?>
 
-<?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == 'Admin'){?>
+<?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
     <div class="container p=4">
-        <h1 class="mb-5">Administracion de Salas</h1>
+        <h1 class="mb-5">Administracion de Salas <?php echo $cinemaName; ?></h1>
         <div class="row">
             <div class="col-m-4">
                 <?php if(isset($_SESSION['successMje']) || isset($_SESSION['errorMje'])) { ?>
@@ -32,16 +35,16 @@
                     <div class="card card-body">
                     
                             
-                            <form action="<?php echo FRONT_ROOT?>CinemaRoom/add" method="POST" required>
-                                
-                                <div class="form-group">
+                            <form action="<?php echo FRONT_ROOT?>CinemaRoom/add?nameCinema=<?php echo $cinemaName; ?>" method="POST" required>
+
+                                <div class="form-group">                                  
                                     <input type="text" class="form-control" name="name" placeholder="Nombre" required>
                                 </div>
                                 <div class="form-group">
-                                    <select class="form-control mr-sm-2" placeholder="Select" aria-label="Select" name="type" required> 
+                                    <select class="form-control mr-sm-2" placeholder="Select" aria-label="Select" name="is3D" required> 
                                     <option value="" disabled selected >Selecciones un tipo</option>
-                                    <option value="3d">3D</option>
-                                    <option value="3d">2D</option>
+                                    <option value="true">3D</option>
+                                    <option value="false">2D</option>
                                     </select>
                                 </div>
                                 <!-- <div>
@@ -50,6 +53,9 @@
                                 </div> -->
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="capacity" placeholder="Capacidad" required>
+                                </div>
+                                <div class="form-group">
+                                <input type="hidden" name="cinemaId" value="<?php echo $cinemaId;?>">
                                 </div>
                                 
                                 <input type="submit" class="btn btn-success btn-block" name="save" value="Save">   
@@ -77,7 +83,7 @@
                                             foreach($rooms as $valueR){ 
                                                 echo "<tr>
                                                         <td class=table-light>".$valueR->getName()."</td>";
-                                                echo    "<td class=table-light>".$valueR->getType()."</td>";
+                                                echo    "<td class=table-light>".$valueR->getIs3d()."</td>";
                                                 echo    "<td class=table-light>".$valueR->getCapacity()."</td>";
                                                 //DELETE STARTS HERE
                                                 echo    "<td class=table-light> <a href=".FRONT_ROOT."CinemaRoom/delete?id=".$valueR->getName()."class=btn btn-danger>";

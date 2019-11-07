@@ -70,7 +70,7 @@
         public function addCinemaRoom($cinemaRoom){
             $rta=false;
             foreach($this->cinemaRooms as $room){
-                if($room->getName==$cinemaRoom->getName){
+                if($room->getName()==$cinemaRoom->getName()){
                     $rta=true; 
                 }
             }

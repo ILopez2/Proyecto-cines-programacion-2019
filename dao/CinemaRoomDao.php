@@ -19,7 +19,7 @@
         */
         public function add($cinemaRoom){
             //tenemos el mismo problema del tipo foreign key no sabemos como poner un int si le pasamos un string (idcine1)
-            $sql = "INSERT INTO salas(id_cine1,nombre_sala,capacidad,is3D) VALUES (':id_cine1',':name',':capacity',':is3D')";
+            $sql = "INSERT INTO salas(id_cine1,nombre_sala,capacidad,is3D) VALUES (:id_cine1,:name,:capacity,:is3D)";
             $parameters["id_cine1"]=$cinemaRoom->getCinemaId();
             $parameters["name"]=$cinemaRoom->getName();
             $parameters["capacity"]=$cinemaRoom->getCapacity();
@@ -50,9 +50,9 @@
         /*
         *Retorna el cine con el nombre pasado por parametro
         */
-        public function getForID($cinemaRName){
-            $sql = "SELECT * FROM salas WHERE nombre_sala = :cinemaRName";
-            $parameters['cinemaRName']=$cinemaRName;
+        public function getForID($roomID){
+            $sql = "SELECT * FROM salas WHERE id_sala = :roomID";
+            $parameters['roomID']=$roomID;
             try{
                 //creo la instancia de coneccion
                 $this->connection= Connection::getInstance();

@@ -146,7 +146,7 @@ insert into cines(nombre_cine,direccion,valor_entrada,id_ciudad1)values("Ambasar
 insert into roles(nombre_rol)values("Admin");
 insert into roles(nombre_rol)values("Comun");
 #USUARIOS
-insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Jorge",'1995-01-29','jorge@utn','asd123','1');
+insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Jorge",'1995-01-29','jorge@utn','asd123',1);
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivan",'1995-01-29','ivan@utn','asd123','1');
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivaasdn",'1995-01-29','ivsdasan@utn','asd123','1');
 insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(1,"sala1",100,true);
