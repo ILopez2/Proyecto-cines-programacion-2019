@@ -15,10 +15,9 @@
         }
         //METHODS
         /*
-        *Agrega un nuevo cine a la BDD
+        *Agrega una sala a la BDD
         */
         public function add($cinemaRoom){
-            //tenemos el mismo problema del tipo foreign key no sabemos como poner un int si le pasamos un string (idcine1)
             $sql = "INSERT INTO salas(id_cine1,nombre_sala,capacidad,is3D) VALUES (:id_cine1,:name,:capacity,:is3D)";
             $parameters["id_cine1"]=$cinemaRoom->getCinemaId();
             $parameters["name"]=$cinemaRoom->getName();
@@ -87,7 +86,7 @@
             }
 
         }
-        public function edit(){
+        public function edit($room){
 
         }
         /*

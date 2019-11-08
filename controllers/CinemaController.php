@@ -40,7 +40,7 @@
             //editar el valor del atributo seleccionado por el usuario del cine seleccionado
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
                 $cinema = new Cinema($name,$city,$adress,$price);
-                $this->cinemaDao->modify($cinema);
+                $this->cinemaDao->edit($cinema);
                 $this->view->admCinema();
             }
         }

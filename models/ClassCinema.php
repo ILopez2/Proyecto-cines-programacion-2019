@@ -10,7 +10,7 @@
         private $ticketCost;
         private $cinemaRooms;
         //private $billboard;
-        private $id;
+        private $id; //de que te sirve poner este atributo si no podes setearle su id correspondiente?
 
         //CONSTRUCTOR
         public function __construct($name,$city,$address,$ticketCost,$cinemaRoom=array(),$id=null){

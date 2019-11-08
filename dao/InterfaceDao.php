@@ -9,6 +9,6 @@
         public function getAll();
         public function add($obj);
         public function delete($id);
-        public function edit();
+        public function edit($obj);
     }
 ?>

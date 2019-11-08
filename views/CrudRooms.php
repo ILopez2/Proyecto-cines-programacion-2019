@@ -5,9 +5,6 @@
     $dao = new CinemaDao();
     //$dao->createRoom();
     $cinemas=$dao->getAll();
-    $cinetoid=$dao->getForId($cinemaName);
-    $cinemaId=$cinetoid->getId();
-
 
 ?>
 
@@ -35,7 +32,7 @@
                     <div class="card card-body">
                     
                             
-                            <form action="<?php echo FRONT_ROOT?>CinemaRoom/add?nameCinema=<?php echo $cinemaName; ?>" method="POST" required>
+                            <form action="<?php echo FRONT_ROOT?>CinemaRoom/add" method="POST" required>
 
                                 <div class="form-group">                                  
                                     <input type="text" class="form-control" name="name" placeholder="Nombre" required>
@@ -47,18 +44,12 @@
                                     <option value="false">2D</option>
                                     </select>
                                 </div>
-                                <!-- <div>
-                                <input type=”radio” name=”affirmative” value=”yes” checked>Yes</input> 
-                                <input type=”radio” name=”negative” value=”no”>No</input>
-                                </div> -->
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="capacity" placeholder="Capacidad" required>
+                                    <input type="number"min="0" max="1000" class="form-control" name="capacity" placeholder="Capacidad" required>
                                 </div>
-                                <div class="form-group">
-                                <input type="hidden" name="cinemaId" value="<?php echo $cinemaId;?>">
-                                </div>
+                                <input name="nameCinema" type="hidden" value="<?php echo $cinemaName; ?>">
                                 
-                                <input type="submit" class="btn btn-success btn-block" name="save" value="Save">   
+                                <input type="submit" class="btn btn-success btn-block" value="Save">   
                             </form>
 
                     
@@ -71,6 +62,7 @@
                         <th>Nombre</th>
                         <th>Tipo</th>
                         <th>Capacidad</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>

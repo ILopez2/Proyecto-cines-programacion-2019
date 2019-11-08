@@ -70,10 +70,6 @@
                         <label>Birthdate</label>
                         <input type="date" class="form-control" name="birthdate" placeholder="Fecha de nacimiento" required/>
                     </div>
-                    <div class="form-group">
-                        <label>Nationality</label>
-                        <input type="text" class="form-control" name="nationality" placeholder="Nacionalidad" required/>
-                    </div>
                     
                     <div class="form-group">
                         <label>Email</label>

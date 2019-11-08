@@ -25,9 +25,6 @@
             $parameters["city"]=$cinema->getCity();
             $parameters["address"]=$cinema->getAddress();
             $parameters["price"]=$cinema->getTicketCost();
-
-            var_dump($parameters);
-
             try{
                 //creo la instancia de coneccion
                 $this->connection = Connection::getInstance();
@@ -61,6 +58,27 @@
                 //creo la instancia de coneccion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql,$parameters);
+            }catch(\PDOException $ex){
+                throw $ex;
+            } 
+            //hay que mapear de un arreglo asociativo a objetos
+            if(!empty($result)){
+                return $this->mapeo($result);
+            }else{
+                return false;
+            }
+        }
+        /*
+        *Retorna el id del cine correspondiente al nombre de cine pasado por parametro
+        */
+        public function getCinemaIdForName($cinemaName){
+            $sql = "SELECT id_cine FROM cines WHERE nombre_cine = :cinemaName";
+            $parameters['cinemaName']=$cinemaName;
+            try{
+                //creo la instancia de coneccion
+                $this->connection= Connection::getInstance();
+                $result = $this->connection->execute($sql,$parameters);
+                //var_dump($result);
             }catch(\PDOException $ex){
                 throw $ex;
             } 
@@ -108,8 +126,21 @@
             }
 
         }
-        public function edit(){
-
+        public function edit($cinema){
+            $sql = "UPDATE cines SET nombre_cine=:nombre_cine,direccion=:direccion,valor_entrada=:valor_entrada,id_ciudad1=:id_ciudad1 WHERE nombre_cine = :nombre_cine";
+            $parameters["nombre_cine"]=$cinema->getName();
+            $parameters["id_ciudad1"]=$cinema->getCity();
+            $parameters["direccion"]=$cinema->getAddress();
+            $parameters["valor_entrada"]=$cinema->getTicketCost();
+            try
+            {
+                $this->connection = Connection::getInstance();
+                return $this->connection->ExecuteNonQuery($sql, $parameters);
+            }
+            catch(PDOException $e)
+            {
+                echo $e;
+            }
         }
         /*
         *Convierte un array asociativo a un array de objetos para facilitar su manejo

@@ -2,7 +2,6 @@
     //esta controladora se encargara de administrar todas las vistas necesarias
     class ViewsController
     {
-        //private $home;
         
         public function __construct(){
             //I'm the fucking construct.

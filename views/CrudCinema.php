@@ -166,13 +166,13 @@
                                     <input type="text" class="form-control" name="adress" placeholder= "Direccion" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="price" placeholder="Precio de entrada" required>
+                                    <input type="number" min="0" max="10000" class="form-control" name="price" placeholder="Precio de entrada" required>
                                 </div>
                                 <div class="form-group">
                                     <select name="city" class="form-control" required>
                                     <option selected disabled value="">Seleccione una ciudad</option>
-                                    <option value="Mar del Plata">Mar del Plata</option>
-                                    <option value="Miramar">Miramar</option>
+                                    <option value="1">Mar del Plata</option>
+                                    <option value="2">Miramar</option>
                                     </select>
                                 </div>
                         </div>

@@ -8,7 +8,7 @@
         private $capacity;
         //private $seats=array();
         private $cinemaId;
-        private $roomId;
+        private $roomId; //de que te sirve poner este atributo si no podes setearle su id correspondiente?
     
     //CONSTRUCTOR
     public function __construct($name=null,$is3D=null,$capacity=null,$cinemaId=null,$roomId=null){

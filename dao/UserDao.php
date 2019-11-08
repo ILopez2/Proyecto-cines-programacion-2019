@@ -44,7 +44,6 @@
             $parameters["email"]=$user->getEmail();
             $parameters["pass"]=$user->getPassword();
             $parameters["id_rol1"]= intval($user->getRoleLevel());
-            var_dump($parameters);
             try{
                 //creo la instancia de coneccion
                 $this->connection = Connection::getInstance();
@@ -108,19 +107,42 @@
             }
 
         }
-
+        /*
+        *Setea el rol del usuario a Admin o Comun
+        */
         public function setRole($email,$role){
-            $sql="UPDATE usuarios SET id_rol1 = 'admin' WHERE email = :email";
+            $sql="UPDATE usuarios SET id_rol1=:role WHERE email = :email";
             $parameters['email']=$email;
-            try{
-                //creo la instancia de coneccion
-                $this->connection= Connection::getInstance();
-                $result = $this->connection->execute($sql,$parameters);
-            }catch(\PDOException $ex){
-                throw $ex;
-            } 
-        } public function edit(){
-
+            $parameters['role']=$role;
+            try
+            {
+                $this->connection = Connection::getInstance();
+                return $this->connection->ExecuteNonQuery($sql, $parameters);
+            }
+            catch(PDOException $e)
+            {
+                echo $e;
+            }
+        } 
+        /*
+        *Edita todos los campos de un usuario
+        */
+        public function edit($user){           
+            $sql = "UPDATE usuarios SET pass=:pass,nombre_user=:nombre_user,fecha_nac=:fecha_nac,id_rol1=:id_rol1  WHERE email = :email";
+            $parameters["nombre_user"]=$user->getName();
+            $parameters["fecha_nac"]=$user->getBirthdate(); 
+            $parameters["pass"]=$user->getPassword();
+            $parameters["id_rol1"]= intval($user->getRoleLevel());
+            $parameters["email"]=$user->getEmail();
+            try
+            {
+                $this->connection = Connection::getInstance();
+                return $this->connection->ExecuteNonQuery($sql, $parameters);
+            }
+            catch(PDOException $e)
+            {
+                echo $e;
+            }
         }
         /*
         *Convierte un array asociativo a un array de objetos para facilitar su manejo

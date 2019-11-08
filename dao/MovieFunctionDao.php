@@ -91,7 +91,7 @@ class MovieFunctionDao implements InterfaceDao{
         }
 
     }
-    public function edit(){
+    public function edit($function){
 
     }
     /*

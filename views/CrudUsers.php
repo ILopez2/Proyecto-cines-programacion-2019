@@ -94,7 +94,7 @@
                             <td class="table-dark"><?php echo $value->getEmail(); ?></td>
                             <td class="table-dark"><?php echo $value->getPassword(); ?></td>
                             <td class="table-dark"><?php if($value->getRoleLevel()=="1") echo "Admin";
-                                                        else "Comun"; ?></td>
+                                                        else echo "Comun"; ?></td>
                             <td class="table-dark">
                             
 
@@ -174,11 +174,7 @@
                             <div class="form-group">
                                 <label>Birthdate</label>
                                 <input type="date" class="form-control" name="birthdate" placeholder="Fecha de nacimiento" required/>
-                            </div>
-                            <div class="form-group">
-                                <label>Nationality</label>
-                                <input type="text" class="form-control" name="nationality" placeholder="Nacionalidad" required/>
-                            </div>    
+                            </div>   
                             <div class="form-group">
                                 <label>Password</label>
                                 <input type="password" class="form-control" name="password" placeholder="Contraseña" required/>
