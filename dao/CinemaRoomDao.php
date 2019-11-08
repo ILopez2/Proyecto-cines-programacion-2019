@@ -34,9 +34,9 @@
         /*
         *Borra un cine de la BDD correspondiente al nombre del mismo pasado por parametro
         */
-        public function delete($cinemaRName){
-            $sql="DELETE FROM salas WHERE nombre_sala = :cinemaRName";
-            $parameters['cinemaRName']=$cinemaRName;
+        public function delete($cinemaRoomId){
+            $sql="DELETE FROM salas WHERE id_sala = :cinemaRoomId";
+            $parameters['cinemaRoomId']=$cinemaRoomId;
             try {
                 $this->connection = Connection::getInstance();
                 return $this->connection->ExecuteNonQuery($sql, $parameters);    
@@ -87,7 +87,21 @@
 
         }
         public function edit($room){
-
+            $sql="UPDATE salas SET nombre_sala=:name,is3d=:is3D,capacidad=:capacity WHERE id_sala=:roomId";
+            $parameters["name"]=$room->getName();
+            $parameters["capacity"]=$room->getCapacity();
+            $parameters["is3D"]=$room->getIs3D();
+            $parameters["roomId"]=$room->getId();
+            var_dump($parameters);
+            try
+            {
+                $this->connection = Connection::getInstance();
+                return $this->connection->ExecuteNonQuery($sql, $parameters);
+            }
+            catch(PDOException $e)
+            {
+                echo $e;
+            }
         }
         /*
         *Convierte un array asociativo a un array de objetos para facilitar su manejo

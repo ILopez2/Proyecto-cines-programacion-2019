@@ -21,32 +21,39 @@
             $rooms=$cinema->getCinemaRooms();
             $flag=false;
             if(!empty($rooms)){
-                foreach($rooms as $RM){
-                    if($RM->getName()==$name){
-                        $_SESSION['errorMje']='<strong>Ya existe una sala con ese nombre</strong>';
-                    }
-                    else {
-                        if($flag==false){
-                            $room= new CinemaRoom($name,$is3D,$capacity,$idCinema);
-                            $this->daoCR->add($room);
-                            $_SESSION['successMje'] = 'Sala agregada con éxito';
+                if(is_array($rooms)){ //en caso de que sea un array
+                        foreach($rooms as $RM){
+                            if($RM->getName()==$name){
+                                $flag=true;
+                            }
+                        }            
+                    }else{ //en caso de que sea un obj
+                        if($rooms->getName()==$name){
                             $flag=true;
                         }
-                    }
-                }
+                     }
             }
-            else {
+            if(!$flag){ //si no existe
                 $room= new CinemaRoom($name,$is3D,$capacity,$idCinema);
                 $this->daoCR->add($room);
                 $_SESSION['successMje'] = 'Sala agregada con éxito';
+            }else{
+                $_SESSION['errorMje']='<strong>Ya existe una sala con ese nombre</strong>';
             }
             $this->view->admRooms($idCinema);
         }
 
-        public function delete($cinemaRoomName,$cinemaId){
-            $cinemaDao = new CND();
-            $cinema=$cinemaDao->getForID2($cinemaId);
-            $cinema->deleteCinemaRoom($cinemaRoomName);
-            $cinemaDao->updateCinema($cinema);
+        public function delete($idroom,$idcinema){
+            $this->daoCR->delete($idroom);
+            $this->view->admRooms($idcinema);
+        }
+
+        public function edit($roomId,$name,$capacity,$is3D){
+            //editar el valor del atributo seleccionado por el usuario del cine seleccionado
+            if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
+                $room=new CinemaRoom($name,$is3D,$capacity,null,$roomId);
+                $this->daoCR->edit($room);
+                $this->view->admRooms($roomId);
+            }
         }
     }

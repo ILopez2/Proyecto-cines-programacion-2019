@@ -67,18 +67,20 @@
                 <tbody>
                        <?php
                                     if(!empty($rooms)){
-                                        if(is_array($rooms)){                     
+                                        if(is_array($rooms)){                    
                                             foreach($rooms as $valueR){ 
                                                 echo "<tr>
                                                         <td class=table-light>".$valueR->getName()."</td>";
                                                 echo    "<td class=table-light>".$valueR->getIs3d()."</td>";
                                                 echo    "<td class=table-light>".$valueR->getCapacity()."</td>";
-                                                //DELETE STARTS HERE
-                                                echo    "<td class=table-light> <a href=".FRONT_ROOT."CinemaRoom/delete?id=".$valueR->getName()."class=btn btn-danger>";
-                                                echo    "<i class=far fa-trash-alt></i></a>";
-                                                //DELETE ENDS HERE
-                                                echo    "</td>
-                                                    </tr>";
+                                                ?>
+                                                <td>
+                                                    <a href="<?php echo FRONT_ROOT?>CinemaRoom/delete?idroom=<?php echo $valueR->getId()?>&?idcinema=<?php echo $valueR->getCinemaId()?>" class="btn btn-danger" onclick="clicked(event)">
+                                                    <i class="far fa-trash-alt"></i>
+                                                    </a>
+                                                </td>
+                                                </tr>
+                                                <?php 
                                             }              
                                         }
                                     
@@ -86,14 +88,18 @@
 
                                         echo "<tr>
                                                 <td class=table-light>".$rooms->getName()."</td>";
-                                                echo    "<td class=table-light>".$rooms->getType()."</td>";
+                                                echo    "<td class=table-light>".$rooms->getIs3d()."</td>";
                                                 echo    "<td class=table-light>".$rooms->getCapacity()."</td>";
                                                 //DELETE STARTS HERE
-                                                echo  "<td class=table-light> <a href=".FRONT_ROOT."CinemaRoom/delete?id=".$rooms->getName()."class=btn btn-danger>";
-                                                echo    "<i class=far fa-trash-alt></i></a>";
+                                            ?>
+                                            <td>
+                                                <a href="<?php echo FRONT_ROOT?>CinemaRoom/delete?idroom=<?php echo $rooms->getId()?>&?idcinema=<?php echo $rooms->getCinemaId()?>" class="btn btn-danger" onclick="clicked(event)">
+                                                <i class="far fa-trash-alt"></i>
+                                                </a>
+                                            </td>
+                                            </tr>
+                                            <?php 
                                                 //DELETE ENDS HERE
-                                                echo    "</td>
-                                                </tr>";
                                     }
                                 }
                         ?>
@@ -110,3 +116,59 @@
         </div>
     </div>
 <?php } ?>
+            <!-- MODAL START HERE  -->
+                <div class="modal fade" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <form class="modal-content" action="<?php echo FRONT_ROOT?>CinemaRoom/edit" method="POST">
+                        <div class="modal-header">
+        
+                            <h5 class="modal-title">Modificar</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+
+                        </div>
+
+                        <div class="modal-body">
+                                <div class="form-group">
+                                <label>Ingrese los datos modificados de la sala</label>
+                                    <select name="roomId" class="form-control" required>
+                                    <option selected disabled value="">Seleccione la sala para editar</option>
+                                    
+                                    <?php 
+                                    if(!empty($rooms)){
+                                        if(is_array($rooms)){
+                                            foreach($rooms as $value){ ?>
+                                            
+                                            <option value="<?php echo $value->getId();?>"> <?php echo $value->getName();?> </option>                        
+                                        <?php }
+                                        
+                                        }
+                                        else ?><option value="<?php echo $rooms->getId();?>"> <?php echo $rooms->getName();?> </option> 
+                                   <?php }?>
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="name" placeholder= "Nombre" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" min="0" max="1000" class="form-control" name="capacity" placeholder="Capacidad" required>
+                                </div>
+                                <div class="form-group">
+                                    <select name="is3d" class="form-control" required>
+                                    <option selected disabled value="">Seleccione un tipo</option>
+                                    <option value="3d">3D</option>
+                                    <option value="2d">2D</option>
+                                    </select>
+                                </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-dark" onclick="clicked(event)">Confirm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- MODAL ENDS HERE  -->
