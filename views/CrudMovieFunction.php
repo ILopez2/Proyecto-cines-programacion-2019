@@ -95,7 +95,9 @@
                                     <option value="Doblada">Doblada</option>
                             </select>
                         </div>
-
+                        <div class="form-group">
+                            <input type="hidden" name="cinemaName" value="<?php echo $cine->getName(); ?>">
+                        </div>
                         <input type="submit" class="btn btn-success btn-block">   
 
                     </form>
@@ -129,34 +131,14 @@
                                 <td class="table-dark"><?php echo $movieF->getTitle(); ?></td>
                                 <td class="table-dark"><?php echo $cinemaF->getName(); ?></td>
                                 <?php
-                                    
                                     $rooms=$roomDao->getForID($function->getCinemaRoom());
                                     ?>
                                 <td class="table-dark"><?php echo $rooms->getName(); ?></td>
                                 <td class="table-dark"><?php echo $function->getDate(); ?></td>
                                 <td class="table-dark"><?php echo $function->getTime(); ?></td>
                                 <td class="table-dark"><?php echo $function->getLanguage(); ?></td>
-                                    
-
-                                <!-- DELETE HERE  -->
-                                <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
-                                    <a href="<?php echo FRONT_ROOT?>MovieFunction/delete?id=<?php echo $value->getId()?>" class="btn btn-danger" onclick="clicked(event)">
-                                    <i class="far fa-trash-alt"></i>
-                                    </a><?php } ?>
-                                <!-- END DELETE HERE -->
-
-                                <!-- EDIT START HERE  -->
-                                <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
-                                    <td class="table-dark" colspan="7" style="text-align:center;">
-                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
-                                        <i class="fas fa-marker">Modificar</i>
-                                        </button>
-                                    </td>
-                                <?php } ?>
-                                <!-- END EDIT HERE  -->
-                            
                         </div>
-                        <?php } } 
+                        <?php } } } 
                         else{ ?>
                                     <tr>
                                     <td class="table-dark"><?php echo $functions->getMovie()->getTitle(); ?></td>
@@ -170,31 +152,13 @@
                                     <td class="table-dark"><?php echo $functions->getDate(); ?></td>
                                     <td class="table-dark"><?php echo $functions->getTime(); ?></td>
                                     <td class="table-dark"><?php echo $functions->getLanguage(); ?></td>
-                                    
-
-                                    <!-- DELETE HERE  -->
-                                    <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
-                                        <a href="<?php echo FRONT_ROOT?>MovieFunction/delete?id=<?php echo $value->getId()?>" class="btn btn-danger" onclick="clicked(event)">
-                                        <i class="far fa-trash-alt"></i>
-                                        </a><?php } ?>
-                                    <!-- END DELETE HERE -->
-
-                                    <!-- EDIT START HERE  -->
-                                <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
-                                    <td class="table-dark" colspan="7" style="text-align:center;">
-                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
-                                        <i class="fas fa-marker">Modificar</i>
-                                        </button>
-                                    </td>
-                                <?php } ?>
-                                <!-- END EDIT HERE  -->
                             </tbody>
                             </table> 
                             <!-- END TABLE HERE  -->  
                         <?php }
                     
                     
-                    } ?>
+                     ?>
                 
                 <!-- MODAL START HERE no terminado todavia -->
                 <div class="modal fade" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">

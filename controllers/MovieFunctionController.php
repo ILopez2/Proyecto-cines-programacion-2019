@@ -18,12 +18,12 @@
         }
 
 
-        public function add($movie,$cinemaId,$date,$time,$language,$cinemaRoom){
+        public function add($cinemaId,$movie,$cinemaRoom,$date,$time,$language,$cinemaName){
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
                 $function = new ClassMovieFunction($movie,$cinemaId,$date,$time,$cinemaRoom,$language);
-                var_dump($function);
+                //var_dump($function);
                 $this->dao->add($function);
-                $this->view->admFunctions();
+                $this->view->admFunctions($cinemaName);
             }
 
         }
