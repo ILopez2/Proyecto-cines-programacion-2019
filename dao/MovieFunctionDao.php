@@ -19,12 +19,13 @@ class MovieFunctionDao implements InterfaceDao{
     *Agrega un nuevo cine a la BDD
     */
     public function add($function){
-        $sql = "INSERT INTO funciones(id_cine2,id_sala2,id_pelicula1,lenguaje,fecha_y_horario) VALUES (:cine,:sala,:pelicula,:lenguaje,:fechaHora)";
+        $sql = "INSERT INTO funciones(id_cine2,id_sala2,id_pelicula1,lenguaje,fecha,hora) VALUES (:cine,:sala,:pelicula,:lenguaje,:fecha,:hora)";
         $parameters["cine"]=$function->getCinema();
         $parameters["sala"]=$function->getCinemaRoom();
         $parameters["pelicula"]=$function->getMovie();
         $parameters["lenguaje"]=$function->getLanguage();
-        $parameters["fechaHora"]=$function->getDateTime();
+        $parameters["fecha"]=$function->getDate();
+        $parameters["hora"]=$function->getTime();
 
         try{
             //creo la instancia de coneccion
@@ -102,7 +103,7 @@ class MovieFunctionDao implements InterfaceDao{
         $value = is_array($value) ? $value : [];   
         $resp=array();  
         $resp = array_map(function($p){
-            return new CMF($p['id_pelicula1'],$p['id_cine2'],$p['fecha_y_horario'],$p['id_sala2'],$p['lenguaje'],$p['id_funcion']);
+        return new CMF($p['id_pelicula1'],$p['id_cine2'],$p['fecha'],$p['hora'],$p['id_sala2'],$p['lenguaje']/*,$p['id_funcion']*/);
         }, $value);
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
             return count($resp) > 1 ? $resp : $resp['0'];
