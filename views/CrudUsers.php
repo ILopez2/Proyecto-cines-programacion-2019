@@ -42,7 +42,7 @@
 
                         <div class="form-group">
                             <label>Birthdate</label>
-                            <input type="date" class="form-control" name="birthdate" required/>
+                            <input type="date" max="<?php echo date("Y-m-d");?>" min="1900-01-01" class="form-control" name="birthdate" required/>
                         </div>
                         
                         <div class="form-group">

@@ -81,7 +81,7 @@
 
                         <div class="form-group">
                             <label>Fecha y hora</label>
-                            <input type="date" class="form-control" name="dateTime" required/>
+                            <input type="date" class="form-control" min="<?php echo date("Y-m-d");?>" max="2030-01-01" name="dateTime" required/>
                         </div>
 
                         <div class="form-group">

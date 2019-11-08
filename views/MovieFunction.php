@@ -62,8 +62,6 @@
                                                 <img class="figure-img img-fluid rounded" src="<?php  echo $daoM->getMoviePoster($fMovie->getPosterPath());?>" alt="">
                                             </figure>
                                         </td>
-                                    </tr>
-                                    <tr>
                                         <td class=table-light><?php echo $fCinema->getName();?></td>
                                         <td class=table-light><?php echo $function->getDateTime();?></td>
                                         <td class=table-light><?php echo $function->getLanguage();?></td>
