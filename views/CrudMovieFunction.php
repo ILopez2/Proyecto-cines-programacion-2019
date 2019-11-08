@@ -46,7 +46,7 @@
                     <form action="<?php echo FRONT_ROOT?>MovieFunction/add" method="POST" >
                         <div class="form-group">
                         <label><strong>Cine:</strong></label>
-                            <input type="hidden" name="cinema" value="<?php echo $cine->getId(); ?>"><strong><?php echo $cine->getName();?></strong>
+                            <input type="hidden" name="cinemaId" value="<?php echo $cine->getId(); ?>"><strong><?php echo $cine->getName();?></strong>
                         </div>
                         <div class="form-group">
                         <!-- MOVIE OPTION START HERE -->
@@ -54,7 +54,7 @@
                             <select name="movie" class="form-control" required>
                             <option selected disabled value="">Elija pelicula</option>
                             <?php foreach($array as $movie){?>
-                            <option value="<?php echo $movie->getTitle(); ?>"><?php echo $movie->getTitle();?></option>
+                            <option value="<?php echo $movie->getId(); ?>"><?php echo $movie->getTitle();?></option>
                             <?php }?>
                             </select>                           
                         </div>
@@ -80,10 +80,13 @@
                         
 
                         <div class="form-group">
-                            <label>Fecha y hora</label>
-                            <input type="date" class="form-control" name="dateTime" required/>
+                            <label>Fecha</label>
+                            <input type="date" class="form-control" min="<?php echo date("Y-m-d");?>" max="2020-01-01" name="dateTime" required/>
                         </div>
-
+                        <div class="form-group">
+                            <label>Hora</label>
+                            <input type="time" name="time" class="form-control" name="dateTime" required/>
+                        </div>
                         <div class="form-group">
                             <label>Lenguaje</label>
                             <select name="language" class="form-control" required>
@@ -109,7 +112,8 @@
                             <th>Pelicula</th>
                             <th>Cine</th>
                             <th>Sala</th>
-                            <th>Fecha y hora</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
                             <th>Lenguaje</th>
                         </tr>
                     </thead>
@@ -129,7 +133,8 @@
                                     $rooms=$roomDao->getForID($function->getCinemaRoom());
                                     ?>
                                 <td class="table-dark"><?php echo $rooms->getName(); ?></td>
-                                <td class="table-dark"><?php echo $function->getDateTime(); ?></td>
+                                <td class="table-dark"><?php echo $function->getDate(); ?></td>
+                                <td class="table-dark"><?php echo $function->getTime(); ?></td>
                                 <td class="table-dark"><?php echo $function->getLanguage(); ?></td>
                                     
 
@@ -162,7 +167,8 @@
                                         foreach($rooms as $room){
                                             echo "<td class=table-light>".$room->getName()."</td>";                           
                                         }?>
-                                    <td class="table-dark"><?php echo $functions->getDateTime(); ?></td>
+                                    <td class="table-dark"><?php echo $functions->getDate(); ?></td>
+                                    <td class="table-dark"><?php echo $functions->getTime(); ?></td>
                                     <td class="table-dark"><?php echo $functions->getLanguage(); ?></td>
                                     
 

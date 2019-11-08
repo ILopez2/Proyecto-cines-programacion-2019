@@ -41,7 +41,7 @@ id_sala int auto_increment not null,
 id_cine1 int not null,
 nombre_sala varchar(30) not null,
 capacidad int not null,
-is3d varchar(20) not null,
+is3d boolean not null,
 constraint fk_cine foreign key(id_cine1)references cines(id_cine),
 constraint pk_salas primary key(id_sala)
 );
@@ -77,7 +77,8 @@ id_sala2 int not null,
 id_pelicula1 int not null,
 id_cine2 int not null,
 lenguaje varchar(20) not null,
-fecha_y_horario date,
+fecha date not null,
+hora time not null,
 constraint fk_salas1 foreign key(id_sala2) references salas(id_sala),
 #constraint fk_peliculas foreign key(id_pelicula1) references peliculas(id_pelicula),
 constraint fk_cines2 foreign key(id_cine2) references cines(id_cine),
@@ -149,11 +150,12 @@ insert into roles(nombre_rol)values("Comun");
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Jorge",'1995-01-29','jorge@utn','asd123',1);
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivan",'1995-01-29','ivan@utn','asd123','1');
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivaasdn",'1995-01-29','ivsdasan@utn','asd123','1');
-insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(1,"sala1",100,"3d");
-insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(2,"sala2",300,"2d");
-insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha_y_horario)values(1,1,475557,"ESP",'2019-10-07');
-insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha_y_horario)values(2,1,475557,"ESP",'2019-10-07');
-select * from roles;
+insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(1,"sala1",100,true);
+insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(2,"sala2",300,true);
+insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha,hora)values(1,1,475557,"ESP",'2019-10-07','10:00:00');
+insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha,hora)values(2,1,475557,"ESP",'2019-10-07','11:00');
+/*select * from roles;
 select * from cines;
 select * from usuarios;
 select * from funciones;
+select * from cidades;*/ 
