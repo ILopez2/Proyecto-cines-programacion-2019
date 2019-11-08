@@ -3,14 +3,13 @@
     //$dao = new JsonCinema();
     use dao\CinemaDao as CinemaDao;
     $dao = new CinemaDao();
-    //$dao->createRoom();
-    $cinemas=$dao->getAll();
-
+    $cinema=$dao->getForID2($cinemaId);
+    $rooms = $cinema->getCinemaRooms();
 ?>
 
 <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
     <div class="container p=4">
-        <h1 class="mb-5">Administracion de Salas <?php echo $cinemaName; ?></h1>
+        <h1 class="mb-5">Administracion de Salas <?php //echo $cinemaName; ?></h1>
         <div class="row">
             <div class="col-m-4">
                 <?php if(isset($_SESSION['successMje']) || isset($_SESSION['errorMje'])) { ?>
@@ -40,14 +39,14 @@
                                 <div class="form-group">
                                     <select class="form-control mr-sm-2" placeholder="Select" aria-label="Select" name="is3D" required> 
                                     <option value="" disabled selected >Selecciones un tipo</option>
-                                    <option value="true">3D</option>
-                                    <option value="false">2D</option>
+                                    <option value="3d">3D</option>
+                                    <option value="2d">2D</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <input type="number"min="0" max="1000" class="form-control" name="capacity" placeholder="Capacidad" required>
+                                    <input type="number" min="0" max="1000" class="form-control" name="capacity" placeholder="Capacidad" required>
                                 </div>
-                                <input name="nameCinema" type="hidden" value="<?php echo $cinemaName; ?>">
+                                <input name="idCinema" type="hidden" value="<?php echo $cinemaId; ?>">
                                 
                                 <input type="submit" class="btn btn-success btn-block" value="Save">   
                             </form>
@@ -66,12 +65,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                       <?php 
-                            foreach($cinemas as $values){
-                                if($values->getName() == $cinemaName){
-                                    $rooms = $values->getCinemaRooms();
-                                    if(is_array($rooms)){
-                                        if(!empty($rooms)){
+                       <?php
+                                    if(!empty($rooms)){
+                                        if(is_array($rooms)){                     
                                             foreach($rooms as $valueR){ 
                                                 echo "<tr>
                                                         <td class=table-light>".$valueR->getName()."</td>";
@@ -85,7 +81,7 @@
                                                     </tr>";
                                             }              
                                         }
-                                    }
+                                    
                                     else {
 
                                         echo "<tr>
@@ -93,14 +89,13 @@
                                                 echo    "<td class=table-light>".$rooms->getType()."</td>";
                                                 echo    "<td class=table-light>".$rooms->getCapacity()."</td>";
                                                 //DELETE STARTS HERE
-                                                echo    "<td class=table-light> <a href=".FRONT_ROOT."CinemaRoom/delete?id=".$rooms->getName()."class=btn btn-danger>";
+                                                echo  "<td class=table-light> <a href=".FRONT_ROOT."CinemaRoom/delete?id=".$rooms->getName()."class=btn btn-danger>";
                                                 echo    "<i class=far fa-trash-alt></i></a>";
                                                 //DELETE ENDS HERE
                                                 echo    "</td>
                                                 </tr>";
                                     }
                                 }
-                            } 
                         ?>
                     <!-- EDIT START HERE  -->
                         <td colspan="7" style="text-align:center;">
