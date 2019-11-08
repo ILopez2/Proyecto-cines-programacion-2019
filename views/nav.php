@@ -20,19 +20,28 @@
                     <div class="btn-group mr-1" role="group" aria-label="First group">
                     
                     <form action="<?php echo FRONT_ROOT?>Views/searchGen" method="POST" class="form-inline">
-                        
+                        <!-- SEARCH BY GENRE STARTS HERE -->
                         <select class="form-control mr-sm-2" placeholder="Select" aria-label="Select" name="searchG" required>
                             <option value="" disabled selected >Selecciones un genero</option>
                             <?php foreach($genres as $gen){
                                 echo "<option value=".$gen->getName().">".$gen->getName()."</option>";          
                             }?>
-                        </select>
-
-                        
+                        </select>    
+                            
                         <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fas fa-user-astronaut"></i> Search</button>
                     
                     </form>
+                    <!-- SEARCH BY GENRE ENDS HERE -->
+                    <!-- SEARCH BY DATE STARTS HERE -->
                     </div>
+                    <div class="btn-group mr-1" role="group" aria-label="First group">
+                    
+                    <form action="<?php echo FRONT_ROOT?>Views/searchFunction" method="POST" class="form-inline">
+                            <input type="date" name="searchF" min="<?php echo date("Y-m-d");?>" >
+                        <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fas fa-user-astronaut"></i> Search</button>
+                    </form>
+                    </div>
+                    <!-- SEARCH BY DATE ENDS HERE -->
                     <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1') {?>
                     <div class="btn-group mr-2" role="group" aria-label="Second group">
                     <div class="btn-group" role="group">
