@@ -81,7 +81,7 @@
                                     <!-- DELETE START HERE  -->
 
                                     <!-- CINEMA ROOMS VIEW START HERE -->
-                                    <a href="<?php echo FRONT_ROOT?>Views/admRooms?id=<?php echo $cine->getName()?>" class="btn btn-primary" onclick="clicked(event)">
+                                    <a href="<?php echo FRONT_ROOT?>Views/admRooms?id=<?php echo $cine->getId()?>" class="btn btn-primary" onclick="clicked(event)">
                                         <i class="fas fa-person-booth"></i>
                                     </a>
                                     <!-- CINEMA ROOMS VIEW ENDS HERE -->
@@ -110,7 +110,7 @@
                                     <!-- DELETE START HERE  -->
 
                                     <!-- CINEMA ROOMS VIEW START HERE -->
-                                    <a href="<?php echo FRONT_ROOT?>Views/admRooms?id=<?php echo $cinemas->getName()?>" class="btn btn-primary" onclick="clicked(event)">
+                                    <a href="<?php echo FRONT_ROOT?>Views/admRooms?id=<?php echo $cinemas->getId()?>" class="btn btn-primary" onclick="clicked(event)">
                                         <i class="fas fa-person-booth"></i>
                                     </a>
                                     <!-- CINEMA ROOMS VIEW ENDS HERE -->

@@ -16,18 +16,36 @@
             $this->daoC = new CD();
         }
 
-        public function add($name,$is3D,$capacity,$nameCinema){
-            $cinemaId = $this->daoC->getCinemaIdForName($nameCinema);
-            //var_dump($cinemaId);
-            echo $is3D;
-            $room= new CinemaRoom($name,$is3D,$capacity,$cinemaId->getId());
-            $this->daoCR->add($room);
-            $this->view->admRooms($nameCinema);
+        public function add($name,$is3D,$capacity,$idCinema){
+            $cinema=$this->daoC->getForID2($idCinema);
+            $rooms=$cinema->getCinemaRooms();
+            $flag=false;
+            if(!empty($rooms)){
+                foreach($rooms as $RM){
+                    if($RM->getName()==$name){
+                        $_SESSION['errorMje']='<strong>Ya existe una sala con ese nombre</strong>';
+                    }
+                    else {
+                        if($flag==false){
+                            $room= new CinemaRoom($name,$is3D,$capacity,$idCinema);
+                            $this->daoCR->add($room);
+                            $_SESSION['successMje'] = 'Sala agregada con éxito';
+                            $flag=true;
+                        }
+                    }
+                }
+            }
+            else {
+                $room= new CinemaRoom($name,$is3D,$capacity,$idCinema);
+                $this->daoCR->add($room);
+                $_SESSION['successMje'] = 'Sala agregada con éxito';
+            }
+            $this->view->admRooms($idCinema);
         }
 
-        public function delete($cinemaRoomName,$cinemaName){
+        public function delete($cinemaRoomName,$cinemaId){
             $cinemaDao = new CND();
-            $cinema=$cinemaDao->getForID($cinemaName);
+            $cinema=$cinemaDao->getForID2($cinemaId);
             $cinema->deleteCinemaRoom($cinemaRoomName);
             $cinemaDao->updateCinema($cinema);
         }
