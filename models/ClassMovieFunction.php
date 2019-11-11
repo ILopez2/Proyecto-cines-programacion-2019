@@ -22,7 +22,7 @@
             $this->time=$time;
             $this->cinemaRoom=$cinemaRoom;
             $this->language=$language;
-            $this->$id=$id;
+            $this->id=$id;
         }
 
 

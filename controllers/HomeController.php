@@ -1,6 +1,9 @@
 <?php namespace controllers;
     
     use controllers\UserController as UserController;
+    use controllers\MovieApiController as MovieApiController;
+    use dao\MovieFunctionDao as MovieFunctionDao;
+    use dao\CinemaDao as CinemaDao;
     
     class HomeController
     {
@@ -14,15 +17,17 @@
         {
             //checksession y login
             $showView=false; //se vuelve verdadero solo si hay un user en session
-            if($user=$this->userController->checkSession()){
+            
+            if($user = $this->userController->checkSession()){
                 $showView=true;
             }
             else{
-                if(isset($email)){
+                if(isset($email)) {
                     if($user=$this->userController->login($email,$password)){
+
                         $showView=true;
                     }
-                    else{
+                    else {
                         $alert='Datos incorrectos vuelva a intentarlo';
                     }
                 }
@@ -30,6 +35,18 @@
             include_once(VIEWS.'/header.php');
             
             if($showView){
+                $dao = new MovieApiController();
+                $daoF = new MovieFunctionDao();
+            
+                $functions=$daoF->getAll();
+                $array = $dao->getLastMovies(ESP);
+
+                foreach($array as $k => $v) {
+                    if(!$daoF->getForID($v->getID())) {
+                        unset($array[$k]);
+                    }
+                }
+                        
                 include_once(VIEWS.'/nav.php');
                 include_once(VIEWS.'/home.php');
             }
@@ -52,6 +69,14 @@
             $this->Index();
         }
         public function admCinema(){
+            //use daojson\JsonCinema as JsonCinema;
+            //$dao = new JsonCinema();
+            
+            $dao = new CinemaDao();
+            $cinemas=$dao->getAll();
+            //var_dump($_SESSION);
+
+
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
             include_once(VIEWS.'/CrudCinema.php');

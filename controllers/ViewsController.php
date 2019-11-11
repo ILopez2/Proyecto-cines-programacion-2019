@@ -1,5 +1,7 @@
 <?php namespace controllers;
     //esta controladora se encargara de administrar todas las vistas necesarias
+    use dao\CinemaDao as CinemaDao;
+    
     class ViewsController
     {
         
@@ -13,6 +15,13 @@
             include_once(VIEWS.'/footer.php');
         }
         public function admCinema(){
+
+            //use daojson\JsonCinema as JsonCinema;
+            //$dao = new JsonCinema();
+            
+            $dao = new CinemaDao();
+            $cinemas=$dao->getAll();
+            //var_dump($_SESSION);
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
             include_once(VIEWS.'/CrudCinema.php');

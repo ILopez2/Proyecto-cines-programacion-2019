@@ -1,11 +1,3 @@
-<?php
-    //use daojson\JsonCinema as JsonCinema;
-    //$dao = new JsonCinema();
-    use dao\CinemaDao as CinemaDao;
-    $dao = new CinemaDao();
-    $cinemas=$dao->getAll();
-    //var_dump($_SESSION);
-?>
 
 <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
     <div class="container p=4">

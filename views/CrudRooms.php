@@ -160,7 +160,7 @@
                                     </select>
                                 </div>
                                 <div>
-                                    <input name="cinemaId" type="hidden" value="<?php echo $value->getCinemaId();?>">
+                                    <!-- <input name="cinemaId" type="hidden" value="<?php //echo $value->getCinemaId();?>"> -->
                                 </div>
                         </div>
 

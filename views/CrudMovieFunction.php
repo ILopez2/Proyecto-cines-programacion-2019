@@ -16,7 +16,6 @@
     use controllers\MovieApiController as MovieApiController;
     $daoMAC = new MovieApiController();
     $array = $daoMAC->getLastMovies(ESP);
-
  
 ?>
 
