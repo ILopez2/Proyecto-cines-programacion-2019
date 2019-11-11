@@ -1,6 +1,6 @@
 <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
     <div class="container p=4">
-    <h1 class="mb-5">Administracion de Funciones</h1>
+    <h1 class="mb-5">Administracion de Funciones : <?php echo $cine->getName()?></h1>
     <div class="row">
     <div class="col-m-4">
         <?php if(isset($_SESSION['successMje']) || isset($_SESSION['errorMje'])) { ?> 
