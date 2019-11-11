@@ -1,4 +1,3 @@
-
 <div class="container">
 <section class="jumbotron">
 		<div class="container">

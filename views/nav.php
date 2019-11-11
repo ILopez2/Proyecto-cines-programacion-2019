@@ -1,12 +1,5 @@
-<?php 
-    use controllers\MovieApiController as MAC;
-
-    $apiM= new MAC();
-    $genres=$apiM->getAllGenres(ESP);
-?>
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="<?php echo FRONT_ROOT?>Views/Mhome">MoviePass</a>
+    <a class="navbar-brand" href="<?php echo FRONT_ROOT?>Home/index">MoviePass</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -38,7 +31,7 @@
                     
                     <form action="<?php echo FRONT_ROOT?>Views/searchFunctions" method="POST" class="form-inline">
                             <input type="date" name="searchF" min="<?php echo date("Y-m-d");?>" >
-                        <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fas fa-user-astronaut"></i> Search</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fas fa-user-astronaut"></i> Buscar</button>
                     </form>
                     </div>
                     <!-- SEARCH BY DATE ENDS HERE -->

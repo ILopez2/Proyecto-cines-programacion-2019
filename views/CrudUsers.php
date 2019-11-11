@@ -1,15 +1,3 @@
-<?php
-
-    //use daojson\JsonUser as JsonUser;
-    //$dao = new JsonUser();
-
-    use dao\UserDao as UserDao;
-    $dao = new UserDao();
-
-    $users=$dao->getAll();
- 
-?>
-
 <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
     <div class="container p=4">
     <h1 class="mb-5">Administracion de usuarios</h1>

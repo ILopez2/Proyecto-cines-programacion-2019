@@ -4,7 +4,6 @@
     use controllers\MovieApiController as MovieApiController;
     use dao\MovieFunctionDao as MovieFunctionDao;
     use dao\CinemaDao as CinemaDao;
-    
     class HomeController
     {
         private $userController;
@@ -35,18 +34,22 @@
             include_once(VIEWS.'/header.php');
             
             if($showView){
+                
+    
+                
                 $dao = new MovieApiController();
                 $daoF = new MovieFunctionDao();
             
                 $functions=$daoF->getAll();
                 $array = $dao->getLastMovies(ESP);
+                $genres=$dao->getAllGenres(ESP);
 
                 foreach($array as $k => $v) {
                     if(!$daoF->getForID($v->getID())) {
                         unset($array[$k]);
                     }
                 }
-                        
+
                 include_once(VIEWS.'/nav.php');
                 include_once(VIEWS.'/home.php');
             }
@@ -68,22 +71,6 @@
             $this->userController->singUp($name,$birthdate,$email,$password,$role);
             $this->Index();
         }
-        public function admCinema(){
-            //use daojson\JsonCinema as JsonCinema;
-            //$dao = new JsonCinema();
-            
-            $dao = new CinemaDao();
-            $cinemas=$dao->getAll();
-            //var_dump($_SESSION);
-
-
-            include_once(VIEWS.'/header.php');
-            include_once(VIEWS.'/nav.php');
-            include_once(VIEWS.'/CrudCinema.php');
-            include_once(VIEWS.'/footer.php');
-        }
-
-
 
     }
 

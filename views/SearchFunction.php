@@ -1,21 +1,3 @@
-<?php 
-//use daojson\JsonCinemaMovieFunction as JsonCinemaMovieFunction;
-//$dao = new JsonCinemaMovieFunction();
-use dao\MovieFunctionDao as MFD;
-use dao\CinemaDao as CMD;
-use controllers\MovieApiController as MovieApiController;
-use controllers\ViewsController as VC;
-
-$dao = new MFD();
-$daoC=new CMD();
-$daoM = new MovieApiController();
-$views= new VC();
-
-$cinemasFunction=$dao->getAll();
-
-?>
-
-
 <div class="container p=4">
     <h1 class="mb-5">Funcion</h1>
     <div class="row">
@@ -73,11 +55,6 @@ $cinemasFunction=$dao->getAll();
                                 </tr>
                             <?php } ?>
                     <?php } ?>
-                    <?php   if($flag==false){
-                                $_SESSION['errorMje']= "No hay funciones para la fecha ".$searchF."<br>";
-                                $views->Mhome();
-                            }?>
-                        
             </tbody>
             </table>       
         </div>

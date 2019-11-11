@@ -1,11 +1,3 @@
-<?php
-    //use daojson\JsonCinema as JsonCinema;
-    //$dao = new JsonCinema();
-    use dao\CinemaRoomDao as CRD;
-    $dao = new CRD();
-    $rooms = $dao->getForCinema($cinemaId);
-?>
-
 <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
     <div class="container p=4">
         <h1 class="mb-5">Administracion de Salas <?php //echo $cinemaName; ?></h1>
@@ -67,50 +59,49 @@
                     </tr>
                 </thead>
                 <tbody>
-                       <?php
-                                    if(!empty($rooms)){
-                                        if(is_array($rooms)){                    
-                                            foreach($rooms as $valueR){ 
-                                                echo "<tr>
-                                                        <td class=table-light>".$valueR->getName()."</td>";
-                                                echo    "<td class=table-light>".$valueR->getIs3d()."</td>";
-                                                echo    "<td class=table-light>".$valueR->getCapacity()."</td>";
-                                                ?>
-                                                <td>
-                                                    <a href="<?php echo FRONT_ROOT?>CinemaRoom/delete?idroom=<?php echo $valueR->getId()?>&?idcinema=<?php echo $valueR->getCinemaId()?>" class="btn btn-danger" onclick="clicked(event)">
-                                                    <i class="far fa-trash-alt"></i>
-                                                    </a>
-                                                </td>
-                                                </tr>
-                                                <?php 
-                                            }              
-                                        }
-                                    
-                                    else {
-
+                       <?php if(!empty($rooms)){
+                                if(is_array($rooms)){                    
+                                    foreach($rooms as $valueR){ 
                                         echo "<tr>
-                                                <td class=table-light>".$rooms->getName()."</td>";
-                                                echo    "<td class=table-light>".$rooms->getIs3d()."</td>";
-                                                echo    "<td class=table-light>".$rooms->getCapacity()."</td>";
-                                                //DELETE STARTS HERE
-                                            ?>
-                                            <td>
-                                                <a href="<?php echo FRONT_ROOT?>CinemaRoom/delete?idroom=<?php echo $rooms->getId()?>&?idcinema=<?php echo $rooms->getCinemaId()?>" class="btn btn-danger" onclick="clicked(event)">
-                                                <i class="far fa-trash-alt"></i>
-                                                </a>
-                                            </td>
-                                            </tr>
-                                            <?php 
-                                                //DELETE ENDS HERE
-                                    } ?>
-                                    <!-- EDIT START HERE  -->
-                                    <td class="table-dark" colspan="7" style="text-align:center;">
-                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
-                                        <i class="fas fa-marker">Modificar</i>
-                                        </button>
+                                                <td class=table-light>".$valueR->getName()."</td>";
+                                        echo    "<td class=table-light>".$valueR->getIs3d()."</td>";
+                                        echo    "<td class=table-light>".$valueR->getCapacity()."</td>";
+                                        ?>
+                                        <td>
+                                            <a href="<?php echo FRONT_ROOT?>CinemaRoom/delete?idroom=<?php echo $valueR->getId()?>&?idcinema=<?php echo $valueR->getCinemaId()?>" class="btn btn-danger" onclick="clicked(event)">
+                                            <i class="far fa-trash-alt"></i>
+                                            </a>
+                                        </td>
+                                        </tr>
+                                        <?php 
+                                    }              
+                                }
+                            
+                            else {
+
+                                echo "<tr>
+                                        <td class=table-light>".$rooms->getName()."</td>";
+                                        echo    "<td class=table-light>".$rooms->getIs3d()."</td>";
+                                        echo    "<td class=table-light>".$rooms->getCapacity()."</td>";
+                                        //DELETE STARTS HERE
+                                    ?>
+                                    <td>
+                                        <a href="<?php echo FRONT_ROOT?>CinemaRoom/delete?idroom=<?php echo $rooms->getId()?>&?idcinema=<?php echo $rooms->getCinemaId()?>" class="btn btn-danger" onclick="clicked(event)">
+                                        <i class="far fa-trash-alt"></i>
+                                        </a>
                                     </td>
-                                    <!-- EDIT ENDS HERE  -->
-            <?php  } ?>
+                                    </tr>
+                                    <?php 
+                                        //DELETE ENDS HERE
+                            } ?>
+                            <!-- EDIT START HERE  -->
+                            <td class="table-dark" colspan="7" style="text-align:center;">
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
+                                <i class="fas fa-marker">Modificar</i>
+                                </button>
+                            </td>
+                            <!-- EDIT ENDS HERE  -->
+                        <?php  } ?>
                     
                 </tbody>
                 </table>       

@@ -1,12 +1,3 @@
-<?php 
-
-    use controllers\MovieApiController as MovieApiController;
-
-    $search = new MovieApiController();
-
-    $result=$search->getLastMovies(ESP);
-    
-?>
 <div class="container">
     <table border=1 class="table jumbotron">
         <thead class="thead-dark">
@@ -18,19 +9,17 @@
             </thead>
             <tbody>
                     <?php foreach($result as $value){ ?>
-                    <tr>
-                        <td>
                         <?php foreach($value->getGenres() as $gen){
-                                    if($gen==$searchG){
-                                        
-                                    $value->getTitle();?></td>
-                                    <td>
-
-                                        <figure class="figure">
-                                            <img class="figure-img img-fluid rounded" src="<?php echo $search->getMoviePoster($value->getPosterPath()); ?>" alt="">
-                                        </figure>
-
-                                    </td>
+                            if($gen==$searchG){?>
+                            <tr>
+                            <td>
+                                <?php echo $value->getTitle();?>
+                            </td>
+                            <td>
+                                <figure class="figure">
+                                    <img class="figure-img img-fluid rounded" src="<?php echo $search->getMoviePoster($value->getPosterPath()); ?>" alt="">
+                                </figure>
+                            </td>
                                 </tr>
                             <?php } ?> 
                         <?php } ?> 

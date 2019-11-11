@@ -1,4 +1,3 @@
-
 <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
     <div class="container p=4">
         <h1 class="mb-5">Administracion de cines</h1>
@@ -98,18 +97,18 @@
 
                                     <!-- DELETE START HERE  -->
                                         <a href="<?php echo FRONT_ROOT?>Cinema/delete?id=<?php echo $cinemas->getName()?>" class="btn btn-danger" onclick="clicked(event)">
-                                            <i class="far fa-trash-alt"> Eliminar</i>
+                                            <i class="far fa-trash-alt"></i>
                                         </a>
                                     <!-- DELETE START HERE  -->
 
                                     <!-- CINEMA ROOMS VIEW START HERE -->
                                     <a href="<?php echo FRONT_ROOT?>Views/admRooms?id=<?php echo $cinemas->getId()?>" class="btn btn-primary" onclick="clicked(event)">
-                                        <i class="fas fa-person-booth">Ver Salas</i>
+                                        <i class="fas fa-person-booth">Salas</i>
                                     </a>
                                     <!-- CINEMA ROOMS VIEW ENDS HERE -->
                                      <!-- FUNCTIONS START HERE  -->
                                      <a href="<?php echo FRONT_ROOT?>Views/admFunctions?id=<?php echo $cinemas->getName()?>" class="btn btn-danger" onclick="clicked(event)">
-                                            <i class="fa fa-ticket"> Ver Funciones</i>
+                                            <i class="fa fa-ticket">Funciones</i>
                                         </a>
                                     <!-- FUNCTIONS START HERE  -->
                                     </td>
@@ -136,7 +135,7 @@
                     <form class="modal-content" action="<?php echo FRONT_ROOT?>Cinema/edit" method="POST">
                         <div class="modal-header">
         
-                            <h5 class="modal-title">Modify</h5>
+                            <h5 class="modal-title">Modificar</h5>
                             <button type="button" class="close" data-dismiss="modal">
                                 <span>&times;</span>
                             </button>
@@ -171,8 +170,8 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-dark" onclick="clicked(event)">Confirm</button>
+                            <button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-dark" onclick="clicked(event)">Confirmar</button>
                         </div>
                     </form>
                 </div>

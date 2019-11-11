@@ -1,24 +1,3 @@
-<?php
-    //use daojson\JsonMovieFunction as JsonMovieFunction;
-    //$dao = new JsonMovieFunction();
-
-    use dao\MovieFunctionDao as MovieFunctionDao;
-    use dao\CinemaDao as CMD;
-    use dao\CinemaRoomDao as CMRD;
-    $dao = new MovieFunctionDao();
-    $cinemaDao=new CMD();
-    $cine=$cinemaDao->getForID($cinemaName);
-    $functions=$dao->getForCinema($cine->getId());
-    $roomDao=new CMRD();
-
-    $cines=$cinemaDao->getAll();
-
-    use controllers\MovieApiController as MovieApiController;
-    $daoMAC = new MovieApiController();
-    $array = $daoMAC->getLastMovies(ESP);
- 
-?>
-
 <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
     <div class="container p=4">
     <h1 class="mb-5">Administracion de Funciones</h1>

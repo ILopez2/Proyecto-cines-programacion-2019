@@ -1,22 +1,4 @@
-<?php 
-    //use daojson\JsonCinemaMovieFunction as JsonCinemaMovieFunction;
-    //$dao = new JsonCinemaMovieFunction();
-    use dao\MovieFunctionDao as MFD;
-    use dao\CinemaDao as CMD;
-    use controllers\MovieApiController as MovieApiController;
-    
-    $dao = new MFD();
-    $daoC=new CMD();
-    $daoM = new MovieApiController();
-
-    $cinemasFunction=$dao->getAll();
-    $movie = $daoM->getMovieXid($id,ESP);
-
-
-?>
-
-
-    <div class="container p=4">
+<div class="container p=4">
         <h1 class="mb-5">Funcion</h1>
         <div class="row">
             <div class="col-m-4">
