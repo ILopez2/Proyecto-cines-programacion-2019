@@ -126,7 +126,6 @@
                                 
                             if(is_array($functions)){                            
                                 foreach($functions as $function){ 
-                                    var_dump($function);
                                     $movieF=$daoMAC->getMovieXid($function->getMovie(),ESP);
                                     $cinemaF=$cinemaDao->getForID2($function->getCinema()); ?>
                                     <tr>
@@ -142,7 +141,7 @@
                                     <td class="table-dark">
                                         <!-- DELETE START HERE  -->
                                         <a href="<?php echo FRONT_ROOT?>MovieFunction/delete?id=<?php echo $function->getId()?>&?cinema=<?php echo $cinemaName?>" class="btn btn-danger" onclick="clicked(event)">
-                                                <i class="far fa-trash-alt"></i>
+                                                <i class="far fa-trash-alt"> Eliminar</i>
                                         </a>
                                         <!-- DELETE START HERE  -->
                                     </td>
@@ -164,7 +163,7 @@
                                     <td class="table-dark">
                                         <!-- DELETE START HERE  -->
                                         <a href="<?php echo FRONT_ROOT?>MovieFunction/delete?id=<?php echo $functions->getId()?>&?cinema=<?php echo $cinemaName?>" class="btn btn-danger" onclick="clicked(event)">
-                                                <i class="far fa-trash-alt"></i>
+                                                <i class="far fa-trash-alt"> Eliminar</i>
                                         </a>
                                         <!-- DELETE START HERE  -->
                                     </td>

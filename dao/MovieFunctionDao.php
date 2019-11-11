@@ -53,9 +53,9 @@ class MovieFunctionDao implements InterfaceDao{
     /*
     *Retorna el cine con el nombre pasado por parametro
     */
-    public function getForID($functionId){
-        $sql = "SELECT * FROM funciones WHERE id_funcion = :id";
-        $parameters['id']=$functionId;
+    public function getForID($movieID){
+        $sql = "SELECT * FROM funciones WHERE id_pelicula1 = :id";
+        $parameters['id']=$movieID;
         try{
             //creo la instancia de coneccion
             $this->connection= Connection::getInstance();

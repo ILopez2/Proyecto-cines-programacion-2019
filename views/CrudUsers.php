@@ -101,7 +101,7 @@
                             <!-- DELETE HERE  -->
                             <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
                                 <a href="<?php echo FRONT_ROOT?>User/delete?id=<?php echo $value->getEmail()?>" class="btn btn-danger" onclick="clicked(event)">
-                                <i class="far fa-trash-alt"></i>
+                                <i class="far fa-trash-alt"> Eliminar</i>
                                 </a><?php } ?>
                             <!-- END DELETE HERE -->
                     
@@ -109,12 +109,12 @@
                             <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
                                 <?php if($value->getRoleLevel() != '1'){ ?>
                                 <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=1" class="btn btn-success" onclick="clicked(event)" >
-                                <i class="fas fa-user-shield"></i>
+                                <i class="fas fa-user-shield"> Cambiar Rol</i>
                                 </a>
                                 <?php }else{?>
                                     <!-- SET COMMON -->
                                     <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=2" class="btn btn-danger" onclick="clicked(event)" >
-                                    <i class="fas fa-user-times"></i>
+                                    <i class="fas fa-user-times"> Revocar Admin</i>
                                     </a>
                             <?php } ?>    
                         <?php } ?>

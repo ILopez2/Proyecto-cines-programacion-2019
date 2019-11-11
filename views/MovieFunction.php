@@ -3,16 +3,13 @@
     //$dao = new JsonCinemaMovieFunction();
     use dao\MovieFunctionDao as MFD;
     use dao\CinemaDao as CMD;
+    use controllers\MovieApiController as MovieApiController;
+    
     $dao = new MFD();
     $daoC=new CMD();
-    $cinemasFunction=$dao->getAll();
-
-    use controllers\MovieApiController as MovieApiController;
     $daoM = new MovieApiController();
-    
 
-    // ha yque cambiar esto por lo que se pase en el click..
-    // hay que ver la forma de traer mediante el click la peli para esta pantalla..
+    $cinemasFunction=$dao->getAll();
     $movie = $daoM->getMovieXid($id,ESP);
 
 
@@ -54,7 +51,6 @@
                        <?php if(!empty($cinemasFunction)){
                                 if(is_array($cinemasFunction)){
                                     foreach($cinemasFunction as $function){
-                                        var_dump($function);
                                         if($movie->getId() == $function->getMovie()){
                                             $fMovie=$daoM->getMovieXid($function->getMovie(),ESP);
                                             $fCinema=$daoC->getForID2($function->getCinema());

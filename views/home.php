@@ -1,8 +1,11 @@
 <?php 
 
     use controllers\MovieApiController as MovieApiController;
+    use dao\MovieFunctionDao as MovieFunctionDao;
     $dao = new MovieApiController();
+    $daoF = new MovieFunctionDao();
 
+    $functions=$daoF->getAll();
     $array = $dao->getLastMovies(ESP);
 
 ?>
@@ -22,14 +25,18 @@
             </tr>
         </thead>
         <tbody>
-                <?php foreach($array as $movie){  ?>
-                <tr>
-                    <td><?php echo $movie->getTitle(); ?></td>
-                    <td>
-                    <a href="<?php echo FRONT_ROOT?>Views/viewFunctions?id=<?php echo $movie->getId()?>"><img class="figure-img img-fluid rounded" src="<?php echo $dao->getMoviePoster($movie->getPosterPath()); ?>" alt=""></a> 
-                    </td>
-                </tr>
-                <?php } ?>
+                <?php foreach($array as $movie){  
+                    if($daoF->getForID($movie->getId())){?>
+                        <tr>
+                        <td><?php echo $movie->getTitle(); ?></td>
+                        <td>
+                        <a href="<?php echo FRONT_ROOT?>Views/viewFunctions?id=<?php echo $movie->getId()?>"><img class="figure-img img-fluid rounded" src="<?php echo $dao->getMoviePoster($movie->getPosterPath()); ?>" alt=""></a> 
+                        </td>
+                    </tr>        
+                
+                
+                <?php }
+                } ?>
         </tbody>
     </table>
 </div>

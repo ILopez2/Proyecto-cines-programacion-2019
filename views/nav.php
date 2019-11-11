@@ -28,7 +28,7 @@
                             }?>
                         </select>    
                             
-                        <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fas fa-user-astronaut"></i> Search</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fas fa-user-astronaut"></i> Buscar</button>
                     
                     </form>
                     <!-- SEARCH BY GENRE ENDS HERE -->
@@ -58,7 +58,7 @@
                     </div>
                     <div class="btn-group" role="group" aria-label="Third group">
                         
-                        <a class="btn btn-danger" href="<?php echo FRONT_ROOT?>Home/logout"  onclick="clicked(event)"><i class="fas fa-door-open"></i> </i>Logout </a>
+                        <a class="btn btn-danger" href="<?php echo FRONT_ROOT?>Home/logout"  onclick="clicked(event)"><i class="fas fa-door-open"></i> </i>Cerrar Sesion </a>
                        
                     </div>
                 </div>
