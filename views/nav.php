@@ -36,7 +36,7 @@
                     </div>
                     <div class="btn-group mr-1" role="group" aria-label="First group">
                     
-                    <form action="<?php echo FRONT_ROOT?>Views/searchFunction" method="POST" class="form-inline">
+                    <form action="<?php echo FRONT_ROOT?>Views/searchFunctions" method="POST" class="form-inline">
                             <input type="date" name="searchF" min="<?php echo date("Y-m-d");?>" >
                         <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fas fa-user-astronaut"></i> Search</button>
                     </form>

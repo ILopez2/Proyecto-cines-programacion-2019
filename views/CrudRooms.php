@@ -11,19 +11,22 @@
     <div class="container p=4">
         <h1 class="mb-5">Administracion de Salas <?php //echo $cinemaName; ?></h1>
         <div class="row">
-            <div class="col-m-4">
-                <?php if(isset($_SESSION['successMje']) || isset($_SESSION['errorMje'])) { ?>
+           <div class="col-m-4">
+                <?php if(isset($_SESSION['successMje']) || isset($_SESSION['errorMje'])){ ?>
                     <div class="alert <?php if(isset($_SESSION['successMje'])) echo 'alert-success'; else echo 'alert-danger'; ?> alert-dismissible fade show mt-3" role="alert">
                         <strong>
-                        <?php if(isset($_SESSION['successMje'])) echo $_SESSION['successMje']; else echo $_SESSION['errorMje'];?>
+                        <?php if(isset($_SESSION['successMje'])) echo $_SESSION['successMje']; else echo $_SESSION['errorMje']; ?>
                         </strong>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                         
-                        <?php if(isset($_SESSION['successMje'])){unset($_SESSION['successMje']);}
-                        if(isset($_SESSION['errorMje'])){unset($_SESSION['errorMje']);}?>
-
+                        <?php if(isset($_SESSION['successMje'])){
+                            unset($_SESSION['successMje']);
+                        }
+                        if(isset($_SESSION['errorMje'])){
+                            unset($_SESSION['errorMje']);
+                        }?>
                     </div>
 
                 <?php } ?>
@@ -61,7 +64,7 @@
                         <th>Nombre</th>
                         <th>Tipo</th>
                         <th>Capacidad</th>
-                        <th>Actions</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>

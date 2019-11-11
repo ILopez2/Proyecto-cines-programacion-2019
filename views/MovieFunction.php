@@ -43,36 +43,61 @@
                 <table class="table table-bordered">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Movie</th>
-                        <th>Cinema</th>
-                        <th>dateTime</th>
-                        <th>language</th>
-                        <th>cinemaRoom</th>
+                        <th>Pelicula</th>
+                        <th>Cine</th>
+                        <th>Fecha y hora</th>
+                        <th>Lenguaje</th>
+                        <th>Sala</th>
                     </tr>
                 </thead>
                 <tbody>
-                       <?php  foreach($cinemasFunction as $function){
-                           
-                                if($movie->getId() == $function->getMovie()){
-                                    $fMovie=$daoM->getMovieXid($function->getMovie(),ESP);
-                                    $fCinema=$daoC->getForID2($function->getCinema());
-                                    ?>
-                                    <tr>
-                                        <td><figure class="figure">
-                                                <img class="figure-img img-fluid rounded" src="<?php  echo $daoM->getMoviePoster($fMovie->getPosterPath());?>" alt="">
-                                            </figure>
-                                        </td>
-                                        <td class=table-light><?php echo $fCinema->getName();?></td>
-                                        <td class=table-light><?php echo $function->getDateTime();?></td>
-                                        <td class=table-light><?php echo $function->getLanguage();?></td>
-                                        <?php 
-                                            $rooms=$fCinema->getCinemaRooms();
-                                            foreach($rooms as $room){
-                                                echo "<td class=table-light>".$room->getName()."</td>";                           
-                                            }?>
-                                    </tr>
-                                <?php } ?>
-                        <?php } ?>
+                       <?php if(!empty($cinemasFunction)){
+                                if(is_array($cinemasFunction)){
+                                    foreach($cinemasFunction as $function){
+                                        var_dump($function);
+                                        if($movie->getId() == $function->getMovie()){
+                                            $fMovie=$daoM->getMovieXid($function->getMovie(),ESP);
+                                            $fCinema=$daoC->getForID2($function->getCinema());
+                                            ?>
+                                            <tr>
+                                                <td><figure class="figure">
+                                                        <img class="figure-img img-fluid rounded" src="<?php  echo $daoM->getMoviePoster($fMovie->getPosterPath());?>" alt="">
+                                                    </figure>
+                                                </td>
+                                                <td class=table-light><?php echo $fCinema->getName();?></td>
+                                                <td class=table-light><?php echo $function->getDate()." ".$function->getTime();?></td>
+                                                <td class=table-light><?php echo $function->getLanguage();?></td>
+                                                <?php 
+                                                    $rooms=$fCinema->getCinemaRooms();
+                                                    foreach($rooms as $room){
+                                                        echo "<td class=table-light>".$room->getName()."</td>";                           
+                                                    }?>
+                                            </tr>
+                                        <?php } 
+                                    }
+                                }
+                                else{
+                                    if($movie->getId() == $cinemasFunction->getMovie()){
+                                        $fMovie=$daoM->getMovieXid($cinemasFunction->getMovie(),ESP);
+                                        $fCinema=$daoC->getForID2($cinemasFunction->getCinema());
+                                        ?>
+                                        <tr>
+                                            <td><figure class="figure">
+                                                    <img class="figure-img img-fluid rounded" src="<?php  echo $daoM->getMoviePoster($fMovie->getPosterPath());?>" alt="">
+                                                </figure>
+                                            </td>
+                                            <td class=table-light><?php echo $fCinema->getName();?></td>
+                                            <td class=table-light><?php echo $cinemasFunction->getDate()." ".$cinemasFunction->getTime();?></td>
+                                            <td class=table-light><?php echo $cinemasFunction->getLanguage();?></td>
+                                            <?php 
+                                                $rooms=$fCinema->getCinemaRooms();
+                                                foreach($rooms as $room){
+                                                    echo "<td class=table-light>".$room->getName()."</td>";                           
+                                                }?>
+                                        </tr>
+                            <?php   }
+                                }
+                            } ?>
                 </tbody>
                 </table>       
             </div>

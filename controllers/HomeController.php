@@ -47,8 +47,8 @@
             $this->Index();
         }
 
-        public function singUp($name,$birthdate,$nationality,$email,$password,$role='2'){
-            $this->userController->singUp($name,$birthdate,$nationality,$email,$password,$role);
+        public function singUp($name,$birthdate,$email,$password,$role='2'){
+            $this->userController->singUp($name,$birthdate,$email,$password,$role);
             $this->Index();
         }
         public function admCinema(){

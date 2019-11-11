@@ -39,8 +39,8 @@ class MovieFunctionDao implements InterfaceDao{
     *Borra un cine de la BDD correspondiente al nombre del mismo pasado por parametro
     */
     public function delete($functionId){
-        $sql="DELETE FROM funciones WHERE id_funcion = :id";
-        $parameters['id']=$functionId;
+        $sql="DELETE FROM funciones WHERE id_funcion = :functionId";
+        $parameters['functionId']=$functionId;
         try {
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql, $parameters);    
@@ -56,6 +56,23 @@ class MovieFunctionDao implements InterfaceDao{
     public function getForID($functionId){
         $sql = "SELECT * FROM funciones WHERE id_funcion = :id";
         $parameters['id']=$functionId;
+        try{
+            //creo la instancia de coneccion
+            $this->connection= Connection::getInstance();
+            $result = $this->connection->execute($sql,$parameters);
+        }catch(\PDOException $ex){
+            throw $ex;
+        } 
+        //hay que mapear de un arreglo asociativo a objetos
+        if(!empty($result)){
+            return $this->mapeo($result);
+        }else{
+            return false;
+        }
+    }
+    public function getForCinema($cinemaId){
+        $sql = "SELECT * FROM funciones WHERE id_cine2 = :cinemaId";
+        $parameters['cinemaId']=$cinemaId;
         try{
             //creo la instancia de coneccion
             $this->connection= Connection::getInstance();
@@ -103,7 +120,7 @@ class MovieFunctionDao implements InterfaceDao{
         $value = is_array($value) ? $value : [];   
         $resp=array();  
         $resp = array_map(function($p){
-        return new CMF($p['id_pelicula1'],$p['id_cine2'],$p['fecha'],$p['hora'],$p['id_sala2'],$p['lenguaje']/*,$p['id_funcion']*/);
+        return new CMF($p['id_pelicula1'],$p['id_cine2'],$p['fecha'],$p['hora'],$p['id_sala2'],$p['lenguaje'],$p['id_funcion']);
         }, $value);
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
             return count($resp) > 1 ? $resp : $resp['0'];

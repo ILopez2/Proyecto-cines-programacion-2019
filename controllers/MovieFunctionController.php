@@ -20,20 +20,50 @@
 
         public function add($cinemaId,$movie,$cinemaRoom,$date,$time,$language,$cinemaName){
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
-                $function = new ClassMovieFunction($movie,$cinemaId,$date,$time,$cinemaRoom,$language);
-                //var_dump($function);
-                $this->dao->add($function);
+                $functions=$this->dao->getForCinema($cinemaId);
+                $flag=false;
+                if(!empty($functions)){
+                    if(is_array($functions)){
+                        foreach($functions as $FU){
+                            if($FU->getCinemaRoom()==$cinemaRoom){
+                                if($FU->getDate()==$date){
+                                    if($FU->getTime()==$time){  
+                                        $flag=true;                      
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        if($functions->getCinemaRoom()==$cinemaRoom){
+                            if($functions->getDate()==$date){
+                                if($functions->getTime()==$time){
+                                    $flag=true;                        
+                                }
+                            }
+                        }
+                    }
+                }
+                if($flag==false){
+                    $function = new ClassMovieFunction($movie,$cinemaId,$date,$time,$cinemaRoom,$language);              
+                    $this->dao->add($function);
+                    $_SESSION["successMje"]="Funcion cargada con exito";
+                }
+                else{
+                    $_SESSION["errorMje"]="Ya hay una funcion en esa sala para esa fecha y hora";
+                }
                 $this->view->admFunctions($cinemaName);
             }
 
         }
 
 
-        public function delete($id){
+        public function delete($id,$cinema){
             //borrar el cine con el nombre pasado por parameto
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
                 $this->dao->delete($id);
-                $this->view->admFunctions();
+                $_SESSION["successMje"]="Funcion borrada con exito";
+                $this->view->admFunctions($cinema);
             }
         }
 

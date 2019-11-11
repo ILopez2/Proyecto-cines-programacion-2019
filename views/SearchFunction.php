@@ -4,10 +4,12 @@
 use dao\MovieFunctionDao as MFD;
 use dao\CinemaDao as CMD;
 use controllers\MovieApiController as MovieApiController;
+use controllers\ViewsController as VC;
 
 $dao = new MFD();
 $daoC=new CMD();
 $daoM = new MovieApiController();
+$views= new VC();
 
 $cinemasFunction=$dao->getAll();
 
@@ -47,8 +49,10 @@ $cinemasFunction=$dao->getAll();
                 </tr>
             </thead>
             <tbody>
-                   <?php  foreach($cinemasFunction as $function){
+                   <?php  $flag=false;
+                        foreach($cinemasFunction as $function){
                             if($searchF == $function->getDate()){
+                                $flag=true;
                                 $fMovie=$daoM->getMovieXid($function->getMovie(),ESP);
                                 $fCinema=$daoC->getForID2($function->getCinema());
                             ?>
@@ -64,14 +68,15 @@ $cinemasFunction=$dao->getAll();
                                     <?php 
                                         $rooms=$fCinema->getCinemaRooms();
                                         foreach($rooms as $room){
-                                            echo "<td class=table-light>".$room->getName()."</td>";                           
+                                            echo "<td class=table-light>".$room->getName()."</td>";                         
                                         }?>
                                 </tr>
                             <?php } ?>
                     <?php } ?>
-                    <?php   if($searchF != $function->getDate()){?>
-                                <a href="<?php echo FRONT_ROOT?>Views/Mhome"></a>
-                    <?php }?>
+                    <?php   if($flag==false){
+                                $_SESSION['errorMje']= "No hay funciones para la fecha ".$searchF."<br>";
+                                $views->Mhome();
+                            }?>
                         
             </tbody>
             </table>       

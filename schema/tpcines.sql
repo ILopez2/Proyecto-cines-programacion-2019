@@ -41,7 +41,7 @@ id_sala int auto_increment not null,
 id_cine1 int not null,
 nombre_sala varchar(30) not null,
 capacidad int not null,
-is3d boolean not null,
+is3d varchar(10) not null,
 constraint fk_cine foreign key(id_cine1)references cines(id_cine),
 constraint pk_salas primary key(id_sala)
 );
@@ -150,10 +150,10 @@ insert into roles(nombre_rol)values("Comun");
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Jorge",'1995-01-29','jorge@utn','asd123',1);
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivan",'1995-01-29','ivan@utn','asd123','1');
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivaasdn",'1995-01-29','ivsdasan@utn','asd123','1');
-insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(1,"sala1",100,true);
-insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(2,"sala2",300,true);
-insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha,hora)values(1,1,475557,"ESP",'2019-10-07','10:00:00');
-insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha,hora)values(2,1,475557,"ESP",'2019-10-07','11:00');
+insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(1,"sala1",100,"3D");
+insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(2,"sala2",300,"2D");
+insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha,hora)values(1,1,475557,"Subtitulada",'2019-10-07','10:00:00');
+insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha,hora)values(2,1,475557,"Doblada",'2019-10-07','11:00');
 /*select * from roles;
 select * from cines;
 select * from usuarios;

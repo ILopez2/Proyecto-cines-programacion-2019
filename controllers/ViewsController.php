@@ -51,7 +51,7 @@
             include_once(VIEWS.'/MovieFunction.php');
             include_once(VIEWS.'/footer.php');
         }
-        public function searchFunction($searchF){
+        public function searchFunctions($searchF){
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
             include_once(VIEWS.'/SearchFunction.php');

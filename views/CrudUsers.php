@@ -83,7 +83,7 @@
                             <th>Email</th>
                             <th>Password</th>
                             <th>Role</th>
-                            <th>Actions</th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>

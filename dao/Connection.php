@@ -37,7 +37,7 @@ class Connection {
                $this->pdoStatement = $this->pdo->prepare($query);  // PREPARO LA CONSULTA PARA MANDARLA A LA BASE DE DATOS
 
                foreach($parameters as $parameterName => $value) {
-                    $this->pdoStatement->bindParam(":".$parameterName, $value);  // para verificar, y queda lista la consulta con los valores q trae el objeto pasado x parametro q solicito este execute
+                    $this->pdoStatement->bindParam(":$parameterName", $value);  // para verificar, y queda lista la consulta con los valores q trae el objeto pasado x parametro q solicito este execute
                }
 
                $this->pdoStatement->execute();

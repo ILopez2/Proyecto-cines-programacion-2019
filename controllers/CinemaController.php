@@ -22,6 +22,7 @@
                 $cinema = new Cinema($name,$city,$adress,$price);
                 //falta resolver el tema de las salas, por el momento no trabajo con ellas solo se crea un array vacio.
                 $this->cinemaDao->add($cinema);
+                $_SESSION['successMje'] = 'Cine agregado con éxito';
                 $this->view->admCinema();
             }
 
@@ -31,6 +32,7 @@
             //borrar el cine con el nombre pasado por parameto
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
                 $this->cinemaDao->delete($name);
+                $_SESSION['successMje'] = 'Cine borrado con éxito';
                 $this->view->admCinema();
             }
         }
@@ -41,6 +43,7 @@
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
                 $cinema = new Cinema($name,$city,$adress,$price);
                 $this->cinemaDao->edit($cinema);
+                $_SESSION['successMje'] = 'Cine modificado con éxito';
                 $this->view->admCinema();
             }
         }

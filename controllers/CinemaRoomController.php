@@ -37,14 +37,16 @@
                 $room= new CinemaRoom($name,$is3D,$capacity,$idCinema);
                 $this->daoCR->add($room);
                 $_SESSION['successMje'] = 'Sala agregada con éxito';
+                $this->view->admRooms($idCinema);
             }else{
                 $_SESSION['errorMje']='<strong>Ya existe una sala con ese nombre</strong>';
+                $this->view->admRooms($idCinema);
             }
-            $this->view->admRooms($idCinema);
         }
 
         public function delete($idroom,$idcinema){
             $this->daoCR->delete($idroom);
+            $_SESSION['successMje'] = 'Sala borrada con éxito';
             $this->view->admRooms($idcinema);
         }
 

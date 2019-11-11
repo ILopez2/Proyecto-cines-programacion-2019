@@ -14,7 +14,9 @@
             <div class="col-m-4">
                 <?php if(isset($_SESSION['successMje']) || isset($_SESSION['errorMje'])){ ?>
                     <div class="alert <?php if(isset($_SESSION['successMje'])) echo 'alert-success'; else echo 'alert-danger'; ?> alert-dismissible fade show mt-3" role="alert">
-                        <strong><?php if(isset($_SESSION['successMje'])) echo $_SESSION['successMje']; else echo $_SESSION['errorMje']; ?></strong>
+                        <strong>
+                        <?php if(isset($_SESSION['successMje'])) echo $_SESSION['successMje']; else echo $_SESSION['errorMje']; ?>
+                        </strong>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -58,7 +60,7 @@
                         <th>Direccion</th>
                         <th>Ciudad</th>
                         <th>Precio ticket</th>
-                        <th>Actions</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,7 +81,6 @@
                                             <i class="far fa-trash-alt"></i>
                                         </a>
                                     <!-- DELETE START HERE  -->
-
                                     <!-- CINEMA ROOMS VIEW START HERE -->
                                     <a href="<?php echo FRONT_ROOT?>Views/admRooms?id=<?php echo $cine->getId()?>" class="btn btn-primary" onclick="clicked(event)">
                                         <i class="fas fa-person-booth"></i>

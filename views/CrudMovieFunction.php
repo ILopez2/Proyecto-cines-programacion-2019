@@ -8,7 +8,7 @@
     $dao = new MovieFunctionDao();
     $cinemaDao=new CMD();
     $cine=$cinemaDao->getForID($cinemaName);
-    $functions=$dao->getAll();
+    $functions=$dao->getForCinema($cine->getId());
     $roomDao=new CMRD();
 
     $cines=$cinemaDao->getAll();
@@ -109,56 +109,71 @@
                 <!-- Table here -->
                 <div class="col-m-8">
                     <table class="table table-bordered table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Pelicula</th>
-                            <th>Cine</th>
-                            <th>Sala</th>
-                            <th>Fecha</th>
-                            <th>Hora</th>
-                            <th>Lenguaje</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Pelicula</th>
+                                <th>Sala</th>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Lenguaje</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                        <?php 
-                        if(is_array($functions)){
-                            if(!empty($functions)){ 
+                            <?php 
+                            if(!empty($functions)){
+                                
+                            if(is_array($functions)){                            
                                 foreach($functions as $function){ 
+                                    var_dump($function);
                                     $movieF=$daoMAC->getMovieXid($function->getMovie(),ESP);
-                                    $cinemaF=$cinemaDao->getForID2($function->getCinema());?>
-                                <tr>
-                                <td class="table-dark"><?php echo $movieF->getTitle(); ?></td>
-                                <td class="table-dark"><?php echo $cinemaF->getName(); ?></td>
-                                <?php
-                                    $rooms=$roomDao->getForID($function->getCinemaRoom());
-                                    ?>
-                                <td class="table-dark"><?php echo $rooms->getName(); ?></td>
-                                <td class="table-dark"><?php echo $function->getDate(); ?></td>
-                                <td class="table-dark"><?php echo $function->getTime(); ?></td>
-                                <td class="table-dark"><?php echo $function->getLanguage(); ?></td>
-                        </div>
-                        <?php } } } 
-                        else{ ?>
+                                    $cinemaF=$cinemaDao->getForID2($function->getCinema()); ?>
                                     <tr>
-                                    <td class="table-dark"><?php echo $functions->getMovie()->getTitle(); ?></td>
-                                    <td class="table-dark"><?php echo $functions->getCinema()->getName(); ?></td>
+                                    <td class="table-dark"><?php echo $movieF->getTitle(); ?></td>
                                     <?php
-                                        $cinema=$functions->getCinema();
-                                        $rooms=$cinema->getCinemaRooms();
+                                        $rooms=$cinemaF->getCinemaRooms();
                                         foreach($rooms as $room){
-                                            echo "<td class=table-light>".$room->getName()."</td>";                           
+                                            echo "<td class=table-dark>".$room->getName()."</td>";                           
+                                        }?>
+                                    <td class="table-dark"><?php echo $function->getDate(); ?></td>
+                                    <td class="table-dark"><?php echo $function->getTime(); ?></td>
+                                    <td class="table-dark"><?php echo $function->getLanguage(); ?></td>
+                                    <td class="table-dark">
+                                        <!-- DELETE START HERE  -->
+                                        <a href="<?php echo FRONT_ROOT?>MovieFunction/delete?id=<?php echo $function->getId()?>&?cinema=<?php echo $cinemaName?>" class="btn btn-danger" onclick="clicked(event)">
+                                                <i class="far fa-trash-alt"></i>
+                                        </a>
+                                        <!-- DELETE START HERE  -->
+                                    </td>
+                            <?php } }  
+                            else{ 
+                                $movieF=$daoMAC->getMovieXid($functions->getMovie(),ESP);
+                                $cinemaF=$cinemaDao->getForID2($functions->getCinema());
+                                ?>                            
+                                <tr>
+                                    <td class="table-dark"><?php echo $movieF->getTitle(); ?></td>
+                                    <?php
+                                        $rooms=$cinemaF->getCinemaRooms();
+                                        foreach($rooms as $room){
+                                            echo "<td class=table-dark>".$room->getName()."</td>";                           
                                         }?>
                                     <td class="table-dark"><?php echo $functions->getDate(); ?></td>
                                     <td class="table-dark"><?php echo $functions->getTime(); ?></td>
                                     <td class="table-dark"><?php echo $functions->getLanguage(); ?></td>
-                            </tbody>
-                            </table> 
+                                    <td class="table-dark">
+                                        <!-- DELETE START HERE  -->
+                                        <a href="<?php echo FRONT_ROOT?>MovieFunction/delete?id=<?php echo $functions->getId()?>&?cinema=<?php echo $cinemaName?>" class="btn btn-danger" onclick="clicked(event)">
+                                                <i class="far fa-trash-alt"></i>
+                                        </a>
+                                        <!-- DELETE START HERE  -->
+                                    </td>
+                            <?php } }?>
+                                </tr>
+                        </tbody>
+                    </table> 
+                </div>
                             <!-- END TABLE HERE  -->  
-                        <?php }
-                    
-                    
-                     ?>
                 
                 <!-- MODAL START HERE no terminado todavia -->
                 <div class="modal fade" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">

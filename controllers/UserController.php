@@ -45,7 +45,7 @@
             unset($_SESSION['loggedPass']);
         }
 
-        public function singUp($name,$birthdate,$email,$password,$role='Common'){
+        public function singUp($name,$birthdate,$email,$password,$role='2'){
             //registrar nuevo usario
             $newUser = new User($name,$birthdate,$email,$password,$role);
             if(!$this->checkUserExists($newUser->getEmail())){
