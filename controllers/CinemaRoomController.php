@@ -50,10 +50,10 @@
             $this->view->admRooms($idcinema);
         }
 
-        public function edit($roomId,$name,$capacity,$is3D){
+        public function edit($roomId,$name,$capacity,$is3D,$cinemaId){
             //editar el valor del atributo seleccionado por el usuario del cine seleccionado
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
-                $room=new CinemaRoom($name,$is3D,$capacity,null,$roomId);
+                $room=new CinemaRoom($name,$is3D,$capacity,$cinemaId,$roomId);
                 $this->daoCR->edit($room);
                 $this->view->admRooms($roomId);
             }

@@ -32,7 +32,7 @@
             } 
         }
         /*
-        *Borra un cine de la BDD correspondiente al nombre del mismo pasado por parametro
+        *Borra una sala de la BDD correspondiente al id del mismo pasado por parametro
         */
         public function delete($cinemaRoomId){
             $sql="DELETE FROM salas WHERE id_sala = :cinemaRoomId";
@@ -47,7 +47,7 @@
 
         }
         /*
-        *Retorna el cine con el nombre pasado por parametro
+        *Retorna la sala con el id pasado por parametro
         */
         public function getForID($roomID){
             $sql = "SELECT * FROM salas WHERE id_sala = :roomID";
@@ -66,8 +66,25 @@
                 return false;
             }
         }
+        public function getForCinema($cinemaId){
+            $sql = "SELECT * FROM salas WHERE id_cine1 = :cinemaId";
+            $parameters['cinemaId']=$cinemaId;
+            try{
+                //creo la instancia de coneccion
+                $this->connection= Connection::getInstance();
+                $result = $this->connection->execute($sql,$parameters);
+            }catch(\PDOException $ex){
+                throw $ex;
+            } 
+            //hay que mapear de un arreglo asociativo a objetos
+            if(!empty($result)){
+                return $this->mapeo($result);
+            }else{
+                return false;
+            }
+        }
         /*
-        *Retorna todos los cines de la BDD
+        *Retorna todas las salas de la BDD
         */
         public function getAll(){
             $sql="SELECT * FROM salas";

@@ -1,10 +1,9 @@
 <?php
     //use daojson\JsonCinema as JsonCinema;
     //$dao = new JsonCinema();
-    use dao\CinemaDao as CinemaDao;
-    $dao = new CinemaDao();
-    $cinema=$dao->getForID2($cinemaId);
-    $rooms = $cinema->getCinemaRooms();
+    use dao\CinemaRoomDao as CRD;
+    $dao = new CRD();
+    $rooms = $dao->getForCinema($cinemaId);
 ?>
 
 <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
@@ -103,16 +102,16 @@
                                             </tr>
                                             <?php 
                                                 //DELETE ENDS HERE
-                                    }
-                                }
-                        ?>
-                    <!-- EDIT START HERE  -->
-                        <td colspan="7" style="text-align:center;">
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
-                            <i class="fas fa-marker">Modificar</i>
-                            </button>
-                        </td>
-                    <!-- EDIT ENDS HERE  -->
+                                    } ?>
+                                    <!-- EDIT START HERE  -->
+                                    <td class="table-dark" colspan="7" style="text-align:center;">
+                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
+                                        <i class="fas fa-marker">Modificar</i>
+                                        </button>
+                                    </td>
+                                    <!-- EDIT ENDS HERE  -->
+            <?php  } ?>
+                    
                 </tbody>
                 </table>       
             </div>
@@ -140,15 +139,10 @@
                                     
                                     <?php 
                                     if(!empty($rooms)){
-                                        if(is_array($rooms)){
-                                            foreach($rooms as $value){ ?>
-                                            
+                                        foreach($rooms as $value){ ?>
                                             <option value="<?php echo $value->getId();?>"> <?php echo $value->getName();?> </option>                        
                                         <?php }
-                                        
-                                        }
-                                        else ?><option value="<?php echo $rooms->getId();?>"> <?php echo $rooms->getName();?> </option> 
-                                   <?php }?>
+                                    }?>
 
                                     </select>
                                 </div>
@@ -164,6 +158,9 @@
                                     <option value="3d">3D</option>
                                     <option value="2d">2D</option>
                                     </select>
+                                </div>
+                                <div>
+                                    <input name="cinemaId" type="hidden" value="<?php echo $value->getCinemaId();?>">
                                 </div>
                         </div>
 
