@@ -34,16 +34,13 @@
             include_once(VIEWS.'/header.php');
             
             if($showView){
-                
-    
-                
+                         
                 $dao = new MovieApiController();
                 $daoF = new MovieFunctionDao();
             
                 $functions=$daoF->getAll();
                 $array = $dao->getLastMovies(ESP);
                 $genres=$dao->getAllGenres(ESP);
-
                 foreach($array as $k => $v) {
                     if(!$daoF->getForID($v->getID())) {
                         unset($array[$k]);

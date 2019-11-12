@@ -109,7 +109,6 @@
             $parameters["capacity"]=$room->getCapacity();
             $parameters["is3D"]=$room->getIs3D();
             $parameters["roomId"]=$room->getId();
-            var_dump($parameters);
             try
             {
                 $this->connection = Connection::getInstance();
