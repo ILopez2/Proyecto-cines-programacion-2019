@@ -4,8 +4,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <?php if(isset($_SESSION['loggedPass']) && isset($_SESSION['loggedEmail'])){ 
-           ?>
+        <?php if( isset($_SESSION['userLogedIn'])){ ?>
         
             <ul class="navbar-nav ml-auto">
             

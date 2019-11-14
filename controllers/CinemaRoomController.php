@@ -55,7 +55,7 @@
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
                 $room=new CinemaRoom($name,$is3D,$capacity,$cinemaId,$roomId);
                 $this->daoCR->edit($room);
-                $this->view->admRooms($roomId);
+                $this->view->admRooms($cinemaId);
             }
         }
     }
