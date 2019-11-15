@@ -86,9 +86,12 @@
             $dao = new MovieFunctionDao();
             $daoC=new CinemaDao();
             $daoM = new MovieApiController();
+            $daoRM= new CinemaRoomDao();
             $genres=$daoM->getAllGenres(ESP);
-            $cinemasFunction=$dao->getAll();
+            $cinemasFunction=$dao->getForMovie($id);
             $movie = $daoM->getMovieXid($id,ESP);
+            $title=$movie->getTitle();
+            $poster= $daoM->getMoviePoster($movie->getPosterPath());
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
             include_once(VIEWS.'/MovieFunction.php');

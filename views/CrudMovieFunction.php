@@ -108,11 +108,10 @@
                                     $cinemaF=$cinemaDao->getForID2($function->getCinema()); ?>
                                     <tr>
                                     <td class="table-dark"><?php echo $movieF->getTitle(); ?></td>
-                                    <?php
-                                        $rooms=$cinemaF->getCinemaRooms();
-                                        foreach($rooms as $room){
-                                            echo "<td class=table-dark>".$room->getName()."</td>";                           
-                                        }?>
+                                    <?php 
+                                        $room=$roomDao->getForID($function->getCinemaRoom());                          
+                                    ?>
+                                    <td class=table-dark><?php echo $room->getName();?></td>
                                     <td class="table-dark"><?php echo $function->getDate(); ?></td>
                                     <td class="table-dark"><?php echo $function->getTime(); ?></td>
                                     <td class="table-dark"><?php echo $function->getLanguage(); ?></td>
@@ -130,11 +129,10 @@
                                 ?>                            
                                 <tr>
                                     <td class="table-dark"><?php echo $movieF->getTitle(); ?></td>
-                                    <?php
-                                        $rooms=$cinemaF->getCinemaRooms();
-                                        foreach($rooms as $room){
-                                            echo "<td class=table-dark>".$room->getName()."</td>";                           
-                                        }?>
+                                    <?php 
+                                        $room=$roomDao->getForID($functions->getCinemaRoom());                          
+                                    ?>
+                                    <td class=table-dark><?php echo $room->getName();?></td>
                                     <td class="table-dark"><?php echo $functions->getDate(); ?></td>
                                     <td class="table-dark"><?php echo $functions->getTime(); ?></td>
                                     <td class="table-dark"><?php echo $functions->getLanguage(); ?></td>
