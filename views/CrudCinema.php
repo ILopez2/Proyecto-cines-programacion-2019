@@ -68,18 +68,18 @@
                                     <td class="table-dark">
 
                                     <!-- DELETE START HERE  -->
-                                        <a href="<?php echo FRONT_ROOT?>Cinema/delete?id=<?php echo $cine->getName()?>" class="btn btn-danger" onclick="clicked(event)">
+                                        <a href="<?php echo FRONT_ROOT?>Cinema/delete?id=<?php echo $cine->getId()?>" class="btn btn-danger" onclick="clicked(event)">
                                             <i class="far fa-trash-alt"> Eliminar</i>
                                         </a>
                                     <!-- DELETE START HERE  -->
                                     <!-- CINEMA ROOMS VIEW START HERE -->
-                                    <a href="<?php echo FRONT_ROOT?>Views/admRooms?id=<?php echo $cine->getId()?>" class="btn btn-primary" onclick="clicked(event)">
-                                        <i class="fas fa-person-booth"> Ver Salas</i>
+                                    <a href="<?php echo FRONT_ROOT?>Views/admRooms?id=<?php echo $cine->getId()?>" class="btn btn-primary" >
+                                        <i class="fas fa-person-booth"> Administrar Salas</i>
                                     </a>
                                     <!-- CINEMA ROOMS VIEW ENDS HERE -->
                                     <!-- FUNCTIONS START HERE  -->
-                                    <a href="<?php echo FRONT_ROOT?>Views/admFunctions?id=<?php echo $cine->getName()?>" class="btn btn-success" onclick="clicked(event)">
-                                        <i class="fa fa-ticket"> Ver Funciones</i>
+                                    <a href="<?php echo FRONT_ROOT?>Views/admFunctions?id=<?php echo $cine->getName()?>" class="btn btn-success" >
+                                        <i class="fa fa-ticket"> Administrar Funciones</i>
                                     </a>
                                     <!-- FUNCTIONS START HERE  -->
                                     </td>
@@ -96,19 +96,19 @@
                                     <td class="table-dark">
 
                                     <!-- DELETE START HERE  -->
-                                        <a href="<?php echo FRONT_ROOT?>Cinema/delete?id=<?php echo $cinemas->getName()?>" class="btn btn-danger" onclick="clicked(event)">
-                                            <i class="far fa-trash-alt"></i>
+                                        <a href="<?php echo FRONT_ROOT?>Cinema/delete?id=<?php echo $cinemas->getId()?>" class="btn btn-danger" onclick="clicked(event)">
+                                            <i class="far fa-trash-alt"> Eliminar</i>
                                         </a>
                                     <!-- DELETE START HERE  -->
 
                                     <!-- CINEMA ROOMS VIEW START HERE -->
-                                    <a href="<?php echo FRONT_ROOT?>Views/admRooms?id=<?php echo $cinemas->getId()?>" class="btn btn-primary" onclick="clicked(event)">
-                                        <i class="fas fa-person-booth">Salas</i>
+                                    <a href="<?php echo FRONT_ROOT?>Views/admRooms?id=<?php echo $cinemas->getId()?>" class="btn btn-primary" >
+                                        <i class="fas fa-person-booth"> Administrar Salas</i>
                                     </a>
                                     <!-- CINEMA ROOMS VIEW ENDS HERE -->
                                      <!-- FUNCTIONS START HERE  -->
-                                     <a href="<?php echo FRONT_ROOT?>Views/admFunctions?id=<?php echo $cinemas->getName()?>" class="btn btn-danger" onclick="clicked(event)">
-                                            <i class="fa fa-ticket">Funciones</i>
+                                     <a href="<?php echo FRONT_ROOT?>Views/admFunctions?id=<?php echo $cinemas->getName()?>" class="btn btn-danger" >
+                                            <i class="fa fa-ticket"> Administrar Funciones</i>
                                         </a>
                                     <!-- FUNCTIONS START HERE  -->
                                     </td>

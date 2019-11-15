@@ -43,20 +43,27 @@
             include_once(VIEWS.'/footer.php');
         }
 
-        public function searchGen($searchG){ 
+        public function searchForGen($searchG){ 
             
             $daoMovie = new MovieApiController();
             $daoFunction= new MovieFunctionDao();
             $genres=$daoMovie->getAllGenres(ESP);
             $functions=$daoFunction->getAll();
+            
             $result=array();
-            foreach($functions as $fu){
-                $movie=$daoMovie->getMovieXid($fu->getMovie(),ESP);
+            if(is_array($functions)){
+                foreach($functions as $fu){
+                    $movie=$daoMovie->getMovieXid($fu->getMovie(),ESP);
+                    array_push($result,$movie);
+                }
+            }
+            else{
+                $movie=$daoMovie->getMovieXid($functions->getMovie(),ESP);
                 array_push($result,$movie);
             }
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
-            include_once(VIEWS.'/SearchResult.php');
+            include_once(VIEWS.'/SearchGen.php');
             include_once(VIEWS.'/footer.php');
         }
         public function admFunctions($cinemaName){
@@ -87,7 +94,7 @@
             include_once(VIEWS.'/MovieFunction.php');
             include_once(VIEWS.'/footer.php');
         }
-        public function searchFunctions($searchF){
+        public function searchForDate($searchF){
             $dao = new MovieFunctionDao();
             $daoC=new CinemaDao();
             $daoM = new MovieApiController();
@@ -95,7 +102,7 @@
             $cinemasFunction=$dao->getAll();
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
-            include_once(VIEWS.'/SearchFunction.php');
+            include_once(VIEWS.'/SearchDate.php');
             include_once(VIEWS.'/footer.php');
         }
     }

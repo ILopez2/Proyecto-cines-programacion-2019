@@ -12,26 +12,32 @@
         private $view;
         
         public function __construct(){
-            //$this->cinemaDao = new JsonCinema();
             $this->cinemaDao = new CinemaDao();
             $this->view = new View();
         }
 
         public function add($name,$adress,$price,$city){
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
+                if($this->cinemaDao->getForID($name)!=null){
                 $cinema = new Cinema($name,$city,$adress,$price);
                 //falta resolver el tema de las salas, por el momento no trabajo con ellas solo se crea un array vacio.
                 $this->cinemaDao->add($cinema);
                 $_SESSION['successMje'] = 'Cine agregado con éxito';
                 $this->view->admCinema();
+                }
+                else{
+                    $_SESSION['errorMje'] = 'Ya existe un cine con ese nombre';
+                    $this->view->admCinema();
+                }
             }
 
         }
 
-        public function delete($name){
+        public function delete($id){
             //borrar el cine con el nombre pasado por parameto
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
-                $this->cinemaDao->delete($name);
+
+                $this->cinemaDao->delete($id);
                 $_SESSION['successMje'] = 'Cine borrado con éxito';
                 $this->view->admCinema();
             }

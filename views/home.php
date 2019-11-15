@@ -2,7 +2,7 @@
 <section class="jumbotron">
 		<div class="container">
 			<h1>MoviePass</h1>
-			<p>Ultimos lanzamientos</p>
+			<h3>Cartelera</h3>
 		</div>
 </section>
 <table border=1 class="table jumbotron">

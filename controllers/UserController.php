@@ -32,7 +32,7 @@
 
             if(isset($_SESSION['userLogedIn'])) {
 
-                $user = $userDAO->getForID($_SESSION['userLogedIn']->getEmail());
+                $user = $this->userDAO->getForID($_SESSION['userLogedIn']->getEmail());
 
                 if($user->getPassword() == $_SESSION['userLogedIn']->getPassword())
                     return $user;

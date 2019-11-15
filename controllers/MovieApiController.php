@@ -34,7 +34,7 @@
             $jsonContent=file_get_contents(SERCM.$aux.$lang);
             $arrayJson= ($jsonContent) ? json_decode($jsonContent, true ) : array();
             $arrayMovies=$arrayJson["results"];
-                
+
             foreach($arrayMovies as $values){
                     $movieGenres=$this->genreIdToName($values["genre_ids"],$lang);
                     $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"],$movieGenres);
@@ -49,9 +49,13 @@
         }
 
         public function getMovieXid($id,$lang){
+            
             $jsonContent=file_get_contents(SERCHMID.$id.APIKEY.$lang);
             $values= ($jsonContent) ? json_decode($jsonContent, true ) : array();
-            $movieGenres=$this->genreIdToName($values["genres"],$lang);
+            $movieGenres=array();
+            foreach($values["genres"] as $gen){
+                array_push($movieGenres,$gen["name"]);
+            }
             $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"],$movieGenres);
             return $movie;
         }
@@ -71,11 +75,12 @@
             $allGenres=$this->getAllGenres($lang);
             foreach($allGenres as $genre){
                 for($i=0;$i<count($genresId);$i++){
-                    if($genre->getId()==$genresId[$i]){
+                    if($genre->getId()==$genresId[$i]){                
                         array_push($genreNames,$genre->getName());
                     }
                 }
             }
+            
             return $genreNames;
         }
         //DEVUELVE UN ARRAY CON TODOS LOS GENEROS

@@ -36,9 +36,9 @@
         /*
         *Borra un cine de la BDD correspondiente al nombre del mismo pasado por parametro
         */
-        public function delete($cinemaName){
-            $sql="DELETE FROM cines WHERE nombre_cine = :cinemaName";
-            $parameters['cinemaName']=$cinemaName;
+        public function delete($id){
+            $sql="DELETE FROM cines WHERE id_cine = :id";
+            $parameters['id']=$id;
             try {
                 $this->connection = Connection::getInstance();
                 return $this->connection->ExecuteNonQuery($sql, $parameters);    

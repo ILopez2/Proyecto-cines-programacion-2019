@@ -11,7 +11,7 @@
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group mr-1" role="group" aria-label="First group">
                     
-                    <form action="<?php echo FRONT_ROOT?>Views/searchGen" method="POST" class="form-inline">
+                    <form action="<?php echo FRONT_ROOT?>Views/searchForGen" method="POST" class="form-inline">
                         <!-- SEARCH BY GENRE STARTS HERE -->
                         <select class="form-control mr-sm-2" placeholder="Select" aria-label="Select" name="searchG" required>
                             <option value="" disabled selected >Selecciones un genero</option>
@@ -28,7 +28,7 @@
                     </div>
                     <div class="btn-group mr-1" role="group" aria-label="First group">
                     
-                    <form action="<?php echo FRONT_ROOT?>Views/searchFunctions" method="POST" class="form-inline">
+                    <form action="<?php echo FRONT_ROOT?>Views/searchForDate" method="POST" class="form-inline">
                             <input type="date" name="searchF" min="<?php echo date("Y-m-d");?>" >
                         <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fas fa-user-astronaut"></i> Buscar</button>
                     </form>
