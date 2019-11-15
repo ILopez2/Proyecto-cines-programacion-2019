@@ -10,9 +10,10 @@ class ClassMovie{
     private $overview; //SINOPSIS DE LA PELICULA
     private $posterPath; //RUTA DEL ARCHIVO 
     private $genres; //ARRAY DE GENEROS
+    private $duration; //DURACION DE LA PELICULA
 
      //CONSTRUCTOR
-    public function __construct($id,$title,$releaseDate,$adult,$overview,$posterPath,$genres=array()){
+    public function __construct($id,$title,$releaseDate,$adult,$overview,$posterPath,$genres=array(),$duration){
         $this->id=$id;
         $this->title=$title;
         $this->releaseDate=$releaseDate;
@@ -20,6 +21,7 @@ class ClassMovie{
         $this->overview=$overview;
         $this->posterPath=$posterPath;
         $this->genres=$genres;
+        $this->duration=$duration;
     }
 
      //GETTERS
@@ -43,6 +45,9 @@ class ClassMovie{
     }
     public function getGenres(){
         return $this->genres;
+    }
+    public function getDuration(){
+        return $this->duration;
     }
 }
 ?>

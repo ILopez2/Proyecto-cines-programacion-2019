@@ -74,12 +74,12 @@
                                     <!-- DELETE START HERE  -->
                                     <!-- CINEMA ROOMS VIEW START HERE -->
                                     <a href="<?php echo FRONT_ROOT?>Views/admRooms?id=<?php echo $cine->getId()?>" class="btn btn-primary" >
-                                        <i class="fas fa-person-booth"> Administrar Salas</i>
+                                        <i class="fas fa-person-booth"> Salas</i>
                                     </a>
                                     <!-- CINEMA ROOMS VIEW ENDS HERE -->
                                     <!-- FUNCTIONS START HERE  -->
                                     <a href="<?php echo FRONT_ROOT?>Views/admFunctions?id=<?php echo $cine->getName()?>" class="btn btn-success" >
-                                        <i class="fa fa-ticket"> Administrar Funciones</i>
+                                        <i class="fa fa-ticket"> Funciones</i>
                                     </a>
                                     <!-- FUNCTIONS START HERE  -->
                                     </td>
@@ -103,12 +103,12 @@
 
                                     <!-- CINEMA ROOMS VIEW START HERE -->
                                     <a href="<?php echo FRONT_ROOT?>Views/admRooms?id=<?php echo $cinemas->getId()?>" class="btn btn-primary" >
-                                        <i class="fas fa-person-booth"> Administrar Salas</i>
+                                        <i class="fas fa-person-booth"> Salas</i>
                                     </a>
                                     <!-- CINEMA ROOMS VIEW ENDS HERE -->
                                      <!-- FUNCTIONS START HERE  -->
                                      <a href="<?php echo FRONT_ROOT?>Views/admFunctions?id=<?php echo $cinemas->getName()?>" class="btn btn-danger" >
-                                            <i class="fa fa-ticket"> Administrar Funciones</i>
+                                            <i class="fa fa-ticket"> Funciones</i>
                                         </a>
                                     <!-- FUNCTIONS START HERE  -->
                                     </td>

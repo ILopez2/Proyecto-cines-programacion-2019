@@ -54,23 +54,30 @@ constraint fk_salas foreign key(id_sala1) references salas(id_sala),
 constraint pk_asientos primary key(nro_asiento)
 );
 
-/*
-create table tipoPeliculas(
-id_tipoPelicula int auto_increment not null,
-genero varchar(30),
-descripcion varchar(300),
-constraint pk_tipoPelicula primary key(id_tipoPelicula)
+create table peliculas(
+	id_pelicula int not null unique,
+    id_generosXpelicula int,
+    title varchar(100) not null,
+    releaseDate date not null,
+    adult boolean not null,
+    overview varchar(500),
+    posterPath varchar(200),
+    constraint pk_pelicula primary key(id_pelicula)
 );
 
-create table peliculas(
-id_pelicula int auto_increment not null,
-id_tipoPelicula1 int not null,
-nombre_pelicula varchar(30),
-descripcion varchar(300),
-constraint fk_tipoPelicula foreign key(id_tipoPelicula1)references tipoPeliculas(id_tipoPelicula),
-constraint pk_peliculas primary key(id_pelicula)
+create table generos (
+	id_genero int not null unique,
+    nombre varchar(100),
+    constraint pk_genero primary key(id_genero)
 );
-*/
+create table generosXpelicula (
+    id_pelicula int not null,
+    id_genero int not null,
+    constraint fk_pelicula foreign key(id_pelicula) references peliculas(id_pelicula),
+    constraint fk_genero foreign key(id_genero) references generos(id_genero),
+    constraint pk_generosXpelicula primary key(id_pelicula, id_genero)
+);
+
 create table funciones(
 id_funcion int auto_increment not null,
 id_sala2 int not null,

@@ -41,6 +41,7 @@
                         <i class="fas fa-users-cog"></i> Administrar
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href="<?php echo FRONT_ROOT?>Views/admTickets"><i class="fas fa-hand-holding-usd"></i> Tickets</a>
                         <a class="dropdown-item" href="<?php echo FRONT_ROOT?>Views/admCinema"><i class="fas fa-film"></i> Cines</a>
                         <a class="dropdown-item" href="<?php echo FRONT_ROOT?>Views/admUsers"><i class="fas fa-user-cog"></i> Usuarios</a>
                         </div>
