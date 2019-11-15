@@ -42,7 +42,7 @@
                 $array = $dao->getLastMovies(ESP);
                 $genres=$dao->getAllGenres(ESP);
                 foreach($array as $k => $v) {
-                    if(!$daoF->getForID($v->getID())) {
+                    if(!$daoF->getForMovie($v->getID())) {
                         unset($array[$k]);
                     }
                 }
