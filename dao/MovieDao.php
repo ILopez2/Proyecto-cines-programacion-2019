@@ -30,7 +30,7 @@
             $parameters["Duration"]= $movie->getDuration();
             $daogxm = new DAOGXM();
             foreach($movie->getGenres() as $gen){
-                $daogxm->delete($movie->getId());
+                $daogxm->delete($movie->getId().$gen);
                 $genXmovie= new GenreXMovie($gen,$movie->getId());
                 $daogxm->add($genXmovie);
             }

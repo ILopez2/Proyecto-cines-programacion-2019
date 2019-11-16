@@ -16,7 +16,8 @@
          
         public function add($GenreXMovie){
 
-            $sql = "INSERT INTO generosXpelicula(id_pelicula,id_genero) VALUES (:id_pelicula,:id_genero)";
+            $sql = "INSERT INTO generosXpelicula(id_generoxpelicula,id_pelicula,id_genero) VALUES (:id_generoxpelicula,:id_pelicula,:id_genero)";
+            $parameters["id_genero"]=$GeGenreXMovie->getIdMovie().$GenreXMovie->getIdGenre(); 
             $parameters["id_pelicula"]=$GenreXMovie->getIdMovie();
             $parameters["id_genero"]=$GenreXMovie->getIdGenre(); 
             

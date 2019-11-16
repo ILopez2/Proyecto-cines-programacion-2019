@@ -64,18 +64,19 @@ create table peliculas(
     duration int,
     constraint pk_pelicula primary key(id_pelicula)
 );
-drop table peliculas
+
 create table generos (
 	id_genero int not null unique,
     nombre varchar(100),
     constraint pk_genero primary key(id_genero)
 );
 create table generosXpelicula (
+	id_generoxpelicula int auto_increment not null ,
     id_pelicula int not null,
     id_genero int not null,
     constraint fk_pelicula foreign key(id_pelicula) references peliculas(id_pelicula),
     constraint fk_genero foreign key(id_genero) references generos(id_genero),
-    constraint pk_generosXpelicula primary key(id_pelicula, id_genero)
+    constraint pk_generosXpelicula primary key(id_generoxpelicula)
 );
 
 create table funciones(
@@ -162,7 +163,6 @@ insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(2,"sala2",300,"2D"
 insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha,hora)values(1,1,475557,"Subtitulada",'2019-10-07','10:00:00');
 insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha,hora)values(2,1,475557,"Doblada",'2019-10-07','11:00');
 /*select * from roles;
-select * from generos;
 select * from peliculas;
 select * from funciones;
 select * from cidades;*/ 
