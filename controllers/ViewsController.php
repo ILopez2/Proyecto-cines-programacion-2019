@@ -4,6 +4,7 @@
     use dao\MovieFunctionDao as MovieFunctionDao;
     use dao\CinemaRoomDao as CinemaRoomDao;
     use dao\UserDao as UserDao;
+    use dao\TicketDao as TicketDao;
     use controllers\MovieApiController as MovieApiController;
     
     class ViewsController
@@ -106,6 +107,24 @@
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
             include_once(VIEWS.'/SearchDate.php');
+            include_once(VIEWS.'/footer.php');
+        }
+        public function admTickets(){
+            $daoTicket = new TicketDao();
+            $daoCinema=new CinemaDao();
+            $daoCinemaRoom = new CinemaRoomDao();
+            $daoMovieFunction = new MovieFunctionDao();
+            $daoUsers = new UserDao();
+            
+            $users=$daoUsers->getAll();
+            $cinemas=$daoCinema->getAll();
+            $cinemaRooms=$daoCinemaRoom->getAll();
+            $functions=$daoFunction->getAll();
+            $tickets=$daoTicket->getAll();
+            
+            include_once(VIEWS.'/header.php');
+            include_once(VIEWS.'/nav.php');
+            include_once(VIEWS.'/CrudTicket.php');
             include_once(VIEWS.'/footer.php');
         }
     }
