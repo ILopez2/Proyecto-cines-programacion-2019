@@ -31,7 +31,11 @@
         }
         
         public function delete($id_generoXpelicula){
+<<<<<<< HEAD
             $sql="DELETE FROM generosXpelicula WHERE  id_generoxpelicula = :id_generoXpelicula";
+=======
+            $sql="DELETE FROM generosxpelicula WHERE  id_generoxpelicula = :id_generoXpelicula";
+>>>>>>> b863fe9aa366100f623d7b4b702caee2b39466a8
             $parameters['id_generoXpelicula']=$id_generoXpelicula;
             try {
                 $this->connection = Connection::getInstance();
