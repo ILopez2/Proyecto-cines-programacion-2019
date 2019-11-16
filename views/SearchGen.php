@@ -11,7 +11,6 @@
                     <?php foreach($result as $value){ ?>
                         <?php 
                             foreach($value->getGenres() as $gen){
-                            
                             if($gen == $searchG){?>
                             <tr>
                             <td>

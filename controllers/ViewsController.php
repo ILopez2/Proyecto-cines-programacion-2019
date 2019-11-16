@@ -45,7 +45,6 @@
         }
 
         public function searchForGen($searchG){ 
-            
             $daoMovie = new MovieApiController();
             $daoFunction= new MovieFunctionDao();
             $genres=$daoMovie->getAllGenres(ESP);
@@ -53,7 +52,7 @@
             $result=array();
             if(is_array($functions)){
                 foreach($functions as $fu){
-                    $movie=$daoMovie->getMovieXid($fu->getMovie(),ESP);
+                    $movie=$daoMovie->getMovieXid($fu->getMovie());
                     array_push($result,$movie);               
                 }
                 $result=array_unique($result,SORT_REGULAR );
@@ -90,7 +89,7 @@
             $daoRM= new CinemaRoomDao();
             $genres=$daoM->getAllGenres(ESP);
             $cinemasFunction=$dao->getForMovie($id);
-            $movie = $daoM->getMovieXid($id,ESP);
+            $movie = $daoM->getMovieXid($id);
             $title=$movie->getTitle();
             $poster= $daoM->getMoviePoster($movie->getPosterPath());
             include_once(VIEWS.'/header.php');

@@ -32,8 +32,10 @@
             return $movies;   
         }
 
-        public function getMovieXid($id,$lang){            
-            
+        public function getMovieXid($id){            
+            $daom= new DAOM();
+            $movie=$daom->getForID($id);
+            return $movie;
         }
         public function getDetailsForId($id){            
             $jsonContent=file_get_contents(SERCHMID.$id.APIKEY.ESP);
@@ -54,21 +56,7 @@
             return $imgm;
         }
 
-        //TRANSFORMA EL ARRAY DE IDS DE GENEROS EN UN ARRAY DE LOS NOMBRES DE LOS GENEROS
-        public function genreIdToName($genresId){
-            $genreNames=array();
-            $allGenres=$this->getAllGenres(ESP);
-            foreach($allGenres as $genre){
-                for($i=0;$i<count($genresId);$i++){
-                    if($genre->getId()==$genresId[$i]){                
-                        array_push($genreNames,$genre->getName());
-                    }
-                }
-            }
-            
-            return $genreNames;
-        }
-        //DEVUELVE UN ARRAY CON TODOS LOS GENEROS
+        //CARGA TODOS LOS GENEROS DE LA API EN LA BDD
         public function getAllGenresToDB(){
             $daog=new DAOG();
             $jsonContent=file_get_contents(GEN.ESP);
@@ -80,6 +68,7 @@
             $home=new HC();
             $home->Index();
         }
+        //DEVUELVE UN ARRAY CON TODOS LOS GENEROS
         public function getAllGenres(){
             $daog=new DAOG();
             $genres=$daog->getAll();

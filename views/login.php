@@ -68,7 +68,7 @@
                     </div>
                     <div class="form-group">
                         <label>Birthdate</label>
-                        <input type="date" class="form-control" name="birthdate" placeholder="Fecha de nacimiento" required/>
+                        <input type="date" class="form-control" name="birthdate" placeholder="Fecha de nacimiento" max=" <?php echo $date; ?>" required/>
                     </div>
                     
                     <div class="form-group">
@@ -78,7 +78,7 @@
 
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" name="password" placeholder="******" required/>
+                        <input type="password" class="form-control" name="password" placeholder="Contraseña" required/>
                     </div>
 
                 </div>

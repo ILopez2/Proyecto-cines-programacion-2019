@@ -18,7 +18,7 @@
 
         public function add($name,$adress,$price,$city){
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
-                if($this->cinemaDao->getForID($name)!=null){
+                if($this->cinemaDao->getForID($name)==null){
                 $cinema = new Cinema($name,$city,$adress,$price);
                 //falta resolver el tema de las salas, por el momento no trabajo con ellas solo se crea un array vacio.
                 $this->cinemaDao->add($cinema);

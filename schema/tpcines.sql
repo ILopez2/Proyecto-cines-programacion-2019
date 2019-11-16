@@ -71,7 +71,7 @@ create table generos (
     constraint pk_genero primary key(id_genero)
 );
 create table generosXpelicula (
-	id_generoxpelicula int auto_increment not null ,
+	id_generoxpelicula varchar(100) not null ,
     id_pelicula int not null,
     id_genero int not null,
     constraint fk_pelicula foreign key(id_pelicula) references peliculas(id_pelicula),
@@ -88,7 +88,7 @@ lenguaje varchar(20) not null,
 fecha date not null,
 hora time not null,
 constraint fk_salas1 foreign key(id_sala2) references salas(id_sala),
-#constraint fk_peliculas foreign key(id_pelicula1) references peliculas(id_pelicula),
+constraint fk_peliculas foreign key(id_pelicula1) references peliculas(id_pelicula),
 constraint fk_cines2 foreign key(id_cine2) references cines(id_cine),
 constraint pk_funciones primary key(id_funcion)
 );

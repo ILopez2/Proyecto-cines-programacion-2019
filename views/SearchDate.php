@@ -22,12 +22,12 @@
             <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
-                    <th>Movie</th>
-                    <th>Cinema</th>
-                    <th>date</th>
-                    <th>time</th>
-                    <th>language</th>
-                    <th>cinemaRoom</th>
+                    <th>Pelicula</th>
+                    <th>Cine</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Lenguaje</th>
+                    <th>Sala</th>
                 </tr>
             </thead>
             <tbody>

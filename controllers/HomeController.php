@@ -2,6 +2,7 @@
     
     use controllers\UserController as UserController;
     use controllers\MovieApiController as MovieApiController;
+    use controllers\DateTimeController as DateTime;
     use dao\MovieFunctionDao as MovieFunctionDao;
     use dao\CinemaDao as CinemaDao;
     class HomeController
@@ -14,6 +15,7 @@
 
         public function Index($email=null,$password=null)
         {
+            $daoDT=new DateTime();
             //checksession y login
             $showView=false; //se vuelve verdadero solo si hay un user en session
             
@@ -23,7 +25,6 @@
             else{
                 if(isset($email)) {
                     if($user=$this->userController->login($email,$password)){
-
                         $showView=true;
                     }
                     else {
@@ -39,18 +40,20 @@
                 $daoF = new MovieFunctionDao();
                 $functions=$daoF->getAll();
                 $array = $dao->getLastMovies();
-                $genres=$dao->getAllGenres(ESP);
-                foreach($array as $k => $v) {
-                    if(!$daoF->getForMovie($v->getID())) {
-                        unset($array[$k]);
+                $genres=$dao->getAllGenres();
+                if(!empty($array)){
+                    foreach($array as $k => $v) {
+                        if(!$daoF->getForMovie($v->getID())) {
+                            unset($array[$k]);
+                        }
                     }
                 }
-
                 include_once(VIEWS.'/nav.php');
                 include_once(VIEWS.'/home.php');
             }
             else{
-               
+                $date=$daoDT->getActualDate();
+                var_dump($date);
                 include_once(VIEWS.'/login.php');
             }
             

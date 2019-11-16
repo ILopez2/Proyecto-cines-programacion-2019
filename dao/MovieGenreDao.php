@@ -97,7 +97,7 @@
         protected function mapear($value) {
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($p){
-                return new Genre($p['id_genero'],$p['nombre']);
+                return new Genre($p['nombre'],$p['id_genero']);
             }, $value);
                 /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
                 return count($resp) > 1 ? $resp : $resp['0'];

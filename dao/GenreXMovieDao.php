@@ -30,9 +30,9 @@
             } 
         }
         
-        public function delete($id_pelicula){
-            $sql="DELETE FROM generosXpelicula WHERE  id_pelicula = :id_pelicula";
-            $parameters['id_pelicula']=$id_pelicula;
+        public function delete($id_generoXpelicula){
+            $sql="DELETE FROM generosXpelicula WHERE  id_generoxpelicula = :id_generoXpelicula";
+            $parameters['id_generoXpelicula']=$id_generoXpelicula;
             try {
                 $this->connection = Connection::getInstance();
                 return $this->connection->ExecuteNonQuery($sql, $parameters);    
@@ -95,7 +95,7 @@
         protected function mapear($value) {
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($p){
-                return new GenreXMovie($p['id_pelicula'],$p['id_genero']);
+                return new GenreXMovie($p['id_genero'],$p['id_pelicula']);
             }, $value);
                 /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
                 return count($resp) > 1 ? $resp : $resp['0'];

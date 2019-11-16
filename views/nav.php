@@ -16,7 +16,7 @@
                         <select class="form-control mr-sm-2" placeholder="Select" aria-label="Select" name="searchG" required>
                             <option value="" disabled selected >Selecciones un genero</option>
                             <?php foreach($genres as $gen){
-                                echo "<option value=".$gen->getName().">".$gen->getName()."</option>";          
+                                echo "<option value=".$gen->getId().">".$gen->getName()."</option>";          
                             }?>
                         </select>    
                             
