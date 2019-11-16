@@ -30,9 +30,9 @@
             } 
         }
         
-        public function delete($id_pelicula){
-            $sql="DELETE FROM generosXpelicula WHERE  id_pelicula = :id_pelicula";
-            $parameters['id_pelicula']=$id_pelicula;
+        public function delete($id_generoXpelicula){
+            $sql="DELETE FROM generosxpelicula WHERE  id_generoxpelicula = :id_generoXpelicula";
+            $parameters['id_generoXpelicula']=$id_generoXpelicula;
             try {
                 $this->connection = Connection::getInstance();
                 return $this->connection->ExecuteNonQuery($sql, $parameters);    
