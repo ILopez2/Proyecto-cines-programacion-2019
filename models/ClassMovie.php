@@ -13,7 +13,7 @@ class ClassMovie{
     private $duration; //DURACION DE LA PELICULA
 
      //CONSTRUCTOR
-    public function __construct($id,$title,$releaseDate,$adult,$overview,$posterPath,$genres=array(),$duration){
+    public function __construct($id,$title,$releaseDate,$adult,$overview,$posterPath,$genres=array(),$duration=null){
         $this->id=$id;
         $this->title=$title;
         $this->releaseDate=$releaseDate;

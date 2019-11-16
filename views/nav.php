@@ -20,24 +20,39 @@
                             }?>
                         </select>    
                             
-                        <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fas fa-user-astronaut"></i> Buscar</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fas fa-search"></i> Buscar</button>
                     
                     </form>
                     <!-- SEARCH BY GENRE ENDS HERE -->
                     <!-- SEARCH BY DATE STARTS HERE -->
                     </div>
-                    <div class="btn-group mr-1" role="group" aria-label="First group">
+                    <div class="btn-group mr-1" role="group" aria-label="Second group">
                     
                     <form action="<?php echo FRONT_ROOT?>Views/searchForDate" method="POST" class="form-inline">
-                            <input type="date" name="searchF" min="<?php echo date("Y-m-d");?>" >
-                        <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fas fa-user-astronaut"></i> Buscar</button>
+                        <input type="date" name="searchF" min="<?php echo date("Y-m-d");?>" >
+                        <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fas fa-search"></i> Buscar</button>
                     </form>
                     </div>
                     <!-- SEARCH BY DATE ENDS HERE -->
                     <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1') {?>
-                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                    <div class="btn-group mr-2" role="group" aria-label="Third group">
                     <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-database"></i> BDD
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href="<?php echo FRONT_ROOT?>MovieApi/getLastMoviesToDB">
+                        <i class="fas fa-video"></i> Cargar peliculas
+                        </a>
+                        <a class="dropdown-item" href="<?php echo FRONT_ROOT?>MovieApi/getAllGenresToDB">
+                        <i class="fas fa-bookmark"></i> Cargar generos
+                        </a>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="btn-group mr-2" role="group" aria-label="Fourth group">
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop2" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-users-cog"></i> Administrar
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -49,7 +64,7 @@
                     <?php } ?>
                         
                     </div>
-                    <div class="btn-group" role="group" aria-label="Third group">
+                    <div class="btn-group" role="group" aria-label="Fifth group">
                         
                         <a class="btn btn-danger" href="<?php echo FRONT_ROOT?>Home/logout"  onclick="clicked(event)"><i class="fas fa-door-open"></i> </i>Cerrar Sesion </a>
                        

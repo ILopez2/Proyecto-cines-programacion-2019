@@ -56,15 +56,15 @@ constraint pk_asientos primary key(nro_asiento)
 
 create table peliculas(
 	id_pelicula int not null unique,
-    id_generosXpelicula int,
     title varchar(100) not null,
     releaseDate date not null,
-    adult boolean not null,
-    overview varchar(500),
+    adult varchar(10),
+    overview varchar(1000),
     posterPath varchar(200),
+    duration int,
     constraint pk_pelicula primary key(id_pelicula)
 );
-
+drop table peliculas
 create table generos (
 	id_genero int not null unique,
     nombre varchar(100),
@@ -162,7 +162,7 @@ insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(2,"sala2",300,"2D"
 insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha,hora)values(1,1,475557,"Subtitulada",'2019-10-07','10:00:00');
 insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha,hora)values(2,1,475557,"Doblada",'2019-10-07','11:00');
 /*select * from roles;
-select * from cines;
-select * from usuarios;
+select * from generos;
+select * from peliculas;
 select * from funciones;
 select * from cidades;*/ 

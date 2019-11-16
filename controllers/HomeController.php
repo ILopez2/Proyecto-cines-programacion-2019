@@ -37,9 +37,8 @@
                          
                 $dao = new MovieApiController();
                 $daoF = new MovieFunctionDao();
-            
                 $functions=$daoF->getAll();
-                $array = $dao->getLastMovies(ESP);
+                $array = $dao->getLastMovies();
                 $genres=$dao->getAllGenres(ESP);
                 foreach($array as $k => $v) {
                     if(!$daoF->getForMovie($v->getID())) {

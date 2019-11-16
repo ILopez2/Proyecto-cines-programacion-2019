@@ -2,7 +2,10 @@
     //https://developers.themoviedb.org/3
     use models\ClassMovieGenre as CMG;
     use models\ClassMovie as CM;
+    use dao\MovieDao as DAOM;
+    use dao\MovieGenreDao as DAOG;
     use controllers\ViewsController as VC;
+    use controllers\HomeController as HC;
 
     class MovieApiController{
 
@@ -11,55 +14,37 @@
         public function __construct(){
             $view = new VC();
         }
-
-        public function getLastMovies($lang){
-            $movies=array();
-            $jsonContent=file_get_contents(LASTMVS.$lang);
-
+        public function getLastMoviesToDB(){
+            $daom= new DAOM();
+            $jsonContent=file_get_contents(LASTMVS.ESP);
             $arrayJson= ($jsonContent) ? json_decode($jsonContent, true ) : array();
             $arrayMovies=$arrayJson["results"];
-                foreach($arrayMovies as $values){
-                    $movieGenres=$this->genreIdToName($values["genre_ids"],$lang);
-                    $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"],$movieGenres);
-                    array_push($movies,$movie);
-            }
-            return $movies;
-        }
-
-        /**DEVUELVE UN ARREGLO CON PELICULAS RELACIONADAS AL NOMBRE QUE SE PASO POR PARAMETRO */
-        public function getMovie($name,$lang){
-            $aux = str_replace(" ","+",$name);
-            $movies=array();
-
-            $jsonContent=file_get_contents(SERCM.$aux.$lang);
-            $arrayJson= ($jsonContent) ? json_decode($jsonContent, true ) : array();
-            $arrayMovies=$arrayJson["results"];
-
             foreach($arrayMovies as $values){
-                    $movieGenres=$this->genreIdToName($values["genre_ids"],$lang);
-                    $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"],$movieGenres);
-                    array_push($movies,$movie);
+                $movie=$this->getDetailsForId($values["id"]);        
+                $daom->add($movie);             
             }
-            return $movies;
-
+            $home=new HC();
+            $home->Index();
+        }
+        public function getLastMovies(){
+            $daom= new DAOM();
+            $movies= $daom->getAll();
+            return $movies;   
         }
 
-        public function search($searchResult){
-            $this->view->search($searchResult);
-        }
-
-        public function getMovieXid($id,$lang){
+        public function getMovieXid($id,$lang){            
             
-            $jsonContent=file_get_contents(SERCHMID.$id.APIKEY.$lang);
+        }
+        public function getDetailsForId($id){            
+            $jsonContent=file_get_contents(SERCHMID.$id.APIKEY.ESP);
             $values= ($jsonContent) ? json_decode($jsonContent, true ) : array();
-            $movieGenres=array();
+            $genres=array();
             foreach($values["genres"] as $gen){
-                array_push($movieGenres,$gen["name"]);
+                array_push($genres,$gen["id"]);
             }
-            $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"],$movieGenres);
+            $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"],$genres,$values["runtime"]);
             return $movie;
         }
-
         public function getMoviePoster($posterPath=null,$posterSize="200"){
             
             if($posterPath!=null){
@@ -70,9 +55,9 @@
         }
 
         //TRANSFORMA EL ARRAY DE IDS DE GENEROS EN UN ARRAY DE LOS NOMBRES DE LOS GENEROS
-        public function genreIdToName($genresId,$lang){
+        public function genreIdToName($genresId){
             $genreNames=array();
-            $allGenres=$this->getAllGenres($lang);
+            $allGenres=$this->getAllGenres(ESP);
             foreach($allGenres as $genre){
                 for($i=0;$i<count($genresId);$i++){
                     if($genre->getId()==$genresId[$i]){                
@@ -84,14 +69,20 @@
             return $genreNames;
         }
         //DEVUELVE UN ARRAY CON TODOS LOS GENEROS
-        public function getAllGenres($lang){
-            $jsonContent=file_get_contents(GEN.$lang);
+        public function getAllGenresToDB(){
+            $daog=new DAOG();
+            $jsonContent=file_get_contents(GEN.ESP);
             $values= ($jsonContent) ? json_decode($jsonContent, true ) : array();
-            $genres=array();
             for($i=0;$i<count($values["genres"]);$i++){
                 $gen=new CMG($values["genres"][$i]["name"],$values["genres"][$i]["id"]);
-                array_push($genres,$gen);
+                $daog->add($gen);
             }
+            $home=new HC();
+            $home->Index();
+        }
+        public function getAllGenres(){
+            $daog=new DAOG();
+            $genres=$daog->getAll();
             return $genres;
         }
     }
