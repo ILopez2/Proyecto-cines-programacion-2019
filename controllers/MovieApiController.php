@@ -48,7 +48,7 @@
             $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"],$genres,$values["runtime"]);
             return $movie;
         }
-        public function getMoviePoster($posterPath=null,$posterSize="200"){
+        public function getMoviePoster($posterPath=null,$posterSize="300"){
             
             if($posterPath!=null){
                 $imgm=IMGM.$posterSize.$posterPath;

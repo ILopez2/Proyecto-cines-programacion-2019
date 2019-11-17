@@ -68,7 +68,7 @@
                     </div>
                     <div class="form-group">
                         <label>Birthdate</label>
-                        <input type="date" class="form-control" name="birthdate" placeholder="Fecha de nacimiento" max=" <?php echo $date; ?>" required/>
+                        <input type="date" class="form-control" name="birthdate" placeholder="Fecha de nacimiento" min="1919-01-01" max="<?php echo $date;?>" required/>
                     </div>
                     
                     <div class="form-group">

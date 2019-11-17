@@ -53,7 +53,6 @@
             }
             else{
                 $date=$daoDT->getActualDate();
-                var_dump($date);
                 include_once(VIEWS.'/login.php');
             }
             

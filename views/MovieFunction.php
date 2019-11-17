@@ -40,7 +40,7 @@
             <tbody>
                 <tr>
                 <th scope="row">Generos</th>
-                <td colspan="3"><?php foreach($genrs as $gen){ echo $gen.', '; } ?></td>
+                <td colspan="3"><?php foreach($genrs as $gen){ echo $gen.','; } ?></td>
                 </tr>
                 <tr>
                 <th scope="row">Apto para</th>
@@ -48,8 +48,8 @@
                 
                 </tr>
                 <tr>
-                <th scope="row">3</th>
-                <td colspan="3">Para agregar mas info...</td>
+                <th scope="row">Duracion</th>
+                <td colspan="3"><?php  echo $duration." Minutos";?></td>
                 </tr>
             </tbody>
             </table>

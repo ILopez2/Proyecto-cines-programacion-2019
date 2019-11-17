@@ -99,6 +99,7 @@
             $poster= $daoM->getMoviePoster($movie->getPosterPath());
             $overView=$movie->getOverview();
             $genrsId=$movie->getGenres();
+            $duration=$movie->getDuration();
             $genrs=array();
             foreach($genrsId as $genId){
                 array_push($genrs,$daoMG->getForID($genId)->getName());
