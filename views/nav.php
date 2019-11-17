@@ -36,29 +36,19 @@
                     <!-- SEARCH BY DATE ENDS HERE -->
                     <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1') {?>
                     <div class="btn-group mr-2" role="group" aria-label="Third group">
-                    <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-database"></i> BDD
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" href="<?php echo FRONT_ROOT?>MovieApi/getLastMoviesToDB">
-                        <i class="fas fa-video"></i> Cargar peliculas
-                        </a>
-                        <a class="dropdown-item" href="<?php echo FRONT_ROOT?>MovieApi/getAllGenresToDB">
-                        <i class="fas fa-bookmark"></i> Cargar generos
-                        </a>
-                        </div>
+                    <div class="btn-group" role="group" aria-label="Fifth group">    
+                        <a class="btn btn-success" href="<?php echo FRONT_ROOT?>MovieApi/getLastMoviesToDB"><i class="fas fa-video"></i> Cargar peliculas</a>  
                     </div>
                     </div>
                     <div class="btn-group mr-2" role="group" aria-label="Fourth group">
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop2" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-users-cog"></i> Administrar
+                            <i class="fas fa-users-cog"></i> Administrar
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" href="<?php echo FRONT_ROOT?>Views/admTickets"><i class="fas fa-hand-holding-usd"></i> Tickets</a>
-                        <a class="dropdown-item" href="<?php echo FRONT_ROOT?>Views/admCinema"><i class="fas fa-film"></i> Cines</a>
-                        <a class="dropdown-item" href="<?php echo FRONT_ROOT?>Views/admUsers"><i class="fas fa-user-cog"></i> Usuarios</a>
+                            <a class="dropdown-item" href="<?php echo FRONT_ROOT?>Views/admTickets"><i class="fas fa-hand-holding-usd"></i> Tickets</a>
+                            <a class="dropdown-item" href="<?php echo FRONT_ROOT?>Views/admCinema"><i class="fas fa-film"></i> Cines</a>
+                            <a class="dropdown-item" href="<?php echo FRONT_ROOT?>Views/admUsers"><i class="fas fa-user-cog"></i> Usuarios</a>
                         </div>
                     </div>
                     <?php } ?>

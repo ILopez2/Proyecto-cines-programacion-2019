@@ -28,16 +28,18 @@
             $parameters["OverView"]= $movie->getOverview();
             $parameters["PosterPath"]= $movie->getPosterPath();
             $parameters["Duration"]= $movie->getDuration();
-            $daogxm = new DAOGXM();
-            foreach($movie->getGenres() as $gen){
-                $daogxm->delete($movie->getId().$gen);
-                $genXmovie= new GenreXMovie($gen,$movie->getId());
-                $daogxm->add($genXmovie);
-            }
+                  
             try{
                 //creo la instancia de coneccion
                 $this->connection = Connection::getInstance();
-                return $this->connection->ExecuteNonQuery($sql,$parameters);
+                $queryResult=$this->connection->ExecuteNonQuery($sql,$parameters);
+                $daogxm = new DAOGXM();   
+                foreach($movie->getGenres() as $gen){
+                    $daogxm->delete($movie->getId().$gen);
+                    $genXmovie= new GenreXMovie($gen,$movie->getId());
+                    $daogxm->add($genXmovie);
+                }
+                return $queryResult;
             }catch(\PDOException $ex){
                 throw $ex;
             } 
@@ -112,9 +114,11 @@
                 $daogxm=new DAOGXM();
                 $genres=array();
                 $idGenres=$daogxm->getForMovie($p['id_pelicula']);
-                foreach($idGenres as $genId){
-                    array_push($genres,$genId->getIdGenre());
-                }
+                if (is_array($idGenres) || is_object($idGenres)){
+                    foreach($idGenres as $genId){
+                        array_push($genres,$genId->getIdGenre());
+                    }
+                }   
                 return new Movie($p['id_pelicula'],$p['title'],$p['releaseDate'],$p['adult'],$p['overview'],$p['posterPath'],$genres,$p['duration']);
             }, $value);
                 /* devuelve un arreglo si tiene datos y sino devuelve nulo*/

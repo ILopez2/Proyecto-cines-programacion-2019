@@ -2,6 +2,7 @@
     //esta controladora se encargara de administrar todas las vistas necesarias
     use dao\CinemaDao as CinemaDao;
     use dao\MovieFunctionDao as MovieFunctionDao;
+    use dao\MovieGenreDao as MovieGenreDao;
     use dao\CinemaRoomDao as CinemaRoomDao;
     use dao\UserDao as UserDao;
     use dao\TicketDao as TicketDao;
@@ -50,17 +51,20 @@
             $genres=$daoMovie->getAllGenres(ESP);
             $functions=$daoFunction->getAll();
             $result=array();
-            if(is_array($functions)){
-                foreach($functions as $fu){
-                    $movie=$daoMovie->getMovieXid($fu->getMovie());
-                    array_push($result,$movie);               
+            if(!empty($functions)){
+                if(is_array($functions)){
+                    foreach($functions as $fu){
+                        $movie=$daoMovie->getMovieXid($fu->getMovie());
+                        array_push($result,$movie);               
+                    }
+                    $result=array_unique($result,SORT_REGULAR );
                 }
-                $result=array_unique($result,SORT_REGULAR );
+                else{
+                    $movie=$daoMovie->getMovieXid($functions->getMovie(),ESP);
+                    array_push($result,$movie);
+                }
             }
-            else{
-                $movie=$daoMovie->getMovieXid($functions->getMovie(),ESP);
-                array_push($result,$movie);
-            }
+            
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
             include_once(VIEWS.'/SearchGen.php');
@@ -87,11 +91,19 @@
             $daoC=new CinemaDao();
             $daoM = new MovieApiController();
             $daoRM= new CinemaRoomDao();
+            $daoMG= new MovieGenreDao();
             $genres=$daoM->getAllGenres(ESP);
             $cinemasFunction=$dao->getForMovie($id);
             $movie = $daoM->getMovieXid($id);
             $title=$movie->getTitle();
             $poster= $daoM->getMoviePoster($movie->getPosterPath());
+            $overView=$movie->getOverview();
+            $genrsId=$movie->getGenres();
+            $genrs=array();
+            foreach($genrsId as $genId){
+                array_push($genrs,$daoMG->getForID($genId)->getName());
+            }
+            $adult=$movie->getAdult();
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
             include_once(VIEWS.'/MovieFunction.php');

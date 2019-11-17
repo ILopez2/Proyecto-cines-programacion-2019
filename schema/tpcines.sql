@@ -12,7 +12,7 @@ create table provincias(
 id_provincia int auto_increment not null,
 nombre_provincia varchar(50),
 id_pais1 int not null,
-constraint fk_paises foreign key (id_pais1) references paises(id_pais),
+constraint fk_paises foreign key (id_pais1) references paises(id_pais)  on delete cascade,
 constraint pk_provincias primary key(id_provincia)
 );
 
@@ -21,7 +21,7 @@ create table ciudades(
 id_ciudad int auto_increment not null,
 nombre_ciudad varchar(50),
 id_provincia1 int not null,
-constraint fk_provincia foreign key(id_provincia1) references provincias(id_provincia),
+constraint fk_provincia foreign key(id_provincia1) references provincias(id_provincia)  on delete cascade,
 constraint pk_cuidades primary key(id_ciudad)
 );
 
@@ -32,7 +32,7 @@ nombre_cine varchar(50) not null,
 direccion varchar(80) not null,
 valor_entrada int not null,
 id_ciudad1 int not null,
-constraint fk_ciudad1 foreign key (id_ciudad1) references ciudades(id_ciudad),
+constraint fk_ciudad1 foreign key (id_ciudad1) references ciudades(id_ciudad)  on delete cascade,
 constraint pk_cine primary key(id_cine)
 );
 
@@ -42,7 +42,7 @@ id_cine1 int not null,
 nombre_sala varchar(30) not null,
 capacidad int not null,
 is3d varchar(10) not null,
-constraint fk_cine foreign key(id_cine1)references cines(id_cine),
+constraint fk_cine foreign key(id_cine1)references cines(id_cine)  on delete cascade,
 constraint pk_salas primary key(id_sala)
 );
 
@@ -50,7 +50,7 @@ create table asientos(
 nro_asiento int unique not null,
 id_sala1 int not null,
 tipo_de_asiento varchar(20),
-constraint fk_salas foreign key(id_sala1) references salas(id_sala),
+constraint fk_salas foreign key(id_sala1) references salas(id_sala)  on delete cascade,
 constraint pk_asientos primary key(nro_asiento)
 );
 
@@ -74,8 +74,8 @@ create table generosXpelicula (
 	id_generoxpelicula varchar(100) not null ,
     id_pelicula int not null,
     id_genero int not null,
-    constraint fk_pelicula foreign key(id_pelicula) references peliculas(id_pelicula),
-    constraint fk_genero foreign key(id_genero) references generos(id_genero),
+    constraint fk_pelicula foreign key(id_pelicula) references peliculas(id_pelicula) on delete cascade,
+    constraint fk_genero foreign key(id_genero) references generos(id_genero)  on delete cascade,
     constraint pk_generosXpelicula primary key(id_generoxpelicula)
 );
 
@@ -87,9 +87,9 @@ id_cine2 int not null,
 lenguaje varchar(20) not null,
 fecha date not null,
 hora time not null,
-constraint fk_salas1 foreign key(id_sala2) references salas(id_sala),
+constraint fk_salas1 foreign key(id_sala2) references salas(id_sala)  on delete cascade,
 constraint fk_peliculas foreign key(id_pelicula1) references peliculas(id_pelicula),
-constraint fk_cines2 foreign key(id_cine2) references cines(id_cine),
+constraint fk_cines2 foreign key(id_cine2) references cines(id_cine)  on delete cascade,
 constraint pk_funciones primary key(id_funcion)
 );
 
@@ -107,7 +107,7 @@ fecha_nac date not null,
 email varchar(50) not null,
 pass varchar(50) not null,
 id_rol1 int not null,
-constraint fk_roles foreign key(id_rol1) references roles(id_rol),
+constraint fk_roles foreign key(id_rol1) references roles(id_rol)  on delete cascade,
 constraint pk_users primary key(id_usuario)
 );
 
@@ -122,7 +122,7 @@ id_factura int auto_increment not null,
 id_medioPago1 int not null,
 monto int not null,
 descuento float not null,
-constraint fk_medioPago foreign key(id_medioPago1) references medio_pagos(id_medioPago),
+constraint fk_medioPago foreign key(id_medioPago1) references medio_pagos(id_medioPago)  on delete cascade,
 constraint pk_factura primary key(id_factura)
 );
 
@@ -132,10 +132,10 @@ nro_asiento1 int not null,
 id_funcion1 int not null,
 id_usuario1 int not null,
 id_factura1 int not null,
-constraint fk_asiento_ foreign key (nro_asiento1) references asientos(nro_asiento),
-constraint fk_funcion_ foreign key (id_funcion1) references funciones(id_funcion),
-constraint fk_usuario_ foreign key (id_usuario1) references usuarios(id_usuario),
-constraint fk_factura_ foreign key (id_factura1) references facturas(id_factura),
+constraint fk_asiento_ foreign key (nro_asiento1) references asientos(nro_asiento)  on delete cascade,
+constraint fk_funcion_ foreign key (id_funcion1) references funciones(id_funcion)  on delete cascade,
+constraint fk_usuario_ foreign key (id_usuario1) references usuarios(id_usuario)  on delete cascade,
+constraint fk_factura_ foreign key (id_factura1) references facturas(id_factura)  on delete cascade,
 constraint pk_entrada_ primary key (id_entrada)
 );
 #################INSERTAMOS DATOS#####################
@@ -160,9 +160,11 @@ insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivan",'19
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivaasdn",'1995-01-29','ivsdasan@utn','asd123','1');
 insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(1,"sala1",100,"3D");
 insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(2,"sala2",300,"2D");
-insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha,hora)values(1,1,475557,"Subtitulada",'2019-10-07','10:00:00');
-insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha,hora)values(2,1,475557,"Doblada",'2019-10-07','11:00');
+
+
 /*select * from roles;
 select * from peliculas;
+select * from generos;
+select * from generosxpelicula;
 select * from funciones;
 select * from cidades;*/ 

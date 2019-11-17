@@ -15,6 +15,7 @@
             $view = new VC();
         }
         public function getLastMoviesToDB(){
+            $this->getAllGenresToDB();
             $daom= new DAOM();
             $jsonContent=file_get_contents(LASTMVS.ESP);
             $arrayJson= ($jsonContent) ? json_decode($jsonContent, true ) : array();
