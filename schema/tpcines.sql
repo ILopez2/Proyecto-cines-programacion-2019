@@ -88,6 +88,10 @@ lenguaje varchar(20) not null,
 fecha date not null,
 hora time not null,
 constraint fk_salas1 foreign key(id_sala2) references salas(id_sala) on delete cascade,
+<<<<<<< HEAD
+=======
+constraint fk_peliculas foreign key(id_pelicula1) references peliculas(id_pelicula),
+>>>>>>> a534197e47da95517d1998e54848af866496ed69
 constraint fk_cines2 foreign key(id_cine2) references cines(id_cine) on delete cascade,
 constraint pk_funciones primary key(id_funcion)
 );
