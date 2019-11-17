@@ -74,7 +74,7 @@ create table generosXpelicula (
 	id_generoxpelicula varchar(100) not null ,
     id_pelicula int not null,
     id_genero int not null,
-    constraint fk_pelicula foreign key(id_pelicula) references peliculas(id_pelicula),
+    constraint fk_pelicula foreign key(id_pelicula) references peliculas(id_pelicula) on delete cascade,
     constraint fk_genero foreign key(id_genero) references generos(id_genero),
     constraint pk_generosXpelicula primary key(id_generoxpelicula)
 );
@@ -88,7 +88,7 @@ lenguaje varchar(20) not null,
 fecha date not null,
 hora time not null,
 constraint fk_salas1 foreign key(id_sala2) references salas(id_sala),
-constraint fk_peliculas foreign key(id_pelicula1) references peliculas(id_pelicula),
+constraint fk_peliculas foreign key(id_pelicula1) references peliculas(id_pelicula) on delete cascade,
 constraint fk_cines2 foreign key(id_cine2) references cines(id_cine),
 constraint pk_funciones primary key(id_funcion)
 );
@@ -162,7 +162,10 @@ insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(1,"sala1",100,"3D"
 insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(2,"sala2",300,"2D");
 insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha,hora)values(1,1,475557,"Subtitulada",'2019-10-07','10:00:00');
 insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha,hora)values(2,1,475557,"Doblada",'2019-10-07','11:00');
+
 /*select * from roles;
 select * from peliculas;
+select * from generos;
+select * from generosxpelicula;
 select * from funciones;
 select * from cidades;*/ 

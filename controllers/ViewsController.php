@@ -50,17 +50,20 @@
             $genres=$daoMovie->getAllGenres(ESP);
             $functions=$daoFunction->getAll();
             $result=array();
-            if(is_array($functions)){
-                foreach($functions as $fu){
-                    $movie=$daoMovie->getMovieXid($fu->getMovie());
-                    array_push($result,$movie);               
+            if(!empty($functions)){
+                if(is_array($functions)){
+                    foreach($functions as $fu){
+                        $movie=$daoMovie->getMovieXid($fu->getMovie());
+                        array_push($result,$movie);               
+                    }
+                    $result=array_unique($result,SORT_REGULAR );
                 }
-                $result=array_unique($result,SORT_REGULAR );
+                else{
+                    $movie=$daoMovie->getMovieXid($functions->getMovie(),ESP);
+                    array_push($result,$movie);
+                }
             }
-            else{
-                $movie=$daoMovie->getMovieXid($functions->getMovie(),ESP);
-                array_push($result,$movie);
-            }
+            
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
             include_once(VIEWS.'/SearchGen.php');
