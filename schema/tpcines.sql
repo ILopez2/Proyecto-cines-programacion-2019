@@ -75,11 +75,7 @@ create table generosXpelicula (
     id_pelicula int not null,
     id_genero int not null,
     constraint fk_pelicula foreign key(id_pelicula) references peliculas(id_pelicula) on delete cascade,
-<<<<<<< HEAD
     constraint fk_genero foreign key(id_genero) references generos(id_genero)  on delete cascade,
-=======
-    constraint fk_genero foreign key(id_genero) references generos(id_genero),
->>>>>>> a9bc2e3ee00e4f20972402fe89871ab2b07d56cc
     constraint pk_generosXpelicula primary key(id_generoxpelicula)
 );
 
@@ -91,15 +87,9 @@ id_cine2 int not null,
 lenguaje varchar(20) not null,
 fecha date not null,
 hora time not null,
-<<<<<<< HEAD
-constraint fk_salas1 foreign key(id_sala2) references salas(id_sala)  on delete cascade,
+constraint fk_salas1 foreign key(id_sala2) references salas(id_sala) on delete cascade,
 constraint fk_peliculas foreign key(id_pelicula1) references peliculas(id_pelicula),
-constraint fk_cines2 foreign key(id_cine2) references cines(id_cine)  on delete cascade,
-=======
-constraint fk_salas1 foreign key(id_sala2) references salas(id_sala),
-constraint fk_peliculas foreign key(id_pelicula1) references peliculas(id_pelicula) on delete cascade,
-constraint fk_cines2 foreign key(id_cine2) references cines(id_cine),
->>>>>>> a9bc2e3ee00e4f20972402fe89871ab2b07d56cc
+constraint fk_cines2 foreign key(id_cine2) references cines(id_cine) on delete cascade,
 constraint pk_funciones primary key(id_funcion)
 );
 
@@ -117,7 +107,7 @@ fecha_nac date not null,
 email varchar(50) not null,
 pass varchar(50) not null,
 id_rol1 int not null,
-constraint fk_roles foreign key(id_rol1) references roles(id_rol)  on delete cascade,
+constraint fk_roles foreign key(id_rol1) references roles(id_rol),
 constraint pk_users primary key(id_usuario)
 );
 
@@ -170,12 +160,7 @@ insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivan",'19
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivaasdn",'1995-01-29','ivsdasan@utn','asd123','1');
 insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(1,"sala1",100,"3D");
 insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(2,"sala2",300,"2D");
-<<<<<<< HEAD
 
-=======
-insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha,hora)values(1,1,475557,"Subtitulada",'2019-10-07','10:00:00');
-insert into funciones(id_sala2,id_cine2,id_pelicula1,lenguaje,fecha,hora)values(2,1,475557,"Doblada",'2019-10-07','11:00');
->>>>>>> a9bc2e3ee00e4f20972402fe89871ab2b07d56cc
 
 /*select * from roles;
 select * from peliculas;
