@@ -29,7 +29,7 @@
                     <div class="btn-group mr-1" role="group" aria-label="Second group">
                     
                     <form action="<?php echo FRONT_ROOT?>Views/searchForDate" method="POST" class="form-inline">
-                        <input type="date" name="searchF" min="<?php echo date("Y-m-d");?>" >
+                        <input type="date" name="searchF" min="<?php echo date("Y-m-d");?>" required >
                         <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fas fa-search"></i> Buscar</button>
                     </form>
                     </div>

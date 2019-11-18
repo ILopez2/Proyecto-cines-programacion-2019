@@ -49,6 +49,7 @@ constraint pk_salas primary key(id_sala)
 create table asientos(
 nro_asiento int unique not null,
 id_sala1 int not null,
+ocupada boolean,
 tipo_de_asiento varchar(20),
 constraint fk_salas foreign key(id_sala1) references salas(id_sala)  on delete cascade,
 constraint pk_asientos primary key(nro_asiento)

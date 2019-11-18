@@ -24,6 +24,7 @@
                 $movie=$this->getDetailsForId($values["id"]);        
                 $daom->add($movie);             
             }
+            $_SESSION['successMje'] = "Espere a que la pagina termine de cargar todas las peliculas actuales se estan cargando en la base de datos.";
             $home=new HC();
             $home->Index();
         }
