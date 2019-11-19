@@ -47,11 +47,12 @@ constraint pk_salas primary key(id_sala)
 );
 
 create table asientos(
-nro_asiento int unique not null,
+id_asiento int auto_increment unique,
+nro_asiento int not null,
 id_sala1 int not null,
-tipo_de_asiento varchar(20),
+ocupada boolean,
 constraint fk_salas foreign key(id_sala1) references salas(id_sala)  on delete cascade,
-constraint pk_asientos primary key(nro_asiento)
+constraint pk_asientos primary key(id_asiento)
 );
 
 create table peliculas(
@@ -121,7 +122,7 @@ id_factura int auto_increment not null,
 id_medioPago1 int not null,
 monto int not null,
 descuento float not null,
-constraint fk_medioPago foreign key(id_medioPago1) references medio_pagos(id_medioPago)  on delete cascade,
+constraint fk_medioPago foreign key(id_medioPago1) references medio_pagos(id_medioPago) ,
 constraint pk_factura primary key(id_factura)
 );
 
@@ -131,12 +132,13 @@ nro_asiento1 int not null,
 id_funcion1 int not null,
 id_usuario1 int not null,
 id_factura1 int not null,
-constraint fk_asiento_ foreign key (nro_asiento1) references asientos(nro_asiento)  on delete cascade,
-constraint fk_funcion_ foreign key (id_funcion1) references funciones(id_funcion)  on delete cascade,
-constraint fk_usuario_ foreign key (id_usuario1) references usuarios(id_usuario)  on delete cascade,
-constraint fk_factura_ foreign key (id_factura1) references facturas(id_factura)  on delete cascade,
+constraint fk_asiento_ foreign key (nro_asiento1) references asientos(id_asiento),
+constraint fk_funcion_ foreign key (id_funcion1) references funciones(id_funcion),
+constraint fk_usuario_ foreign key (id_usuario1) references usuarios(id_usuario),
+constraint fk_factura_ foreign key (id_factura1) references facturas(id_factura),
 constraint pk_entrada_ primary key (id_entrada)
 );
+
 #################INSERTAMOS DATOS#####################
 #PAISES
 insert into paises(nombre_pais) values('Argentina');
@@ -160,10 +162,10 @@ insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivaasdn",
 insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(1,"sala1",100,"3D");
 insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(2,"sala2",300,"2D");
 
-
+SELECT * FROM salas WHERE (id_cine1 =1) AND (nombre_sala ="asd")
 /*select * from roles;
-select * from peliculas;
+select * from asientos;
 select * from generos;
 select * from generosxpelicula;
-select * from funciones;
+select * from salas;
 select * from cidades;*/ 

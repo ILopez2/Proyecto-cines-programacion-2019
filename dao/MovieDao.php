@@ -45,7 +45,7 @@
             } 
         }
         /*
-        *Borra un user de la BDD correspondiente al email del mismo pasado por parametro
+        *Borra una pelicula de la BDD correspondiente al id del mismo pasado por parametro
         */
         public function delete($MovieId){
             $sql="DELETE FROM peliculas WHERE  id_pelicula = :MovieId";

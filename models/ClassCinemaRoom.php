@@ -6,7 +6,6 @@
         private $name;
         private $is3D; 
         private $capacity;
-        //private $seats=array();
         private $cinemaId;
         private $roomId; 
     
@@ -15,8 +14,6 @@
         $this->name=$name;
         $this->is3D=$is3D;
         $this->capacity=$capacity;
-        //if($capacity!=null) $this->createSeats($capacity);
-        //else $this->seats=array();
         $this->cinemaId=$cinemaId;
         $this->roomId=$roomId;
     }
@@ -37,9 +34,6 @@
     public function getId(){
         return $this->roomId;
     }
-    /*public function getSeats(){
-        return $this->seats;
-    }*/
 
     //SETTERS
     public function setName($name){
@@ -50,17 +44,7 @@
     }
     public function setCapacity($capacity){
         $this->capacity=$capacity;
-        //$this->createSeats($capacity);
     }
-
-   /* //EXTRAS
-    private function createSeats($capacity){
-        $number=1;
-        for($i=0;$i<$capacity;$i++){
-            $this->seats[$i]=$number;
-            $number++;
-        }
-    }*/
 
     }
 ?>

@@ -1,6 +1,8 @@
 <?php namespace dao;
 
     use dao\Connection as Connection;
+    use dao\SeatDao as SeatDao;
+    use models\ClassSeat as Seat;
     use models\ClassCinemaRoom as CinemaRoom;  
 
     class CinemaRoomDao implements InterfaceDao{
@@ -26,10 +28,23 @@
             try{
                 //creo la instancia de coneccion
                 $this->connection = Connection::getInstance();
-                return $this->connection->ExecuteNonQuery($sql,$parameters);
-            }catch(\PDOException $ex){
+                $Executeresult=$this->connection->ExecuteNonQuery($sql,$parameters);
+
+
+                $createdRoom=$this->getForCinemaAndName($parameters["id_cine1"],$parameters["name"]);
+                $createdRoomId=$createdRoom->getId(); 
+                $daoSeats= new SeatDao();
+                for($i;$i<$parameters["capacity"];$i++){
+                    $seat=new Seat(($i+1),$createdRoomId,false);
+                    $daoSeats->add($seat);
+                }
+                return $Executeresult;
+            }
+            catch(\PDOException $ex){
                 throw $ex;
             } 
+            
+            
         }
         /*
         *Borra una sala de la BDD correspondiente al id del mismo pasado por parametro
@@ -66,8 +81,27 @@
                 return false;
             }
         }
+        private function getForCinemaAndName($cinemaId,$cinemaRoomName){
+            
+            $sql = "SELECT * FROM salas WHERE (id_cine1 = :cinemaId) AND (nombre_sala = :cinemaRoomName)";
+            $parameters['cinemaId']=$cinemaId;
+            $parameters['cinemaRoomName']=$cinemaRoomName;   
+            try{
+                //creo la instancia de coneccion
+                $this->connection= Connection::getInstance();
+                $result = $this->connection->execute($sql,$parameters);
+            }catch(\PDOException $ex){
+                throw $ex;
+            } 
+            //hay que mapear de un arreglo asociativo a objetos
+            if(!empty($result)){
+                return $this->mapeo($result);
+            }else{
+                return false;
+            }
+        }
         public function getForCinema($cinemaId){
-            $sql = "SELECT * FROM salas WHERE id_cine1 = :cinemaId";
+            $sql = "SELECT * FROM salas WHERE id_cine1 =:cinemaId";
             $parameters['cinemaId']=$cinemaId;
             try{
                 //creo la instancia de coneccion

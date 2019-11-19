@@ -134,9 +134,6 @@ class MovieFunctionDao implements InterfaceDao{
     *si la cantidad de elementos es mayor a 1 retorna el array entero, sino retorna la posicion 0.
     */
     protected function mapeo($value) {
-        //echo '<pre>';
-        //var_dump($value);
-        //echo '</pre>';
         $value = is_array($value) ? $value : [];   
         $resp=array();  
         $resp = array_map(function($p){

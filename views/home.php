@@ -1,11 +1,28 @@
 <div class="container">
-<section class="jumbotron">
+    <div class="col-m-4">
+                <?php if(isset($_SESSION['successMje']) || isset($_SESSION['errorMje'])) { ?>
+                    <div class="alert <?php if(isset($_SESSION['successMje'])) echo 'alert-success'; else echo 'alert-danger'; ?> alert-dismissible fade show mt-3" role="alert">
+                        <strong>
+                        <?php if(isset($_SESSION['successMje'])) echo $_SESSION['successMje']; else echo $_SESSION['errorMje'];?>
+                        </strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        
+                        <?php 
+                            if(isset($_SESSION['successMje'])){unset($_SESSION['successMje']);}
+                            if(isset($_SESSION['errorMje'])){unset($_SESSION['errorMje']);}
+                        ?>
+                    </div>
+                <?php } ?>
+    </div>
+    <section class="jumbotron">
 		<div class="container">
 			<h1>MoviePass</h1>
 			<h3>Cartelera</h3>
 		</div>
-</section>
-<table border=1 class="table jumbotron">
+    </section>
+    <table border=1 class="table jumbotron">
         <thead class="thead-dark">
             <tr>
                 <th>Movie</th>
