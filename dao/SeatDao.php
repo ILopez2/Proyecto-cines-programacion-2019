@@ -47,6 +47,37 @@
             }
 
         }
+        
+        public function occupySeat($seat){
+            $sql="UPDATE asientos SET ocupada=:occupied WHERE id_asiento=:seatId";
+            $parameters["occupied"]=$seat->getOccupied();       
+            $parameters["seatId"]=$seat->getId();     
+            try
+            {
+                $this->connection = Connection::getInstance();
+                return $this->connection->ExecuteNonQuery($sql, $parameters);
+            }
+            catch(PDOException $e)
+            {
+                echo $e;
+            }
+        }
+        public function emptyRoomSeats($seat){
+            $sql="UPDATE asientos SET ocupada=:occupied WHERE id_sala1=:cinemaRoomId";
+            $parameters["occupied"]=$seat->getOccupied();       
+            $parameters["cinemaRoomId"]=$seat->getId();     
+            try
+            {
+                $this->connection = Connection::getInstance();
+                return $this->connection->ExecuteNonQuery($sql, $parameters);
+            }
+            catch(PDOException $e)
+            {
+                echo $e;
+            }
+        }
+        
+        
         public function getForID($id){
             $sql = "SELECT * FROM asientos WHERE id_asiento = :id";
             $parameters['id']=$id;

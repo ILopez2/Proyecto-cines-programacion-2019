@@ -2,7 +2,10 @@
 namespace dao;
 
 use dao\Connection as Connection;
+use dao\SeatDao as DaoSeat;
 use models\ClassMovieFunction as CMF;  
+use models\ClassSeat as Seat;
+
 
 class MovieFunctionDao implements InterfaceDao{
 
@@ -41,6 +44,10 @@ class MovieFunctionDao implements InterfaceDao{
     public function delete($functionId){
         $sql="DELETE FROM funciones WHERE id_funcion = :functionId";
         $parameters['functionId']=$functionId;
+        $idCinemaRoom=$this->getForID($functionId)->getCinemaRoom();
+        $daoSeat=new DaoSeat();
+        $seat=new Seat(0,$idCinemaRoom,false);
+        $daoSeat->emptyRoomSeats($seat);
         try {
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql, $parameters);    
