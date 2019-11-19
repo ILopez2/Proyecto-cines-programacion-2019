@@ -29,13 +29,17 @@
                 //creo la instancia de coneccion
                 $this->connection = Connection::getInstance();
                 $Executeresult=$this->connection->ExecuteNonQuery($sql,$parameters);
-
-
-                $createdRoom=$this->getForCinemaAndName($parameters["id_cine1"],$parameters["name"]);
-                $createdRoomId=$createdRoom->getId(); 
+                /*$createdRoom=$this->getForCinemaAndName($parameters["id_cine1"],$parameters["name"]);
+                $createdRoomId=$createdRoom->getId(); */
+                $rooms=$this->getAll();
+                foreach($rooms as $room){
+                    if($room->getCinemaId()==$parameters["id_cine1"] && $room->getName()==$parameters["name"]){
+                        $createdRoomId=$room->getId();
+                    }
+                }
                 $daoSeats= new SeatDao();
-                for($i;$i<$parameters["capacity"];$i++){
-                    $seat=new Seat(($i+1),$createdRoomId,false);
+                for($i=0;$i<$parameters["capacity"];$i++){
+                    $seat=new Seat(null,($i+1),$createdRoomId);
                     $daoSeats->add($seat);
                 }
                 return $Executeresult;
@@ -81,9 +85,9 @@
                 return false;
             }
         }
-        private function getForCinemaAndName($cinemaId,$cinemaRoomName){
+       /* public function getForCinemaAndName($cinemaId,$cinemaRoomName){
             
-            $sql = "SELECT * FROM salas WHERE (id_cine1 = :cinemaId) AND (nombre_sala = :cinemaRoomName)";
+            $sql = "SELECT * FROM salas WHERE ((id_cine1 = :cinemaId) AND (nombre_sala = :cinemaRoomName))";
             $parameters['cinemaId']=$cinemaId;
             $parameters['cinemaRoomName']=$cinemaRoomName;   
             try{
@@ -99,7 +103,7 @@
             }else{
                 return false;
             }
-        }
+        }*/
         public function getForCinema($cinemaId){
             $sql = "SELECT * FROM salas WHERE id_cine1 =:cinemaId";
             $parameters['cinemaId']=$cinemaId;

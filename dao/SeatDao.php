@@ -4,7 +4,7 @@
     use dao\Connection as Connection;
     use models\ClassSeat as CS;  
 
-    class MovieFunctionDao implements InterfaceDao{
+    class SeatDao implements InterfaceDao{
 
         //ATRIBUTES
         private $connection;
@@ -20,9 +20,9 @@
         */
         public function add($seat){
             $sql = "INSERT INTO asientos(nro_asiento,id_sala1,ocupada) VALUES (:number,:cinemaRoomId,:occupied)";
-            $parameters["number"]=$function->getNumber();
-            $parameters["cinemaRoomId"]=$function->getCinemaRommId();
-            $parameters["occupied"]=$function->getOccupied();
+            $parameters["number"]=$seat->getNumber();
+            $parameters["cinemaRoomId"]=$seat->getCinemaRoomId();
+            $parameters["occupied"]=$seat->getOccupied();
 
             try{
                 //creo la instancia de coneccion
@@ -69,7 +69,7 @@
         */
 
         public function getForCinemaRoom($cinemaRoomId){
-            $sql = "SELECT * FROM funciones WHERE id_sala1 = :cinemaRoomId";
+            $sql = "SELECT * FROM asientos WHERE id_sala1 = :cinemaRoomId";
             $parameters['cinemaRoomId']=$cinemaRoomId;
             try{
                 //creo la instancia de coneccion
@@ -116,7 +116,7 @@
             $value = is_array($value) ? $value : [];   
             $resp=array();  
             $resp = array_map(function($p){
-            return new CMF($p['id_asiento'],$p['nro_asiento'],$p['id_sala1'],$p['ocupada']);
+            return new CS($p['id_asiento'],$p['nro_asiento'],$p['id_sala1'],$p['ocupada']);
             }, $value);
                 /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
                 return count($resp) > 1 ? $resp : $resp['0'];

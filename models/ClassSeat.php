@@ -6,7 +6,7 @@
         private $cinemaRoomId;
         private $occupied;
 
-        public function __constructor($id=null,$number,$cinemaRoomId,$occupied=false){
+        public function __construct($id=null,$number,$cinemaRoomId,$occupied=false){
             $this->id=$id;
             $this->number=$number;
             $this->cinemaRoomId=$cinemaRoomId;

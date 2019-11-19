@@ -49,10 +49,13 @@
                 $_SESSION['errorMje'] = 'No hay peliculas del genero '.$daoMovieGenres->getForID($searchG)->getName()." en cartelera";
                 $home->Index();
             }
-            include_once(VIEWS.'/header.php');
-            include_once(VIEWS.'/nav.php');
-            include_once(VIEWS.'/SearchGen.php');
-            include_once(VIEWS.'/footer.php');
+            else{
+                include_once(VIEWS.'/header.php');
+                include_once(VIEWS.'/nav.php');
+                include_once(VIEWS.'/SearchGen.php');
+                include_once(VIEWS.'/footer.php');
+            }
+            
         }   
             //POR FECHA
         public function searchForDate($searchF){
