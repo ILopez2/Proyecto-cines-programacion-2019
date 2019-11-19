@@ -47,6 +47,18 @@
             }
 
         }
+        public function deleteForSeatNumber($seatNumber){
+            $sql="DELETE FROM asientos WHERE nro_asiento = :seatNumber";
+            $parameters['seatNumber']=$seatNumber;
+            try {
+                $this->connection = Connection::getInstance();
+                return $this->connection->ExecuteNonQuery($sql, $parameters);    
+
+            } catch (\PDOException $ex) {
+                throw $ex;
+            }
+
+        }
         public function getForID($id){
             $sql = "SELECT * FROM asientos WHERE id_asiento = :id";
             $parameters['id']=$id;

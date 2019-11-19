@@ -87,7 +87,7 @@
                                     ?>
                                     <td>
                                         <a href="<?php echo FRONT_ROOT?>CinemaRoom/delete?idroom=<?php echo $rooms->getId()?>&?idcinema=<?php echo $rooms->getCinemaId()?>" class="btn btn-danger" onclick="clicked(event)">
-                                        <i class="far fa-trash-alt"></i>
+                                        <i class="far fa-trash-alt"> Eliminar</i> 
                                         </a>
                                     </td>
                                     </tr>
@@ -130,18 +130,21 @@
                                     
                                     <?php 
                                     if(!empty($rooms)){
-                                        foreach($rooms as $value){ ?>
-                                            <option value="<?php echo $value->getId();?>"> <?php echo $value->getName();?> </option>                        
-                                        <?php }
+                                        if(is_array($rooms)){
+                                            foreach($rooms as $value){ ?>
+                                                <option value="<?php echo $value->getId();?>"> <?php echo $value->getName();?> </option>                        
+                                            <?php }
+                                        }
+                                        else{ ?>
+                                            <option value="<?php echo $rooms->getId();?>"> <?php echo $rooms->getName();?> </option>                        
+                                    <?php 
+                                        }
                                     }?>
 
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="name" placeholder= "Nombre" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="number" min="0" max="1000" class="form-control" name="capacity" placeholder="Capacidad" required>
                                 </div>
                                 <div class="form-group">
                                     <select name="is3d" class="form-control" required>
