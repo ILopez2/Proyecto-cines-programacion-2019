@@ -46,15 +46,6 @@ constraint fk_cine foreign key(id_cine1)references cines(id_cine)  on delete cas
 constraint pk_salas primary key(id_sala)
 );
 
-create table asientos(
-id_asiento int auto_increment unique,
-nro_asiento int not null,
-id_sala1 int not null,
-ocupada boolean,
-constraint fk_salas foreign key(id_sala1) references salas(id_sala)  on delete cascade,
-constraint pk_asientos primary key(id_asiento)
-);
-
 create table peliculas(
 	id_pelicula int not null unique,
     title varchar(100) not null,
@@ -91,6 +82,22 @@ hora time not null,
 constraint fk_salas1 foreign key(id_sala2) references salas(id_sala) on delete cascade,
 constraint fk_cines2 foreign key(id_cine2) references cines(id_cine) on delete cascade,
 constraint pk_funciones primary key(id_funcion)
+);
+create table asientos(
+id_asiento int auto_increment unique,
+nro_asiento int not null,
+id_sala1 int not null,
+constraint fk_salas foreign key(id_sala1) references salas(id_sala)  on delete cascade,
+constraint pk_asientos primary key(id_asiento)
+);
+create table asientoXfuncion (
+	id_asientoXfuncion int auto_increment unique,
+    id_asiento2 int not null,
+    id_funcion2 int not null,
+    ocupada boolean not null,
+	constraint fk_asiento foreign key(id_asiento2) references asientos(id_asiento)  on delete cascade,
+    constraint fk_funcion foreign key(id_funcion2) references funciones(id_funcion)  on delete cascade,
+	constraint pk_asientoXfuncion primary key(id_asientoXfuncion)
 );
 
 

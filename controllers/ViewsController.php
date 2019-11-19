@@ -114,7 +114,10 @@
             include_once(VIEWS.'/MovieFunction.php');
             include_once(VIEWS.'/footer.php');
         }
-
+            //VER ASIENTOS DE UNA FUNCION
+        public function viewSeatsXFunction($seatsOfFunction){
+            include_once(VIEWS."/CrudeSeats");
+        }
         //ADMINISTRACION
 
             //USUARIOS

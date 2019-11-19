@@ -19,10 +19,9 @@
         *Agrega un nuevo cine a la BDD
         */
         public function add($seat){
-            $sql = "INSERT INTO asientos(nro_asiento,id_sala1,ocupada) VALUES (:number,:cinemaRoomId,:occupied)";
+            $sql = "INSERT INTO asientos(nro_asiento,id_sala1) VALUES (:number,:cinemaRoomId)";
             $parameters["number"]=$seat->getNumber();
             $parameters["cinemaRoomId"]=$seat->getCinemaRoomId();
-            $parameters["occupied"]=$seat->getOccupied();
 
             try{
                 //creo la instancia de coneccion
@@ -47,7 +46,7 @@
             }
 
         }    
-        public function occupySeat($seat){
+        /*public function occupySeat($seat){
             $sql="UPDATE asientos SET ocupada=:occupied WHERE id_asiento=:seatId";
             $parameters["occupied"]=$seat->getOccupied();       
             $parameters["seatId"]=$seat->getId();     
@@ -74,9 +73,7 @@
             {
                 echo $e;
             }
-        }
-        
-        
+        }*/
         public function getForID($id){
             $sql = "SELECT * FROM asientos WHERE id_asiento = :id";
             $parameters['id']=$id;

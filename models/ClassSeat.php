@@ -4,13 +4,11 @@
         private $id;
         private $number;
         private $cinemaRoomId;
-        private $occupied;
 
-        public function __construct($id=null,$number,$cinemaRoomId,$occupied=false){
+        public function __construct($id=null,$number,$cinemaRoomId){
             $this->id=$id;
             $this->number=$number;
             $this->cinemaRoomId=$cinemaRoomId;
-            $this->occupied=$occupied;
         }
 
         public function getId(){
@@ -22,11 +20,5 @@
         public function getCinemaRoomId(){
             return $this->cinemaRoomId;
         }
-        public function getOccupied(){
-            return $this->occupied;
-        }
 
-        public function setOccupied($occupied){
-            $this->occupied=$occupied;
-        }
     }
