@@ -46,8 +46,7 @@
                 throw $ex;
             }
 
-        }
-        
+        }    
         public function occupySeat($seat){
             $sql="UPDATE asientos SET ocupada=:occupied WHERE id_asiento=:seatId";
             $parameters["occupied"]=$seat->getOccupied();       
