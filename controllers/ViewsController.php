@@ -250,4 +250,23 @@
             include_once(VIEWS.'/CrudTicket.php');
             include_once(VIEWS.'/footer.php');
         }
+
+        //COMPRAR ENTRADAS
+        public function buyTickets($idFunction){
+            $daoTicket = new TicketDao();
+            $daoCinema=new CinemaDao();
+            $daoCinemaRoom = new CinemaRoomDao();
+            $daoMovieFunction = new MovieFunctionDao();
+            $daoUsers = new UserDao();
+            $users=$daoUsers->getAll();
+            $cinemas=$daoCinema->getAll();
+            $cinemaRooms=$daoCinemaRoom->getAll();
+            $functions=$daoFunction->getAll();
+            $tickets=$daoTicket->getAll();
+            include_once(VIEWS.'/header.php');
+            include_once(VIEWS.'/nav.php');
+            include_once(VIEWS.'/BuyTicket.php');
+            include_once(VIEWS.'/footer.php');
+
+        }
     }
