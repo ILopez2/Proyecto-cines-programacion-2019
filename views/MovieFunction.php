@@ -77,7 +77,11 @@
                                                     $room=$daoRM->getForID($function->getCinemaRoom());                          
                                                 ?>
                                                 <td ><?php echo $room->getName();?></td>
-                                                <td style = "text-align: center"> <a  class="btn btn-success" href="<?php echo FRONT_ROOT?>Ticket/buy?idFunction=<?php echo $function->getId()?>"><i class="fas fa-shopping-cart"></i>Comprar</a> </td>
+                                                <td style = "text-align: center"> 
+                                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sign-up">
+                                                    <i class="fas fa-shopping-cart"> Comprar</i>
+                                                    </button>                                   
+                                                </td>
                                             </tr>
                                         <?php } 
                                     }
@@ -95,7 +99,13 @@
                                                     $room=$daoRM->getForID($cinemasFunction->getCinemaRoom());                          
                                                 ?>
                                             <td class=table-light><?php echo $room->getName();?></td>
-                                            <td style = "text-align: center"> <a  class="btn btn-success" href="<?php echo FRONT_ROOT?>Ticket/buy?idFunction=<?php echo $cinemasFunction->getId()?>"><i class="fas fa-shopping-cart"></i>Comprar</a> </td>
+                                            
+                                            <td style = "text-align: center"> 
+                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sign-up">
+                                            <i class="fas fa-shopping-cart"> Comprar</i>
+                                            </button>                                   
+                                            </td>
+
                                         </tr>
                             <?php   }
                                 }
@@ -106,5 +116,29 @@
             </div>
             
         </div>
+            
+            <!-- MODAL START HERE  -->
+            <div class="modal fade" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <form class="modal-content" action="<?php echo FRONT_ROOT?>Views/buyTickets" method="POST">
+                        <div class="modal-header">
+        
+                            <h5 class="modal-title">Comprar Entradas para : <?php echo $title;?></h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+
+                        </div>
+
+                        <div class="modal-body">
+                            <input type="number" min="1" max="100" name="quantityTicket" required> Cantidad
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-dark" onclick="clicked(event)">Confirmar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- MODAL ENDS HERE  -->
     </div>
-                        <!-- FALTA BOTON PARA COMPRAR ENTRADAS BOTON PARA VOLVER A LA VISTA DEL HOME  -->
