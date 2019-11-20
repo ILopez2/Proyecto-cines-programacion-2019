@@ -145,38 +145,46 @@
         }   
             //ASIENTOS DE UNA FUNCION
         public function viewFunctionSeats($functionId){
-                $search = new MovieApiController();
-                $genres=$search->getAllGenres();
-                $seatController=new SeatCon();
-                $seatDao=new SeatDao();
-                $seatsXfunction= $seatController->getForFunction($functionId);
-                $i=0;
-                $seatNumberOccupied=array();
-                if(!empty($seatsXfunction)){
-                    if(is_array($seatsXfunction)){
-                        foreach($seatsXfunction as $seatXf){
-                            $seat=$seatDao->getForID($seatXf->getSeatId());
-                            $seatNumber=$seat->getNumber();
-                            $seatNumberOccupied[$i]["seatNumber"]=$seatNumber;
-                            $seatNumberOccupied[$i]["occupied"]=$seatXf->getOccupied();
-                            $i++;
-                        }
-                    }
-                    else{
-                        $seat=$seatDao->getForID($seatsXfunction->getSeatId());
+            $search = new MovieApiController();
+            $genres=$search->getAllGenres();
+            $seatController=new SeatCon();
+            $seatDao=new SeatDao();
+            $seatsXfunction= $seatController->getForFunction($functionId);
+            $i=0;
+            $seatNumberOccupied=array();
+            if(!empty($seatsXfunction)){
+                if(is_array($seatsXfunction)){
+                    foreach($seatsXfunction as $seatXf){
+                        $seat=$seatDao->getForID($seatXf->getSeatId());
                         $seatNumber=$seat->getNumber();
-                        array_push($seatNumberOccupied[$i]["seatNumber"],$seatNumber);
-                        array_push($seatNumberOccupied[$i]["occupied"],$seatsXfunction->getOccupied());
+                        $seatNumberOccupied[$i]["seatNumber"]=$seatNumber;
+                        $seatNumberOccupied[$i]["occupied"]=$seatXf->getOccupied();
+                        $i++;
                     }
-                }   
-                include_once(VIEWS.'/header.php');
-                include_once(VIEWS.'/nav.php');
-                include_once(VIEWS.'/CrudSeats.php');
-                include_once(VIEWS.'/footer.php');
+                }
+                else{
+                    $seat=$seatDao->getForID($seatsXfunction->getSeatId());
+                    $seatNumber=$seat->getNumber();
+                    array_push($seatNumberOccupied[$i]["seatNumber"],$seatNumber);
+                    array_push($seatNumberOccupied[$i]["occupied"],$seatsXfunction->getOccupied());
+                }
+            }   
+            include_once(VIEWS.'/header.php');
+            include_once(VIEWS.'/nav.php');
+            include_once(VIEWS.'/CrudSeats.php');
+            include_once(VIEWS.'/footer.php');
         }   
             //ELEGIR ASIENTOS
         public function selectSeats($functionId){
-            
+            $search = new MovieApiController();
+            $genres=$search->getAllGenres();
+            $seatController=new SeatCon();
+            $seats= $seatController->getForFunction($functionId);
+            array_push($seats,null);
+            include_once(VIEWS.'/header.php');
+            include_once(VIEWS.'/nav.php');
+            include_once(VIEWS.'/SelectSeat.php');
+            include_once(VIEWS.'/footer.php');
         }
         //ADMINISTRACION
 

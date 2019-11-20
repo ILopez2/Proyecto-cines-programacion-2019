@@ -164,8 +164,8 @@ insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivaasdn",
 
 
 
-/*select * from roles;
-select * from asientos;
+/*select * from funciones;
+select * from asientoxfuncion;
 select * from generos;
 select * from generosxpelicula;
 select * from salas;
