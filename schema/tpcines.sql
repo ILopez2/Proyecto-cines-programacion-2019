@@ -50,7 +50,6 @@ create table peliculas(
 	id_pelicula int not null unique,
     title varchar(100) not null,
     releaseDate date not null,
-    adult boolean,
     overview varchar(1000),
     posterPath varchar(200),
     duration int,
