@@ -53,6 +53,27 @@ class MovieFunctionDao implements InterfaceDao{
         }
 
     }
+    /*
+    *Retorna las funciones de una sala en particulara
+    */
+    public function getForRoomAndCinemaID($roomId,$cinemaId){
+        $sql = "SELECT * FROM funciones WHERE id_sala2 = :roomId AND id_cine2 = :cinemaId";
+        $parameters['cinemaId']=$cinemaId;
+        $parameters['roomId']=$roomId;
+        try{
+            //creo la instancia de coneccion
+            $this->connection= Connection::getInstance();
+            $result = $this->connection->execute($sql,$parameters);
+        }catch(\PDOException $ex){
+            throw $ex;
+        } 
+        //hay que mapear de un arreglo asociativo a objetos
+        if(!empty($result)){
+            return $this->mapeo($result);
+        }else{
+            return false;
+        }
+    }
     public function getForID($id){
         $sql = "SELECT * FROM funciones WHERE id_funcion = :id";
         $parameters['id']=$id;
