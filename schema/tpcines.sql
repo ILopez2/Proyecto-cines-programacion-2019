@@ -50,7 +50,6 @@ create table peliculas(
 	id_pelicula int not null unique,
     title varchar(100) not null,
     releaseDate date not null,
-    adult boolean,
     overview varchar(1000),
     posterPath varchar(200),
     duration int,
@@ -155,10 +154,6 @@ insert into provincias(nombre_provincia,id_pais1) values('Buenos aires',1);
 insert into ciudades(nombre_ciudad,id_provincia1) values('Mar del Plata',1);
 insert into ciudades(nombre_ciudad,id_provincia1) values('Miramar',1);
 # CINES
-insert into cines(nombre_cine,direccion,valor_entrada,id_ciudad1)values("Del paseo","Ayacucho 12312",200,1);
-insert into cines(nombre_cine,direccion,valor_entrada,id_ciudad1)values("Ambassador","Cordoba",300,1);
-insert into cines(nombre_cine,direccion,valor_entrada,id_ciudad1)values("Aldrey","not cordoba",300,1);
-insert into cines(nombre_cine,direccion,valor_entrada,id_ciudad1)values("Ambasarasa","Cba",300,1);
 #ROLES
 insert into roles(nombre_rol)values("Admin");
 insert into roles(nombre_rol)values("Comun");
@@ -166,10 +161,9 @@ insert into roles(nombre_rol)values("Comun");
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Jorge",'1995-01-29','jorge@utn','asd123',1);
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivan",'1995-01-29','ivan@utn','asd123','1');
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivaasdn",'1995-01-29','ivsdasan@utn','asd123','1');
-insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(1,"sala1",100,"3D");
-insert into salas (id_cine1,nombre_sala,capacidad,is3D)values(2,"sala2",300,"2D");
 
-SELECT * FROM salas WHERE (id_cine1 =1) AND (nombre_sala ="asd")
+
+
 /*select * from roles;
 select * from asientos;
 select * from generos;

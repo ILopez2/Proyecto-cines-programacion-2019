@@ -45,7 +45,7 @@
             foreach($values["genres"] as $gen){
                 array_push($genres,$gen["id"]);
             }
-            $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["adult"],$values["overview"],$values["poster_path"],$genres,$values["runtime"]);
+            $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["overview"],$values["poster_path"],$genres,$values["runtime"]);
             return $movie;
         }
         public function getMoviePoster($posterPath=null,$posterSize="300"){

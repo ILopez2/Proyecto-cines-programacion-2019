@@ -19,12 +19,11 @@
 
         public function add($movie){
 
-            $sql = "INSERT INTO peliculas(id_pelicula,title,releaseDate,adult,overview,posterPath,duration) VALUES (:MovieId,:Title,:RelaseDate,:Adult,:OverView,:PosterPath,:Duration)";
+            $sql = "INSERT INTO peliculas(id_pelicula,title,releaseDate,overview,posterPath,duration) VALUES (:MovieId,:Title,:RelaseDate,:OverView,:PosterPath,:Duration)";
             $this->delete($movie->getId());
             $parameters["MovieId"]=$movie->getId();
             $parameters["Title"]=$movie->getTitle(); 
             $parameters["RelaseDate"]=$movie->getReleaseDate();
-            $parameters["Adult"]=$movie->getAdult();
             $parameters["OverView"]= $movie->getOverview();
             $parameters["PosterPath"]= $movie->getPosterPath();
             $parameters["Duration"]= $movie->getDuration();
@@ -100,7 +99,7 @@
 
         }
     
-        public function edit($user){           
+        public function edit($movie){           
             //LAS PELICULAS NO SE EDITAN
         }
 
@@ -119,7 +118,7 @@
                         array_push($genres,$genId->getIdGenre());
                     }
                 }   
-                return new Movie($p['id_pelicula'],$p['title'],$p['releaseDate'],$p['adult'],$p['overview'],$p['posterPath'],$genres,$p['duration']);
+                return new Movie($p['id_pelicula'],$p['title'],$p['releaseDate'],$p['overview'],$p['posterPath'],$genres,$p['duration']);
             }, $value);
                 /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
                 return count($resp) > 1 ? $resp : $resp['0'];

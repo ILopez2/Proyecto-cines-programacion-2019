@@ -43,11 +43,6 @@
                 <td colspan="3"><?php foreach($genrs as $gen){ echo $gen.','; } ?></td>
                 </tr>
                 <tr>
-                <th scope="row">Apto para</th>
-                <td colspan="3"><?php if($adult){echo 'Adultos.';}else{echo 'Todo publico.';} ?></td>
-                
-                </tr>
-                <tr>
                 <th scope="row">Duracion</th>
                 <td colspan="3"><?php  echo $duration." Minutos";?></td>
                 </tr>
