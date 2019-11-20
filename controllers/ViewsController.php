@@ -71,18 +71,20 @@
             $genres=$daoM->getAllGenres();
             $allFunctions=$dao->getAll();
             $cinemasFunction=array();
-            if(is_array($allFunctions)){
-                foreach($allFunctions as $function){
-                    if($searchF == $function->getDate()){
-                        array_push($cinemasFunction,$function);
+            if(!empty($allFunctions)){
+                if(is_array($allFunctions)){
+                    foreach($allFunctions as $function){
+                        if($searchF == $function->getDate()){
+                            array_push($cinemasFunction,$function);
+                        }
                     }
                 }
-            }
-            else{      
-                if($searchF == $allFunctions->getDate()){
-                    array_push($cinemasFunction,$allFunctions);
-                }
-            } 
+                else{      
+                    if($searchF == $allFunctions->getDate()){
+                        array_push($cinemasFunction,$allFunctions);
+                    }
+                } 
+            }       
             if(empty($cinemasFunction)){
                 $home= new Home();
                 $_SESSION['errorMje'] = 'No hay funciones para la fecha '.$searchF;
@@ -115,7 +117,6 @@
             foreach($genrsId as $genId){
                 array_push($genrs,$daoMG->getForID($genId)->getName());
             }
-            $adult=$movie->getAdult();
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
             include_once(VIEWS.'/MovieFunction.php');
@@ -151,21 +152,23 @@
                 $seatsXfunction= $seatController->getForFunction($functionId);
                 $i=0;
                 $seatNumberOccupied=array();
-                if(is_array($seatsXfunction)){
-                    foreach($seatsXfunction as $seatXf){
-                        $seat=$seatDao->getForID($seatXf->getSeatId());
-                        $seatNumber=$seat->getNumber();
-                        $seatNumberOccupied[$i]["seatNumber"]=$seatNumber;
-                        $seatNumberOccupied[$i]["occupied"]=$seatXf->getOccupied();
-                        $i++;
+                if(!empty($seatsXfunction)){
+                    if(is_array($seatsXfunction)){
+                        foreach($seatsXfunction as $seatXf){
+                            $seat=$seatDao->getForID($seatXf->getSeatId());
+                            $seatNumber=$seat->getNumber();
+                            $seatNumberOccupied[$i]["seatNumber"]=$seatNumber;
+                            $seatNumberOccupied[$i]["occupied"]=$seatXf->getOccupied();
+                            $i++;
+                        }
                     }
-                }
-                else{
-                    $seat=$seatDao->getForID($seatsXfunction->getSeatId());
-                    $seatNumber=$seat->getNumber();
-                    array_push($seatNumberOccupied[$i]["seatNumber"],$seatNumber);
-                    array_push($seatNumberOccupied[$i]["occupied"],$seatsXfunction->getOccupied());
-                }
+                    else{
+                        $seat=$seatDao->getForID($seatsXfunction->getSeatId());
+                        $seatNumber=$seat->getNumber();
+                        array_push($seatNumberOccupied[$i]["seatNumber"],$seatNumber);
+                        array_push($seatNumberOccupied[$i]["occupied"],$seatsXfunction->getOccupied());
+                    }
+                }   
                 include_once(VIEWS.'/header.php');
                 include_once(VIEWS.'/nav.php');
                 include_once(VIEWS.'/CrudSeats.php');

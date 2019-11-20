@@ -6,7 +6,7 @@
         private $seatId;
         private $occupied;
 
-        public function __construct($functionId,$seatId,$occupied=false){
+        public function __construct($functionId,$seatId,$occupied=0){
             $this->id=$functionId.$seatId;
             $this->functionId=$functionId;
             $this->seatId=$seatId;

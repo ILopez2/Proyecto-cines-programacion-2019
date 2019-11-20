@@ -25,23 +25,25 @@
                 $functionDao=new MovieFunctionDao();
                 $function=$functionDao->getForId($functionId);
                 $seats=$this->seatDao->getForCinemaRoom($function->getCinemaRoom());
-                if(is_array($seats)){
-                    foreach($seats as $seat){
-                        $seatXfunction=new SeatXfunction($functionId,$seat->getId());
+                if(!empty($seats)){
+                    if(is_array($seats)){
+                        foreach($seats as $seat){
+                            $seatXfunction=new SeatXfunction($functionId,$seat->getId());
+                            $this->seatXfunctionDao->add($seatXfunction);
+                        }
+                    }
+                    else{
+                        $seatXfunction=new SeatXfunction($functionId,$seats->getId());
                         $this->seatXfunctionDao->add($seatXfunction);
                     }
+                    $seatsOfFunction=$this->seatXfunctionDao->getForFunction($functionId);
                 }
-                else{
-                    $seatXfunction=new SeatXfunction($functionId,$seats->getId());
-                    $this->seatXfunctionDao->add($seatXfunction);
-                }
-                $seatsOfFunction=$this->seatXfunctionDao->getForFunction($functionId);
             }
             return $seatsOfFunction;
         }
         public function occupySeat($seatXfunctionId){
             $seatXfunction=$this->seatXfunctionDao->getForId($seatXfunctionId);
-            $seatXfunction->setOccupied(true);
+            $seatXfunction->setOccupied(1);
             $this->seatXfunctionDao->changeOccupy($seatXfunction);
         }
     
