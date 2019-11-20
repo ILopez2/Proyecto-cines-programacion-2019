@@ -78,9 +78,9 @@
                                                 ?>
                                                 <td ><?php echo $room->getName();?></td>
                                                 <td style = "text-align: center"> 
-                                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sign-up">
-                                                    <i class="fas fa-shopping-cart"> Comprar</i>
-                                                    </button>                                   
+                                                    <a href="<?php echo FRONT_ROOT;?>Views/selectSeats?id=<?php echo $function->getId();?>" class="btn btn-success">
+                                                        <i class="fas fa-shopping-cart"> Comprar entradas</i>
+                                                    </a>                                   
                                                 </td>
                                             </tr>
                                         <?php } 
@@ -101,9 +101,9 @@
                                             <td class=table-light><?php echo $room->getName();?></td>
                                             
                                             <td style = "text-align: center"> 
-                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sign-up">
-                                            <i class="fas fa-shopping-cart"> Comprar</i>
-                                            </button>                                   
+                                            <a href="<?php echo FRONT_ROOT;?>Views/selectSeats?id=<?php echo $cinemasFunction->getId();?>" class="btn btn-success">
+                                                        <i class="fas fa-shopping-cart"> Comprar entradas</i>
+                                                    </a>                                 
                                             </td>
 
                                         </tr>

@@ -8,6 +8,7 @@
     use dao\TicketDao as TicketDao;
     use dao\UserDao as UserDao;
     use dao\SeatDao as SeatDao;
+    use dao\SeatXFunctionDao as SeatXFDao;
     
     //CONTROLLERS
     use controllers\HomeController as Home;
@@ -186,6 +187,28 @@
             include_once(VIEWS.'/SelectSeat.php');
             include_once(VIEWS.'/footer.php');
         }
+            //COMPRAR ENTRADAS
+        public function buyTickets($seatsXFids){
+            var_dump($seatsXFids);
+            /*$daoSXF= new SeatXFDao();
+            $seatsXfunctions=array();
+
+            $daoTicket = new TicketDao();
+            $daoCinema=new CinemaDao();
+            $daoCinemaRoom = new CinemaRoomDao();
+            $daoMovieFunction = new MovieFunctionDao();
+            $daoUsers = new UserDao();
+            $users=$daoUsers->getAll();
+            $cinemas=$daoCinema->getAll();
+            $cinemaRooms=$daoCinemaRoom->getAll();
+            $functions=$daoFunction->getAll();
+            $tickets=$daoTicket->getAll();
+            include_once(VIEWS.'/header.php');
+            include_once(VIEWS.'/nav.php');
+            include_once(VIEWS.'/BuyTicket.php');
+            include_once(VIEWS.'/footer.php');*/
+
+        }
         //ADMINISTRACION
 
             //USUARIOS
@@ -259,22 +282,5 @@
             include_once(VIEWS.'/footer.php');
         }
 
-        //COMPRAR ENTRADAS
-        public function buyTickets($idFunction){
-            $daoTicket = new TicketDao();
-            $daoCinema=new CinemaDao();
-            $daoCinemaRoom = new CinemaRoomDao();
-            $daoMovieFunction = new MovieFunctionDao();
-            $daoUsers = new UserDao();
-            $users=$daoUsers->getAll();
-            $cinemas=$daoCinema->getAll();
-            $cinemaRooms=$daoCinemaRoom->getAll();
-            $functions=$daoFunction->getAll();
-            $tickets=$daoTicket->getAll();
-            include_once(VIEWS.'/header.php');
-            include_once(VIEWS.'/nav.php');
-            include_once(VIEWS.'/BuyTicket.php');
-            include_once(VIEWS.'/footer.php');
-
-        }
+        
     }

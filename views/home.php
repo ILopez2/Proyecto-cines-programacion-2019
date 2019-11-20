@@ -42,5 +42,4 @@
             <?php } }?>
         </tbody>
     </table>
-    <a href="<?php echo FRONT_ROOT?>Views/selectSeats?id=1" class="btn btn-success">Prueba asientos</a>
 </div>

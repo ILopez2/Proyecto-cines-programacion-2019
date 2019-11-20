@@ -12,7 +12,7 @@
             <?php 
                 $flag=true
             ?>
-            <form action="Views/buyTicket" method="POST">
+            <form action="<?php echo FRONT_ROOT;?>Views/buyTickets" method="POST" required>
             <?php
                 if(!empty($seats)){
                     if(is_array($seats)){
@@ -58,18 +58,14 @@
                         
                            
         </tbody>
-                    <input type="submit" class="btn btn-success btn-block" value="Proceder con la compra">
-            </form>
             <?php
                         }
             ?>
-                
-    
             <?php
                     }
                 }
             ?>      
     </table>
     <input type="submit" class="btn btn-success btn-block" value="Proceder con la compra">
-    </form>
+</form>
 </div>
