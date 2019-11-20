@@ -1,6 +1,6 @@
 <?php
     namespace models;
-    class ClassSeat{
+    class ClassSeatXFunction{
         private $id;
         private $functionId;
         private $seatId;
@@ -29,5 +29,5 @@
         public function setOccupied($occupied){
             $this->occupied=$occupied;
         }
-
+    }
 ?>

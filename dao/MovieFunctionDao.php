@@ -107,6 +107,23 @@ class MovieFunctionDao implements InterfaceDao{
             return false;
         }
     }
+    public function getForCinemaRoom($cinemaRoomId){
+        $sql = "SELECT * FROM funciones WHERE id_sala2 = :cinemaRoomId";
+        $parameters['cinemaRoomId']=$cinemaRoomId;
+        try{
+            //creo la instancia de coneccion
+            $this->connection= Connection::getInstance();
+            $result = $this->connection->execute($sql,$parameters);
+        }catch(\PDOException $ex){
+            throw $ex;
+        } 
+        //hay que mapear de un arreglo asociativo a objetos
+        if(!empty($result)){
+            return $this->mapeo($result);
+        }else{
+            return false;
+        }
+    }
     /*
     *Retorna todos los cines de la BDD
     */

@@ -59,41 +59,59 @@
                     </tr>
                 </thead>
                 <tbody>
-                       <?php if(!empty($rooms)){
+                    <?php   if(!empty($rooms)){
                                 if(is_array($rooms)){                    
                                     foreach($rooms as $valueR){ 
-                                        echo "<tr>
-                                                <td class=table-light>".$valueR->getName()."</td>";
-                                        echo    "<td class=table-light>".$valueR->getIs3d()."</td>";
-                                        echo    "<td class=table-light>".$valueR->getCapacity()."</td>";
-                                        ?>
+                                        ?> 
+                                        <tr>
+                                            <td class=table-light><?php echo $valueR->getName(); ?></td>
+                                            <td class=table-light><?php echo $valueR->getIs3d(); ?></td>
+                                            <td class=table-light><?php echo $valueR->getCapacity(); ?></td>
+                                <?php   //DELETE STARTS HERE ?>
+                                            <td>
+                                                <a href="<?php echo FRONT_ROOT?>CinemaRoom/delete?idroom=<?php echo $valueR->getId()?>&?idcinema=<?php echo $valueR->getCinemaId()?>" class="btn btn-danger" onclick="clicked(event)">
+                                                    <i class="far fa-trash-alt"> Eliminar</i>
+                                                </a>
+                                            
+                                <?php   //DELETE ENDS HERE 
+
+                                        //VIEW FUNCTIONS STARTS HERE
+                                ?>
+                                            
+                                                <a href="<?php echo FRONT_ROOT?>Views/viewCinemaRoomFunctions?cinemaRoomId=<?php echo $valueR->getId()?>" class="btn btn-success" >
+                                                    <i class="fas fa-ticket-alt"> Funciones</i>
+                                                </a>
+                                            </td>
+                                <?php   //VIEW FUNCTIONS ENDS HERE ?>
+                                        </tr>
+                                        <?php                  
+                                    }              
+                                }                     
+                            else {
+                                ?>
+                                    <tr>
+                                        <td class=table-light><?php echo $rooms->getName(); ?></td>
+                                        <td class=table-light><?php echo $rooms->getIs3d(); ?></td>
+                                        <td class=table-light><?php echo $rooms->getCapacity(); ?></td>
+                                <?php   //DELETE STARTS HERE ?>
                                         <td>
-                                            <a href="<?php echo FRONT_ROOT?>CinemaRoom/delete?idroom=<?php echo $valueR->getId()?>&?idcinema=<?php echo $valueR->getCinemaId()?>" class="btn btn-danger" onclick="clicked(event)">
-                                            <i class="far fa-trash-alt"></i>
+                                            <a href="<?php echo FRONT_ROOT?>CinemaRoom/delete?idroom=<?php echo $rooms->getId()?>&?idcinema=<?php echo $rooms->getCinemaId()?>" class="btn btn-danger" onclick="clicked(event)">
+                                            <i class="far fa-trash-alt"> Eliminar</i>
+                                            </a>
+                                        
+                                <?php   //DELETE ENDS HERE 
+
+                                        //VIEW FUNCTIONS STARTS HERE
+                                ?>
+                                        
+                                            <a href="<?php echo FRONT_ROOT?>Views/viewCinemaRoomFunctions?cinemaRoomId=<?php echo $rooms->getId()?>" class="btn btn-success">
+                                            <i class="fas fa-ticket-alt"> Funciones</i>
                                             </a>
                                         </td>
-                                        </tr>
-                                        <?php 
-                                    }              
-                                }
-                            
-                            else {
-
-                                echo "<tr>
-                                        <td class=table-light>".$rooms->getName()."</td>";
-                                        echo    "<td class=table-light>".$rooms->getIs3d()."</td>";
-                                        echo    "<td class=table-light>".$rooms->getCapacity()."</td>";
-                                        //DELETE STARTS HERE
-                                    ?>
-                                    <td>
-                                        <a href="<?php echo FRONT_ROOT?>CinemaRoom/delete?idroom=<?php echo $rooms->getId()?>&?idcinema=<?php echo $rooms->getCinemaId()?>" class="btn btn-danger" onclick="clicked(event)">
-                                        <i class="far fa-trash-alt"> Eliminar</i> 
-                                        </a>
-                                    </td>
+                                <?php   //VIEW FUNCTIONS ENDS HERE ?>
                                     </tr>
-                                    <?php 
-                                        //DELETE ENDS HERE
-                            } ?>
+                    <?php   } 
+                    ?>
                             <!-- EDIT START HERE  -->
                             <td class="table-dark" colspan="7" style="text-align:center;">
                                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
@@ -101,7 +119,7 @@
                                 </button>
                             </td>
                             <!-- EDIT ENDS HERE  -->
-                        <?php  } ?>
+                    <?php   } ?>
                     
                 </tbody>
                 </table>       

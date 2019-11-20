@@ -1,13 +1,20 @@
 <?php namespace controllers;
-    //esta controladora se encargara de administrar todas las vistas necesarias
+    
+    //DAOS
     use dao\CinemaDao as CinemaDao;
+    use dao\CinemaRoomDao as CinemaRoomDao;
     use dao\MovieFunctionDao as MovieFunctionDao;
     use dao\MovieGenreDao as MovieGenreDao;
-    use dao\CinemaRoomDao as CinemaRoomDao;
-    use dao\UserDao as UserDao;
     use dao\TicketDao as TicketDao;
-    use controllers\MovieApiController as MovieApiController;
+    use dao\UserDao as UserDao;
+    use dao\SeatDao as SeatDao;
+    
+    //CONTROLLERS
     use controllers\HomeController as Home;
+    use controllers\MovieApiController as MovieApiController;
+    use controllers\SeatController as SeatCon;
+
+    //ESTA CONTROLADORA GESTIONA TODAS LAS VISTAS
     class ViewsController
     {
         public function __construct(){
@@ -20,7 +27,7 @@
             $daoMovie = new MovieApiController();
             $daoMovieGenres= new MovieGenreDao();
             $daoFunction= new MovieFunctionDao();
-            $genres=$daoMovie->getAllGenres(ESP);
+            $genres=$daoMovie->getAllGenres();
             $functions=$daoFunction->getAll();
             $movies=array();
             if(!empty($functions)){
@@ -54,15 +61,14 @@
                 include_once(VIEWS.'/nav.php');
                 include_once(VIEWS.'/SearchGen.php');
                 include_once(VIEWS.'/footer.php');
-            }
-            
+            }      
         }   
             //POR FECHA
         public function searchForDate($searchF){
             $dao = new MovieFunctionDao();
             $daoC=new CinemaDao();
             $daoM = new MovieApiController();
-            $genres=$daoM->getAllGenres(ESP);
+            $genres=$daoM->getAllGenres();
             $allFunctions=$dao->getAll();
             $cinemasFunction=array();
             if(is_array($allFunctions)){
@@ -89,14 +95,15 @@
                 include_once(VIEWS.'/footer.php');
             }        
         }
-            //VER FUNCIONES DE UNA PELICULA
+        //VER 
+            //FUNCIONES DE UNA PELICULA
         public function viewFunctions($id){
             $dao = new MovieFunctionDao();
             $daoC=new CinemaDao();
             $daoM = new MovieApiController();
             $daoRM= new CinemaRoomDao();
             $daoMG= new MovieGenreDao();
-            $genres=$daoM->getAllGenres(ESP);
+            $genres=$daoM->getAllGenres();
             $cinemasFunction=$dao->getForMovie($id);
             $movie = $daoM->getMovieXid($id);
             $title=$movie->getTitle();
@@ -114,16 +121,63 @@
             include_once(VIEWS.'/MovieFunction.php');
             include_once(VIEWS.'/footer.php');
         }
-            //VER ASIENTOS DE UNA FUNCION
-        public function viewSeatsXFunction($seatsOfFunction){
-            include_once(VIEWS."/CrudeSeats");
-        }
+            //FUNCIONES DE UNA SALA
+        public function viewCinemaRoomFunctions($cinemaRoomId){
+            $search = new MovieApiController();
+            $genres=$search->getAllGenres();
+            $functionDao= new MovieFunctionDao();
+            $functions=$functionDao->getForCinemaRoom($cinemaRoomId);
+            $roomDao= new CinemaRoomDao();
+            $room=$roomDao->getForID($cinemaRoomId);
+            if(!empty($functions)){        
+            $daoMAC= new MovieApiController();
+            $cinemaRoomName=$room->getName(); 
+            include_once(VIEWS.'/header.php');
+            include_once(VIEWS.'/nav.php');
+            include_once(VIEWS.'/CinemaRoomFunctions.php');
+            include_once(VIEWS.'/footer.php');
+            }
+            else{
+                $_SESSION["errorMje"]="Esa sala no tiene funciones";
+                $this->admRooms($room->getCinemaId());
+            }
+        }   
+            //ASIENTOS DE UNA FUNCION
+        public function viewFunctionSeats($functionId){
+                $search = new MovieApiController();
+                $genres=$search->getAllGenres();
+                $seatController=new SeatCon();
+                $seatDao=new SeatDao();
+                $seatsXfunction= $seatController->getForFunction($functionId);
+                $i=0;
+                $seatNumberOccupied=array();
+                if(is_array($seatsXfunction)){
+                    foreach($seatsXfunction as $seatXf){
+                        $seat=$seatDao->getForID($seatXf->getSeatId());
+                        $seatNumber=$seat->getNumber();
+                        $seatNumberOccupied[$i]["seatNumber"]=$seatNumber;
+                        $seatNumberOccupied[$i]["occupied"]=$seatXf->getOccupied();
+                        $i++;
+                    }
+                }
+                else{
+                    $seat=$seatDao->getForID($seatsXfunction->getSeatId());
+                    $seatNumber=$seat->getNumber();
+                    array_push($seatNumberOccupied[$i]["seatNumber"],$seatNumber);
+                    array_push($seatNumberOccupied[$i]["occupied"],$seatsXfunction->getOccupied());
+                }
+                include_once(VIEWS.'/header.php');
+                include_once(VIEWS.'/nav.php');
+                include_once(VIEWS.'/CrudSeats.php');
+                include_once(VIEWS.'/footer.php');
+        }   
+
         //ADMINISTRACION
 
             //USUARIOS
         public function admUsers(){
             $search = new MovieApiController();
-            $genres=$search->getAllGenres(ESP);
+            $genres=$search->getAllGenres();
             $dao = new UserDao();
             $users=$dao->getAll();
             include_once(VIEWS.'/header.php');
@@ -135,7 +189,7 @@
             //CINES
         public function admCinema(){
             $search = new MovieApiController();
-            $genres=$search->getAllGenres(ESP);
+            $genres=$search->getAllGenres();
             $dao = new CinemaDao();
             $cinemas=$dao->getAll();
             include_once(VIEWS.'/header.php');
@@ -147,7 +201,7 @@
             //SALAS DE CINE
         public function admRooms($cinemaId){
             $search = new MovieApiController();
-            $genres=$search->getAllGenres(ESP);
+            $genres=$search->getAllGenres();
             $dao = new CinemaRoomDao();
             $rooms = $dao->getForCinema($cinemaId);
             include_once(VIEWS.'/header.php');
@@ -162,9 +216,9 @@
             $cinemaDao=new CinemaDao();
             $roomDao=new CinemaRoomDao();
             $daoMAC = new MovieApiController();
-            $genres=$daoMAC->getAllGenres(ESP);
+            $genres=$daoMAC->getAllGenres();
             $cines=$cinemaDao->getAll();
-            $array = $daoMAC->getLastMovies(ESP);
+            $array = $daoMAC->getLastMovies();
             $cine=$cinemaDao->getForID($cinemaName);
             $functions=$dao->getForCinema($cine->getId());
             include_once(VIEWS.'/header.php');

@@ -58,12 +58,17 @@
         }
 
 
-        public function delete($id,$cinema){
+        public function delete($id,$cinemaOrRoom,$option){
             //borrar el cine con el nombre pasado por parameto
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
                 $this->dao->delete($id);
                 $_SESSION["successMje"]="Funcion borrada con exito";
-                $this->view->admFunctions($cinema);
+                if($option=="cinema"){
+                    $this->view->admFunctions($cinemaOrRoom);
+                }
+                if($option=="cinemaRoom"){
+                    $this->view->viewCinemaRoomFunctions($cinemaOrRoom);
+                }
             }
         }
 

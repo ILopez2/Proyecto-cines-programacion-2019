@@ -143,7 +143,7 @@
             $value = is_array($value) ? $value : [];   
             $resp=array();  
             $resp = array_map(function($p){
-            return new CS($p['id_asiento'],$p['nro_asiento'],$p['id_sala1'],$p['ocupada']);
+            return new CS($p['id_asiento'],$p['nro_asiento'],$p['id_sala1']);
             }, $value);
                 /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
                 return count($resp) > 1 ? $resp : $resp['0'];

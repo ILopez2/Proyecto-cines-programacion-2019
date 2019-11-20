@@ -5,9 +5,9 @@
     use dao\SeatDao as SeatDao;
     use dao\MovieFunctionDao as MovieFunctionDao;
 
-    use controllers\ViewsController as ViewsController;
+    use controllers\ViewsController as View;
 
-    class SeatControllers{
+    class SeatController{
 
         private $seatDao;
         private $seatXfunctionDao;
@@ -37,13 +37,12 @@
                 }
                 $seatsOfFunction=$this->seatXfunctionDao->getForFunction($functionId);
             }
-            $this->view->viewSeatsXFunction($seatsOfFunction);
+            return $seatsOfFunction;
         }
-        public function occupySeat($seatXfunctionId,$seatsOfFunction){
+        public function occupySeat($seatXfunctionId){
             $seatXfunction=$this->seatXfunctionDao->getForId($seatXfunctionId);
             $seatXfunction->setOccupied(true);
             $this->seatXfunctionDao->changeOccupy($seatXfunction);
-            $this->view->viewSeatsXFunction($seatsOfFunction);
         }
     
     

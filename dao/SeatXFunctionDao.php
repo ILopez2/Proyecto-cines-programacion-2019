@@ -3,7 +3,7 @@ namespace dao;
 
 use dao\Connection as Connection;
 use models\ClassSeatXFunction as SeatXfunction;
-class SeatDao implements InterfaceDao{
+class SeatXFunctionDao implements InterfaceDao{
 
     //ATRIBUTES
     private $connection;

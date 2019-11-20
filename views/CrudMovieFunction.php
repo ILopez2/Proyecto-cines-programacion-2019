@@ -20,7 +20,7 @@
                 <!-- start AddFunction here ...  -->
                 <div class="card card-body bg-secondary">
                 
-                <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1') { ?>
+                
                     <form action="<?php echo FRONT_ROOT?>MovieFunction/add" method="POST" >
                         <div class="form-group">
                         <label><strong>Cine:</strong></label>
@@ -80,7 +80,7 @@
 
                     </form>
                     </div>
-                <?php } ?>    
+                  
                 <!-- End AddFunction here ...         -->
 
                 </div>
@@ -117,7 +117,7 @@
                                     <td class="table-dark"><?php echo $function->getLanguage(); ?></td>
                                     <td class="table-dark">
                                         <!-- DELETE START HERE  -->
-                                        <a href="<?php echo FRONT_ROOT?>MovieFunction/delete?id=<?php echo $function->getId()?>&?cinema=<?php echo $cinemaName?>" class="btn btn-danger" onclick="clicked(event)">
+                                        <a href="<?php echo FRONT_ROOT?>MovieFunction/delete?id=<?php echo $function->getId()?>&?cinema=<?php echo $cinemaName?>&?option=cinema" class="btn btn-danger" onclick="clicked(event)">
                                                 <i class="far fa-trash-alt"> Eliminar</i>
                                         </a>
                                         <!-- DELETE START HERE  -->
@@ -138,7 +138,7 @@
                                     <td class="table-dark"><?php echo $functions->getLanguage(); ?></td>
                                     <td class="table-dark">
                                         <!-- DELETE START HERE  -->
-                                        <a href="<?php echo FRONT_ROOT?>MovieFunction/delete?id=<?php echo $functions->getId()?>&?cinema=<?php echo $cinemaName?>" class="btn btn-danger" onclick="clicked(event)">
+                                        <a href="<?php echo FRONT_ROOT?>MovieFunction/delete?id=<?php echo $functions->getId()?>&?cinema=<?php echo $cinemaName?>&?option=cinema" class="btn btn-danger" onclick="clicked(event)">
                                                 <i class="far fa-trash-alt"> Eliminar</i>
                                         </a>
                                         <!-- DELETE START HERE  -->
