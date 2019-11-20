@@ -163,9 +163,11 @@ insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivan",'19
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivaasdn",'1995-01-29','ivsdasan@utn','asd123','1');
 
 
-
-/*select * from roles;
-select * from asientos;
+update asientoxfuncion
+set ocupada=true;
+where id_asientoXfuncion=11
+/*select * from funciones;
+select * from asientoxfuncion;
 select * from generos;
 select * from generosxpelicula;
 select * from salas;
