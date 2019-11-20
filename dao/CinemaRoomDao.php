@@ -32,16 +32,26 @@
                 /*$createdRoom=$this->getForCinemaAndName($parameters["id_cine1"],$parameters["name"]);
                 $createdRoomId=$createdRoom->getId(); */
                 $rooms=$this->getAll();
-                foreach($rooms as $room){
-                    if($room->getCinemaId()==$parameters["id_cine1"] && $room->getName()==$parameters["name"]){
-                        $createdRoomId=$room->getId();
+                $createdRoomId=0;
+                if(is_array($rooms)){
+                    foreach($rooms as $room){
+                        if($room->getCinemaId()==$parameters["id_cine1"] && $room->getName()==$parameters["name"]){
+                            $createdRoomId=$room->getId();                  
+                        }
                     }
-                }
+                } 
+                else{
+                    if($rooms->getCinemaId()==$parameters["id_cine1"] && $rooms->getName()==$parameters["name"]){
+                        $createdRoomId=$rooms->getId();                  
+                    }
+                } 
                 $daoSeats= new SeatDao();
                 for($i=0;$i<$parameters["capacity"];$i++){
                     $seat=new Seat(null,($i+1),$createdRoomId);
                     $daoSeats->add($seat);
                 }
+                
+                
                 return $Executeresult;
             }
             catch(\PDOException $ex){
