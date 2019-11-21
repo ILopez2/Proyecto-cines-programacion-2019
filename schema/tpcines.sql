@@ -140,10 +140,12 @@ id_entrada int auto_increment not null,
 id_funcion1 int not null,
 id_usuario1 int not null,
 id_compra1 int not null,
+id_asiento1 int not null,
 qr mediumblob,
 constraint fk_compra_ foreign key (id_compra1) references compras(id_compra),
 constraint fk_funcion_ foreign key (id_funcion1) references funciones(id_funcion),
 constraint fk_usuario_ foreign key (id_usuario1) references usuarios(id_usuario),
+constraint fk_asiento_ foreign key (id_asiento1) references asientos(id_asiento),
 constraint pk_entrada_ primary key (id_entrada)
 );
 

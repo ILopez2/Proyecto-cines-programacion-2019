@@ -6,17 +6,15 @@
         private $id;
         private $name;
         private $birthdate;
-        //private $nationality;
         private $email;
         private $password;
         private $roleLevel;
 
         
         //CONSTRUCTOR
-        public function __construct($id=null,$name,$birthdate/*,$nationality*/,$email,$password,$role='2'){
+        public function __construct($id=null,$name,$birthdate,$email,$password,$role='2'){
             $this->id=$id;
             $this->name=$name;
-           // $this->nationality=$nationality;
             $this->birthdate=$birthdate;
             $this->email=$email;
             $this->password=$password;
@@ -30,9 +28,6 @@
         public function getBirthdate(){
             return $this->birthdate;
         }
-       /* public function getNationality(){
-            return $this->nationality;
-        }*/
         public function getEmail(){
             return $this->email;
         }

@@ -1,6 +1,6 @@
 <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
 <div class="container p=4">
-    <h1 class="mb-5">Asientos de la funcion seleccionada</h1>
+    <h1 class="mb-5">Estadisticas de la funcion seleccionada</h1>
     <div class="col-m-8">
          <table class="table table-bordered table-dark">
             <thead class="thead-dark">

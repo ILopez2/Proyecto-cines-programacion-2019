@@ -35,11 +35,11 @@
                     </div>
                     <div class="btn-group mr-2" role="group" aria-label="Fourth group">
                     <div class="btn-group" role="group">
-                        <button id="btnGroupDrop2" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button id="btnGroupDrop2" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-users-cog"></i> Administrar
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            <a class="dropdown-item" href="<?php echo FRONT_ROOT?>Views/admTickets"><i class="fas fa-hand-holding-usd"></i> Tickets</a>
+                            <!-- <a class="dropdown-item" href="<?php echo FRONT_ROOT?>Views/admTickets"><i class="fas fa-hand-holding-usd"></i> Tickets</a> -->
                             <a class="dropdown-item" href="<?php echo FRONT_ROOT?>Views/admCinema"><i class="fas fa-film"></i> Cines</a>
                             <a class="dropdown-item" href="<?php echo FRONT_ROOT?>Views/admUsers"><i class="fas fa-user-cog"></i> Usuarios</a>
                         </div>

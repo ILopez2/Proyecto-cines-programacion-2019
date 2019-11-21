@@ -15,6 +15,7 @@
     use controllers\MovieApiController as MovieApiController;
     use controllers\SeatController as SeatCon;
     use controllers\DateTimeController as DateTime;
+    use controllers\PurchaseController as PurchaseCon;
 
     //ESTA CONTROLADORA GESTIONA TODAS LAS VISTAS
     class ViewsController
@@ -23,8 +24,7 @@
             //VACIO.
         }
         
-        //BUSQUEDA DE PELICULAS
-        
+        //BUSQUEDA DE PELICULAS      
             //POR FECHA Y/O GENERO
         public function search($searchGenre=null,$searchDate=null){
             if(strpos($searchGenre, '-')!=false){
@@ -118,6 +118,27 @@
             }        
         }
         //VER 
+            //GANANCIAS DE UN CINE
+        public function viewCinemaEarnings($cinemaId){
+            $purchaseController= new PurchaseCon();
+            $purchases= $purchaseController->getForCinema($cinemaId);
+            if(!empty($purchases)){
+                $daoCinema=new CinemaDao();
+                $cinemaName=$daoCinema->getForID($cinemaId)->getName();
+                $totalEarnings=0;
+                foreach($purchases as $purchase){
+                    $totalEarnings+=$purchase->getTotal();
+                }
+                include_once(VIEWS.'/header.php');
+                include_once(VIEWS.'/nav.php');
+                include_once(VIEWS.'/CinemaEarnings.php');
+                include_once(VIEWS.'/footer.php');
+            }
+            else{
+                $_SESSION['errorMje'] = "Ese cine no realizo ninguna venta aun";
+                $this->admCinema();
+            }      
+        }
             //FUNCIONES DE UNA PELICULA
         public function viewFunctions($id){
             $dao = new MovieFunctionDao();

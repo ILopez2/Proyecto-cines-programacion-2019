@@ -4,15 +4,17 @@
         private $ticketID;
         private $functionID;
         private $userID;
-        private $movieID;
+        private $purchaseId;
+        private $seatId;
         private $QR;
         
-        public function __construct($ticketID,$functionID,$userID,$qr,$movieID){
+        public function __construct($ticketID=null,$functionID,$userID,$purchaseId,$seatId,$qr=null){
             $this->ticketID=$ticketID;
             $this->functionID=$functionID;
             $this->userID=$userID;
-            $this->QR=$qr;
-            $this->movieID=$movieID;
+            $this->purchaseId=$purchaseId;
+            $this->seatId=$seatId;
+            $this->QR=$qr;          
         }
 
         public function getTicketID(){
@@ -21,16 +23,17 @@
         public function getFunctionID(){
             return $this->functionID;
         }
-        public function getfunctionID(){
-            return $this->functionID;
-        }
         public function getuserID(){
             return $this->userID;
+        }
+        public function getPurchaseID(){
+            return $this->purchaseId;
+        }
+        public function getSeatID(){
+            return $this->seatId;
         }
         public function getQR(){
             return $this->QR;
         }
-        public function getMovieID(){
-            return $this->movieID;
-        }
+        
     }
