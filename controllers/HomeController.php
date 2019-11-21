@@ -38,14 +38,18 @@
                          
                 $dao = new MovieApiController();
                 $daoF = new MovieFunctionDao();
+                $daoDT=new DateTime();
+                $date=$dao->getActualDate();
                 $functions=$daoF->getAll();
                 $array = $dao->getLastMovies();
                 $genres=$dao->getAllGenres();
                 if(!empty($array)){
                     foreach($array as $k => $v) {
-                        if(!$daoF->getForMovie($v->getID())) {
-                            unset($array[$k]);
-                        }
+                        if($v->getDate()>=$date){
+                            if(!$daoF->getForMovie($v->getID())) {
+                                unset($array[$k]);
+                            }
+                        }           
                     }
                 }
                 include_once(VIEWS.'/nav.php');

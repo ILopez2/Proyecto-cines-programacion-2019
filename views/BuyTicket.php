@@ -33,7 +33,11 @@
             </thead>
             <tbody>
                 <tr>
-                <th scope="row">Nombre de la Sala</th>
+                <th scope="row">Cine</th>
+                <td colspan="3"><?php echo $cinemaName;?></td>
+                </tr>
+                <tr>
+                <th scope="row">Sala</th>
                 <td colspan="3"><?php echo $roomName;?></td>
                 </tr>
                 <tr>

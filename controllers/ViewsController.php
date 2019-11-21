@@ -14,6 +14,7 @@
     use controllers\HomeController as Home;
     use controllers\MovieApiController as MovieApiController;
     use controllers\SeatController as SeatCon;
+    use controllers\DateTimeController as DateTime;
 
     //ESTA CONTROLADORA GESTIONA TODAS LAS VISTAS
     class ViewsController
@@ -28,27 +29,33 @@
             $daoMovie = new MovieApiController();
             $daoMovieGenres= new MovieGenreDao();
             $daoFunction= new MovieFunctionDao();
+            $daoDT=new DateTime();
+            $date=$dao->getActualDate();
             $genres=$daoMovie->getAllGenres();
             $functions=$daoFunction->getAll();
             $movies=array();
             if(!empty($functions)){
                 if(is_array($functions)){
                     foreach($functions as $fu){
-                        $movie=$daoMovie->getMovieXid($fu->getMovie());                    
+                        if($fu->getDate()>=$date){
+                            $movie=$daoMovie->getMovieXid($fu->getMovie());                    
+                            foreach($movie->getGenres() as $gen){
+                                if($gen == $searchG){
+                                    array_push($movies,$movie);
+                                }
+                            }     
+                        }      
+                    }
+                }
+                else{
+                    if($functions->getDate()>=$date){
+                        $movie=$daoMovie->getMovieXid($functions->getMovie(),ESP);
                         foreach($movie->getGenres() as $gen){
                             if($gen == $searchG){
                                 array_push($movies,$movie);
                             }
-                        }           
-                    }
-                }
-                else{
-                    $movie=$daoMovie->getMovieXid($functions->getMovie(),ESP);
-                    foreach($movie->getGenres() as $gen){
-                        if($gen == $searchG){
-                            array_push($movies,$movie);
-                        }
-                    }     
+                        }    
+                    }  
                 }
                 $movies=array_unique($movies,SORT_REGULAR );
             }
@@ -106,6 +113,8 @@
             $daoM = new MovieApiController();
             $daoRM= new CinemaRoomDao();
             $daoMG= new MovieGenreDao();
+            $daoDT=new DateTime();
+            $date=$dao->getActualDate();
             $genres=$daoM->getAllGenres();
             $cinemasFunction=$dao->getForMovie($id);
             $movie = $daoM->getMovieXid($id);
@@ -181,7 +190,6 @@
             $genres=$search->getAllGenres();
             $seatController=new SeatCon();
             $seats= $seatController->getForFunction($functionId);
-            array_push($seats,null);
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
             include_once(VIEWS.'/SelectSeat.php');
@@ -211,6 +219,7 @@
             $room=$daoCinemaRoom->getForID($function->getCinemaRoom());
             $roomName=$room->getName();   
             $cinema=$daoCinema->getForID2($function->getCinema());
+            $cinemaName=$cinema->getName();
             $totalPrice = ($cinema->getTicketCost())*($quantityTickets);
             $user = $daoUser->getForID($_SESSION['userLogedIn']->getEmail());
             $userId=$user->getID();
