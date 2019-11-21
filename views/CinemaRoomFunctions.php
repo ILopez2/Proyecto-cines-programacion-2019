@@ -54,7 +54,7 @@
                                             <i class="far fa-trash-alt"> Eliminar</i>
                                         </a>
                                         <a href="<?php echo FRONT_ROOT?>Views/viewFunctionSeats?idroom=<?php echo $function->getId()?>" class="btn btn-warning">
-                                            <i class="fas fa-chair"> Ver asientos</i>
+                                        <i class="fas fa-search-dollar"> Estadisticas de la funcion</i>
                                         </a>
                                     </td>
                         <?php   } 
@@ -71,7 +71,7 @@
                                             <i class="far fa-trash-alt"> Eliminar</i>
                                         </a>
                                         <a href="<?php echo FRONT_ROOT?>Views/viewFunctionSeats?idroom=<?php echo $functions->getId()?>" class="btn btn-warning">
-                                            <i class="fas fa-chair"> Ver asientos</i>
+                                        <i class="fas fa-search-dollar"> Estadisticas de la funcion</i>
                                         </a>
                                     </td>
                     <?php   } 
