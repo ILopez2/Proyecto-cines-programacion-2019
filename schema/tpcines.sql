@@ -127,10 +127,14 @@ create table compras(
 id_compra int auto_increment not null,
 id_usuario1 int not null,
 #id_pago1 int not null,
+cant_entradas int not null,
 monto int not null,
 descuento float not null,
+qr mediumblob,
+id_cine2 int not null,
 constraint pk_factura primary key(id_compra),
-constraint fk_usuario1 foreign key(id_usuario1)references usuarios(id_usuario)
+constraint fk_usuario1 foreign key(id_usuario1)references usuarios(id_usuario),
+constraint fk_cine2 foreign key(id_cine2)references cines(id_cine)
 #constraint fk_pago1 foreign key(id_pago1)references pagos(id_pago)
 );
 
@@ -161,15 +165,6 @@ insert into roles(nombre_rol)values("Comun");
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Jorge",'1995-01-29','jorge@utn','asd123',1);
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivan",'1995-01-29','ivan@utn','asd123','1');
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivaasdn",'1995-01-29','ivsdasan@utn','asd123','1');
-
-
-
-/*select * from funciones;
-select * from asientoxfuncion;
-select * from generos;
-select * from generosxpelicula;
-select * from salas;
-select * from cidades;*/ 
 
 /*select * from roles;
 select * from asientos;

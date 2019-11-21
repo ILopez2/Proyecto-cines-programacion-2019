@@ -18,7 +18,6 @@
     </div>
 
     <div class="container">                        
-        <form action="<?php echo FRONT_ROOT;?>Purchase/createPurchase" method="POST">
         <section class="jumbotron">
             <div style = "text-align: center">
             <h1>Continuando con tu compra...  </h1>
@@ -54,17 +53,17 @@
                 </tr>
                 <tr class="alert-warning">
                 <th scope="row" >Total a Pagar</th>
-                <td colspan="3" ><?php echo $totalPrice;?></td>
+                <td colspan="3" ><?php if($flagDiscount){ echo 'Felicidades hoy es '.$day.' y compraste mas de 2 entradas, accediste a un descuento del 25%! <br> Precio Final: <strong>'.$totalPrice.'</strong>'; }else{ echo $totalPrice;}?></td>
                 </tr>
             </tbody>
             </table>
-                <input type="hidden" value="<?php echo $roomName;?>" disabled>
-                <input type="hidden" value="<?php echo $quantityTickets;?>" disabled>    
-                <input type="hidden" value="<?php echo $totalPrice;?>" disabled>
-                <input type="hidden" value="<?php echo $userId;?>" disabled>
-                <input type="hidden" value="<?php echo $fTime;?>" disabled>
-                <input type="hidden" value="<?php echo $discount;?>" disabled>
-
+            <div style = "text-align: center">
+            <form action="<?php echo FRONT_ROOT;?>Purchase/createPurchase" method="POST">
+                <input type="hidden" value="<?php echo $cinemaId;?>" name="cinemaId">
+                <input type="hidden" value="<?php echo $quantityTickets;?>" name="quantityTickets">    
+                <input type="hidden" value="<?php echo $totalPrice;?>" name="totalPrice">
+                <input type="hidden" value="<?php echo $userId;?>" name="userId">
+                <input type="hidden" value="<?php echo $discount;?>" name="discount">
                 <script 
                     src="https://www.mercadopago.com.ar/integrations/v1/web-tokenize-checkout.js"
                     data-public-key="TEST-5c961a4f-a387-41e4-b1d1-6f307a001f31"
@@ -73,8 +72,8 @@
                     data-elements-color="#8e44ad"
                     data-button-label="Pay">
                 </script>
-        
-        </form>
+            </form>
+            </div>
     </div>
 
 </div>

@@ -12,4 +12,7 @@
         public function getActualTime(){
             return date("H").":".date("i").":".date("s");
         }
+        public function getActualDay(){
+            return date("l");
+        }
     }
