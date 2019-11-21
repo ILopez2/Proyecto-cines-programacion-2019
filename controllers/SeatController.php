@@ -1,7 +1,7 @@
 <?php namespace controllers;
     
     use models\ClassSeatXFunction as SeatXfunction;
-    use dao\SeatXFunctionDao as SeatXfunctionDao;
+    use dao\SeatXFunctionDao as SeatXFDao;
     use dao\SeatDao as SeatDao;
     use dao\MovieFunctionDao as MovieFunctionDao;
 
@@ -14,7 +14,7 @@
         private $view;
         
         public function __construct(){
-            $this->seatXfunctionDao = new SeatXfunctionDao();
+            $this->seatXfunctionDao = new SeatXFDao();
             $this->seatDao = new SeatDao();
             $this->view = new View();
         }
@@ -52,6 +52,7 @@
             foreach($seatXfunctionIds as $id){
                 array_push($seatsXfunction,$daoSXF->getForID($id));
             }
+            return $seatsXfunction;
         }
     
     }

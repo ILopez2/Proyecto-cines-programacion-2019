@@ -189,7 +189,8 @@
         }
             //COMPRAR ENTRADAS
         public function buyTickets($functionId,$seatsXFids){            
-            $daoSXF= new SeatXFDao();
+            $seatController=new SeatCon();
+            $seatDao=new SeatDao();
             $daoMovieFunction = new MovieFunctionDao();
             $daoCinemaRoom = new CinemaRoomDao();
             $daoTicket = new TicketDao();
@@ -197,32 +198,28 @@
             $daoUser = new UserDao();
             $daoM = new MovieApiController();
             $quantityTickets=0;
-            foreach($seatsXFids as $seats){
+            $seatsXfunction=$seatController->getFromIds($seatsXFids);
+            $seats=array();
+            foreach($seatsXfunction as $seatXF){
+                $seat=$seatDao->getForID($seatXF->getSeatId());
+                array_push($seats,$seat);
                 $quantityTickets++;
             }
-
-            $function=$daoMovieFunction->getForID($functionId);
-            
+            $function=$daoMovieFunction->getForID($functionId);       
             $fDate=$function->getDate();
             $fTime=$function->getTime();
-
             $room=$daoCinemaRoom->getForID($function->getCinemaRoom());
-            $roomName=$room->getName();
-            
+            $roomName=$room->getName();   
             $cinema=$daoCinema->getForID2($function->getCinema());
             $totalPrice = ($cinema->getTicketCost())*($quantityTickets);
-    
             $user = $daoUser->getForID($_SESSION['userLogedIn']->getEmail());
             $userId=$user->getID();
             $movie = $daoM->getMovieXid($function->getMovie());
-            $poster= $daoM->getMoviePoster($movie->getPosterPath());
-            
-            
+            $poster= $daoM->getMoviePoster($movie->getPosterPath());          
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
             include_once(VIEWS.'/BuyTicket.php');
             include_once(VIEWS.'/footer.php');
-
         }
         //ADMINISTRACION
 

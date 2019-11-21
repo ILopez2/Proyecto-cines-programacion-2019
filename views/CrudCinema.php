@@ -107,7 +107,7 @@
                                     </a>
                                     <!-- CINEMA ROOMS VIEW ENDS HERE -->
                                      <!-- FUNCTIONS START HERE  -->
-                                     <a href="<?php echo FRONT_ROOT?>Views/admFunctions?id=<?php echo $cinemas->getName()?>" class="btn btn-danger" >
+                                     <a href="<?php echo FRONT_ROOT?>Views/admFunctions?id=<?php echo $cinemas->getName()?>" class="btn btn-success" >
                                             <i class="fa fa-ticket"> Funciones</i>
                                         </a>
                                     <!-- FUNCTIONS START HERE  -->

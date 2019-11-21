@@ -42,11 +42,11 @@
                 </tr>
                 <tr>
                 <th scope="row">Numeros de asientos</th>
-                <td colspan="3"><?php foreach($seatsXFids as $value){echo $value.",";}?></td>
+                <td colspan="3"><?php foreach($seats as $seat){echo $seat->getNumber()." ";}?></td>
                 </tr>
                 <tr>
                 <th scope="row">Fecha y Hora</th>
-                <td colspan="3"><?php echo $fDate." ".$fTime;?></td>
+                <td colspan="3"><?php echo "Fecha: ".$fDate."<br> Hora: ".$fTime;?></td>
                 </tr>
                 <tr class="alert-warning">
                 <th scope="row" >Total a Pagar</th>
