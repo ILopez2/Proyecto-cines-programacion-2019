@@ -64,12 +64,14 @@
                 <div class="col-m-8">
                     <table class="table table-bordered table-striped">
                         <thead class="thead-dark">
-                            <th>Nombre</th>
-                            <th>Fecha nac</th>
-                            <th>Email</th>
-                            <th>Password</th>
-                            <th>Role</th>
-                            <th>Opciones</th>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Fecha nac</th>
+                                <th>Email</th>
+                                <th>Password</th>
+                                <th>Role</th>
+                                <th>Opciones</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <?php foreach($users as $value){ ?>
