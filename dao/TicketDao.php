@@ -18,12 +18,10 @@
         *Agrega un nuevo ticket a la BDD
         */
         public function add($ticket){
-            $sql = "INSERT INTO entradas(id_funcion1,id_usuario,id_compra1,id_asiento1,qr) VALUES (:functionId, :userId, :purchaseId,:seatId,:qr)";
-            $parameters["functionId"]=$ticket->getFunctionID();
-            $parameters["userId"]=$ticket->getUserID();
-            $parameters["purchaseId"]=$ticket->getPurchaseID();
-            $parameters["seatId"]=$ticket->getSeatID();
-            $parameters["qr"]=$ticket->getQr();
+            $sql = "INSERT INTO entradas(id_funcion1,id_usuario1,id_compra1) VALUES (:id_funcion1, :id_usuario, :id_compra1)";
+            $parameters["id_funcion1"]=$ticket->getFunctionID();
+            $parameters["id_usuario"]=$ticket->getUserID();
+            $parameters["id_compra1"]=$ticket->getPurchaseID();
             try{
                 //creo la instancia de conexion
                 $this->connection = Connection::getInstance();
@@ -72,13 +70,14 @@
         }
 
         //RETORNA LOS TICKETS CORRESPONDIENTES A UNA FUNCION
-        public function getForFunction($functionId){
-            $sql="SELECT * FROM entradas WHERE id_funcion1=:functionId";
-            $parameters["functionId"]=$functionId;
+        public function getForFunction($id_funcion1){
+            $sql="SELECT * FROM entradas WHERE id_funcion1=:id_funcion1";
+            $parameters["id_funcion1"]=$id_funcion1;
             try{
                 //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
-                $result = $this->connection->execute($sql);
+                $result = $this->connection->execute($sql,$parameters);
+                
             }catch(\PDOException $ex){
                 throw $ex;
             } 
@@ -101,7 +100,7 @@
             $value = is_array($value) ? $value : [];   
             $resp=array();  
             $resp = array_map(function($p){
-            return new ClassTicket($p['id_entrada'],$p['id_funcion1'],$p['id_usuario1'],$p['id_compra1'],$p['id_asiento1'],$p["qr"]);
+            return new ClassTicket($p['id_funcion1'],$p['id_usuario1'],$p['id_compra1'],$p['id_entrada']);
             }, $value);
                 /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
                 return count($resp) > 1 ? $resp : $resp['0'];

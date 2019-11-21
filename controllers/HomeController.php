@@ -40,7 +40,6 @@
                             
                     $dao = new MovieApiController();
                     $daoF = new MovieFunctionDao();
-                    
                     $date=$daoDT->getActualDate();
                     $functions=$daoF->getAll();
                     $array = $dao->getLastMovies();
@@ -51,6 +50,9 @@
                                 unset($array[$k]);
                             }         
                         }
+                    }
+                    if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
+                        $_SESSION["errorMje"]="Para traer las ultimas peliculas a su base de datos debe presionar el boton 'Cargar peliculas'";
                     }
                     include_once(VIEWS.'/nav.php');
                     include_once(VIEWS.'/home.php');

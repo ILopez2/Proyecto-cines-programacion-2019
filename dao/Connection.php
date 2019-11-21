@@ -39,6 +39,7 @@ class Connection {
                foreach($parameters as $parameterName => $value) {
                     $this->pdoStatement->bindParam(":$parameterName", $value);  // para verificar, y queda lista la consulta con los valores q trae el objeto pasado x parametro q solicito este execute
                }
+
                $this->pdoStatement->execute();
                
                return $this->pdoStatement->fetchAll(); // devuelve registros

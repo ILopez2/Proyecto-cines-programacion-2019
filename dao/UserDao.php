@@ -87,6 +87,23 @@
                 return false;
             }
         }
+        public function getForID2($id){
+            $sql = "SELECT * FROM usuarios WHERE id_usuario = :id";
+            $parameters['id']=$id;
+            try{
+                //creo la instancia de conexion
+                $this->connection= Connection::getInstance();
+                $result = $this->connection->execute($sql,$parameters);
+            }catch(\PDOException $ex){
+                throw $ex;
+            } 
+            //hay que mapear de un arreglo asociativo a objetos
+            if(!empty($result)){
+                return $this->mapear($result);
+            }else{
+                return false;
+            }
+        }
         /*
         *Retorna todos los users de la BDD
         */

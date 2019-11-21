@@ -27,8 +27,8 @@
             try{
                 //creo la instancia de conexion
                 $this->connection = Connection::getInstance();
-                $this->connection->ExecuteNonQuery($sql,$parameters);
-                return $this->connection->lastInsertId();
+                return $this->connection->ExecuteNonQuery($sql,$parameters);
+                
             }catch(\PDOException $ex){
                 throw $ex;
             } 
@@ -67,6 +67,18 @@
             }else{
                 return false;
             }
+        }
+        public function getLastIds(){
+            $sql = "SELECT id_compra 
+                    FROM compras 
+                    ORDER BY id_compra desc";
+            try{
+                //creo la instancia de coneccion
+                $this->connection= Connection::getInstance();
+                return $this->connection->execute($sql);
+            }catch(\PDOException $ex){
+                throw $ex;
+            } 
         }
         //RETORNA TODAS LAS COMPRAS DE LA BDD
         public function getAll(){

@@ -1,4 +1,5 @@
 <?php
+ namespace phpqrcode\bindings\tcpdf;
 //============================================================+
 // File name   : qrcode.php
 // Begin       : 2010-03-22

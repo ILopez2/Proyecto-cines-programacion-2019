@@ -10,6 +10,7 @@
     define('ROOT', dirname(__DIR__)."/");
 
     define('VIEWS', ROOT . '/views');
+    define('TEMP', ROOT . 'temp');
     define('ADMIN_VIEWS', ROOT . '/views/admin');
 
     /* FRONT */

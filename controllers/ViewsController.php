@@ -100,7 +100,6 @@
                         }
                         else{
                             if(empty($searchDate)){
-                                var_dump($searchGenre);
                                 $_SESSION['errorMje'] = 'No hay peliculas del genero '.$daoM->getGenreForID($searchGenre)->getName()." en cartelera";
                             }
                             else{
@@ -127,11 +126,12 @@
             //GANANCIAS DE UN CINE
         public function viewCinemaEarnings($cinemaId){
             try{
+                $daoUser=new UserDao();
                 $purchaseController= new PurchaseCon();
                 $purchases= $purchaseController->getForCinema($cinemaId);
                 if(!empty($purchases)){
                     $daoCinema=new CinemaDao();
-                    $cinemaName=$daoCinema->getForID($cinemaId)->getName();
+                    $cinemaName=$daoCinema->getForID2($cinemaId)->getName();
                     $totalEarnings=0;
                     foreach($purchases as $purchase){
                         $totalEarnings+=$purchase->getTotal();
@@ -261,6 +261,12 @@
                 echo $ex;
             }
         }   
+        public function purchaseComplete(){
+            include_once(VIEWS.'/header.php');
+            include_once(VIEWS.'/nav.php');
+            include_once(VIEWS.'/purchaseComplete.php');
+            include_once(VIEWS.'/footer.php');
+        }
             //ELEGIR ASIENTOS
         public function selectSeats($functionId){
             try{

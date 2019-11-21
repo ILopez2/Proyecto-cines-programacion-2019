@@ -6,6 +6,10 @@
     use controllers\ViewsController as ViewsController;
     use models\ClassTicket as ClassTicket;
     use dao\TicketDao as TicketDao;
+    use phpqrcode\QRcode as QRcode;
+    use controllers\HomeController as Home;
+
+    
 
     class PurchaseController{
         
@@ -19,23 +23,28 @@
         // creo un registro de una compra
         public function createPurchase($quantityTickets,$totalPrice,$userId,$discount,$functionId){
             try{
-                var_dump($functionId);
+                $home=new Home();
+                $daoTicket = new TicketDao();
                 $newPurchase = new ClassPurchase($quantityTickets,$totalPrice,$userId,$discount);
-                $last_id = $this->purchaseDao->add($newPurchase);
-                
-                $qr = $this->generateRandomQr($last_id);
+                $this->purchaseDao->add($newPurchase);
+                $ids_array = $this->purchaseDao->getLastIds();
+                $last_id = $ids_array[0][0];
+                $i=0;
                 while($i < $quantityTickets){
                     $i++;
-                    $newTicket = new ClassTicket($functionId,$userId,$qr,$last_id);
+                    $newTicket = new ClassTicket($functionId,$userId,$last_id);
+                    $daoTicket->add($newTicket);
                 }
+                $_SESSION["successMje"]="Compra realizada con exito,revise las entradas en su email";
+                $home->Index();
             }
             catch(PDOException $ex)
             {
                 echo $ex;
-            }
+            }           
         }
         public function getForCinema($cinemaId){
-            try{
+            try{                
                 $functionDao=new MovieFunctionDao();
                 $ticketDao= new TicketDao();
                 $purchaseDao= new PurchaseDao();
@@ -43,19 +52,31 @@
                 $tickets=array();
                 $purchases=array();
                 if(!empty($functions)){
-                    foreach($functions as $function){
-                        $ticket=$ticketDao->getForFunction($function->getId());
-                        array_push($tickets,$ticket);
+                    if(is_array($functions)){
+                        foreach($functions as $function){
+                            $ticket=$ticketDao->getForFunction($function->getId());
+                            array_push($tickets,$ticket);
+                        }
+                    } 
+                    else{
+                        $ticket=$ticketDao->getForFunction($functions->getId());
+                        array_push($tickets,$ticket);    
                     }
                     if(!empty($tickets)){
                         foreach($tickets as $ticket){
-                            $purchase=$purchaseDao->getForID($ticket->getPurchaseID());
-                            array_push($purchases,$purchase);
-                        }
-                    }      
-                } 
+                            if(!empty($ticket)){
+                                foreach($ticket as $t){
+                                    $purchase=$purchaseDao->getForID($t->getPurchaseID());
+                                    array_push($purchases,$purchase);
+                                }                      
+                            } 
+                        }                            
+                    }
+                }    
+
+                $purchases=array_unique($purchases,SORT_REGULAR);  
                 return $purchases;
-            }
+            }  
             catch(PDOException $ex)
             {
                 echo $ex;
@@ -63,7 +84,8 @@
         }
         // genero un qr aleatorio
         public function generateRandomQr($id){
-            $filePath = ROOT . $id . ".png";
+            $filePath = TEMP.'/'. $id . ".png";
+            echo $filePath;
             $content = "Purchase code" . $id;
             $size = 10;
             $level = 'L';

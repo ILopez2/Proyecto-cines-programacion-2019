@@ -20,7 +20,7 @@
         <table class="table table-bordered table-dark">
             <thead class="thead-dark">
                 <tr>
-                    <th class="bg-success"colspan=2>MONTO TOTAL GANADO POR EL CINE: <?php echo $totalEarning;?>$</th>
+                    <th class="bg-success"colspan=3>MONTO TOTAL GANADO POR EL CINE: <?php echo $totalEarnings;?>$</th>
                 </tr>
                 <tr>
                     <th>Usuario</th>
@@ -32,7 +32,7 @@
                 <?php if(is_array($purchases)){
                     foreach($purchases as $purchase){?>
                     <tr>
-                        <td class="table-dark"><?php echo $daoUser->getForID($purchase->getIdUser())->getName()?></td>
+                        <td class="table-dark"><?php echo $daoUser->getForID2($purchase->getIdUser())->getName()?></td>
                         <td class="table-dark"><?php echo $purchase->getQuantityTicket()?></td>
                         <td class="table-dark"><?php echo $purchase->getTotal()?></td>
                     </tr>
