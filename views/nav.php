@@ -30,7 +30,7 @@
                     <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1') {?>
                     <div class="btn-group mr-2" role="group" aria-label="Third group">
                     <div class="btn-group" role="group" aria-label="Fifth group">    
-                        <a class="btn btn-success" href="<?php echo FRONT_ROOT?>MovieApi/getLastMoviesToDB"><i class="fas fa-video"></i> Cargar peliculas</a>  
+                        <a class="btn btn-success" href="<?php echo FRONT_ROOT?>MovieApi/getLastMoviesToDB" onclick="clicked(event)"><i class="fas fa-video"></i> Cargar peliculas</a>  
                     </div>
                     </div>
                     <div class="btn-group mr-2" role="group" aria-label="Fourth group">
