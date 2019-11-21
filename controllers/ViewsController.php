@@ -181,7 +181,6 @@
             $genres=$search->getAllGenres();
             $seatController=new SeatCon();
             $seats= $seatController->getForFunction($functionId);
-            array_push($seats,null);
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
             include_once(VIEWS.'/SelectSeat.php');
@@ -211,6 +210,7 @@
             $room=$daoCinemaRoom->getForID($function->getCinemaRoom());
             $roomName=$room->getName();   
             $cinema=$daoCinema->getForID2($function->getCinema());
+            $cinemaName=$cinema->getName();
             $totalPrice = ($cinema->getTicketCost())*($quantityTickets);
             $user = $daoUser->getForID($_SESSION['userLogedIn']->getEmail());
             $userId=$user->getID();
