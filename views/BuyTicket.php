@@ -64,6 +64,7 @@
                 <input type="hidden" value="<?php echo $totalPrice;?>" name="totalPrice">
                 <input type="hidden" value="<?php echo $userId;?>" name="userId">
                 <input type="hidden" value="<?php echo $discount;?>" name="discount">
+                <input type="hidden" value="<?php echo $functionId;?>" name="functionId">
                 <script 
                     src="https://www.mercadopago.com.ar/integrations/v1/web-tokenize-checkout.js"
                     data-public-key="TEST-5c961a4f-a387-41e4-b1d1-6f307a001f31"

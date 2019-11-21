@@ -270,7 +270,6 @@
                 $roomName=$room->getName();   
                 $cinema=$daoCinema->getForID2($function->getCinema());
                 $cinemaName=$cinema->getName();
-                //$cinemaId=$cinema->getId();
                 $totalPrice = ($cinema->getTicketCost())*($quantityTickets);
                 $discount=0;
                 $flagDiscount=false;
