@@ -117,31 +117,31 @@ constraint fk_roles foreign key(id_rol1) references roles(id_rol),
 constraint pk_users primary key(id_usuario)
 );
 
-create table medio_pagos(
-id_medioPago int auto_increment not null,
-medio_de_pago int not null,
-constraint pk_medioPago primary key (id_medioPago)
-);
+/*create table pagos(
+id_pago int auto_increment not null,
+total int not null,
+constraint pk_pagos primary key(id_pago)
+);*/
 
-create table facturas(
-id_factura int auto_increment not null,
-id_medioPago1 int not null,
+create table compras(
+id_compra int auto_increment not null,
+id_usuario1 int not null,
+#id_pago1 int not null,
 monto int not null,
 descuento float not null,
-constraint fk_medioPago foreign key(id_medioPago1) references medio_pagos(id_medioPago) ,
-constraint pk_factura primary key(id_factura)
+constraint pk_factura primary key(id_compra),
+constraint fk_usuario1 foreign key(id_usuario1)references usuarios(id_usuario)
+#constraint fk_pago1 foreign key(id_pago1)references pagos(id_pago)
 );
 
 create table entradas(
 id_entrada int auto_increment not null,
-nro_asiento1 int not null,
 id_funcion1 int not null,
 id_usuario1 int not null,
-id_factura1 int not null,
-constraint fk_asiento_ foreign key (nro_asiento1) references asientos(id_asiento),
+id_compra1 int not null,
+constraint fk_compra_ foreign key (id_compra1) references compras(id_compra),
 constraint fk_funcion_ foreign key (id_funcion1) references funciones(id_funcion),
 constraint fk_usuario_ foreign key (id_usuario1) references usuarios(id_usuario),
-constraint fk_factura_ foreign key (id_factura1) references facturas(id_factura),
 constraint pk_entrada_ primary key (id_entrada)
 );
 
@@ -169,4 +169,15 @@ select * from asientoxfuncion;
 select * from generos;
 select * from generosxpelicula;
 select * from salas;
+select * from cidades;*/ 
+
+/*select * from roles;
+select * from asientos;
+select * from peliculas;
+select * from funciones;
+select * from generosxpelicula;
+select * from salas;
+select * from cidades; 
+select * from salas;
+select * from cines;
 select * from cidades;*/ 
