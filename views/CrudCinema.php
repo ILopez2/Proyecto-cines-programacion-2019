@@ -116,6 +116,7 @@
                                             <i class="fa fa-ticket"> Funciones</i>
                                     </a>
                                     <!-- FUNCTIONS ENDS HERE  -->
+                                    <br>
                                     <!-- EARNINGS STARTS HERE  -->
                                     <a href="<?php echo FRONT_ROOT?>Views/viewCinemaEarnings?id=<?php echo $cinemas->getId()?>" class="btn btn-warning" >
                                         <i class="fa fa-hand-holding-usd"> Ganancias</i>
