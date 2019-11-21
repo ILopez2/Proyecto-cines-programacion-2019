@@ -173,6 +173,8 @@
             $seatDao=new SeatDao();
             $seatsXfunction= $seatController->getForFunction($functionId);
             $i=0;
+            $ticketsSold=0;
+            $ticketsNotSold=0;
             $seatNumberOccupied=array();
             if(!empty($seatsXfunction)){
                 if(is_array($seatsXfunction)){
@@ -181,6 +183,12 @@
                         $seatNumber=$seat->getNumber();
                         $seatNumberOccupied[$i]["seatNumber"]=$seatNumber;
                         $seatNumberOccupied[$i]["occupied"]=$seatXf->getOccupied();
+                        if($seatNumberOccupied[$i]["occupied"]==true){
+                            $ticketsSold++;
+                        }
+                        else{
+                            $ticketsNotSold++;
+                        }
                         $i++;
                     }
                 }
@@ -189,6 +197,12 @@
                     $seatNumber=$seat->getNumber();
                     array_push($seatNumberOccupied[$i]["seatNumber"],$seatNumber);
                     array_push($seatNumberOccupied[$i]["occupied"],$seatsXfunction->getOccupied());
+                    if($seatNumberOccupied[$i]["occupied"]==true){
+                        $ticketsSold++;
+                    }
+                    else{
+                        $ticketsNotSold++;
+                    }
                 }
             }   
             include_once(VIEWS.'/header.php');
@@ -208,39 +222,45 @@
             include_once(VIEWS.'/footer.php');
         }
             //COMPRAR ENTRADAS
-        public function buyTickets($functionId,$seatsXFids){            
-            $seatController=new SeatCon();
-            $seatDao=new SeatDao();
-            $daoMovieFunction = new MovieFunctionDao();
-            $daoCinemaRoom = new CinemaRoomDao();
-            $daoTicket = new TicketDao();
-            $daoCinema = new CinemaDao();
-            $daoUser = new UserDao();
-            $daoM = new MovieApiController();
-            $quantityTickets=0;
-            $seatsXfunction=$seatController->getFromIds($seatsXFids);
-            $seats=array();
-            foreach($seatsXfunction as $seatXF){
-                $seat=$seatDao->getForID($seatXF->getSeatId());
-                array_push($seats,$seat);
-                $quantityTickets++;
+        public function buyTickets($functionId,$seatsXFids=null){
+            if($seatsXFids!=null){
+                $seatController=new SeatCon();
+                $seatDao=new SeatDao();
+                $daoMovieFunction = new MovieFunctionDao();
+                $daoCinemaRoom = new CinemaRoomDao();
+                $daoTicket = new TicketDao();
+                $daoCinema = new CinemaDao();
+                $daoUser = new UserDao();
+                $daoM = new MovieApiController();
+                $quantityTickets=0;
+                $seatsXfunction=$seatController->getFromIds($seatsXFids);
+                $seats=array();
+                foreach($seatsXfunction as $seatXF){
+                    $seat=$seatDao->getForID($seatXF->getSeatId());
+                    array_push($seats,$seat);
+                    $quantityTickets++;
+                }
+                $function=$daoMovieFunction->getForID($functionId);       
+                $fDate=$function->getDate();
+                $fTime=$function->getTime();
+                $room=$daoCinemaRoom->getForID($function->getCinemaRoom());
+                $roomName=$room->getName();   
+                $cinema=$daoCinema->getForID2($function->getCinema());
+                $cinemaName=$cinema->getName();
+                $totalPrice = ($cinema->getTicketCost())*($quantityTickets);
+                $user = $daoUser->getForID($_SESSION['userLogedIn']->getEmail());
+                $userId=$user->getID();
+                $movie = $daoM->getMovieXid($function->getMovie());
+                $poster= $daoM->getMoviePoster($movie->getPosterPath());          
+                include_once(VIEWS.'/header.php');
+                include_once(VIEWS.'/nav.php');
+                include_once(VIEWS.'/BuyTicket.php');
+                include_once(VIEWS.'/footer.php');
+            }           
+            else{
+                $_SESSION["errorMje"]="No selecciono ningun asiento";
+                $this->selectSeats($functionId);
             }
-            $function=$daoMovieFunction->getForID($functionId);       
-            $fDate=$function->getDate();
-            $fTime=$function->getTime();
-            $room=$daoCinemaRoom->getForID($function->getCinemaRoom());
-            $roomName=$room->getName();   
-            $cinema=$daoCinema->getForID2($function->getCinema());
-            $cinemaName=$cinema->getName();
-            $totalPrice = ($cinema->getTicketCost())*($quantityTickets);
-            $user = $daoUser->getForID($_SESSION['userLogedIn']->getEmail());
-            $userId=$user->getID();
-            $movie = $daoM->getMovieXid($function->getMovie());
-            $poster= $daoM->getMoviePoster($movie->getPosterPath());          
-            include_once(VIEWS.'/header.php');
-            include_once(VIEWS.'/nav.php');
-            include_once(VIEWS.'/BuyTicket.php');
-            include_once(VIEWS.'/footer.php');
         }
         //ADMINISTRACION
 

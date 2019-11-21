@@ -5,6 +5,12 @@
          <table class="table table-bordered table-dark">
             <thead class="thead-dark">
                 <tr>
+                    <th class="bg-success"colspan=2>CANTIDAD DE ENTRADAS VENDIDAS DE ESTA FUNCION: <?php echo $ticketsSold;?> ENTRADAS</th>
+                </tr>
+                <tr>
+                    <th class="bg-danger" colspan=2>CANTIDAD DE ENTRADAS REMANENTES DE ESTA FUNCION: <?php echo $ticketsNotSold;?> ENTRADAS</th>
+                </tr>
+                <tr>
                     <th>Numero asiento</th>
                     <th>Estado</th>
                 </tr>
@@ -32,6 +38,9 @@
                     }
             }
             ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <?php } ?>
