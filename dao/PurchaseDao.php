@@ -4,7 +4,7 @@
     use models\ClassPurchase as Purchase;
     
 
-    class CinemaDao implements InterfaceDao{
+    class PurchaseDao implements InterfaceDao{
 
         //ATRIBUTES
         private $connection;
@@ -97,7 +97,7 @@
             $value=is_array($value) ? $value : [];
             $resp=array();
             $resp = array_map(function($p){
-                return new Purchase($p['id_compra'],$p['cant_entradas'],$p['id_usuario1'],$p['descuento']);
+                return new Purchase($p['id_compra'],$p['cant_entradas'],$p['monto'],$p['id_usuario1'],$p['descuento']);
             },$value);
             return count($resp) > 1 ? $resp : $resp['0'];//hay que checkear del otro lado si esta devolviendo un obj o un array
         }
