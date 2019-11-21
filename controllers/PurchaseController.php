@@ -2,10 +2,9 @@
 
     use dao\MovieFunctionDao as MovieFunctionDao;
     use dao\PurchaseDao as PurchaseDao;
-    use models\ClassPurhcase as ClassPurchase;
+    use models\ClassPurchase as ClassPurchase;
     use controllers\ViewsController as ViewsController;
     use models\ClassTicket as ClassTicket;
-    use dao\PurchaseDao as PurchaseDao;
     use dao\TicketDao as TicketDao;
 
     class PurchaseController{
@@ -23,9 +22,8 @@
         }
         public function createPurchase($quantityTickets,$totalPrice,$userId,$discount,$functionId){
             var_dump($functionId);
-            $purchaseDAO = new PurchaseDao();
             $newPurchase = new ClassPurchase($quantityTickets,$totalPrice,$userId,$discount);
-            $last_id = $this->purchaseDAO->add($newPurchase);
+            $last_id = $this->purchaseDao->add($newPurchase);
             
             $qr = $this->generateRandomQr($last_id);
             while($i < $quantityTickets){

@@ -19,11 +19,11 @@
         *Agrega un nuevo cine a la BDD
         */
         public function add($purchase){
-            $sql = "INSERT INTO compras(id_usuario1,cant_entradas,monto,descuento) VALUES (:userId, :ticketQuantity, :amount, :discount)";
-            $parameters["userId"]=$cinema->getIdUser();
-            $parameters["ticketQuantity"]=$cinema->getQuantityTicket();
-            $parameters["amount"]=$cinema->getTotal();
-            $parameters["discount"]=$cinema->getDiscount();
+            $sql = "INSERT INTO compras(id_usuario1,cant_entradas,monto,descuento) VALUES (:id_usuario1, :cant_entradas, :monto, :descuento)";
+            $parameters["id_usuario1"]=$purchase->getIdUser();
+            $parameters["cant_entradas"]=$purchase->getQuantityTicket();
+            $parameters["monto"]=$purchase->getTotal();
+            $parameters["descuento"]=$purchase->getDiscount();
             try{
                 //creo la instancia de coneccion
                 $this->connection = Connection::getInstance();
@@ -97,7 +97,7 @@
             $value=is_array($value) ? $value : [];
             $resp=array();
             $resp = array_map(function($p){
-                return new Purchase($p['id_compra'],$p['cant_entradas'],$p['monto'],$p['id_usuario1'],$p['descuento']);
+                return new Purchase($p['cant_entradas'],$p['monto'],$p['id_usuario1'],$p['descuento'],$p['id_compra']);
             },$value);
             return count($resp) > 1 ? $resp : $resp['0'];//hay que checkear del otro lado si esta devolviendo un obj o un array
         }

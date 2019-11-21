@@ -8,24 +8,27 @@
         private $discount;
         private $id;
 
-        public function __construct($id=null,$quantityTickets,$totalPrice,$userId,$discount){
-            $this->quantityTicket=$quantityTicket;
+        public function __construct($quantityTickets,$totalPrice,$userId,$discount,$id=null){
+            $this->quantityTicket=$quantityTickets;
             $this->totalPrice=$totalPrice;
             $this->userId=$userId;
             $this->discount=$discount;
-            $this->id=$id
+            $this->id=$id;
         }
 
         public function getQuantityTicket(){
             return $this->quantityTicket;
         }
         public function getTotal(){
-            return $this->total;
+            return $this->totalPrice;
         }
         public function getIdUser(){
-            return $this->idUser;
+            return $this->userId;
         }
         public function getDiscount(){
             return $this->discount;
+        }
+        public function getId(){
+            return $this->id;
         }
     }
