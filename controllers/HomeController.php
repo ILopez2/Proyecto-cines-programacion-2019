@@ -38,7 +38,7 @@
                 $dao = new MovieApiController();
                 $daoF = new MovieFunctionDao();
                 $daoDT=new DateTime();
-                $date=$daoDT->getActualDate();
+                $date=$dao->getActualDate();
                 $functions=$daoF->getAll();
                 $array = $dao->getLastMovies();
                 $genres=$dao->getAllGenres();
