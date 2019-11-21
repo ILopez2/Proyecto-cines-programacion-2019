@@ -85,7 +85,6 @@
                 }
             ?>      
     </table>
-    
     <input type="submit" class="btn btn-success btn-block" value="Proceder con la compra">
-</form>
+    </form>
 </div>

@@ -16,11 +16,11 @@
         <div class="actions">
 
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sign-up">
-            <i class="fas fa-user-plus"></i> Sign up
+                <i class="fas fa-user-plus"></i> Sign up
             </button>
             
             <button type="submit" class="btn btn-dark">
-            <i class="fas fa-sign-in-alt"></i> Login
+                <i class="fas fa-sign-in-alt"></i> Login
             </button>
         
         </div>
