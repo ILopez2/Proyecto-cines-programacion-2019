@@ -232,6 +232,8 @@
                 $daoCinema = new CinemaDao();
                 $daoUser = new UserDao();
                 $daoM = new MovieApiController();
+                $dateC = new DateTimeController();
+                $day = $dateC->getActualDay();
                 $quantityTickets=0;
                 $seatsXfunction=$seatController->getFromIds($seatsXFids);
                 $seats=array();
@@ -247,7 +249,15 @@
                 $roomName=$room->getName();   
                 $cinema=$daoCinema->getForID2($function->getCinema());
                 $cinemaName=$cinema->getName();
+                //$cinemaId=$cinema->getId();
                 $totalPrice = ($cinema->getTicketCost())*($quantityTickets);
+                $discount=0;
+                $flagDiscount=false;
+                if(($quantityTickets>=2) && ($day == 'Thursday' || 'Wednesday')){
+                    $discount=0.25;
+                    $flagDiscount=true;
+                    $totalPrice=$totalPrice-$totalPrice*$discount;
+                }
                 $user = $daoUser->getForID($_SESSION['userLogedIn']->getEmail());
                 $userId=$user->getID();
                 $movie = $daoM->getMovieXid($function->getMovie());

@@ -2,19 +2,18 @@
     
     class ClassPurchase{
 
-        private $id;
         private $quantityTicket;
-        private $total;
-        private $idUser;
-        private $idFunction;
+        private $totalPrice;
+        private $userId;
         private $discount;
+        private $id;
 
-        public function __construct($id,$quantityTicket,$total,$idUser,$idFunction,$discount){
+        public function __construct($id=null,$quantityTickets,$totalPrice,$userId,$discount){
             $this->quantityTicket=$quantityTicket;
-            $this->total=$total;
-            $this->idUser=$idUser;
-            $this->idFunctionDate=$idFunction;
+            $this->totalPrice=$totalPrice;
+            $this->userId=$userId;
             $this->discount=$discount;
+            $this->id=$id
         }
 
         public function getQuantityTicket(){
@@ -25,9 +24,6 @@
         }
         public function getIdUser(){
             return $this->idUser;
-        }
-        public function getIdFunction(){
-            return $this->idFunction    ;
         }
         public function getDiscount(){
             return $this->discount;

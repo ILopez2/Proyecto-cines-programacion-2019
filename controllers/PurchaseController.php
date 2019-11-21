@@ -6,29 +6,20 @@
 
     class PurchaseController{
         
-        private $functionDao;
+        private $purchaseDao;
         private $view;
 
         public function __construct(){
             $this->view = new ViewsController();
-            $this->functionDao = new MovieFunctionDao();
+            $this->purchaseDao = new PurchaseDao();
         }
 
         public function getTotal($quantityTicket,$total){
             return $quantityTicket*$total;
         }
-        public function createPurchase($cinemaId,$quantityTickets,$totalPrice,$userId,$discount){
-            echo 'HAPPINESSSSS';
-            echo '<br>';
-            print_r($quantityTickets);
-            echo '<br>';
-            var_dump($totalPrice);
-            echo '<br>';
-            var_dump($userId);
-            echo '<br>';
-            var_dump($cinemaId);
+        public function createPurchase($quantityTickets,$totalPrice,$userId,$discount){
             
-            
+            $newPurchase = new ClassPurchase($quantityTickets,$totalPrice,$userId,$discount);
 
         }
 

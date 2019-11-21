@@ -59,7 +59,7 @@
             </table>
             <div style = "text-align: center">
             <form action="<?php echo FRONT_ROOT;?>Purchase/createPurchase" method="POST">
-                <input type="hidden" value="<?php echo $cinemaId;?>" name="cinemaId">
+
                 <input type="hidden" value="<?php echo $quantityTickets;?>" name="quantityTickets">    
                 <input type="hidden" value="<?php echo $totalPrice;?>" name="totalPrice">
                 <input type="hidden" value="<?php echo $userId;?>" name="userId">
