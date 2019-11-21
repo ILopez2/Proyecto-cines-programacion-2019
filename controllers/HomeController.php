@@ -33,11 +33,13 @@
             }
             include_once(VIEWS.'/header.php');
             
+            $daoDT=new DateTime();
+            
             if($showView){
                          
                 $dao = new MovieApiController();
                 $daoF = new MovieFunctionDao();
-                $daoDT=new DateTime();
+                
                 $date=$daoDT->getActualDate();
                 $functions=$daoF->getAll();
                 $array = $dao->getLastMovies();
