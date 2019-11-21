@@ -14,7 +14,7 @@
             $this->connection = null;
         }
          /*
-        *Agrega un nuevo user a la BDD
+        *Agrega un nuevo genero a la BDD
         */
         public function add($genre){
 
@@ -23,7 +23,7 @@
             $parameters["Name"]=$genre->getName(); 
             $this->delete($parameters["IdGenre"]);
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection = Connection::getInstance();
                 return $this->connection->ExecuteNonQuery($sql,$parameters);
             }catch(\PDOException $ex){
@@ -31,7 +31,7 @@
             } 
         }
         /*
-        *Borra un user de la BDD correspondiente al email del mismo pasado por parametro
+        *Borra un genero de la BDD correspondiente al id del mismo pasado por parametro
         */
         public function delete($IdGenre){
             $sql="DELETE FROM generos WHERE  id_genero = :IdGenre";
@@ -46,13 +46,13 @@
 
         }
         /*
-        *Retorna el user con el email pasado por parametro
+        *Retorna el genero con el id pasado por parametro
         */
         public function getForID($IdGenre){
             $sql = "SELECT * FROM generos WHERE id_genero = :IdGenre";
             $parameters['IdGenre']=$IdGenre;
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql,$parameters);
             }catch(\PDOException $ex){
@@ -66,12 +66,12 @@
             }
         }
         /*
-        *Retorna todos los users de la BDD
+        *Retorna todos los genero de la BDD
         */
         public function getAll(){
             $sql="SELECT * FROM generos";
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql);
             }catch(\PDOException $ex){
@@ -86,7 +86,7 @@
 
         }
     
-        public function edit($user){           
+        public function edit($genre){           
             //LOS GENEROS NO SE EDITAN
         }
 

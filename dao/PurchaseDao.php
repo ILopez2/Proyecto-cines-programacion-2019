@@ -16,7 +16,7 @@
         }
         //METHODS
         /*
-        *Agrega un nuevo cine a la BDD
+        *Agrega una nueva compra a la BDD
         */
         public function add($purchase){
             $sql = "INSERT INTO compras(id_usuario1,cant_entradas,monto,descuento) VALUES (:id_usuario1, :cant_entradas, :monto, :descuento)";
@@ -25,7 +25,7 @@
             $parameters["monto"]=$purchase->getTotal();
             $parameters["descuento"]=$purchase->getDiscount();
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection = Connection::getInstance();
                 $this->connection->ExecuteNonQuery($sql,$parameters);
                 return $this->connection->lastInsertId();
@@ -34,7 +34,7 @@
             } 
         }
         /*
-        *Borra un cine de la BDD correspondiente al nombre del mismo pasado por parametro
+        *Borra una compra de la BDD correspondiente al id del mismo pasado por parametro
         */
         public function delete($id){
             $sql="DELETE FROM compras WHERE id_compra = :id";
@@ -49,13 +49,13 @@
 
         }
         /*
-        *Retorna el cine con el nombre pasado por parametro
+        *Retorna la compra con el nombre pasado por parametro
         */
         public function getForID($id){
             $sql = "SELECT * FROM compras WHERE id_compra = :id";
             $parameters['id']=$id;
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql,$parameters);
             }catch(\PDOException $ex){
@@ -68,11 +68,11 @@
                 return false;
             }
         }
-
+        //RETORNA TODAS LAS COMPRAS DE LA BDD
         public function getAll(){
             $sql="SELECT * FROM compras";
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql);
             }catch(\PDOException $ex){

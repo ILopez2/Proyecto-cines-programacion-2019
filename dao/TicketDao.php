@@ -25,7 +25,7 @@
             $parameters["seatId"]=$ticket->getSeatID();
             $parameters["qr"]=$ticket->getQr();
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection = Connection::getInstance();
                 return $this->connection->ExecuteNonQuery($sql,$parameters);
             }catch(\PDOException $ex){
@@ -33,10 +33,11 @@
             } 
         }
 
+        //RETORNA TODOS LOS TICKETS DE LA BDD
         public function getAll(){
             $sql="SELECT * FROM entradas";
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql);
             }catch(\PDOException $ex){
@@ -50,11 +51,13 @@
                 return false;
             }
         }
+        
+        //RETORNA UN TICKET CORRESPONDIENTE AL ID PASADO POR PARAMETRO
         public function getForId($id){
             $sql="SELECT * FROM entradas WHERE id=:id";
             $parameters["id"]=$id;
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql);
             }catch(\PDOException $ex){
@@ -67,11 +70,13 @@
                 return false;
             }
         }
+
+        //RETORNA LOS TICKETS CORRESPONDIENTES A UNA FUNCION
         public function getForFunction($functionId){
             $sql="SELECT * FROM entradas WHERE id_funcion1=:functionId";
             $parameters["functionId"]=$functionId;
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql);
             }catch(\PDOException $ex){
@@ -85,17 +90,14 @@
                 return false;
             }
         }
-        public function edit($function){
-
+        public function edit($ticket){
+            //LOS TICKETS NO SE EDITAN
         }
         /*
         *Convierte un array asociativo a un array de objetos para facilitar su manejo
         *si la cantidad de elementos es mayor a 1 retorna el array entero, sino retorna la posicion 0.
         */
         protected function mapeo($value) {
-            //echo '<pre>';
-            //var_dump($value);
-            //echo '</pre>';
             $value = is_array($value) ? $value : [];   
             $resp=array();  
             $resp = array_map(function($p){

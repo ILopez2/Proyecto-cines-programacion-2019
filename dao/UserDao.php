@@ -28,9 +28,9 @@
               $this->connection = Connection::getInstance();
               return $this->connection->ExecuteNonQuery($sql, $parameters);
           }
-          catch(PDOException $e)
+          catch(PDOException $ex)
           {
-              echo $e;
+              throw $ex;
           }
         }
          /*
@@ -45,7 +45,7 @@
             $parameters["pass"]=$user->getPassword();
             $parameters["id_rol1"]= intval($user->getRoleLevel());
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection = Connection::getInstance();
                 return $this->connection->ExecuteNonQuery($sql,$parameters);
             }catch(\PDOException $ex){
@@ -53,7 +53,7 @@
             } 
         }
         /*
-        *Borra un user de la BDD correspondiente al email del mismo pasado por parametro
+        *Borra un usuario de la BDD correspondiente al email del mismo pasado por parametro
         */
         public function delete($email){
             $sql="DELETE FROM usuarios WHERE  email = :email";
@@ -74,7 +74,7 @@
             $sql = "SELECT * FROM usuarios WHERE email = :email";
             $parameters['email']=$email;
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql,$parameters);
             }catch(\PDOException $ex){
@@ -139,9 +139,9 @@
                 $this->connection = Connection::getInstance();
                 return $this->connection->ExecuteNonQuery($sql, $parameters);
             }
-            catch(PDOException $e)
+            catch(PDOException $ex)
             {
-                echo $e;
+                throw $ex;
             }
         }
         /*

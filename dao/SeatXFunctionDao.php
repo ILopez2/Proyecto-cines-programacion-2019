@@ -15,7 +15,7 @@ class SeatXFunctionDao implements InterfaceDao{
     }
     //METHODS
     /*
-    *Agrega un nuevo cine a la BDD
+    *Agrega un nuevo asiento x funcion a la BDD
     */
     public function add($seatXfunction){
         $sql = "INSERT INTO asientoXfuncion(id_asientoXfuncion,id_asiento2,id_funcion2,ocupada) VALUES (:id,:seatId,:functionId,:occupied)";
@@ -24,7 +24,7 @@ class SeatXFunctionDao implements InterfaceDao{
         $parameters["functionId"]=$seatXfunction->getFunctionId();
         $parameters["occupied"]=$seatXfunction->getOccupied();
         try{
-            //creo la instancia de coneccion
+            //creo la instancia de conexion
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql,$parameters);
         }catch(\PDOException $ex){
@@ -32,7 +32,7 @@ class SeatXFunctionDao implements InterfaceDao{
         } 
     }
     /*
-    *Borra un cine de la BDD correspondiente al nombre del mismo pasado por parametro
+    *Borra un asiento x funcion de la BDD correspondiente al id del mismo pasado por parametro
     */
     public function delete($id){
         $sql="DELETE FROM asientoXfuncion WHERE id_asientoXfuncion = :id";
@@ -46,6 +46,7 @@ class SeatXFunctionDao implements InterfaceDao{
         }
 
     }    
+    //CAMBIA EL ESTADO DEL ASIENTO DE UNA FUNCION A OCUPADO
     public function changeOccupy($seatXfunction){
         $sql="UPDATE asientoXfuncion SET ocupada=:occupied WHERE id_asientoXfuncion=:seatXfunctionId";
         $parameters["occupied"]=$seat->getOccupied();       
@@ -55,17 +56,18 @@ class SeatXFunctionDao implements InterfaceDao{
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql, $parameters);
         }
-        catch(PDOException $e)
+        catch(PDOException $ex)
         {
-            echo $e;
+            throw $ex;
         }
     }
     
+    //RETORNA EL ASIENTO X FUNCION CORRESPONDIENTE AL ID PASADO POR PARAMETRO
     public function getForID($id){
         $sql = "SELECT * FROM asientoXfuncion WHERE id_asientoXfuncion = :id";
         $parameters['id']=$id;
         try{
-            //creo la instancia de coneccion
+            //creo la instancia de conexion
             $this->connection= Connection::getInstance();
             $result = $this->connection->execute($sql,$parameters);
         }catch(\PDOException $ex){
@@ -78,15 +80,15 @@ class SeatXFunctionDao implements InterfaceDao{
             return false;
         }
     }
-    /*
-    *Retorna las funciones de la pelicula pasada por parametro
-    */
 
+    /*
+    *Retorna los asientos de la funcion pasada por parametro
+    */
     public function getForFunction($functionId){
         $sql = "SELECT * FROM asientoXfuncion WHERE id_funcion2 = :functionId";
         $parameters['functionId']=$functionId;
         try{
-            //creo la instancia de coneccion
+            //creo la instancia de conexion
             $this->connection= Connection::getInstance();
             $result = $this->connection->execute($sql,$parameters);
         }catch(\PDOException $ex){
@@ -100,11 +102,12 @@ class SeatXFunctionDao implements InterfaceDao{
         }
     }
 
+    //RETORNA TODOS LOS ASIENTOS POR FUNCION DE LA BDD
     public function getAll(){
         $sql="SELECT * FROM asientoXfuncion";
 
         try{
-            //creo la instancia de coneccion
+            //creo la instancia de conexion
             $this->connection= Connection::getInstance();
             $result = $this->connection->execute($sql);
         }catch(\PDOException $ex){
@@ -119,8 +122,8 @@ class SeatXFunctionDao implements InterfaceDao{
         }
 
     }
-    public function edit($function){
-
+    public function edit($seatXfunction){
+        //LOS X POR FUNCION NO SE EDITAN
     }
     /*
     *Convierte un array asociativo a un array de objetos para facilitar su manejo

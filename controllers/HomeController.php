@@ -15,51 +15,57 @@
         // metodo por el cual pasa siempre nuestro framework
         public function Index($email=null,$password=null)
         {
-            //checksession y login
-            $showView=false; //se vuelve verdadero solo si hay un user en session
-            
-            if($user = $this->userController->checkSession()){
-                $showView=true;
-            }
-            else{
-                if(isset($email)) {
-                    if($user=$this->userController->login($email,$password)){
-                        $showView=true;
-                    }
-                    else {
-                        $alert='Datos incorrectos vuelva a intentarlo';
-                    }
-                }
-            }
-            include_once(VIEWS.'/header.php');
-            
-            $daoDT=new DateTime();
-            
-            if($showView){
-                         
-                $dao = new MovieApiController();
-                $daoF = new MovieFunctionDao();
+            try{
+                //checksession y login
+                $showView=false; //se vuelve verdadero solo si hay un user en session
                 
-                $date=$daoDT->getActualDate();
-                $functions=$daoF->getAll();
-                $array = $dao->getLastMovies();
-                $genres=$dao->getAllGenres();
-                if(!empty($array)){
-                    foreach($array as $k => $v) {
-                        if(!$daoF->getForMovie($v->getID())) {
-                            unset($array[$k]);
-                        }         
+                if($user = $this->userController->checkSession()){
+                    $showView=true;
+                }
+                else{
+                    if(isset($email)) {
+                        if($user=$this->userController->login($email,$password)){
+                            $showView=true;
+                        }
+                        else {
+                            $alert='Datos incorrectos vuelva a intentarlo';
+                        }
                     }
                 }
-                include_once(VIEWS.'/nav.php');
-                include_once(VIEWS.'/home.php');
+                include_once(VIEWS.'/header.php');
+                
+                $daoDT=new DateTime();
+                
+                if($showView){
+                            
+                    $dao = new MovieApiController();
+                    $daoF = new MovieFunctionDao();
+                    
+                    $date=$daoDT->getActualDate();
+                    $functions=$daoF->getAll();
+                    $array = $dao->getLastMovies();
+                    $genres=$dao->getAllGenres();
+                    if(!empty($array)){
+                        foreach($array as $k => $v) {
+                            if(!$daoF->getForMovie($v->getID())) {
+                                unset($array[$k]);
+                            }         
+                        }
+                    }
+                    include_once(VIEWS.'/nav.php');
+                    include_once(VIEWS.'/home.php');
+                }
+                else{
+                    $date=$daoDT->getActualDate();
+                    include_once(VIEWS.'/login.php');
+                }
+                
+                include_once(VIEWS.'/footer.php');
             }
-            else{
-                $date=$daoDT->getActualDate();
-                include_once(VIEWS.'/login.php');
+            catch(PDOException $ex)
+            {
+                echo $ex;
             }
-            
-            include_once(VIEWS.'/footer.php');
         }
         
         //metodo para cerrar una sesion

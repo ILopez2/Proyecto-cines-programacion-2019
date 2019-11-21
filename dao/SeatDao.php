@@ -16,7 +16,7 @@
         }
         //METHODS
         /*
-        *Agrega un nuevo cine a la BDD
+        *Agrega un nuevo asiento a la BDD
         */
         public function add($seat){
             $sql = "INSERT INTO asientos(nro_asiento,id_sala1) VALUES (:number,:cinemaRoomId)";
@@ -24,7 +24,7 @@
             $parameters["cinemaRoomId"]=$seat->getCinemaRoomId();
 
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection = Connection::getInstance();
                 return $this->connection->ExecuteNonQuery($sql,$parameters);
             }catch(\PDOException $ex){
@@ -32,7 +32,7 @@
             } 
         }
         /*
-        *Borra un cine de la BDD correspondiente al nombre del mismo pasado por parametro
+        *Borra un asiento de la BDD correspondiente al nombre del mismo pasado por parametro
         */
         public function delete($id){
             $sql="DELETE FROM asientos WHERE id_asiento = :id";
@@ -46,11 +46,12 @@
             }
 
         }    
+        //RETORNA UN ASIENTO CORRESPONDIENTE AL ID PASADO POR PARAMETRO
         public function getForID($id){
             $sql = "SELECT * FROM asientos WHERE id_asiento = :id";
             $parameters['id']=$id;
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql,$parameters);
             }catch(\PDOException $ex){
@@ -64,14 +65,13 @@
             }
         }
         /*
-        *Retorna las funciones de la pelicula pasada por parametro
+        *Retorna los asientos de la sala pasada por parametro
         */
-
         public function getForCinemaRoom($cinemaRoomId){
             $sql = "SELECT * FROM asientos WHERE id_sala1 = :cinemaRoomId";
             $parameters['cinemaRoomId']=$cinemaRoomId;
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql,$parameters);
             }catch(\PDOException $ex){
@@ -85,11 +85,12 @@
             }
         }
 
+        //RETORNA TODOS LOS ASIENTOS DE LA BDD
         public function getAll(){
             $sql="SELECT * FROM asientos";
 
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql);
             }catch(\PDOException $ex){
@@ -104,8 +105,8 @@
             }
 
         }
-        public function edit($function){
-
+        public function edit($seat){
+            //LOS ASIENTOS NO SE EDITAN
         }
         /*
         *Convierte un array asociativo a un array de objetos para facilitar su manejo

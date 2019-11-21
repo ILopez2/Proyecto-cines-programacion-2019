@@ -19,7 +19,7 @@ class MovieFunctionDao implements InterfaceDao{
     }
     //METHODS
     /*
-    *Agrega un nuevo cine a la BDD
+    *Agrega una nueva funcion a la BDD
     */
     public function add($function){
         $sql = "INSERT INTO funciones(id_cine2,id_sala2,id_pelicula1,lenguaje,fecha,hora) VALUES (:cine,:sala,:pelicula,:lenguaje,:fecha,:hora)";
@@ -31,7 +31,7 @@ class MovieFunctionDao implements InterfaceDao{
         $parameters["hora"]=$function->getTime();
 
         try{
-            //creo la instancia de coneccion
+            //creo la instancia de conexion
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql,$parameters);
         }catch(\PDOException $ex){
@@ -39,7 +39,7 @@ class MovieFunctionDao implements InterfaceDao{
         } 
     }
     /*
-    *Borra un cine de la BDD correspondiente al nombre del mismo pasado por parametro
+    *Borra una funcion de la BDD correspondiente al id del mismo pasado por parametro
     */
     public function delete($functionId){
         $sql="DELETE FROM funciones WHERE id_funcion = :functionId";
@@ -61,7 +61,7 @@ class MovieFunctionDao implements InterfaceDao{
         $parameters['cinemaId']=$cinemaId;
         $parameters['roomId']=$roomId;
         try{
-            //creo la instancia de coneccion
+            //creo la instancia de conexion
             $this->connection= Connection::getInstance();
             $result = $this->connection->execute($sql,$parameters);
         }catch(\PDOException $ex){
@@ -74,11 +74,12 @@ class MovieFunctionDao implements InterfaceDao{
             return false;
         }
     }
+    // RETORNA LA FUNCION CORRESPONDIENTE AL ID PASADO POR PARAMETRO
     public function getForID($id){
         $sql = "SELECT * FROM funciones WHERE id_funcion = :id";
         $parameters['id']=$id;
         try{
-            //creo la instancia de coneccion
+            //creo la instancia de conexion
             $this->connection= Connection::getInstance();
             $result = $this->connection->execute($sql,$parameters);
         }catch(\PDOException $ex){
@@ -98,7 +99,7 @@ class MovieFunctionDao implements InterfaceDao{
         $sql = "SELECT * FROM funciones WHERE id_pelicula1 = :movieID";
         $parameters['movieID']=$movieID;
         try{
-            //creo la instancia de coneccion
+            //creo la instancia de conexion
             $this->connection= Connection::getInstance();
             $result = $this->connection->execute($sql,$parameters);
         }catch(\PDOException $ex){
@@ -111,11 +112,12 @@ class MovieFunctionDao implements InterfaceDao{
             return false;
         }
     }
+    //RETORNA LAS FUNCIONES DEL CINE PASADO POR PARAMETRO
     public function getForCinema($cinemaId){
         $sql = "SELECT * FROM funciones WHERE id_cine2 = :cinemaId";
         $parameters['cinemaId']=$cinemaId;
         try{
-            //creo la instancia de coneccion
+            //creo la instancia de conexion
             $this->connection= Connection::getInstance();
             $result = $this->connection->execute($sql,$parameters);
         }catch(\PDOException $ex){
@@ -128,11 +130,12 @@ class MovieFunctionDao implements InterfaceDao{
             return false;
         }
     }
+    //RETORNA LAS FUNCIONES CORRESPONDIENTES A UNA SALA
     public function getForCinemaRoom($cinemaRoomId){
         $sql = "SELECT * FROM funciones WHERE id_sala2 = :cinemaRoomId";
         $parameters['cinemaRoomId']=$cinemaRoomId;
         try{
-            //creo la instancia de coneccion
+            //creo la instancia de conexion
             $this->connection= Connection::getInstance();
             $result = $this->connection->execute($sql,$parameters);
         }catch(\PDOException $ex){
@@ -146,13 +149,13 @@ class MovieFunctionDao implements InterfaceDao{
         }
     }
     /*
-    *Retorna todos los cines de la BDD
+    *Retorna todas las funciones de la BDD
     */
     public function getAll(){
         $sql="SELECT * FROM funciones";
 
         try{
-            //creo la instancia de coneccion
+            //creo la instancia de conexion
             $this->connection= Connection::getInstance();
             $result = $this->connection->execute($sql);
         }catch(\PDOException $ex){
