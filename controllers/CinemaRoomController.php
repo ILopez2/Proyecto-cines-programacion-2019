@@ -15,7 +15,8 @@
             $this->daoCR = new CRD();
             $this->daoC = new CD();
         }
-
+        
+        // agrego una sala 
         public function add($name,$is3D,$capacity,$idCinema){
             $cinema=$this->daoC->getForID2($idCinema);
             $rooms=$cinema->getCinemaRooms();
@@ -43,15 +44,14 @@
                 $this->view->admRooms($idCinema);
             }
         }
-
+        // borra una sala pasando por parametro el id y el id del cine
         public function delete($idroom,$idcinema){
             $this->daoCR->delete($idroom);
             $_SESSION['successMje'] = 'Sala borrada con éxito';
             $this->view->admRooms($idcinema);
         }
-
+        //editar el valor del atributo seleccionado por el usuario de la sala seleccionada
         public function edit($roomId,$name,$is3D,$cinemaId){
-            //editar el valor del atributo seleccionado por el usuario del cine seleccionado
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
                 $oldRoom=$this->daoCR->getForId($roomId);
                 $capacity=$oldRoom->getCapacity();

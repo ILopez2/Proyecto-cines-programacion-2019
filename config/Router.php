@@ -9,7 +9,6 @@
             $controllerName = $request->getcontroller() . 'Controller';
             $methodName = $request->getmethod();
             $methodParameters = $request->getparameters();   
-            // var_dump($methodParameters);       
             $controllerClassName = "controllers\\". $controllerName;            
             $controller = new $controllerClassName;
             if(!isset($methodParameters))            

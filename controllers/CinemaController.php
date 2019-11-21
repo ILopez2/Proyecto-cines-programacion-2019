@@ -15,8 +15,8 @@
             $this->cinemaDao = new CinemaDao();
             $this->view = new View();
         }
-
-        public function add($name,$adress,$price,$city){
+        // agrego un cine pasandole por parametro nombre direccion precio y ciudad
+        public function add($name,$adress,$price,$city){    
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
                 if($this->cinemaDao->getForID($name)==null){
                 $cinema = new Cinema($name,$city,$adress,$price);
@@ -32,9 +32,8 @@
             }
 
         }
-
+        //borrar el cine con el nombre pasado por parameto
         public function delete($id){
-            //borrar el cine con el nombre pasado por parameto
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
 
                 $this->cinemaDao->delete($id);
@@ -43,9 +42,8 @@
             }
         }
 
-
+        //edita el valor del atributo seleccionado por el usuario del cine seleccionado
         public function edit($name,$adress,$price,$city){
-            //editar el valor del atributo seleccionado por el usuario del cine seleccionado
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
                 $cinema = new Cinema($name,$city,$adress,$price);
                 $this->cinemaDao->edit($cinema);

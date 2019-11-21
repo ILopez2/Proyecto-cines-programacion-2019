@@ -12,7 +12,7 @@
         public function __construct(){
             $this->userController= new UserController();
         }
-
+        // metodo por el cual pasa siempre nuestro framework
         public function Index($email=null,$password=null)
         {
             //checksession y login
@@ -62,12 +62,12 @@
             include_once(VIEWS.'/footer.php');
         }
         
-        
+        //metodo para cerrar una sesion
         public function logout(){
             $this->userController->logout();
             $this->Index();
         }
-
+        //metodo para ingresar por primera vez 
         public function singUp($name,$birthdate,$email,$password,$role='2'){
             $this->userController->singUp($name,$birthdate,$email,$password,$role);
             $this->Index();

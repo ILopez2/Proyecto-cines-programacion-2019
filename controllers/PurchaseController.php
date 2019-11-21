@@ -16,10 +16,7 @@
             $this->view = new ViewsController();
             $this->purchaseDao = new PurchaseDao();
         }
-
-        public function getTotal($quantityTicket,$total){
-            return $quantityTicket*$total;
-        }
+        // creo un registro de una compra
         public function createPurchase($quantityTickets,$totalPrice,$userId,$discount,$functionId){
             var_dump($functionId);
             $newPurchase = new ClassPurchase($quantityTickets,$totalPrice,$userId,$discount);
@@ -30,8 +27,6 @@
                 $i++;
                 $newTicket = new ClassTicket($functionId,$userId,$qr,$last_id);
             }
-
-
         }
         public function getForCinema($cinemaId){
             $functionDao=new MovieFunctionDao();
@@ -54,11 +49,7 @@
             } 
             return $purchases;
         }
-
-
-
-
-
+        // genero un qr aleatorio
         public function generateRandomQr($id){
             $filePath = ROOT . $id . ".png";
             $content = "Purchase code" . $id;

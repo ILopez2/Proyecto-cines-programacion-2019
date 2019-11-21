@@ -19,7 +19,7 @@
             $this->ticketDao = new TicketDao();
             $this->view = new View();
         }
-
+        // agrego un ticket como registro
         public function add($id,$cinemaid,$cinemaroomid,$price,$userid,$date,$time,$qr,$idmovie){
             if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
                 if($this->cinemaDao->getForID($name)!=null){

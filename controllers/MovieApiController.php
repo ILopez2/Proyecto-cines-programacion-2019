@@ -14,6 +14,7 @@
         public function __construct(){
             $view = new VC();
         }
+        //devuelve todas las peliculas de la api a la base de datos
         public function getLastMoviesToDB(){
             $this->getAllGenresToDB();
             $daom= new DAOM();
@@ -27,12 +28,13 @@
             $home=new HC();
             $home->Index();
         }
+        //metodo que devuelve todas las ultimas peliculas
         public function getLastMovies(){
             $daom= new DAOM();
             $movies= $daom->getAll();
             return $movies;   
         }
-
+        //metodo que devuelve una pelicula por id
         public function getMovieXid($id){            
             $daom= new DAOM();
             $movie=$daom->getForID($id);
@@ -48,6 +50,7 @@
             $movie=new CM($values["id"],$values["title"],$values["release_date"],$values["overview"],$values["poster_path"],$genres,$values["runtime"]);
             return $movie;
         }
+        //metodo que devuelve el poster de una pelicula pasando por parametro la altura 
         public function getMoviePoster($posterPath=null,$posterSize="300"){
             
             if($posterPath!=null){

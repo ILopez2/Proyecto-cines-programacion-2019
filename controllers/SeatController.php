@@ -18,7 +18,7 @@
             $this->seatDao = new SeatDao();
             $this->view = new View();
         }
-        
+        //metodo que duvuelve un asiento de un id de una funcion pasa por parametro 
         public function getForFunction($functionId){
             $seatsOfFunction=$this->seatXfunctionDao->getForFunction($functionId);
             if(empty($seatsOfFunction)){
@@ -41,11 +41,13 @@
             }
             return $seatsOfFunction;
         }
+        // setea el asiento en ocupado
         public function occupySeat($seatXfunctionId){
             $seatXfunction=$this->seatXfunctionDao->getForId($seatXfunctionId);
             $seatXfunction->setOccupied(1);
             $this->seatXfunctionDao->changeOccupy($seatXfunction);
         }
+        //devuelve un array con las posiciones de los asientos
         public function getFromIds($seatXfunctionIds){
             $daoSXF= new SeatXFDao();
             $seatsXfunction=array();
