@@ -151,7 +151,7 @@
         protected function mapear($value) {
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($p){
-                return new User($p['nombre_user'],$p['fecha_nac'],$p['email'],$p['pass'],$p['id_rol1']);
+                return new User($p['id_usuario'],$p['nombre_user'],$p['fecha_nac'],$p['email'],$p['pass'],$p['id_rol1']);
             }, $value);
                 /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
                 return count($resp) > 1 ? $resp : $resp['0'];

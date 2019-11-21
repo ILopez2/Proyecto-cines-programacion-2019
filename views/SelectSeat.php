@@ -1,6 +1,5 @@
 <div class="container p=4">
     <H1>Seleccione sus asientos</h1>  
-    <form action="Views/buyTicket" method="POST">
     <table class="table table-borderless table-dark">
         <thead>
             <tr>
@@ -31,6 +30,7 @@
                                         <label for="<?php echo $seats[$j]->getId();?>">
                                             <img src="http://img.fenixzone.net/i/R741tfz.png">
                                             <input type="checkbox" name="seats[]" id="<?php echo $seats[$j]->getId();?>"value="<?php echo $seats[$j]->getId();?>"/>                  
+                                            <input type="hidden" name="functionId" value="<?php echo $functionId;?>">
                                         </label>                      
                                     </td>
                                     
@@ -66,6 +66,7 @@
                 }
             ?>      
     </table>
+
     <input type="submit" class="btn btn-success btn-block" value="Proceder con la compra">
 </form>
 </div>

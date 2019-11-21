@@ -188,25 +188,40 @@
             include_once(VIEWS.'/footer.php');
         }
             //COMPRAR ENTRADAS
-        public function buyTickets($seatsXFids){
-            var_dump($seatsXFids);
-            /*$daoSXF= new SeatXFDao();
-            $seatsXfunctions=array();
-
-            $daoTicket = new TicketDao();
-            $daoCinema=new CinemaDao();
-            $daoCinemaRoom = new CinemaRoomDao();
+        public function buyTickets($functionId,$seatsXFids){            
+            $daoSXF= new SeatXFDao();
             $daoMovieFunction = new MovieFunctionDao();
-            $daoUsers = new UserDao();
-            $users=$daoUsers->getAll();
-            $cinemas=$daoCinema->getAll();
-            $cinemaRooms=$daoCinemaRoom->getAll();
-            $functions=$daoFunction->getAll();
-            $tickets=$daoTicket->getAll();
+            $daoCinemaRoom = new CinemaRoomDao();
+            $daoTicket = new TicketDao();
+            $daoCinema = new CinemaDao();
+            $daoUser = new UserDao();
+            $daoM = new MovieApiController();
+            $quantityTickets=0;
+            foreach($seatsXFids as $seats){
+                $quantityTickets++;
+            }
+
+            $function=$daoMovieFunction->getForID($functionId);
+            
+            $fDate=$function->getDate();
+            $fTime=$function->getTime();
+
+            $room=$daoCinemaRoom->getForID($function->getCinemaRoom());
+            $roomName=$room->getName();
+            
+            $cinema=$daoCinema->getForID2($function->getCinema());
+            $totalPrice = ($cinema->getTicketCost())*($quantityTickets);
+    
+            $user = $daoUser->getForID($_SESSION['userLogedIn']->getEmail());
+            $userId=$user->getID();
+            $movie = $daoM->getMovieXid($function->getMovie());
+            $poster= $daoM->getMoviePoster($movie->getPosterPath());
+            
+            
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
             include_once(VIEWS.'/BuyTicket.php');
-            include_once(VIEWS.'/footer.php');*/
+            include_once(VIEWS.'/footer.php');
 
         }
         //ADMINISTRACION
