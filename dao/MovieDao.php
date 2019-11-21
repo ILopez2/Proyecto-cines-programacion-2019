@@ -17,6 +17,7 @@
             $this->connection = null;
         }
 
+        //AÑADE UNA PELICULA A LA BDD
         public function add($movie){
 
             $sql = "INSERT INTO peliculas(id_pelicula,title,releaseDate,overview,posterPath,duration) VALUES (:MovieId,:Title,:RelaseDate,:OverView,:PosterPath,:Duration)";
@@ -29,7 +30,7 @@
             $parameters["Duration"]= $movie->getDuration();
                   
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection = Connection::getInstance();
                 $queryResult=$this->connection->ExecuteNonQuery($sql,$parameters);
                 $daogxm = new DAOGXM();   
@@ -59,13 +60,13 @@
 
         }
         /*
-        *Retorna el user con el email pasado por parametro
+        *Retorna la pelicula con el id pasado por parametro
         */
         public function getForID($MovieId){
             $sql = "SELECT * FROM peliculas WHERE id_pelicula = :MovieId";
             $parameters['MovieId']=$MovieId;
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql,$parameters);
             }catch(\PDOException $ex){
@@ -79,12 +80,12 @@
             }
         }
         /*
-        *Retorna todos los users de la BDD
+        *Retorna todas las peliculas de la BDD
         */
         public function getAll(){
             $sql="SELECT * FROM peliculas";
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql);
             }catch(\PDOException $ex){

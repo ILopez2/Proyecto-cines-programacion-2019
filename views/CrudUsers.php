@@ -97,7 +97,7 @@
                             <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
                                 <?php if($value->getRoleLevel() != '1'){ ?>
                                 <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=1" class="btn btn-success" onclick="clicked(event)" >
-                                <i class="fas fa-user-shield"> Cambiar Rol</i>
+                                <i class="fas fa-user-shield"> Dar admin</i>
                                 </a>
                                 <?php }else{?>
                                     <!-- SET COMMON -->

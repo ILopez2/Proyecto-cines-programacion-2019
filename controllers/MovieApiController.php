@@ -16,29 +16,47 @@
         }
         //devuelve todas las peliculas de la api a la base de datos
         public function getLastMoviesToDB(){
-            $this->getAllGenresToDB();
-            $daom= new DAOM();
-            $jsonContent=file_get_contents(LASTMVS.ESP);
-            $arrayJson= ($jsonContent) ? json_decode($jsonContent, true ) : array();
-            $arrayMovies=$arrayJson["results"];
-            foreach($arrayMovies as $values){
-                $movie=$this->getDetailsForId($values["id"]);        
-                $daom->add($movie);             
+            try{
+                $this->getAllGenresToDB();
+                $daom= new DAOM();
+                $jsonContent=file_get_contents(LASTMVS.ESP);
+                $arrayJson= ($jsonContent) ? json_decode($jsonContent, true ) : array();
+                $arrayMovies=$arrayJson["results"];
+                foreach($arrayMovies as $values){
+                    $movie=$this->getDetailsForId($values["id"]);        
+                    $daom->add($movie);             
+                }
+                $home=new HC();
+                $home->Index();
             }
-            $home=new HC();
-            $home->Index();
+            catch(PDOException $ex)
+            {
+                echo $ex;
+            }
         }
         //metodo que devuelve todas las ultimas peliculas
         public function getLastMovies(){
-            $daom= new DAOM();
-            $movies= $daom->getAll();
-            return $movies;   
+            try{
+                $daom= new DAOM();
+                $movies= $daom->getAll();
+                return $movies;  
+            }
+            catch(PDOException $ex)
+            {
+                echo $ex;
+            } 
         }
         //metodo que devuelve una pelicula por id
-        public function getMovieXid($id){            
-            $daom= new DAOM();
-            $movie=$daom->getForID($id);
-            return $movie;
+        public function getMovieXid($id){     
+            try{       
+                $daom= new DAOM();
+                $movie=$daom->getForID($id);
+                return $movie;
+            }
+            catch(PDOException $ex)
+            {
+                echo $ex;
+            }
         }
         public function getDetailsForId($id){            
             $jsonContent=file_get_contents(SERCHMID.$id.APIKEY.ESP);
@@ -62,26 +80,44 @@
 
         //CARGA TODOS LOS GENEROS DE LA API EN LA BDD
         public function getAllGenresToDB(){
-            $daog=new DAOG();
-            $jsonContent=file_get_contents(GEN.ESP);
-            $values= ($jsonContent) ? json_decode($jsonContent, true ) : array();
-            for($i=0;$i<count($values["genres"]);$i++){
-                $gen=new CMG($values["genres"][$i]["name"],$values["genres"][$i]["id"]);
-                $daog->add($gen);
+            try{
+                $daog=new DAOG();
+                $jsonContent=file_get_contents(GEN.ESP);
+                $values= ($jsonContent) ? json_decode($jsonContent, true ) : array();
+                for($i=0;$i<count($values["genres"]);$i++){
+                    $gen=new CMG($values["genres"][$i]["name"],$values["genres"][$i]["id"]);
+                    $daog->add($gen);
+                }
+                $home=new HC();
+                $home->Index();
             }
-            $home=new HC();
-            $home->Index();
+            catch(PDOException $ex)
+            {
+                echo $ex;
+            }
         }
         //DEVUELVE UN ARRAY CON TODOS LOS GENEROS
         public function getAllGenres(){
-            $daog=new DAOG();
-            $genres=$daog->getAll();
-            return $genres;
+            try{
+                $daog=new DAOG();
+                $genres=$daog->getAll();
+                return $genres;
+            }
+            catch(PDOException $ex)
+            {
+                echo $ex;
+            }
         }
         public function getGenreForID($genreId){
-            $daog=new DAOG();
-            $genre=$daog->getForID($genreId);
-            return $genre;
+            try{
+                $daog=new DAOG();
+                $genre=$daog->getForID($genreId);
+                return $genre;
+            }
+            catch(PDOException $ex)
+            {
+                echo $ex;
+            }
         }
     }
 

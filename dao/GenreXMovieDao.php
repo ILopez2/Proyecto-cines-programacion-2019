@@ -14,6 +14,7 @@
             $this->connection = null;
         }
          
+        // AÑADE UN GENERO X PELICULA A LA BDD
         public function add($GenreXMovie){
 
             $sql = "INSERT INTO generosXpelicula(id_generoxpelicula,id_pelicula,id_genero) VALUES (:id_generoxpelicula,:id_pelicula,:id_genero)";
@@ -22,7 +23,7 @@
             $parameters["id_genero"]=$GenreXMovie->getIdGenre(); 
             
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection = Connection::getInstance();
                 return $this->connection->ExecuteNonQuery($sql,$parameters);
             }catch(\PDOException $ex){
@@ -46,12 +47,13 @@
             //EN ESTA TABLA NO SE UTILIZA EL ID PROPIO
         }
         
+        // DEVUELVE LOS GENEROS DE LA PELICULA PASADA POR PARAMETRO
         public function getForMovie($id_pelicula){
             $sql = "SELECT * FROM generosXpelicula WHERE id_pelicula = :id_pelicula";
             $parameters['id_pelicula']=$id_pelicula;
             try{
                 
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql,$parameters);
             }catch(\PDOException $ex){
@@ -65,12 +67,12 @@
             }
         }
         /*
-        *Retorna todos los users de la BDD
+        *Retorna todos los generos x pelicula de la BDD
         */
         public function getAll(){
             $sql="SELECT * FROM generosXpelicula";
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql);
             }catch(\PDOException $ex){

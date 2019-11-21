@@ -26,7 +26,7 @@
             $parameters["address"]=$cinema->getAddress();
             $parameters["price"]=$cinema->getTicketCost();
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection = Connection::getInstance();
                 return $this->connection->ExecuteNonQuery($sql,$parameters);
             }catch(\PDOException $ex){
@@ -34,7 +34,7 @@
             } 
         }
         /*
-        *Borra un cine de la BDD correspondiente al nombre del mismo pasado por parametro
+        *Borra un cine de la BDD correspondiente al id del mismo pasado por parametro
         */
         public function delete($id){
             $sql="DELETE FROM cines WHERE id_cine = :id";
@@ -55,7 +55,7 @@
             $sql = "SELECT * FROM cines WHERE nombre_cine = :cinemaName";
             $parameters['cinemaName']=$cinemaName;
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql,$parameters);
             }catch(\PDOException $ex){
@@ -75,25 +75,27 @@
             $sql = "SELECT id_cine FROM cines WHERE nombre_cine = :cinemaName";
             $parameters['cinemaName']=$cinemaName;
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql,$parameters);
-                //var_dump($result);
             }catch(\PDOException $ex){
                 throw $ex;
             } 
-            //hay que mapear de un arreglo asociativo a objetos
+            //Hay que mapear de un arreglo asociativo a objetos
             if(!empty($result)){
                 return $this->mapeo($result);
             }else{
                 return false;
             }
         }
-        public function getForID2($cinemaName){
+        /*
+            Retorna el cine correspondiente al id pasado por parametro
+        */
+        public function getForID2($id){
             $sql = "SELECT * FROM cines WHERE id_cine = :id";
-            $parameters['id']=$cinemaName;
+            $parameters['id']=$id;
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql,$parameters);
             }catch(\PDOException $ex){
@@ -112,7 +114,7 @@
         public function getAll(){
             $sql="SELECT * FROM cines";
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql);
             }catch(\PDOException $ex){
@@ -126,6 +128,9 @@
             }
 
         }
+        /*
+            Edita el cine pasado por parametro
+        */
         public function edit($cinema){
             $sql = "UPDATE cines SET nombre_cine=:nombre_cine,direccion=:direccion,valor_entrada=:valor_entrada,id_ciudad1=:id_ciudad1 WHERE nombre_cine = :nombre_cine";
             $parameters["nombre_cine"]=$cinema->getName();
@@ -137,9 +142,9 @@
                 $this->connection = Connection::getInstance();
                 return $this->connection->ExecuteNonQuery($sql, $parameters);
             }
-            catch(PDOException $e)
+            catch(PDOException $ex)
             {
-                echo $e;
+                throw $ex;
             }
         }
         /*

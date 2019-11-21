@@ -26,7 +26,7 @@
             $parameters["capacity"]=$cinemaRoom->getCapacity();
             $parameters["is3D"]=$cinemaRoom->getIs3D();
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection = Connection::getInstance();
                 $Executeresult=$this->connection->ExecuteNonQuery($sql,$parameters);
                 /*$createdRoom=$this->getForCinemaAndName($parameters["id_cine1"],$parameters["name"]);
@@ -82,7 +82,7 @@
             $sql = "SELECT * FROM salas WHERE id_sala = :roomID";
             $parameters['roomID']=$roomID;
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql,$parameters);
             }catch(\PDOException $ex){
@@ -118,7 +118,7 @@
             $sql = "SELECT * FROM salas WHERE id_cine1 =:cinemaId";
             $parameters['cinemaId']=$cinemaId;
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql,$parameters);
             }catch(\PDOException $ex){
@@ -137,7 +137,7 @@
         public function getAll(){
             $sql="SELECT * FROM salas";
             try{
-                //creo la instancia de coneccion
+                //creo la instancia de conexion
                 $this->connection= Connection::getInstance();
                 $result = $this->connection->execute($sql);
             }catch(\PDOException $ex){
@@ -151,6 +151,9 @@
             }
 
         }
+        /* 
+            Edita la sala pasada por parametro
+        */
         public function edit($room){
             $sql="UPDATE salas SET nombre_sala=:name,is3d=:is3D,capacidad=:capacity WHERE id_sala=:roomId";
             $parameters["name"]=$room->getName();
@@ -162,9 +165,9 @@
                 $this->connection = Connection::getInstance();
                 return $this->connection->ExecuteNonQuery($sql, $parameters);
             }
-            catch(PDOException $e)
+            catch(PDOException $ex)
             {
-                echo $e;
+                throw $ex;
             }
         }
         /*

@@ -21,18 +21,24 @@
         }
         // agrego un ticket como registro
         public function add($id,$cinemaid,$cinemaroomid,$price,$userid,$date,$time,$qr,$idmovie){
-            if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
-                if($this->cinemaDao->getForID($name)!=null){
-                $ticket = new ClassTicket($id,$cinemaid,$cinemaroomid,$price,$userid,$date,$time,$qr,$idmovie);
-                //falta resolver el tema de las salas, por el momento no trabajo con ellas solo se crea un array vacio.
-                $this->ticketDao->add($ticket);
-                $_SESSION['successMje'] = 'Ticket agregado con éxito';
-                $this->view->admTicket();
-                }
-                else{
-                    $_SESSION['errorMje'] = 'Ya existe un ticket';
+            try{
+                if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
+                    if($this->cinemaDao->getForID($name)!=null){
+                    $ticket = new ClassTicket($id,$cinemaid,$cinemaroomid,$price,$userid,$date,$time,$qr,$idmovie);
+                    //falta resolver el tema de las salas, por el momento no trabajo con ellas solo se crea un array vacio.
+                    $this->ticketDao->add($ticket);
+                    $_SESSION['successMje'] = 'Ticket agregado con éxito';
                     $this->view->admTicket();
+                    }
+                    else{
+                        $_SESSION['errorMje'] = 'Ya existe un ticket';
+                        $this->view->admTicket();
+                    }
                 }
+            }
+            catch(PDOException $ex)
+            {
+                echo $ex;
             }
         }
     }
