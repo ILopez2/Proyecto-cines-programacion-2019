@@ -2,13 +2,14 @@
     
     class ClassPurchase{
 
+        private $id;
         private $quantityTicket;
         private $total;
         private $idUser;
         private $idFunction;
         private $discount;
 
-        public function __construct($quantityTicket,$total,$idUser,$idFunction,$discount){
+        public function __construct($id,$quantityTicket,$total,$idUser,$idFunction,$discount){
             $this->quantityTicket=$quantityTicket;
             $this->total=$total;
             $this->idUser=$idUser;

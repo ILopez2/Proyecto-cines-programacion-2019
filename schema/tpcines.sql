@@ -130,11 +130,8 @@ id_usuario1 int not null,
 cant_entradas int not null,
 monto int not null,
 descuento float not null,
-qr mediumblob,
-id_cine2 int not null,
 constraint pk_factura primary key(id_compra),
-constraint fk_usuario1 foreign key(id_usuario1)references usuarios(id_usuario),
-constraint fk_cine2 foreign key(id_cine2)references cines(id_cine)
+constraint fk_usuario1 foreign key(id_usuario1)references usuarios(id_usuario)
 #constraint fk_pago1 foreign key(id_pago1)references pagos(id_pago)
 );
 
@@ -143,6 +140,7 @@ id_entrada int auto_increment not null,
 id_funcion1 int not null,
 id_usuario1 int not null,
 id_compra1 int not null,
+qr mediumblob,
 constraint fk_compra_ foreign key (id_compra1) references compras(id_compra),
 constraint fk_funcion_ foreign key (id_funcion1) references funciones(id_funcion),
 constraint fk_usuario_ foreign key (id_usuario1) references usuarios(id_usuario),
@@ -166,8 +164,9 @@ insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Jorge",'1
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivan",'1995-01-29','ivan@utn','asd123','1');
 insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivaasdn",'1995-01-29','ivsdasan@utn','asd123','1');
 
+
 /*select * from roles;
-select * from asientos;
+select * from asientoXfuncion;
 select * from peliculas;
 select * from funciones;
 select * from generosxpelicula;

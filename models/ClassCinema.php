@@ -9,7 +9,6 @@
         private $address;
         private $ticketCost;
         private $cinemaRooms;
-        //private $billboard;
         private $id; //de que te sirve poner este atributo si no podes setearle su id correspondiente?
 
         //CONSTRUCTOR
@@ -19,7 +18,6 @@
             $this->address=$address;
             $this->ticketCost=$ticketCost;
             $this->cinemaRooms=$cinemaRoom;
-            //$this->billboard=$billboard;
             $this->id=$id;
         }
 
@@ -39,9 +37,6 @@
         public function getCinemaRooms(){
             return $this->cinemaRooms;
         }
-        /*public function getBillboard(){
-            return $this->billboard;
-        }*/
         public function getId(){
             return $this->id;
         }
@@ -61,9 +56,6 @@
         public function setCinemaRoom($cinemaRoom){
             $this->cinemaRooms=$cinemaRoom;
         }
-        /*public function setBillboard($billboard){
-            $this->billboard=$billboard;
-        }*/
 
         //EXTRAS 
 
