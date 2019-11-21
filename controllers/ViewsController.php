@@ -14,6 +14,7 @@
     use controllers\HomeController as Home;
     use controllers\MovieApiController as MovieApiController;
     use controllers\SeatController as SeatCon;
+    use controllers\DateTimeController as DateTime;
 
     //ESTA CONTROLADORA GESTIONA TODAS LAS VISTAS
     class ViewsController
@@ -23,78 +24,96 @@
         }
         
         //BUSQUEDA DE PELICULAS
-            //POR GENERO
-        public function searchForGen($searchG){ 
-            $daoMovie = new MovieApiController();
-            $daoMovieGenres= new MovieGenreDao();
-            $daoFunction= new MovieFunctionDao();
-            $genres=$daoMovie->getAllGenres();
-            $functions=$daoFunction->getAll();
-            $movies=array();
-            if(!empty($functions)){
-                if(is_array($functions)){
-                    foreach($functions as $fu){
-                        $movie=$daoMovie->getMovieXid($fu->getMovie());                    
-                        foreach($movie->getGenres() as $gen){
-                            if($gen == $searchG){
-                                array_push($movies,$movie);
-                            }
-                        }           
-                    }
-                }
-                else{
-                    $movie=$daoMovie->getMovieXid($functions->getMovie(),ESP);
-                    foreach($movie->getGenres() as $gen){
-                        if($gen == $searchG){
-                            array_push($movies,$movie);
-                        }
-                    }     
-                }
-                $movies=array_unique($movies,SORT_REGULAR );
+        
+            //POR FECHA Y/O GENERO
+        public function search($searchGenre=null,$searchDate=null){
+            if(strpos($searchGenre, '-')!=false){
+                $searchDate=$searchGenre;
+                $searchGenre=null;
             }
-            if(empty($movies)){
-                $home= new Home();
-                $_SESSION['errorMje'] = 'No hay peliculas del genero '.$daoMovieGenres->getForID($searchG)->getName()." en cartelera";
-                $home->Index();
-            }
-            else{
-                include_once(VIEWS.'/header.php');
-                include_once(VIEWS.'/nav.php');
-                include_once(VIEWS.'/SearchGen.php');
-                include_once(VIEWS.'/footer.php');
-            }      
-        }   
-            //POR FECHA
-        public function searchForDate($searchF){
             $dao = new MovieFunctionDao();
             $daoC=new CinemaDao();
+            $daoCR= new CinemaRoomDao();
             $daoM = new MovieApiController();
             $genres=$daoM->getAllGenres();
             $allFunctions=$dao->getAll();
-            $cinemasFunction=array();
-            if(!empty($allFunctions)){
-                if(is_array($allFunctions)){
-                    foreach($allFunctions as $function){
-                        if($searchF == $function->getDate()){
-                            array_push($cinemasFunction,$function);
+            $functions=$dao->getAll();
+            $movies=array();
+            if(!empty($searchDate)){
+                if(!empty($allFunctions)){
+                    $functions=array();
+                    if(is_array($allFunctions)){
+                        foreach($allFunctions as $function){
+                            if($searchDate == $function->getDate()){
+                                array_push($functions,$function);
+                            }
+                        }
+                        foreach($functions as $fu){
+                            $movie=$daoM->getMovieXid($fu->getMovie());
+                            array_push($movies,$movie); 
+                        } 
+                    }
+                    else{      
+                        if($searchDate == $allFunctions->getDate()){
+                            array_push($functions,$allFunctions);
+                        }
+                    }
+                    foreach($functions as $fu){
+                        $movie=$daoM->getMovieXid($fu->getMovie());
+                        array_push($movies,$movie); 
+                    } 
+                    $movies=array_unique($movies,SORT_REGULAR );
+                }
+            }
+            if(!empty($searchGenre)){
+                if(!empty($functions)){
+                    $movies=array();
+                    if(is_array($functions)){
+                        foreach($functions as $fu){
+                            $movie=$daoM->getMovieXid($fu->getMovie());                    
+                            foreach($movie->getGenres() as $gen){
+                                if($gen == $searchGenre){
+                                    array_push($movies,$movie);
+                                }
+                            }         
+                        }
+                    }
+                    else{
+                        $movie=$daoM->getMovieXid($functions->getMovie(),ESP);
+                        foreach($movie->getGenres() as $gen){
+                            if($gen == $searchGenre){
+                                array_push($movies,$movie);
+                            }  
+                        }  
+                    }
+                    $movies=array_unique($movies,SORT_REGULAR );
+                }
+            }    
+            if(empty($movies)){
+                $home= new Home();
+                if(empty($searchGenre) && empty($searchDate)){
+                    $_SESSION['errorMje'] = "Seleccione alguna de las opciones de busqueda";
+                }else{
+                    if(empty($searchGenre)){
+                        $_SESSION['errorMje'] = 'No hay funciones para la fecha '.$searchDate;
+                    }
+                    else{
+                        if(empty($searchDate)){
+                            var_dump($searchGenre);
+                            $_SESSION['errorMje'] = 'No hay peliculas del genero '.$daoM->getGenreForID($searchGenre)->getName()." en cartelera";
+                        }
+                        else{
+                            $_SESSION['errorMje'] = "No hay funciones de peliculas del genero ".$daoM->getGenreForID($searchGenre)->getName()." para la fecha ".$searchDate;
                         }
                     }
                 }
-                else{      
-                    if($searchF == $allFunctions->getDate()){
-                        array_push($cinemasFunction,$allFunctions);
-                    }
-                } 
-            }       
-            if(empty($cinemasFunction)){
-                $home= new Home();
-                $_SESSION['errorMje'] = 'No hay funciones para la fecha '.$searchF;
+
                 $home->Index();
             }
             else{
                 include_once(VIEWS.'/header.php');
                 include_once(VIEWS.'/nav.php');
-                include_once(VIEWS.'/SearchDate.php');
+                include_once(VIEWS.'/Search.php');
                 include_once(VIEWS.'/footer.php');
             }        
         }
@@ -106,6 +125,8 @@
             $daoM = new MovieApiController();
             $daoRM= new CinemaRoomDao();
             $daoMG= new MovieGenreDao();
+            $daoDT=new DateTime();
+            $date=$daoDT->getActualDate();
             $genres=$daoM->getAllGenres();
             $cinemasFunction=$dao->getForMovie($id);
             $movie = $daoM->getMovieXid($id);
@@ -181,7 +202,6 @@
             $genres=$search->getAllGenres();
             $seatController=new SeatCon();
             $seats= $seatController->getForFunction($functionId);
-            array_push($seats,null);
             include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/nav.php');
             include_once(VIEWS.'/SelectSeat.php');
@@ -211,6 +231,7 @@
             $room=$daoCinemaRoom->getForID($function->getCinemaRoom());
             $roomName=$room->getName();   
             $cinema=$daoCinema->getForID2($function->getCinema());
+            $cinemaName=$cinema->getName();
             $totalPrice = ($cinema->getTicketCost())*($quantityTickets);
             $user = $daoUser->getForID($_SESSION['userLogedIn']->getEmail());
             $userId=$user->getID();

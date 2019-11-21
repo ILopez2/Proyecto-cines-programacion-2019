@@ -11,28 +11,21 @@
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group mr-1" role="group" aria-label="First group">
                     
-                    <form action="<?php echo FRONT_ROOT?>Views/searchForGen" method="POST" class="form-inline">
+                    <form action="<?php echo FRONT_ROOT?>Views/search" method="POST" class="form-inline">
                         <!-- SEARCH BY GENRE STARTS HERE -->
-                        <select class="form-control mr-sm-2" placeholder="Select" aria-label="Select" name="searchG" required>
-                            <option value="" disabled selected >Selecciones un genero</option>
+                        <select class="form-control mr-sm-2" placeholder="Select" aria-label="Select" name="searchGenre" >
+                            <option value="" disabled selected >Seleccione un genero</option>
                             <?php foreach($genres as $gen){
                                 echo "<option value=".$gen->getId().">".$gen->getName()."</option>";          
                             }?>
-                        </select>    
-                            
-                        <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fas fa-search"></i> Buscar</button>
-                    
-                    </form>
+                        </select>               
                     <!-- SEARCH BY GENRE ENDS HERE -->
                     <!-- SEARCH BY DATE STARTS HERE -->
+                    <div class="btn-group mr-1" role="group" aria-label="Second group"> 
+                        <input type="date" name="searchDate" min="<?php echo date("Y-m-d");?>">
                     </div>
-                    <div class="btn-group mr-1" role="group" aria-label="Second group">
-                    
-                    <form action="<?php echo FRONT_ROOT?>Views/searchForDate" method="POST" class="form-inline">
-                        <input type="date" name="searchF" min="<?php echo date("Y-m-d");?>" required >
                         <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fas fa-search"></i> Buscar</button>
                     </form>
-                    </div>
                     <!-- SEARCH BY DATE ENDS HERE -->
                     <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1') {?>
                     <div class="btn-group mr-2" role="group" aria-label="Third group">

@@ -65,49 +65,54 @@
                        <?php if(!empty($cinemasFunction)){
                                 if(is_array($cinemasFunction)){
                                     foreach($cinemasFunction as $function){
-                                        if($movie->getId() == $function->getMovie()){
-                                            $fCinema=$daoC->getForID2($function->getCinema());
-                                            ?>
-                                            <tr>
-                                                </td>
-                                                <td ><?php echo $fCinema->getName();?></td>
-                                                <td ><?php echo $function->getDate()." ".$function->getTime();?></td>
-                                                <td ><?php echo $function->getLanguage();?></td>
-                                                <?php 
-                                                    $room=$daoRM->getForID($function->getCinemaRoom());                          
+                                        if($function->getDate()>=$date){
+
+                                            if($movie->getId() == $function->getMovie()){
+                                                $fCinema=$daoC->getForID2($function->getCinema());
                                                 ?>
-                                                <td ><?php echo $room->getName();?></td>
-                                                <td style = "text-align: center"> 
-                                                    <a href="<?php echo FRONT_ROOT;?>Views/selectSeats?id=<?php echo $function->getId();?>" class="btn btn-success">
-                                                        <i class="fas fa-shopping-cart"> Comprar entradas</i>
-                                                    </a>                                   
-                                                </td>
-                                            </tr>
-                                        <?php } 
+                                                <tr>
+                                                    </td>
+                                                    <td ><?php echo $fCinema->getName();?></td>
+                                                    <td ><?php echo $function->getDate()." ".$function->getTime();?></td>
+                                                    <td ><?php echo $function->getLanguage();?></td>
+                                                    <?php 
+                                                        $room=$daoRM->getForID($function->getCinemaRoom());                          
+                                                    ?>
+                                                    <td ><?php echo $room->getName();?></td>
+                                                    <td style = "text-align: center"> 
+                                                        <a href="<?php echo FRONT_ROOT;?>Views/selectSeats?id=<?php echo $function->getId();?>" class="btn btn-success">
+                                                            <i class="fas fa-shopping-cart"> Comprar entradas</i>
+                                                        </a>                                   
+                                                    </td>
+                                                </tr>
+                                    <?php   } 
+                                        }
                                     }
                                 }
                                 else{
-                                    if($movie->getId() == $cinemasFunction->getMovie()){
-                                        $fCinema=$daoC->getForID2($cinemasFunction->getCinema());
-                                        ?>
-                                        <tr>
-                                            </td>
-                                            <td class=table-light><?php echo $fCinema->getName();?></td>
-                                            <td class=table-light><?php echo $cinemasFunction->getDate()." ".$cinemasFunction->getTime();?></td>
-                                            <td class=table-light><?php echo $cinemasFunction->getLanguage();?></td>
-                                            <?php 
-                                                    $room=$daoRM->getForID($cinemasFunction->getCinemaRoom());                          
-                                                ?>
-                                            <td class=table-light><?php echo $room->getName();?></td>
-                                            
-                                            <td style = "text-align: center"> 
-                                            <a href="<?php echo FRONT_ROOT;?>Views/selectSeats?id=<?php echo $cinemasFunction->getId();?>" class="btn btn-success">
-                                                        <i class="fas fa-shopping-cart"> Comprar entradas</i>
-                                                    </a>                                 
-                                            </td>
+                                    if($cinemasFunction->getDate()>=$date){
+                                        if($movie->getId() == $cinemasFunction->getMovie()){
+                                            $fCinema=$daoC->getForID2($cinemasFunction->getCinema());
+                                            ?>
+                                            <tr>
+                                                </td>
+                                                <td class=table-light><?php echo $fCinema->getName();?></td>
+                                                <td class=table-light><?php echo $cinemasFunction->getDate()." ".$cinemasFunction->getTime();?></td>
+                                                <td class=table-light><?php echo $cinemasFunction->getLanguage();?></td>
+                                                <?php 
+                                                        $room=$daoRM->getForID($cinemasFunction->getCinemaRoom());                          
+                                                    ?>
+                                                <td class=table-light><?php echo $room->getName();?></td>
+                                                
+                                                <td style = "text-align: center"> 
+                                                <a href="<?php echo FRONT_ROOT;?>Views/selectSeats?id=<?php echo $cinemasFunction->getId();?>" class="btn btn-success">
+                                                            <i class="fas fa-shopping-cart"> Comprar entradas</i>
+                                                        </a>                                 
+                                                </td>
 
-                                        </tr>
-                            <?php   }
+                                            </tr>
+                            <?php       }
+                                    } 
                                 }
                             } ?>
                 </tbody>

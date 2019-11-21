@@ -15,7 +15,6 @@
 
         public function Index($email=null,$password=null)
         {
-            $daoDT=new DateTime();
             //checksession y login
             $showView=false; //se vuelve verdadero solo si hay un user en session
             
@@ -38,6 +37,8 @@
                          
                 $dao = new MovieApiController();
                 $daoF = new MovieFunctionDao();
+                $daoDT=new DateTime();
+                $date=$daoDT->getActualDate();
                 $functions=$daoF->getAll();
                 $array = $dao->getLastMovies();
                 $genres=$dao->getAllGenres();
@@ -45,7 +46,7 @@
                     foreach($array as $k => $v) {
                         if(!$daoF->getForMovie($v->getID())) {
                             unset($array[$k]);
-                        }
+                        }         
                     }
                 }
                 include_once(VIEWS.'/nav.php');

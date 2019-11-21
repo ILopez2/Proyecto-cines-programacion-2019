@@ -75,6 +75,11 @@
             $genres=$daog->getAll();
             return $genres;
         }
+        public function getGenreForID($genreId){
+            $daog=new DAOG();
+            $genre=$daog->getForID($genreId);
+            return $genre;
+        }
     }
 
 ?>
