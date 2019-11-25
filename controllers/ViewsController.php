@@ -261,12 +261,6 @@
                 echo $ex;
             }
         }   
-        public function purchaseComplete(){
-            include_once(VIEWS.'/header.php');
-            include_once(VIEWS.'/nav.php');
-            include_once(VIEWS.'/purchaseComplete.php');
-            include_once(VIEWS.'/footer.php');
-        }
             //ELEGIR ASIENTOS
         public function selectSeats($functionId){
             try{

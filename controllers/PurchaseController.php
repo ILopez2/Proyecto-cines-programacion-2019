@@ -9,6 +9,7 @@
     use controllers\QrController as QrController;
     use controllers\HomeController as Home;
     use controllers\SeatController as SeatController;
+    use controllers\EmailController as EmailController;
 
     use models\ClassPurchase as ClassPurchase;
     use models\ClassTicket as ClassTicket;
@@ -30,6 +31,7 @@
                 $seatController= new SeatController();
                 $seatXFunctionDao= new SeatXFDao();
                 $qrController=new QrController();
+                $emailController= new EmailController();
                 $home=new Home();
                 $daoTicket = new TicketDao();
                 $newPurchase = new ClassPurchase($quantityTickets,$totalPrice,$userId,$discount);
@@ -38,17 +40,20 @@
                 $purchaseId = $ids_array[0][0];
                 $seatsXFunctionIds = explode("-", $seatsXFunctionString);
                 $seatsXFunctionArray=array();
+                $qrsTomail=array();
                 foreach($seatsXFunctionIds as $Id){
                     array_push($seatsXFunctionArray,$seatXFunctionDao->getForID($Id));
                 }
                 $i=0;
                 while($i < $quantityTickets){    
                     $QRlink=$qrController->generateQrCode("-Asiento: ".$seatsXFunctionArray[$i]->getSeatId()." -Funcion: ".$functionId." -Compra: ".$purchaseId);
+                    array_push($qrsTomail,$QRlink);
                     $newTicket = new ClassTicket($functionId,$userId,$purchaseId,$seatsXFunctionArray[$i]->getSeatId(),$QRlink);
                     $daoTicket->add($newTicket);  
                     $seatController->occupySeat($seatsXFunctionArray[$i]->getId());   
                     $i++;
                 }
+                $emailController->sendTickets($qrsTomail,$userId,$functionId);
                 $_SESSION["successMje"]="Compra realizada con exito,revise las entradas en su email";
                 $home->Index();
             }
