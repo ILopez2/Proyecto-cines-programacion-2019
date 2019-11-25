@@ -3,18 +3,18 @@
     class DateTimeController{
 
         public function __construct(){
-            //VACIO
+            date_default_timezone_set(TMZARG);
         }
         // metodo que devuelve la fecha actual
         public function getActualDate(){
-            return date("Y-m-d");
+            return date("Y-m-d",time());
         }
         // metodo que devuelve la hora actual
         public function getActualTime(){
-            return date("H").":".date("i").":".date("s");
+            return date("H",time()).":".date("i",time()).":".date("s",time());
         }
         // metodo que devuelve el dia actual
-        public function getActualDay(){
-            return date("l");
+        public function getActualDay(){       
+            return date("l",time());
         }
     }

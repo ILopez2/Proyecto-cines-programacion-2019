@@ -141,7 +141,7 @@ id_funcion1 int not null,
 id_usuario1 int not null,
 id_compra1 int not null,
 id_asiento1 int not null,
-qr mediumblob,
+qr varchar(200),
 constraint fk_compra_ foreign key (id_compra1) references compras(id_compra),
 constraint fk_funcion_ foreign key (id_funcion1) references funciones(id_funcion),
 constraint fk_usuario_ foreign key (id_usuario1) references usuarios(id_usuario),
@@ -168,10 +168,10 @@ insert into usuarios(nombre_user,fecha_nac,email,pass,id_rol1) values("Ivaasdn",
 
 
 /*select * from roles;
-select * from asientoXfuncion;
+select * from compras;
 select * from peliculas;
 select * from funciones;
-select * from generosxpelicula;
+select * from entradas;
 select * from salas;
 select * from cidades; 
 select * from salas;

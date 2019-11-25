@@ -18,10 +18,12 @@
         *Agrega un nuevo ticket a la BDD
         */
         public function add($ticket){
-            $sql = "INSERT INTO entradas(id_funcion1,id_usuario1,id_compra1) VALUES (:id_funcion1, :id_usuario, :id_compra1)";
+            $sql = "INSERT INTO entradas(id_funcion1,id_usuario1,id_compra1,id_asiento1,qr) VALUES (:id_funcion1, :id_usuario, :id_compra1, :id_asiento1 , :qr)";
             $parameters["id_funcion1"]=$ticket->getFunctionID();
             $parameters["id_usuario"]=$ticket->getUserID();
             $parameters["id_compra1"]=$ticket->getPurchaseID();
+            $parameters["id_asiento1"]=$ticket->getSeatID();
+            $parameters["qr"]=$ticket->getQR();
             try{
                 //creo la instancia de conexion
                 $this->connection = Connection::getInstance();
@@ -100,7 +102,7 @@
             $value = is_array($value) ? $value : [];   
             $resp=array();  
             $resp = array_map(function($p){
-            return new ClassTicket($p['id_funcion1'],$p['id_usuario1'],$p['id_compra1'],$p['id_entrada']);
+            return new ClassTicket($p['id_funcion1'],$p['id_usuario1'],$p['id_compra1'],$p['id_asiento1'],$p['qr'],$p['id_entrada']);
             }, $value);
                 /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
                 return count($resp) > 1 ? $resp : $resp['0'];

@@ -20,3 +20,9 @@
     define('JS_PATH', FRONT_ROOT . '/assets/js/');
     define('IMG_PATH',FRONT_ROOT . 'assets/images/');
 
+    /* EXTRAS */
+
+    /*CONSTANTE PARA ESTABLECER LA ZONA HORARIA EN ARGENTINA
+    EJEMPLO date_default_timezone_set(TMZARG);*/
+    define("TMZARG",'America/Argentina/Buenos_Aires');
+

@@ -51,9 +51,6 @@
                             }         
                         }
                     }
-                    if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
-                        $_SESSION["errorMje"]="Para traer las ultimas peliculas a su base de datos debe presionar el boton 'Cargar peliculas'";
-                    }
                     include_once(VIEWS.'/nav.php');
                     include_once(VIEWS.'/home.php');
                 }

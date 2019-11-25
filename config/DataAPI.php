@@ -35,4 +35,8 @@
     AL FINAL SE LE DEBE CONCATENAR LA CONSTANTE DEL LENGUAJE DESEADO
     EJEMPLO: GEN.ENG */
     define("GEN",PAGE."/3/genre/movie/list".APIKEY);
+
+    /*ESTE LINK SIRVE PARA GENERAR UN CODIGO QR CON EL TEXTO QUE SE LE PASA POR PARAMETRO
+    EJEMPLO: QRGEN."hola"*/
+    define("QRGEN","https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=");
 ?>

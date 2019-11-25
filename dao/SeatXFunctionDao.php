@@ -49,8 +49,8 @@ class SeatXFunctionDao implements InterfaceDao{
     //CAMBIA EL ESTADO DEL ASIENTO DE UNA FUNCION A OCUPADO
     public function changeOccupy($seatXfunction){
         $sql="UPDATE asientoXfuncion SET ocupada=:occupied WHERE id_asientoXfuncion=:seatXfunctionId";
-        $parameters["occupied"]=$seat->getOccupied();       
-        $parameters["seatXfunctionId"]=$seat->getId();     
+        $parameters["occupied"]=$seatXfunction->getOccupied();       
+        $parameters["seatXfunctionId"]=$seatXfunction->getId();     
         try
         {
             $this->connection = Connection::getInstance();

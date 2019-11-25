@@ -2,13 +2,17 @@
 
     use dao\MovieFunctionDao as MovieFunctionDao;
     use dao\PurchaseDao as PurchaseDao;
-    use models\ClassPurchase as ClassPurchase;
-    use controllers\ViewsController as ViewsController;
-    use models\ClassTicket as ClassTicket;
     use dao\TicketDao as TicketDao;
-    use phpqrcode\QRcode as QRcode;
-    use controllers\HomeController as Home;
+    use dao\SeatXFunctionDao as SeatXFDao;
 
+    use controllers\ViewsController as ViewsController;
+    use controllers\QrController as QrController;
+    use controllers\HomeController as Home;
+    use controllers\SeatController as SeatController;
+
+    use models\ClassPurchase as ClassPurchase;
+    use models\ClassTicket as ClassTicket;
+    
     
 
     class PurchaseController{
@@ -21,19 +25,29 @@
             $this->purchaseDao = new PurchaseDao();
         }
         // creo un registro de una compra
-        public function createPurchase($quantityTickets,$totalPrice,$userId,$discount,$functionId){
+        public function createPurchase($quantityTickets,$totalPrice,$userId,$discount,$functionId,$seatsXFunctionString){
             try{
+                $seatController= new SeatController();
+                $seatXFunctionDao= new SeatXFDao();
+                $qrController=new QrController();
                 $home=new Home();
                 $daoTicket = new TicketDao();
                 $newPurchase = new ClassPurchase($quantityTickets,$totalPrice,$userId,$discount);
                 $this->purchaseDao->add($newPurchase);
                 $ids_array = $this->purchaseDao->getLastIds();
-                $last_id = $ids_array[0][0];
+                $purchaseId = $ids_array[0][0];
+                $seatsXFunctionIds = explode("-", $seatsXFunctionString);
+                $seatsXFunctionArray=array();
+                foreach($seatsXFunctionIds as $Id){
+                    array_push($seatsXFunctionArray,$seatXFunctionDao->getForID($Id));
+                }
                 $i=0;
-                while($i < $quantityTickets){
+                while($i < $quantityTickets){    
+                    $QRlink=$qrController->generateQrCode("-Asiento: ".$seatsXFunctionArray[$i]->getSeatId()." -Funcion: ".$functionId." -Compra: ".$purchaseId);
+                    $newTicket = new ClassTicket($functionId,$userId,$purchaseId,$seatsXFunctionArray[$i]->getSeatId(),$QRlink);
+                    $daoTicket->add($newTicket);  
+                    $seatController->occupySeat($seatsXFunctionArray[$i]->getId());   
                     $i++;
-                    $newTicket = new ClassTicket($functionId,$userId,$last_id);
-                    $daoTicket->add($newTicket);
                 }
                 $_SESSION["successMje"]="Compra realizada con exito,revise las entradas en su email";
                 $home->Index();
@@ -81,19 +95,5 @@
             {
                 echo $ex;
             }
-        }
-        // genero un qr aleatorio
-        public function generateRandomQr($id){
-            $filePath = TEMP.'/'. $id . ".png";
-            echo $filePath;
-            $content = "Purchase code" . $id;
-            $size = 10;
-            $level = 'L';
-            $framSize = 3;
-            
-            QRcode::png($content, $filePath, $level, $size, $framSize);
-            $qrImage = file_get_contents($filePath);
-            unlink($filePath);
-            return $qrImage;
         }
     }

@@ -52,7 +52,7 @@
                 </tr>
                     <tr class="alert-warning">
                     <th scope="row" >Total a Pagar</th>
-                <td colspan="3" ><?php if($flagDiscount){ echo 'Felicidades hoy es '.$day.' y compraste mas de 2 entradas, accediste a un descuento del 25%! <br> Precio Final: <strong>'.$totalPrice.'</strong>'; }else{ echo $totalPrice;}?></td>
+                <td colspan="3" >$<?php if($flagDiscount){ echo 'Felicidades hoy es '.$day.' y compraste mas de 2 entradas, accediste a un descuento del 25%! <br> Precio Final: <strong>'.$totalPrice.'</strong>'; }else{ echo $totalPrice;}?></td>
                 </tr>
             </tbody>
             </table>
@@ -64,6 +64,7 @@
                 <input type="hidden" value="<?php echo $userId;?>" name="userId">
                 <input type="hidden" value="<?php echo $discount;?>" name="discount">
                 <input type="hidden" value="<?php echo $functionId;?>" name="functionId">
+                <input type="hidden" value="<?php echo $seatsXFunctionString;?>" name="seatsXFunctionString">
                 <script 
                     src="https://www.mercadopago.com.ar/integrations/v1/web-tokenize-checkout.js"
                     data-public-key="TEST-5c961a4f-a387-41e4-b1d1-6f307a001f31"

@@ -301,10 +301,20 @@
                     $quantityTickets=0;
                     $seatsXfunction=$seatController->getFromIds($seatsXFids);
                     $seats=array();
+                    
+                    $seatsXFunctionString="";
+                    $firstSeatFlag=true;
                     foreach($seatsXfunction as $seatXF){
                         $seat=$seatDao->getForID($seatXF->getSeatId());
                         array_push($seats,$seat);
                         $quantityTickets++;
+                        if($firstSeatFlag==true){
+                            $seatsXFunctionString.=$seatXF->getId();
+                            $firstSeatFlag=false;
+                        }
+                        else{
+                            $seatsXFunctionString.="-".$seatXF->getId();
+                        }
                     }
                     $function=$daoMovieFunction->getForID($functionId);       
                     $fDate=$function->getDate();
@@ -316,10 +326,16 @@
                     $totalPrice = ($cinema->getTicketCost())*($quantityTickets);
                     $discount=0;
                     $flagDiscount=false;
-                    if(($quantityTickets>=2) && ($day == 'Thursday' || 'Wednesday')){
+                    if(($quantityTickets>=2) && ($day == 'Thursday' || $day == 'Wednesday')){
                         $discount=0.25;
                         $flagDiscount=true;
                         $totalPrice=$totalPrice-$totalPrice*$discount;
+                        if($day == 'Thursday'){
+                            $day="martes";
+                        }
+                        if($day == 'Wednesday'){
+                            $day="miercoles";
+                        }
                     }
                     $user = $daoUser->getForID($_SESSION['userLogedIn']->getEmail());
                     $userId=$user->getID();
