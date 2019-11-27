@@ -46,7 +46,9 @@
                 }
                 $i=0;
                 while($i < $quantityTickets){    
-                    $QRlink=$qrController->generateQrCode("-Asiento: ".$seatsXFunctionArray[$i]->getSeatId()." -Funcion: ".$functionId." -Compra: ".$purchaseId);
+                    $message="-Asiento:".$seatsXFunctionArray[$i]->getSeatId()."-Funcion:".$functionId."-Compra:".$purchaseId;
+                    echo $message;
+                    $QRlink=$qrController->generateQrCode($message);
                     array_push($qrsTomail,$QRlink);
                     $newTicket = new ClassTicket($functionId,$userId,$purchaseId,$seatsXFunctionArray[$i]->getSeatId(),$QRlink);
                     $daoTicket->add($newTicket);  

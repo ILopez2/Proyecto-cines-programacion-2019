@@ -291,6 +291,7 @@
                     $daoUser = new UserDao();
                     $daoM = new MovieApiController();
                     $dateC = new DateTimeController();
+                    
                     $day = $dateC->getActualDay();
                     $quantityTickets=0;
                     $seatsXfunction=$seatController->getFromIds($seatsXFids);
@@ -301,40 +302,48 @@
                     foreach($seatsXfunction as $seatXF){
                         $seat=$seatDao->getForID($seatXF->getSeatId());
                         array_push($seats,$seat);
-                        $quantityTickets++;
-                        if($firstSeatFlag==true){
-                            $seatsXFunctionString.=$seatXF->getId();
-                            $firstSeatFlag=false;
+                        $quantityTickets++; // LA CANTIDAD DE TICKETS    ** CONCATENO LOS NUMEROS DE LOS ASIENTOS
+                        if($firstSeatFlag==true){                        // PARA LUEGO PASARLOS POR HIDDEN 
+                            $seatsXFunctionString.=$seatXF->getId();     // Y PODER GUARDAR LOS ASIENTOS SELECCIONADOS
+                            $firstSeatFlag=false;                        // EN LA BDD.
                         }
                         else{
                             $seatsXFunctionString.="-".$seatXF->getId();
                         }
                     }
                     $function=$daoMovieFunction->getForID($functionId);       
-                    $fDate=$function->getDate();
-                    $fTime=$function->getTime();
+                    $fDate=$function->getDate(); //FECHA DE LA FUNCION
+                    $fTime=$function->getTime(); //HORA DE LA FUNCION
                     $room=$daoCinemaRoom->getForID($function->getCinemaRoom());
-                    $roomName=$room->getName();   
+                    $roomName=$room->getName();   //NOMBRE DE LA SALA
                     $cinema=$daoCinema->getForID2($function->getCinema());
-                    $cinemaName=$cinema->getName();
-                    $totalPrice = ($cinema->getTicketCost())*($quantityTickets);
-                    $discount=0;
-                    $flagDiscount=false;
+                    $cinemaName=$cinema->getName(); //NOMBRE DEL CINE
+                    //
+                    $totalPrice = ($cinema->getTicketCost())*($quantityTickets); //PRECIO TOTAL DE LA COMPRA
+                    $discount=0; //SE REALIZA ES DESCUENTO SOLO SI ES MARTES O JUEVES
+                    $flagDiscount=false;// SI SE VUELVE VERDADERO MUESTRA EL DESCUENTO EN LA VISTA
                     if(($quantityTickets>=2) && ($day == 'Thursday' || $day == 'Wednesday')){
                         $discount=0.25;
-                        $flagDiscount=true;
+                        $flagDiscount=true; 
                         $totalPrice=$totalPrice-$totalPrice*$discount;
                         if($day == 'Thursday'){
                             $day="martes";
-                        }
+                        }                          //SEGUN SEA MARTES O JUEVES LO GUARDAMOS PARA MOSTRAR EL MENSAJE DE DESCTO.
                         if($day == 'Wednesday'){
                             $day="miercoles";
                         }
                     }
+                    //
+
+                    //
                     $user = $daoUser->getForID($_SESSION['userLogedIn']->getEmail());
-                    $userId=$user->getID();
+                    $userId=$user->getID(); //PASO EL ID DEL USUARIO PARA GUARDARLO EN LA COMPRA EN LA BDD
+                    //
+
+                    //
                     $movie = $daoM->getMovieXid($function->getMovie());
-                    $poster= $daoM->getMoviePoster($movie->getPosterPath());          
+                    $poster= $daoM->getMoviePoster($movie->getPosterPath()); //ME TRAIGO EL POSTER DE LA FUNCION
+                    //     
                     include_once(VIEWS.'/header.php');
                     include_once(VIEWS.'/nav.php');
                     include_once(VIEWS.'/BuyTicket.php');

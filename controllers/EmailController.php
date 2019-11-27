@@ -56,7 +56,7 @@
             $to=$userEmail;
             $message="Presente estos codigos qr en el cine ".$cinemaName." para poder acceder a la funcion de ".$movieTitle." el dia ".$functionDate." en el horario ".$functionTime."<br>-Entradas: ".$qrImages;
             $subject="MoviePass Entradas para ver ".$movieTitle;
-            $header="De: ".$this->from."<br>";
+            $header="De: ".$this->from;
             $this->mailSender->Subject = $header;
             $this->mailSender->AddAddress($to);
             $this->mailSender->Body=$message;
