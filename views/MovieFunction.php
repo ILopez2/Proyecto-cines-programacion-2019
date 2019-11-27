@@ -70,7 +70,7 @@
                                                 <tr>
                                                     
                                                     <td ><?php echo $fCinema->getName();?></td>
-                                                    <td ><?php echo $function->getDate()." ".$function->getTime();?></td>
+                                                    <td ><?php echo $function->getDate()." | Inicio ".$function->getTimeStart()." Fin: ".$function->getTimeEnd();?></td>
                                                     <td ><?php echo $function->getLanguage();?></td>
                                                     <?php 
                                                         $room=$daoRM->getForID($function->getCinemaRoom());                          
@@ -94,7 +94,7 @@
                                             <tr>
                                                 
                                                 <td class=table-light><?php echo $fCinema->getName();?></td>
-                                                <td class=table-light><?php echo $cinemasFunction->getDate()." ".$cinemasFunction->getTime();?></td>
+                                                <td class=table-light><?php echo $cinemasFunction->getDate()." Inicio: ".$cinemasFunction->getTimeStart()." Fin: ".$cinemasFunction->getTimeEnd();?></td>
                                                 <td class=table-light><?php echo $cinemasFunction->getLanguage();?></td>
                                                 <?php 
                                                         $room=$daoRM->getForID($cinemasFunction->getCinemaRoom());                          

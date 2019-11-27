@@ -313,7 +313,7 @@
                     }
                     $function=$daoMovieFunction->getForID($functionId);       
                     $fDate=$function->getDate(); //FECHA DE LA FUNCION
-                    $fTime=$function->getTime(); //HORA DE LA FUNCION
+                    $fTime=$function->getTimeStart(); //HORA DE LA FUNCION
                     $room=$daoCinemaRoom->getForID($function->getCinemaRoom());
                     $roomName=$room->getName();   //NOMBRE DE LA SALA
                     $cinema=$daoCinema->getForID2($function->getCinema());

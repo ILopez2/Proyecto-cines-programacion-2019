@@ -48,7 +48,7 @@
             $cinemaName=$cinema->getName();
             $movieTitle=$movie->getTitle();
             $functionDate=$function->getDate();
-            $functionTime=$function->getTime();
+            $functionTime=$function->getTimeStart();
             $qrImages="";
             foreach($qrs as $qr){
                 $qrImages.="<br><img src=".$qr."/>";

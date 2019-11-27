@@ -20,13 +20,8 @@
             $this->view = new View();
         }
         /*
-        $function = new ClassMovieFunction($movie,$cinemaId,$date,$timeStart,$timeEnd,$cinemaRoom,$language);              
-        $this->dao->add($function);
-        $_SESSION["successMje"]="Funcion cargada con exito";
-        $_SESSION["errorMje"]="Ya hay una funcion en esa sala para esa fecha y hora";
-        $this->view->admFunctions($cinemaName);
+        *
         */
-        //metodo que crea una funcion
         public function add($cinemaId,$movieId,$cinemaRoom,$date,$time,$language,$cinemaName){
             try{
                 $daoM = new MovieApiController();
@@ -38,10 +33,17 @@
                 $timeEnd =  $auxTimeEnd->format('H:i:s');
                 $functions = $this->getFunctionsForDateAndMovie($movieId,$date);// me traigo las funciones correspondientes a la fecha y la pelicula ingresada
                 if($functions){ //si existen funciones cargadas de esa peli en algun cine.
-                    if($this->checkFunctionInCinemaAndRoom($functions,$cinemaId,$cinemaRoom)){
-                        $function = new ClassMovieFunction($movieId,$cinemaId,$date,$timeStart,$timeEnd,$cinemaRoom,$language);              
-                        $this->dao->add($function);
-                        $_SESSION["successMje"]="Funcion cargada con exito";
+                    if($this->checkFunctionInCinemaAndRoom($functions,$cinemaId,$cinemaRoom)){//solo puedo agregar si la funcion es el mismo cine y misma sala
+                        //en este punto el array/obj $functions tiene el/las funciones que corresponden al mismo cine y misma sala.
+                        //por lo tanto lo ultimo que queda es verificar que los horarios no se pisen.
+                        //if($this->checkTimeIsAvailable($functions,$timeStart,$timeEnd)){
+                            $function = new ClassMovieFunction($movieId,$cinemaId,$date,$timeStart,$timeEnd,$cinemaRoom,$language);              
+                            $this->dao->add($function);
+                            $_SESSION["successMje"]="Funcion cargada con exito";
+                        /*}else{
+                            $_SESSION["errorMje"]="El horario: ".$time." ya esta siendo ocupado por otra funcion.";
+                        }*/
+                        
                     }else{
                         $_SESSION["errorMje"]="La pelicula ingresada ya posee funciones en otro cine o sala para la fecha: ".$date;
                     }
@@ -64,6 +66,45 @@
                 echo $ex;
             }
         }
+        
+        /*
+        * Chequea que los horarios ingresados no se pisen con otras funciones existentes
+        */
+        public function checkTimeIsAvailable($functions,$timeStart,$timeEnd){
+            
+            $flag=false;
+            if(!is_array($functions)){
+                if($timeStart > $functions->getTimeEnd() || $timeEnd < $functions->getTimeStart()){
+                    $flag=true; 
+                }
+            }else{
+                if($this->checkTimeStartAndEnd($timeStart,$timeEnd,$functions)){ //si es verdadera significa que no se pisa con ninguna funcion
+                    $flag=true;
+                }
+            }
+            return $flag;
+        }
+        /*
+        * Se encarga de chequear si los horarios de incio/fin de la funcion no se pisan con algun otro.
+        * Modularizo esta parte 
+        */
+        public function checkTimeStartAndEnd($timeStart,$timeEnd,$functions){
+            $flag=false;
+            //timeStart hora-inicio
+            //timeEnd hora-fin 
+            //functions array con funciones
+            foreach ($functions as $value) {
+                if($timeStart > $value->getTimeEnd() || $timeEnd < $value->getTimeStart()){ 
+                    $flag=true;
+                }else{
+                    $flag=false;
+                }
+                
+               
+            }
+            return $flag;
+            }
+        
         /*
         * Esta funcion chequea si la sala ingresada ya posee una funcion ingresada de otra pelicula
         */
@@ -86,17 +127,17 @@
             return $flag;
         }
         /*
-        * Esta funcion retorna las funciones correspondientes a un id de una peli y una fecha.
+        * Esta funcion retorna las funciones correspondientes a un id de una pelicula y una fecha.
         */
         public function getFunctionsForDateAndMovie($movieId,$functionDate){
             $array = array();
             $auxFunctions = $this->dao->getForDate($functionDate); //me traigo las funciones correspondientes a al fecha ingresada 
             if($auxFunctions){ //si tiene datos
-                if(!is_array($auxFunctions)){
+                if(!is_array($auxFunctions)){ //si es obj
                     if($auxFunctions->getMovie() == $movieId){
                         $array=$auxFunctions;
                     }
-                }else{
+                }else{//si es array
                     foreach ($auxFunctions as $key => $value) {
                         if($value->getMovie() == $movieId){
                             array_push($array,$value);

@@ -40,7 +40,7 @@
                                     <tr>
                                         <td class="table-dark"><?php echo $movieF->getTitle(); ?></td>
                                         <td class="table-dark"><?php echo $function->getDate(); ?></td>
-                                        <td class="table-dark"><?php echo $function->getTime(); ?></td>
+                                        <td class="table-dark"><?php echo $function->getTimeStart(); ?></td>
                                         <td class="table-dark">
                                             <a href="<?php echo FRONT_ROOT?>MovieFunction/delete?idroom=<?php echo $function->getId()?>&?idcinemaRoom=<?php echo $function->getCinemaRoom()?>&?option=cinemaRoom" class="btn btn-danger" onclick="clicked(event)">
                                                 <i class="far fa-trash-alt"> Eliminar</i>
@@ -55,7 +55,7 @@
                                     <tr>
                                         <td class="table-dark"><?php echo $movieF->getTitle(); ?></td>
                                         <td class="table-dark"><?php echo $functions->getDate(); ?></td>
-                                        <td class="table-dark"><?php echo $functions->getTime(); ?></td>
+                                        <td class="table-dark"><?php echo $functions->getTimeStart(); ?></td>
                                         <td class="table-dark">
                                             <a href="<?php echo FRONT_ROOT?>MovieFunction/delete?idroom=<?php echo $functions->getId()?>&?idcinemaRoom=<?php echo $functions->getCinemaRoom()?>&?option=cinemaRoom" class="btn btn-danger" onclick="clicked(event)">
                                                 <i class="far fa-trash-alt"> Eliminar</i>
