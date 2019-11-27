@@ -8,18 +8,20 @@
         private $movie;
         private $cinema;
         private $date;
-        private $time;
+        private $timeStart;
+        private $timeEnd;
         private $language;
         private $cinemaRoom;
         private $id;
 
         //CONSTRUCTOR
 
-        public function __construct($movie,$cinema,$date,$time,$cinemaRoom,$language,$id=null){
+        public function __construct($movie,$cinema,$date,$timeStart,$timeEnd,$cinemaRoom,$language,$id=null){
             $this->movie=$movie;
             $this->cinema=$cinema;
             $this->date=$date;
-            $this->time=$time;
+            $this->timeStart=$timeStart;
+            $this->timeEnd=$timeEnd;
             $this->cinemaRoom=$cinemaRoom;
             $this->language=$language;
             $this->id=$id;
@@ -37,8 +39,11 @@
         public function getDate(){
             return $this->date;
         }
-        public function getTime(){
-            return $this->time;
+        public function getTimeStart(){
+            return $this->timeStart;
+        }
+        public function getTimeEnd(){
+            return $this->timeEnd;
         }
         public function getId(){
             return $this->id;

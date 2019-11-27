@@ -1,11 +1,14 @@
 <?php namespace controllers;
-    
+
+    //DAOS
     use dao\MovieFunctionDao as MovieFunctionDao;
-    use models\ClassCinema as Cinema;
+    //MODELS
     use models\ClassCinemaRoom as ClassCinemaRoom;
-    use controllers\ViewsController as View;
     use models\ClassMovieFunction as ClassMovieFunction;
+    use models\ClassCinema as Cinema;
+    //CONTROLLERS
     use controllers\MovieApiController as MovieApiController;
+    use controllers\ViewsController as View;
     
     class MovieFunctionController{
         
@@ -13,44 +16,46 @@
         private $view;
 
         public function __construct(){
-            //$this->cinemaDao = new JsonCinema();
             $this->dao = new MovieFunctionDao();
             $this->view = new View();
         }
-
+        /*
+        $function = new ClassMovieFunction($movie,$cinemaId,$date,$timeStart,$timeEnd,$cinemaRoom,$language);              
+        $this->dao->add($function);
+        $_SESSION["successMje"]="Funcion cargada con exito";
+        $_SESSION["errorMje"]="Ya hay una funcion en esa sala para esa fecha y hora";
+        $this->view->admFunctions($cinemaName);
+        */
         //metodo que crea una funcion
-        public function add($cinemaId,$movie,$cinemaRoom,$date,$time,$language,$cinemaName){
+        public function add($cinemaId,$movieId,$cinemaRoom,$date,$time,$language,$cinemaName){
             try{
-                $flag=false;
-                if(!empty($functions)){
-                    if(is_array($functions)){
-                        foreach($functions as $FU){
-                            if($FU->getCinemaRoom()==$cinemaRoom){
-                                if($FU->getDate()==$date){
-                                    if($FU->getTime()==$time){  
-                                        $flag=true;                      
-                                    }
-                                }
-                            }
-                        }
+                $daoM = new MovieApiController();
+                $movie = $daoM->getMovieXid($movieId);
+                $duration = $movie->getDuration(); //me traigo la duracion de la pelicula
+                $auxTimeStart = new \DateTime($date.$time); 
+                $timeStart = $auxTimeStart->format('H:i:s');//hora de inicio de la funcion
+                $auxTimeEnd = $auxTimeStart->modify('+'.($duration+15).' minute'); //le sumo la duracion +15 para saber la hora de finalizacion
+                $timeEnd =  $auxTimeEnd->format('H:i:s');
+                $functions = $this->getFunctionsForDateAndMovie($movieId,$date);// me traigo las funciones correspondientes a la fecha y la pelicula ingresada
+                if($functions){ //si existen funciones cargadas de esa peli en algun cine.
+                    if($this->checkFunctionInCinemaAndRoom($functions,$cinemaId,$cinemaRoom)){
+                        $function = new ClassMovieFunction($movieId,$cinemaId,$date,$timeStart,$timeEnd,$cinemaRoom,$language);              
+                        $this->dao->add($function);
+                        $_SESSION["successMje"]="Funcion cargada con exito";
+                    }else{
+                        $_SESSION["errorMje"]="La pelicula ingresada ya posee funciones en otro cine o sala para la fecha: ".$date;
                     }
-                    else{
-                        if($functions->getCinemaRoom()==$cinemaRoom){
-                            if($functions->getDate()==$date){
-                                if($functions->getTime()==$time){
-                                    $flag=true;                        
-                                }
-                            }
-                        }
+                        
+                }
+                else{ //si no existen funciones para esa pelicula
+                    if(!$this->checkRoomIsAvailable($cinemaRoom,$cinemaId)){ //si la sala ingresada no tiene otras funciones
+                        $function = new ClassMovieFunction($movieId,$cinemaId,$date,$timeStart,$timeEnd,$cinemaRoom,$language);              
+                        $this->dao->add($function);
+                        $_SESSION["successMje"]="Funcion cargada con exito";
+                    }else{
+                        $_SESSION["errorMje"]="La sala ingresada ya posee funciones de otra pelicula para la fecha: ".$date; 
                     }
-                }
-                if($flag==false){
-                    $function = new ClassMovieFunction($movie,$cinemaId,$date,$time,$cinemaRoom,$language);              
-                    $this->dao->add($function);
-                    $_SESSION["successMje"]="Funcion cargada con exito";
-                }
-                else{
-                    $_SESSION["errorMje"]="Ya hay una funcion en esa sala para esa fecha y hora";
+                    
                 }
                 $this->view->admFunctions($cinemaName);
             }
@@ -59,6 +64,72 @@
                 echo $ex;
             }
         }
+        /*
+        * Esta funcion chequea si la sala ingresada ya posee una funcion ingresada de otra pelicula
+        */
+        public function checkRoomIsAvailable($roomId,$cinemaId){
+            $flag=false;
+            $auxFunctions = $this->dao->getForCinema($cinemaId);
+            if($auxFunctions){ //si tiene datos
+                if(!is_array($auxFunctions)){
+                    if($auxFunctions->getCinemaRoom() == $roomId){
+                        $flag=true;
+                    }
+                }else{
+                    foreach ($auxFunctions as $key => $value) {
+                        if($value->getCinemaRoom() == $roomId){
+                            $flag=true;
+                        }
+                    }
+                }
+            }
+            return $flag;
+        }
+        /*
+        * Esta funcion retorna las funciones correspondientes a un id de una peli y una fecha.
+        */
+        public function getFunctionsForDateAndMovie($movieId,$functionDate){
+            $array = array();
+            $auxFunctions = $this->dao->getForDate($functionDate); //me traigo las funciones correspondientes a al fecha ingresada 
+            if($auxFunctions){ //si tiene datos
+                if(!is_array($auxFunctions)){
+                    if($auxFunctions->getMovie() == $movieId){
+                        $array=$auxFunctions;
+                    }
+                }else{
+                    foreach ($auxFunctions as $key => $value) {
+                        if($value->getMovie() == $movieId){
+                            array_push($array,$value);
+                        }
+                    }
+                }
+            }
+            return $array;
+        }
+        /*
+        * Chequea si la funcion ingresada por el usuario pertenece al mismo cine y sala de la/las funciones ya cargadas de esa peli
+        */
+        public function checkFunctionInCinemaAndRoom($functions,$cinemaId,$roomId){
+            $flag=false;
+            if(!is_array($functions)){ //si no es un arreglo
+                if($functions->getCinema() == $cinemaId){
+                    if($functions->getCinemaRoom() == $roomId){
+                        $flag=true;
+                    }
+                }
+            }else{ //si es un arreglo
+                foreach ($functions as  $value) {
+                    if($value->getCinema() == $cinemaId){//si es en el mismo cine
+                        if($value->getCinemaRoom() == $roomId){ //y en la misma sala
+                            $flag=true;
+                        }
+                    }
+                }
+            }
+            
+            return $flag;
+        }
+
         //borrar la funcion con los id pasados por parameto
         public function delete($id,$cinemaOrRoom,$option){
             try{

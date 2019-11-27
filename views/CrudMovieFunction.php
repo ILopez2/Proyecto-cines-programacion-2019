@@ -1,19 +1,21 @@
 <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
+    
     <div class="container p=4">
         <h1 class="mb-5">Administracion de Funciones : <?php echo $cine->getName()?></h1>
+        <?php if(isset($_SESSION['successMje']) || isset($_SESSION['errorMje'])) { ?> 
+            <div class="alert <?php if(isset($_SESSION['successMje'])) echo 'alert-success'; else echo 'alert-danger'; ?> alert-dismissible fade show mt-3" role="alert">
+                <strong><?php if(isset($_SESSION['successMje'])) echo $_SESSION['successMje']; else echo $_SESSION['errorMje']; ?>
+                </strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <?php if(isset($_SESSION['successMje'])){unset($_SESSION['successMje']);}
+                    if(isset($_SESSION['errorMje'])){unset($_SESSION['errorMje']);}?>
+            </div>
+         <?php } ?>
         <div class="row">
             <div class="col-m-4">
-                <?php if(isset($_SESSION['successMje']) || isset($_SESSION['errorMje'])) { ?> 
-                    <div class="alert <?php if(isset($_SESSION['successMje'])) echo 'alert-success'; else echo 'alert-danger'; ?> alert-dismissible fade show mt-3" role="alert">
-                        <strong><?php if(isset($_SESSION['successMje'])) echo $_SESSION['successMje']; else echo $_SESSION['errorMje']; ?>
-                        </strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <?php if(isset($_SESSION['successMje'])){unset($_SESSION['successMje']);}
-                            if(isset($_SESSION['errorMje'])){unset($_SESSION['errorMje']);}?>
-                    </div>
-                <?php } ?>
+                
 
                 <!-- start AddFunction here ...  -->
                 <div class="card card-body bg-secondary">        
@@ -26,7 +28,7 @@
                         <div class="form-group">
                         <!-- MOVIE OPTION START HERE -->
                             <label>Pelicula</label>
-                                <select name="movie" class="form-control" required>
+                                <select name="movieId" class="form-control" required>
                                     <option selected disabled value="">Elija pelicula</option>
                                     <?php foreach($array as $movie){?>
                                     <option value="<?php echo $movie->getId(); ?>"><?php echo $movie->getTitle();?></option>
@@ -103,7 +105,7 @@
                                         ?>
                                         <td class=table-dark><?php echo $room->getName();?></td>
                                         <td class="table-dark"><?php echo $function->getDate(); ?></td>
-                                        <td class="table-dark"><?php echo $function->getTime(); ?></td>
+                                        <td class="table-dark"><?php echo 'Inicio: '.$function->getTimeStart().' Final: '.$function->getTimeEnd(); ?></td>
                                         <td class="table-dark"><?php echo $function->getLanguage(); ?></td>
                                         <td class="table-dark">
                                             <!-- DELETE START HERE  -->
@@ -124,7 +126,7 @@
                                         ?>
                                         <td class=table-dark><?php echo $room->getName();?></td>
                                         <td class="table-dark"><?php echo $functions->getDate(); ?></td>
-                                        <td class="table-dark"><?php echo $functions->getTime(); ?></td>
+                                        <td class="table-dark"><?php echo 'Inicio: '.$functions->getTimeStart().' Final: '.$functions->getTimeEnd(); ?></td>
                                         <td class="table-dark"><?php echo $functions->getLanguage(); ?></td>
                                         <td class="table-dark">
                                             <!-- DELETE START HERE  -->
