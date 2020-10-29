@@ -44,7 +44,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
             /**
@@ -57,18 +57,19 @@
             try{
                 $rta=false;
                 $user=$this->userDAO->getForId($email);
+                
                 if($user!=null){
                     if(($user->getEmail() == $email) && ($user->getPassword() == $pass)){
                         $_SESSION['userLogedIn'] = $user;
                         $_SESSION['loggedRole'] = $user->getRoleLevel();
                         $rta=true;
                     }
-                }               
+                }              
                 return $rta;
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
         /**
@@ -100,7 +101,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
         /**
@@ -120,7 +121,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
         /**
@@ -143,7 +144,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
         /**
@@ -161,7 +162,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
         /**
@@ -181,7 +182,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
         /**
@@ -200,7 +201,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
 }

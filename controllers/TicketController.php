@@ -38,7 +38,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
     }

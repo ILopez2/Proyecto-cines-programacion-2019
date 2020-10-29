@@ -63,7 +63,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
         
@@ -187,7 +187,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
         //modifico una funcion
@@ -202,7 +202,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
 

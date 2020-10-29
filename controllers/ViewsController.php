@@ -119,7 +119,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             } 
         }
         //VER 
@@ -148,7 +148,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             } 
         }
             //FUNCIONES DE UNA PELICULA
@@ -180,7 +180,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
             //FUNCIONES DE UNA SALA
@@ -207,7 +207,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }   
             //ASIENTOS DE UNA FUNCION
@@ -258,7 +258,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }   
             //ELEGIR ASIENTOS
@@ -275,7 +275,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
             //COMPRAR ENTRADAS
@@ -356,7 +356,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
         //ADMINISTRACION
@@ -375,7 +375,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
 
@@ -393,7 +393,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
 
@@ -411,7 +411,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
 
@@ -434,7 +434,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
 
@@ -449,7 +449,7 @@
                 $users=$daoUsers->getAll();
                 $cinemas=$daoCinema->getAll();
                 $cinemaRooms=$daoCinemaRoom->getAll();
-                $functions=$daoFunction->getAll();
+                $functions=$daoMovieFunction->getAll();
                 $tickets=$daoTicket->getAll();
                 include_once(VIEWS.'/header.php');
                 include_once(VIEWS.'/nav.php');
@@ -458,7 +458,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
 

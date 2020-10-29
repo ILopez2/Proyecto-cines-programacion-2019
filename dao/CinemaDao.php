@@ -154,6 +154,7 @@
         protected function mapeo($value){
             $value=is_array($value) ? $value : [];
             $resp=array();
+            $city="";
             $resp = array_map(function($p){
             $cinemaRooms=null;
             $roomDao=new CRD();
@@ -168,7 +169,13 @@
                 }
                 else $cinemaRooms=$rooms;
             }
-                return new Cinema($p['nombre_cine'],$p['id_ciudad1'],$p['direccion'],$p['valor_entrada'],$cinemaRooms,$p["id_cine"]);
+                if($p['id_ciudad1']==1){
+                    $city="Mar del Plata";
+                }
+                elseif($p['id_ciudad1']==2){
+                    $city="Miramar";
+                }
+                return new Cinema($p['nombre_cine'],$city,$p['direccion'],$p['valor_entrada'],$cinemaRooms,$p["id_cine"]);
             },$value);
             return count($resp) > 1 ? $resp : $resp['0'];//hay que checkear del otro lado si esta devolviendo un obj o un array
         }

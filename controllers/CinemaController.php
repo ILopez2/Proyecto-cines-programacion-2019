@@ -1,5 +1,4 @@
-<?php namespace controllers;
-    //aca va a estar la funcionalidad del CRUD de los cines    
+<?php namespace controllers;  
     use models\ClassCinema as Cinema;
     use models\ClassCinemaRoom as ClassCinemaRoom;
     use dao\CinemaDao as CinemaDao;
@@ -21,7 +20,6 @@
                 if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
                     if($this->cinemaDao->getForID($name)==null){
                     $cinema = new Cinema($name,$city,$adress,$price);
-                    //falta resolver el tema de las salas, por el momento no trabajo con ellas solo se crea un array vacio.
                     $this->cinemaDao->add($cinema);
                     $_SESSION['successMje'] = 'Cine agregado con éxito';
                     $this->view->admCinema();
@@ -34,10 +32,10 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
-        //borrar el cine con el nombre pasado por parameto
+
         public function delete($id){
             try{
                 if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
@@ -49,11 +47,10 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
 
-        //edita el valor del atributo seleccionado por el usuario del cine seleccionado
         public function edit($name,$adress,$price,$city){
             try{
                 if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
@@ -65,7 +62,7 @@
             }    
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
     }

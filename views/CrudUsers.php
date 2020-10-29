@@ -74,107 +74,156 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($users as $value){ ?>
-                                <tr>
-                                    <td class="table-dark"><?php echo $value->getName(); ?></td>
-                                    <td class="table-dark"><?php echo $value->getBirthdate(); ?></td>
-                                    <td class="table-dark"><?php echo $value->getEmail(); ?></td>
-                                    <td class="table-dark"><?php echo $value->getPassword(); ?></td>
-                                    <td class="table-dark"><?php if($value->getRoleLevel()=="1") echo "Admin";
-                                                                else echo "Comun"; ?></td>
-                                    <td class="table-dark">
-                                        <!-- DELETE HERE  -->
-                                        <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
-                                            <a href="<?php echo FRONT_ROOT?>User/delete?id=<?php echo $value->getEmail()?>" class="btn btn-danger" onclick="clicked(event)">
-                                                <i class="far fa-trash-alt"> Eliminar</i>
-                                            </a><?php } ?>
-                                        <!-- END DELETE HERE -->
-                                
-                                        <!-- SET ADMIN -->
-                                        <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
-                                            <?php if($value->getRoleLevel() != '1'){ ?>
-                                            <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=1" class="btn btn-success" onclick="clicked(event)" >
-                                                <i class="fas fa-user-shield"> Dar Admin</i>
-                                            </a>
-                                            <?php }else{?>
-                                                <!-- SET COMMON -->
-                                                <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=2" class="btn btn-danger" onclick="clicked(event)" >
-                                                    <i class="fas fa-user-times"> Revocar Admin</i>
+                            <?php 
+                            if(is_array($users)){
+                                foreach($users as $value){ ?>
+                                    <tr>
+                                        <td class="table-dark"><?php echo $value->getName(); ?></td>
+                                        <td class="table-dark"><?php echo $value->getBirthdate(); ?></td>
+                                        <td class="table-dark"><?php echo $value->getEmail(); ?></td>
+                                        <td class="table-dark"><?php echo $value->getPassword(); ?></td>
+                                        <td class="table-dark"><?php if($value->getRoleLevel()=="1") echo "Admin";
+                                                                    else echo "Comun"; ?></td>
+                                        <td class="table-dark">
+                                            <!-- DELETE HERE  -->
+                                            <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
+                                                <a href="<?php echo FRONT_ROOT?>User/delete?id=<?php echo $value->getEmail()?>" class="btn btn-danger" onclick="clicked(event)">
+                                                    <i class="far fa-trash-alt"> Eliminar</i>
+                                                </a><?php } ?>
+                                            <!-- END DELETE HERE -->
+                                    
+                                            <!-- SET ADMIN -->
+                                            <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
+                                                <?php if($value->getRoleLevel() != '1'){ ?>
+                                                <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=1" class="btn btn-success" onclick="clicked(event)" >
+                                                    <i class="fas fa-user-shield"> Dar Admin</i>
                                                 </a>
-                                            <?php } ?>    
-                                        <?php } ?>
-                                    </td>
-                                </tr>
-                                <?php } ?>
+                                                <?php }else{?>
+                                                    <!-- SET COMMON -->
+                                                    <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $value->getEmail()?>&?role=2" class="btn btn-danger" onclick="clicked(event)" >
+                                                        <i class="fas fa-user-times"> Revocar Admin</i>
+                                                    </a>
+                                                <?php } ?>    
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                                    <?php 
+                                }
+                            } 
+                            else{
+                            ?>
+                                <tr>
+                                        <td class="table-dark"><?php echo $users->getName(); ?></td>
+                                        <td class="table-dark"><?php echo $users->getBirthdate(); ?></td>
+                                        <td class="table-dark"><?php echo $users->getEmail(); ?></td>
+                                        <td class="table-dark"><?php echo $users->getPassword(); ?></td>
+                                        <td class="table-dark"><?php if($users->getRoleLevel()=="1") echo "Admin";
+                                                                    else echo "Comun"; ?></td>
+                                        <td class="table-dark">
+                                            <!-- DELETE HERE  -->
+                                            <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
+                                                <a href="<?php echo FRONT_ROOT?>User/delete?id=<?php echo $users->getEmail()?>" class="btn btn-danger" onclick="clicked(event)">
+                                                    <i class="far fa-trash-alt"> Eliminar</i>
+                                                </a><?php } ?>
+                                            <!-- END DELETE HERE -->
+                                    
+                                            <!-- SET ADMIN -->
+                                            <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
+                                                <?php if($users->getRoleLevel() != '1'){ ?>
+                                                <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $users->getEmail()?>&?role=1" class="btn btn-success" onclick="clicked(event)" >
+                                                    <i class="fas fa-user-shield"> Dar Admin</i>
+                                                </a>
+                                                <?php }else{?>
+                                                    <!-- SET COMMON -->
+                                                    <a href="<?php echo FRONT_ROOT?>User/setRole?id=<?php echo $users->getEmail()?>&?role=2" class="btn btn-danger" onclick="clicked(event)" >
+                                                        <i class="fas fa-user-times"> Revocar Admin</i>
+                                                    </a>
+                                                <?php } ?>    
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                            <?php
+                            }
+                            ?>
                                 <!-- EDIT START HERE  -->
                                 <?php if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){?>
                                     <td class="table-dark" colspan="7" style="text-align:center;">
                                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sign-up">
-                                        <i class="fas fa-marker">Modificar</i>
-                                        </button>
-                                    </td>
-                                <?php } ?>
-                                <!-- END EDIT HERE  -->
-                        </tbody>
-                    </table> 
-                    <!-- END TABLE HERE  -->
-                </div>
+                                    <i class="fas fa-marker">Modificar</i>
+                                    </button>
+                                </td>
+                            <?php } ?>
+                            <!-- END EDIT HERE  -->
+                    </tbody>
+                </table> 
+                <!-- END TABLE HERE  -->
+            </div>
                 
-                <!-- MODAL START HERE  -->
-                <div class="modal fade" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+            <!-- MODAL START HERE  -->
+            <div class="modal fade" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">
+                <div class="modal-dialog" role="document">
 
-                        <form class="modal-content" action="<?php echo FRONT_ROOT?>User/edit" method="POST">
+                    <form class="modal-content" action="<?php echo FRONT_ROOT?>User/edit" method="POST">
 
-                            <div class="modal-header">
+                        <div class="modal-header">
                                 
-                                <h5 class="modal-title">Modify</h5>
-                                <button type="button" class="close" data-dismiss="modal">
-                                    <span>&times;</span>
-                                </button>
+                            <h5 class="modal-title">Modify</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
 
-                            </div>
+                        </div>
 
-                            <div class="modal-body">
-                                    <div class="form-group">
-                                        <label>Seleccione un Usuario a editar:</label>
-                                        <select name="email" class="form-control" required>
-                                            <option selected disabled value="">Email del Usuario</option>
-                                            <?php foreach($users as $value){ ?>
-                                            <option value="<?php echo $value->getEmail();?>"> <?php echo $value->getEmail();?> </option>
-                                        <?php }?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Name</label>
-                                        <input type="text" class="form-control" name="name" placeholder="Nombre" required/>
-                                    </div>    
+                        <div class="modal-body">
                                 <div class="form-group">
-                                    <label>Birthdate</label>
-                                    <input type="date" class="form-control" name="birthdate" placeholder="Fecha de nacimiento" required/>
-                                </div>   
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="password" class="form-control" name="password" placeholder="Contraseña" required/>
-                                </div>
-                                <div class="form-group">
-                                    <label>Rol</label>
-                                    <select name="role" class="form-control" required>
-                                            <option selected disabled value="">Rol de Usuario</option>
-                                            <option value="1">Admin</option>
-                                            <option value="2">Comun</option>
+                                    <label>Seleccione un Usuario a editar:</label>
+                                    <select name="email" class="form-control" required>
+                                        <option selected disabled value="">Email del Usuario</option>
+                                        <?php 
+                                        if(is_array($users)){
+                                            foreach($users as $value){ ?>
+                                                <option value="<?php echo $value->getEmail();?>"> <?php echo $value->getEmail();?> </option>
+                                    <?php 
+                                            }
+                                        }
+                                        else{
+                                    ?>  
+                                            <option value="<?php echo $users->getEmail();?>"> <?php echo $users->getEmail();?> </option>
+                                    <?php
+                                        }
+                                    ?>
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" name="name" placeholder="Nombre" required/>
+                                </div>    
+                            <div class="form-group">
+                                <label>Birthdate</label>
+                                <input type="date" class="form-control" name="birthdate" placeholder="Fecha de nacimiento" required/>
+                            </div>   
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" name="password" placeholder="Contraseña" required/>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-dark" onclick="clicked(event)">Confirm</button>
+                            <div class="form-group">
+                                <label>Rol</label>
+                                <select name="role" class="form-control" required>
+                                        <option selected disabled value="">Rol de Usuario</option>
+                                        <option value="1">Admin</option>
+                                        <option value="2">Comun</option>
+                                </select>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-dark" onclick="clicked(event)">Confirm</button>
+                        </div>
+                    </form>
                 </div>
-                <!-- MODAL ENDS HERE  -->
             </div>
+            <!-- MODAL ENDS HERE  -->
+         </div>
     </div>
 <?php } ?>
 

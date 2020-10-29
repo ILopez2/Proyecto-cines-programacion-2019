@@ -47,7 +47,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }         
         }
         // borra una sala pasando por parametro el id y el id del cine
@@ -59,23 +59,42 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
         //editar el valor del atributo seleccionado por el usuario de la sala seleccionada
         public function edit($roomId,$name,$is3D,$cinemaId){
-            try{             
-                if(isset($_SESSION['loggedRole']) && $_SESSION['loggedRole'] == '1'){
+            try{ 
+                $cinema=$this->daoC->getForID2($cinemaId);
+                $rooms=$cinema->getCinemaRooms();
+                $flag=false;
+                if(!empty($rooms)){
+                    if(is_array($rooms)){ //en caso de que sea un array
+                            foreach($rooms as $RM){
+                                if($RM->getName()==$name){
+                                    $flag=true;
+                                }
+                            }            
+                        }else{ //en caso de que sea un obj
+                            if($rooms->getName()==$name){
+                                $flag=true;
+                            }
+                        }
+                }
+                if(!$flag){ //si no existe
                     $oldRoom=$this->daoCR->getForId($roomId);
                     $capacity=$oldRoom->getCapacity();
                     $room=new CinemaRoom($name,$is3D,$capacity,$cinemaId,$roomId);
                     $this->daoCR->edit($room);
                     $this->view->admRooms($cinemaId);
+                }else{
+                    $_SESSION['errorMje']='<strong>Ya existe una sala con ese nombre</strong>';
+                    $this->view->admRooms($cinemaId);
                 }
             }
             catch(PDOException $ex)
             {
-                echo $ex;
-            }
+                echo $ex->getMessage();
+            }     
         }
     }

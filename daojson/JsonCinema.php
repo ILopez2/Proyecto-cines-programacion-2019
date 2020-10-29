@@ -1,5 +1,6 @@
 <?php namespace daojson; 
-
+    //ESTO NO SE USA MAS LUEGO DE IMPLEMENTAR LA PARTE DE BASE DE DATOS
+    
     use models\ClassCinema as CC;
     use models\ClassCinemaRoom as CR;
     class JsonCinema implements IJson {

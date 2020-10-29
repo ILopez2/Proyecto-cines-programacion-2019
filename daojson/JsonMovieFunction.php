@@ -1,6 +1,9 @@
 <?php   
     use models\ClassMovieFunction as CMF;
 
+
+    //ESTO NO SE USA MAS LUEGO DE IMPLEMENTAR LA PARTE DE BASE DE DATOS
+    
     class JsonMovieFunction implements IJson{
 
         //ATRIBUTES

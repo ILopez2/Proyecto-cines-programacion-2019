@@ -29,8 +29,6 @@
                 //creo la instancia de conexion
                 $this->connection = Connection::getInstance();
                 $Executeresult=$this->connection->ExecuteNonQuery($sql,$parameters);
-                /*$createdRoom=$this->getForCinemaAndName($parameters["id_cine1"],$parameters["name"]);
-                $createdRoomId=$createdRoom->getId(); */
                 $rooms=$this->getAll();
                 $createdRoomId=0;
                 if(is_array($rooms)){
@@ -95,25 +93,6 @@
                 return false;
             }
         }
-       /* public function getForCinemaAndName($cinemaId,$cinemaRoomName){
-            
-            $sql = "SELECT * FROM salas WHERE ((id_cine1 = :cinemaId) AND (nombre_sala = :cinemaRoomName))";
-            $parameters['cinemaId']=$cinemaId;
-            $parameters['cinemaRoomName']=$cinemaRoomName;   
-            try{
-                //creo la instancia de coneccion
-                $this->connection= Connection::getInstance();
-                $result = $this->connection->execute($sql,$parameters);
-            }catch(\PDOException $ex){
-                throw $ex;
-            } 
-            //hay que mapear de un arreglo asociativo a objetos
-            if(!empty($result)){
-                return $this->mapeo($result);
-            }else{
-                return false;
-            }
-        }*/
         public function getForCinema($cinemaId){
             $sql = "SELECT * FROM salas WHERE id_cine1 =:cinemaId";
             $parameters['cinemaId']=$cinemaId;

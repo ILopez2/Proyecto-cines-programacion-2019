@@ -60,7 +60,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }           
         }
         public function getForCinema($cinemaId){
@@ -85,10 +85,16 @@
                     if(!empty($tickets)){
                         foreach($tickets as $ticket){
                             if(!empty($ticket)){
-                                foreach($ticket as $t){
-                                    $purchase=$purchaseDao->getForID($t->getPurchaseID());
+                                if(is_array($ticket)){
+                                    foreach($ticket as $t){
+                                        $purchase=$purchaseDao->getForID($t->getPurchaseID());
+                                        array_push($purchases,$purchase);
+                                    }   
+                                }   
+                                else{
+                                    $purchase=$purchaseDao->getForID($ticket->getPurchaseID());
                                     array_push($purchases,$purchase);
-                                }                      
+                                }           
                             } 
                         }                            
                     }
@@ -99,7 +105,7 @@
             }  
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
     }

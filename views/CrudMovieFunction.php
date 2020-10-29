@@ -56,7 +56,7 @@
                         <!-- CINEMAROOM OPTION ENDS HERE -->
                         <div class="form-group">
                             <label>Fecha</label>
-                                <input type="date" class="form-control" min="<?php echo date("Y-m-d");?>" max="2020-01-01" name="dateTime" required/>
+                                <input type="date" class="form-control" min="<?php echo date("Y-m-d");?>" max=<?php echo date("Y-m-d",strtotime(date("Y-m-d")."+ 1 month"));  ?> name="dateTime" required/>
                         </div>
                         <div class="form-group">
                             <label>Hora</label>

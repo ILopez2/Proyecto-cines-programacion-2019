@@ -2,6 +2,8 @@
 
     use models\ClassUser as CU;
 
+    //ESTO NO SE USA MAS LUEGO DE IMPLEMENTAR LA PARTE DE BASE DE DATOS
+
     class JsonUser implements IJson{
 
         private $usersList = array();

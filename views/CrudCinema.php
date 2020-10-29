@@ -30,11 +30,11 @@
                                 <input type="number" min="0" max="10000" step="1" name="price" placeholder="Precio de Entrada" required="required">
                             </div>
                             <div class="form-group">
-                                <!--<input type="text" class="form-control" name="precio" placeholder="Precio de entrada"> -->
+                                
                                 <select name="city" class="form-control" required>
                                 <option selected disabled value="">Seleccione una ciudad</option>
-                                <option value="2">Mar del Plata</option>
-                                <option value="1">Miramar</option>
+                                <option value="1">Mar del Plata</option>
+                                <option value="2">Miramar</option>
                                 </select>
                             </div>
                             <input type="submit" class="btn btn-success btn-block" name="save" value="Save">   
@@ -155,10 +155,20 @@
                             <select name="name" class="form-control" required>
                                 <option selected disabled value="">Nombre</option>
                                 
-                            <?php foreach($cinemas as $value){ ?>
-                                <option value="<?php echo $value->getName();?>"> <?php echo $value->getName();?> 
-                                </option>                        
-                            <?php }?>
+                            <?php 
+                                if(is_array($cinemas)){ 
+                                    foreach($cinemas as $value){ ?>
+                                        <option value="<?php echo $value->getName();?>"> <?php echo $value->getName();?> 
+                                        </option>                        
+                            <?php } 
+                                }
+                                else{
+                                    ?>
+                                    <option value="<?php echo $cinemas->getName();?>"> <?php echo $cinemas->getName();?> 
+                                    </option>     
+                                <?php
+                                }
+                                ?>
 
                             </select>
                         </div>

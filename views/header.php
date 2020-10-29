@@ -9,10 +9,7 @@
             object {
           pointer-events: none;
       }
-/*       
-      body {background: url(https://www.xtrafondos.com/descargar.php?id=3450&resolucion=3840x2160); background-repeat: no-repeat;
-          background-size: 100% 100%; background-attachment: fixed;
-          background-color: blueviolet;} */
+      
       .login {
           display: flex;
           align-items: center;

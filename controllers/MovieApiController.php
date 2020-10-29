@@ -1,5 +1,4 @@
 <?php namespace controllers;
-    //https://developers.themoviedb.org/3
     use models\ClassMovieGenre as CMG;
     use models\ClassMovie as CM;
     use dao\MovieDao as DAOM;
@@ -31,7 +30,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
         //metodo que devuelve todas las ultimas peliculas
@@ -43,7 +42,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             } 
         }
         //metodo que devuelve una pelicula por id
@@ -55,7 +54,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
         public function getDetailsForId($id){            
@@ -93,7 +92,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
         //DEVUELVE UN ARRAY CON TODOS LOS GENEROS
@@ -105,7 +104,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
         public function getGenreForID($genreId){
@@ -116,7 +115,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
     }

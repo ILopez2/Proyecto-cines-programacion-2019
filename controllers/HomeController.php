@@ -5,6 +5,7 @@
     use controllers\DateTimeController as DateTime;
     use dao\MovieFunctionDao as MovieFunctionDao;
     use dao\CinemaDao as CinemaDao;
+    
     class HomeController
     {
         private $userController;
@@ -28,7 +29,7 @@
                             $showView=true;
                         }
                         else {
-                            $alert='Datos incorrectos vuelva a intentarlo';
+                            $_SESSION['errorMje']='Datos incorrectos vuelva a intentarlo';
                         }
                     }
                 }
@@ -63,7 +64,7 @@
             }
             catch(PDOException $ex)
             {
-                echo $ex;
+                echo $ex->getMessage();
             }
         }
         

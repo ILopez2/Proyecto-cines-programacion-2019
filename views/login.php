@@ -1,3 +1,5 @@
+
+
 <main class="login">
 
     <!-- LOGIN -->
@@ -26,7 +28,7 @@
         </div>
 
 
-        <!-- Esto como si no existiera -->
+    <!-- CODIGO QUE VERIFICA SI HAY UN MENSAJE DE ERROR O DE CONFIRMACION -->
         <?php if(isset($_SESSION['successMje']) || isset($_SESSION['errorMje'])) { ?>
             <div class="alert <?php if(isset($_SESSION['successMje'])) echo 'alert-success'; else echo 'alert-danger'; ?> alert-dismissible fade show mt-3" role="alert">
                 <strong><?php if(isset($_SESSION['successMje'])) echo $_SESSION['successMje']; else echo $_SESSION['errorMje']; ?></strong>
@@ -47,7 +49,7 @@
     </form>
 
 
-    <!-- SIGN UP -->
+    
     <div class="modal fade" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">
         <div class="modal-dialog" role="document">
 
